@@ -333,7 +333,36 @@
     .vibe-section {
       padding: 5rem 0; background: var(--bg);
     }
-    .vibe-inner { max-width: 720px; }
+    .vibe-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+    .vibe-canvas-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .vibe-canvas {
+      width: 100%;
+      max-width: 500px;
+      aspect-ratio: 5/3;
+    }
+    .vibe-canvas-labels {
+      display: flex;
+      justify-content: space-around;
+      width: 100%;
+      max-width: 500px;
+      margin-top: 0.75rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      font-family: var(--font-heading);
+    }
+    @media (max-width: 900px) {
+      .vibe-inner { grid-template-columns: 1fr; }
+    }
     .vibe-content h2 { margin-bottom: 1.5rem; }
     .vibe-content p {
       font-size: 1.05rem; color: var(--text-secondary); line-height: 1.75; margin-bottom: 1.25rem;
@@ -561,24 +590,27 @@
 
     /* Proven at scale — case studies */
     .growth-section { padding: 5.5rem 0 4rem; background: var(--bg); }
+    /* Proof cases — varied layout, NOT a uniform grid */
     .proof-cases {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem;
-      max-width: 1100px; margin: 0 auto;
+      max-width: 900px; margin: 0 auto;
+      display: flex; flex-direction: column; gap: 0;
     }
     .proof-case {
-      padding: 1.75rem; border-left: 3px solid var(--drupal-blue);
-      background: var(--bg-alt); border-radius: 0 6px 6px 0;
+      display: flex; align-items: baseline; gap: 1rem;
+      padding: 1.25rem 0; border-bottom: 1px solid var(--border);
     }
+    .proof-case:first-child { padding-top: 0; }
+    .proof-case:last-child { border-bottom: none; }
     .proof-case-org {
-      font-family: var(--font-heading); font-size: 1.1rem; font-weight: 700;
-      color: var(--drupal-navy); margin-bottom: 0.5rem;
+      font-family: var(--font-heading); font-size: 1rem; font-weight: 700;
+      color: var(--drupal-navy); white-space: nowrap; min-width: 160px;
     }
     .proof-case-logo {
-      display: inline-block; vertical-align: middle; margin-right: 0.5rem;
-      filter: grayscale(1); opacity: 0.5;
+      display: inline-block; vertical-align: middle; margin-right: 0.4rem;
+      filter: grayscale(1); opacity: 0.45;
     }
     .proof-case-detail {
-      font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6;
+      font-size: 0.88rem; color: var(--text-secondary); line-height: 1.5;
     }
 
     /* CTA Section — warm off-white background */
@@ -750,7 +782,9 @@
 
     /* Responsive */
     @media (max-width: 900px) {
-      .grid-3, .grid-4, .cta-paths, .initiative-stats, .agents-grid, .structured-section .grid, .proof-cases { grid-template-columns: 1fr; }
+      .grid-3, .grid-4, .cta-paths, .initiative-stats, .agents-grid, .structured-section .grid { grid-template-columns: 1fr; }
+      .proof-case { flex-direction: column; gap: 0.25rem; }
+      .proof-case-org { min-width: auto; }
       .structured-section .card-wide { grid-column: span 1; }
       .card-mcp-inner, .card-providers-inner { flex-direction: column; align-items: flex-start; }
       .card-providers-logos { flex-wrap: wrap; }
@@ -765,6 +799,7 @@
       .proof-stat:nth-child(3), .proof-stat:nth-child(4) { border-bottom: none; }
       .cta-dev-links { flex-wrap: wrap; justify-content: center; }
       .cta-dev-terminal-body { font-size: 0.72rem; overflow-x: auto; }
+      .canvas-layout { grid-template-columns: 1fr; }
     }
     @media (max-width: 480px) {
       h1 { font-size: 2.25rem; }
@@ -821,6 +856,54 @@
     }
 
     .dark-to-light-transition, .light-to-dark-transition { display: none; }
+
+    .canvas-section { padding: 5.5rem 0 5rem; background: var(--bg); }
+    .canvas-layout {
+      display: grid; grid-template-columns: 1fr 1.1fr; gap: 4rem; align-items: center;
+    }
+    .canvas-text h2 { margin-bottom: 1rem; }
+    .canvas-text > p { margin-bottom: 2rem; }
+    .canvas-features { display: flex; flex-direction: column; gap: 1rem; }
+    .canvas-feature {
+      padding-left: 1rem; border-left: 2px solid var(--drupal-blue);
+    }
+    .canvas-feature strong {
+      display: block; font-size: 0.9rem; color: var(--drupal-navy); margin-bottom: 0.2rem;
+    }
+    .canvas-feature span {
+      font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5;
+    }
+    .canvas-mockup {
+      background: #fff; border: 1px solid var(--border); border-radius: 10px;
+      overflow: hidden; box-shadow: var(--shadow-lg);
+    }
+    .canvas-mockup-bar {
+      display: flex; align-items: center; gap: 6px; padding: 0.6rem 1rem;
+      background: var(--bg-alt); border-bottom: 1px solid var(--border);
+    }
+    .canvas-dot { width: 8px; height: 8px; border-radius: 50%; }
+    .canvas-mockup-url {
+      margin-left: 0.75rem; font-size: 0.65rem; color: var(--text-muted);
+      font-family: var(--mono);
+    }
+    .canvas-mockup-body {
+      display: grid; grid-template-columns: 100px 1fr; min-height: 200px;
+    }
+    .canvas-mockup-sidebar {
+      border-right: 1px solid var(--border); padding: 0.75rem 0.5rem;
+      display: flex; flex-direction: column; gap: 0.25rem;
+    }
+    .canvas-mockup-sidebar-item {
+      font-size: 0.6rem; padding: 0.3rem 0.5rem; border-radius: 4px;
+      color: var(--text-muted); cursor: default;
+    }
+    .canvas-mockup-sidebar-item.active {
+      background: rgba(0,156,222,0.08); color: var(--drupal-blue); font-weight: 600;
+    }
+    .canvas-mockup-preview {
+      padding: 0.75rem; display: flex; flex-direction: column; gap: 0.5rem;
+    }
+    .canvas-mockup-block { border-radius: 4px; }
   </style>
 </head>
 <body>
@@ -1031,6 +1114,13 @@
           <p>Content models that seemed fine with 50 pages collapse at 5,000. The permission system you never built becomes a security incident. The "just ship it" API breaks every integration you've sold.</p>
           <p>Drupal is the production vehicle. 25 years of crash tests, security audits, and scale-proofing from organizations like Pfizer, The Economist, and NASA. You still get to vibe — Canvas AI, 22 agents, and MCP mean you move just as fast. You just don't have to rebuild the engine at Series B.</p>
         </div>
+        <div class="vibe-canvas-wrap">
+          <canvas class="vibe-canvas" id="vibeCanvas"></canvas>
+          <div class="vibe-canvas-labels">
+            <span>Vibed from scratch</span>
+            <span>Built on Drupal</span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -1172,6 +1262,60 @@
   </section>
 
   <div class="dark-to-light-transition"></div>
+
+  <!-- CANVAS AI — Visual Page Builder -->
+  <section class="canvas-section">
+    <div class="container">
+      <div class="canvas-layout reveal">
+        <div class="canvas-text">
+          <span class="section-label">Canvas AI</span>
+          <h2>The modern visual page builder.<br>For humans <span class="highlight">and</span> agents.</h2>
+          <p>Start with a site template. Edit visually with drag-and-drop or let an AI agent build pages from a prompt. Under the hood, it's React — no PHP required.</p>
+          <div class="canvas-features">
+            <div class="canvas-feature">
+              <strong>Site templates</strong>
+              <span>Launch in minutes with pre-built designs. Customize everything.</span>
+            </div>
+            <div class="canvas-feature">
+              <strong>React frontend</strong>
+              <span>Modern tools, modern stack. Use the JavaScript ecosystem you already know.</span>
+            </div>
+            <div class="canvas-feature">
+              <strong>Go decoupled</strong>
+              <span>Start visual. Go fully headless when you need a custom app or mobile backend.</span>
+            </div>
+          </div>
+        </div>
+        <div class="canvas-visual">
+          <div class="canvas-mockup">
+            <div class="canvas-mockup-bar">
+              <span class="canvas-dot" style="background:#F46351;"></span>
+              <span class="canvas-dot" style="background:#FFC423;"></span>
+              <span class="canvas-dot" style="background:#397618;"></span>
+              <span class="canvas-mockup-url">yoursite.com/admin/canvas</span>
+            </div>
+            <div class="canvas-mockup-body">
+              <div class="canvas-mockup-sidebar">
+                <div class="canvas-mockup-sidebar-item active">Hero</div>
+                <div class="canvas-mockup-sidebar-item">Card Grid</div>
+                <div class="canvas-mockup-sidebar-item">Testimonials</div>
+                <div class="canvas-mockup-sidebar-item">CTA</div>
+              </div>
+              <div class="canvas-mockup-preview">
+                <div class="canvas-mockup-block" style="height:60px;background:linear-gradient(135deg,rgba(0,156,222,0.15),rgba(204,186,244,0.1));display:flex;align-items:center;justify-content:center;font-size:0.7rem;color:var(--text-muted);">Hero Section</div>
+                <div class="canvas-mockup-block" style="height:40px;display:flex;gap:6px;">
+                  <div style="flex:1;background:var(--border);border-radius:4px;"></div>
+                  <div style="flex:1;background:var(--border);border-radius:4px;"></div>
+                  <div style="flex:1;background:var(--border);border-radius:4px;"></div>
+                </div>
+                <div class="canvas-mockup-block" style="height:30px;background:var(--bg-alt);display:flex;align-items:center;justify-content:center;font-size:0.6rem;color:var(--text-muted);">Testimonials</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- PROVEN AT SCALE -->
   <section class="growth-section">
@@ -1637,6 +1781,231 @@
       }, { threshold: 0.5 });
       var fuseLine = document.querySelector('.fuse-line');
       if (fuseLine) fuseObs.observe(fuseLine);
+
+    /* ── Vibe-section building animation ── */
+    (function vibeCanvasAnim() {
+      var canvas = document.getElementById('vibeCanvas');
+      if (!canvas) return;
+      var ctx = canvas.getContext('2d');
+
+      var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      function sizeCanvas() {
+        var rect = canvas.getBoundingClientRect();
+        var dpr = window.devicePixelRatio || 1;
+        canvas.width = rect.width * dpr;
+        canvas.height = rect.height * dpr;
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        return { w: rect.width, h: rect.height };
+      }
+      var dim = sizeCanvas();
+      window.addEventListener('resize', function() { dim = sizeCanvas(); });
+
+      var blockW = 36, blockH = 14, gapB = 2;
+      var totalRows = 10;
+      var nCols = 3;
+
+      var flashyColors = ['#ff3e7a','#ffd600','#00e5ff','#76ff03','#d500f9','#ff6d00','#2979ff','#f50057'];
+      var drupalBlues  = ['#003d6b','#0072b9','#2390d2','#59b7e0','#0062a3'];
+      var foundationColor = '#1a3a5c';
+
+      var frame = 0;
+      var collapseStart = 120;
+      var totalFrames = 340;
+
+      var vibedColors = [];
+      function resetVibedColors() {
+        vibedColors = [];
+        for (var r = 0; r < totalRows; r++) {
+          vibedColors[r] = [];
+          for (var c = 0; c < nCols; c++) {
+            vibedColors[r][c] = flashyColors[Math.floor(Math.random() * flashyColors.length)];
+          }
+        }
+      }
+      resetVibedColors();
+
+      var scattered = [];
+      function initScatter(builtRows) {
+        scattered = [];
+        var scatterFrom = Math.floor(builtRows * 0.5);
+        for (var r = scatterFrom; r < builtRows; r++) {
+          for (var c = 0; c < nCols; c++) {
+            scattered.push({
+              x: 0, y: 0, row: r, col: c,
+              vx: (Math.random() - 0.5) * 3,
+              vy: -(Math.random() * 3 + 1),
+              rot: 0, vr: (Math.random() - 0.5) * 0.15,
+              gravity: 0.12,
+              color: vibedColors[r][c],
+              opacity: 1
+            });
+          }
+        }
+      }
+
+      function drawBlock(x, y, w, h, color, alpha) {
+        ctx.globalAlpha = (alpha != null) ? alpha : 1;
+        ctx.fillStyle = color;
+        ctx.fillRect(x, y, w, h);
+        ctx.fillStyle = 'rgba(255,255,255,0.15)';
+        ctx.fillRect(x + 1, y + 1, w - 2, 2);
+        ctx.globalAlpha = 1;
+      }
+
+      function drawDrupalDrop(cx, cy, size) {
+        ctx.save();
+        ctx.translate(cx, cy);
+        ctx.scale(size, size);
+        ctx.beginPath();
+        ctx.moveTo(0, -1.1);
+        ctx.bezierCurveTo(0.05, -0.8, 0.7, -0.1, 0.7, 0.3);
+        ctx.bezierCurveTo(0.7, 0.8, 0.35, 1.1, 0, 1.1);
+        ctx.bezierCurveTo(-0.35, 1.1, -0.7, 0.8, -0.7, 0.3);
+        ctx.bezierCurveTo(-0.7, -0.1, -0.05, -0.8, 0, -1.1);
+        ctx.closePath();
+        ctx.fillStyle = '#0072b9';
+        ctx.fill();
+        ctx.restore();
+      }
+
+      function draw() {
+        var w = dim.w, h = dim.h;
+        ctx.clearRect(0, 0, w, h);
+
+        var buildingW = nCols * (blockW + gapB) - gapB;
+        var spacing = w * 0.12;
+        var centerX = w / 2;
+        var leftX = centerX - spacing - buildingW;
+        var rightX = centerX + spacing;
+        var groundY = h - 30;
+
+        var stackSpeed = totalRows / 100;
+        var vibedRows, drupalRows;
+
+        if (frame < collapseStart) {
+          vibedRows = Math.min(totalRows, frame * stackSpeed * 1.8);
+          drupalRows = Math.min(totalRows, frame * stackSpeed * 0.9);
+        } else {
+          vibedRows = totalRows;
+          drupalRows = Math.min(totalRows, frame * stackSpeed * 0.9);
+        }
+
+        var collapseFrame = frame - collapseStart;
+        var isCollapsing = frame >= collapseStart;
+
+        var wobble = 0;
+        if (frame > collapseStart - 25 && frame < collapseStart) {
+          wobble = Math.sin(frame * 0.8) * (1 + (frame - (collapseStart - 25)) * 0.12);
+        }
+
+        if (isCollapsing && collapseFrame === 0) {
+          initScatter(Math.floor(vibedRows));
+        }
+
+        var scatterFrom = isCollapsing ? Math.floor(totalRows * 0.5) : totalRows + 1;
+
+        // Left building (vibed)
+        ctx.save();
+        if (wobble) ctx.translate(wobble, 0);
+        var viRows = Math.floor(vibedRows);
+        for (var r = 0; r < viRows; r++) {
+          if (isCollapsing && r >= scatterFrom) continue;
+          for (var c = 0; c < nCols; c++) {
+            var bx = leftX + c * (blockW + gapB);
+            var by = groundY - (r + 1) * (blockH + gapB);
+            drawBlock(bx, by, blockW, blockH, vibedColors[r][c]);
+          }
+        }
+        ctx.restore();
+
+        if (isCollapsing) {
+          for (var s = 0; s < scattered.length; s++) {
+            var bl = scattered[s];
+            var origX = leftX + bl.col * (blockW + gapB);
+            var origY = groundY - (bl.row + 1) * (blockH + gapB);
+            bl.vy += bl.gravity;
+            bl.x += bl.vx;
+            bl.y += bl.vy;
+            bl.rot += bl.vr;
+            bl.opacity = Math.max(0, bl.opacity - 0.005);
+            ctx.save();
+            ctx.translate(origX + bl.x + blockW / 2, origY + bl.y + blockH / 2);
+            ctx.rotate(bl.rot);
+            drawBlock(-blockW / 2, -blockH / 2, blockW, blockH, bl.color, bl.opacity);
+            ctx.restore();
+          }
+        }
+
+        // Right building (Drupal)
+        var foundH = blockH + 4;
+        ctx.fillStyle = foundationColor;
+        ctx.fillRect(rightX - 4, groundY - foundH, buildingW + 8, foundH + 4);
+        ctx.fillStyle = 'rgba(255,255,255,0.08)';
+        ctx.fillRect(rightX - 4, groundY - foundH, buildingW + 8, 3);
+        ctx.fillStyle = 'rgba(255,255,255,0.5)';
+        ctx.font = '7px system-ui, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('FOUNDATION', rightX + buildingW / 2, groundY - foundH / 2 + 3);
+
+        var drRows = Math.floor(drupalRows);
+        var baseY = groundY - foundH - gapB;
+        for (var r = 0; r < drRows; r++) {
+          for (var c = 0; c < nCols; c++) {
+            var bx = rightX + c * (blockW + gapB);
+            var by = baseY - (r + 1) * (blockH + gapB);
+            var clr = drupalBlues[(r + c) % drupalBlues.length];
+            drawBlock(bx, by, blockW, blockH, clr);
+          }
+        }
+
+        if (drRows >= totalRows) {
+          var topY = baseY - totalRows * (blockH + gapB) - 8;
+          drawDrupalDrop(rightX + buildingW / 2, topY, 7);
+        }
+
+        ctx.strokeStyle = 'rgba(0,0,0,0.08)';
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(0, groundY + 2);
+        ctx.lineTo(w, groundY + 2);
+        ctx.stroke();
+
+        frame++;
+        if (frame > totalFrames) {
+          frame = 0;
+          resetVibedColors();
+          scattered = [];
+        }
+      }
+
+      var animRunning = false;
+      var rafId = null;
+      function loop() {
+        draw();
+        rafId = requestAnimationFrame(loop);
+      }
+
+      if (reducedMotion) {
+        frame = totalFrames - 95;
+        draw();
+      } else {
+        var vibeObs2 = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting && !animRunning) {
+              animRunning = true;
+              frame = 0;
+              resetVibedColors();
+              loop();
+            } else if (!entry.isIntersecting && animRunning) {
+              animRunning = false;
+              if (rafId) cancelAnimationFrame(rafId);
+            }
+          });
+        }, { threshold: 0.2 });
+        vibeObs2.observe(canvas);
+      }
+    })();
 
     })();
   </script>
