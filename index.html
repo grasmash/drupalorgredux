@@ -309,7 +309,7 @@
     }
 
     /* Works with every agent section */
-    .agents-section { padding: 5rem 0 6.5rem; background: var(--drupal-navy); color: #fff; }
+    .agents-section { padding: 5rem 0 6.5rem; background: linear-gradient(180deg, var(--drupal-navy) 0%, #0d2245 50%, var(--drupal-navy) 100%); color: #fff; }
     .agents-header { text-align: center; margin-bottom: 3rem; }
     .agents-header h2 { color: #fff; }
     .agents-header h2 .highlight { color: var(--drupal-light); }
@@ -617,10 +617,11 @@
     .developer-links a svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; }
 
     /* Footer */
-    .footer { padding: 4rem 0 2rem; border-top: 1px solid var(--border); text-align: center; background: var(--bg); }
-    .footer p { font-size: 0.85rem; color: var(--text-muted); }
+    .footer { padding: 4rem 0 2rem; border-top: none; text-align: center; background: var(--drupal-navy); color: rgba(255,255,255,0.5); }
+    .footer p { font-size: 0.85rem; color: rgba(255,255,255,0.35); }
     .footer-links { display: flex; justify-content: center; gap: 2rem; margin-bottom: 2rem; flex-wrap: wrap; }
-    .footer-links a { font-size: 0.85rem; color: var(--text-secondary); }
+    .footer-links a { font-size: 0.85rem; color: rgba(255,255,255,0.5); }
+    .footer-links a:hover { color: #fff; }
 
     /* Scroll-triggered reveal animations */
     .reveal {
@@ -731,6 +732,31 @@
     @keyframes fuse-fill {
       0% { width: 0; }
       100% { width: 100%; }
+    }
+
+    .fuse-burst {
+      position: absolute; right: -4px; top: 50%; transform: translateY(-50%);
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--drupal-blue); opacity: 0;
+      box-shadow: 0 0 12px 4px rgba(0,156,222,0.6), 0 0 24px 8px rgba(0,156,222,0.3);
+    }
+    .fuse-burst.active {
+      animation: fuse-burst-glow 1s ease-out 3s forwards;
+    }
+    @keyframes fuse-burst-glow {
+      0% { opacity: 0; transform: translateY(-50%) scale(0.5); }
+      30% { opacity: 1; transform: translateY(-50%) scale(2); }
+      100% { opacity: 0; transform: translateY(-50%) scale(3); }
+    }
+
+    .dark-to-light-transition {
+      height: 120px;
+      background: linear-gradient(180deg, var(--drupal-navy) 0%, var(--bg) 100%);
+    }
+
+    .light-to-dark-transition {
+      height: 80px;
+      background: linear-gradient(180deg, var(--bg-alt) 0%, var(--drupal-navy) 100%);
     }
   </style>
 </head>
@@ -993,7 +1019,7 @@
       <div class="text-center reveal" style="max-width:700px;margin:0 auto 4rem;">
         <span class="section-label">Built for this moment</span>
         <h2>Architecture that <span class="highlight">agents understand</span></h2>
-        <p class="mt-2">Twenty years of structured content, semantic configuration, and API-first design — the foundation AI needs was in Drupal's DNA long before agents arrived.</p>
+        <p class="mt-2">Twenty years building the world's most scalable, secure CMS — structured content, API-first design, fine-grained access control, and robust configuration management. The foundation AI needs was in Drupal's DNA long before agents arrived.</p>
         <div class="initiative-quote reveal" style="max-width:700px;margin:2.5rem auto 0;text-align:left;">
           <blockquote>
             "We were not thinking about AI at the time, but in hindsight, we built exactly the kind of modern, flexible foundation that makes deep AI integration possible today."
@@ -1060,6 +1086,8 @@
     </div>
   </section>
 
+  <div class="dark-to-light-transition"></div>
+
   <!-- PROVEN AT SCALE -->
   <section class="growth-section">
     <div class="container">
@@ -1087,11 +1115,11 @@
         </div>
         <div class="proof-case reveal">
           <div class="proof-case-org">US Government</div>
-          <div class="proof-case-detail">150+ federal sites. WhiteHouse.gov ran on Drupal 2009-2017.</div>
+          <div class="proof-case-detail">150+ federal agency sites. 56% of government websites worldwide choose Drupal for security and compliance.</div>
         </div>
         <div class="proof-case reveal">
-          <div class="proof-case-org">Gartner Recognition</div>
-          <div class="proof-case-detail">Acquia named a Leader in the Gartner Magic Quadrant for DXP, 6 consecutive years.</div>
+          <div class="proof-case-org">NASA</div>
+          <div class="proof-case-detail">40M page views in a single day during the 2017 eclipse. 250K pages migrated in 13 weeks. Multiple Webby Awards.</div>
         </div>
       </div>
       <p class="text-center reveal" style="font-size:0.88rem;color:var(--text-muted);margin-top:2.5rem;">47 Fortune 500 companies. 40,000+ modules. The same platform that launches in 60 seconds scales to the world's most demanding sites.</p>
@@ -1156,6 +1184,7 @@
         <div class="fuse-line">
           <div class="fuse-trail" id="fuseTrail"></div>
           <div class="fuse-spark" id="fuseSpark"></div>
+          <div class="fuse-burst" id="fuseBurst"></div>
         </div>
         <p class="mt-2" style="max-width:500px;margin-left:auto;margin-right:auto;">Three paths. All free. All open source. Choose the one that fits how you work.</p>
       </div>
@@ -1169,7 +1198,7 @@
         <div class="cta-path reveal">
           <h3>Launch a Free Site</h3>
           <p>Browser-based sandbox with AI tools enabled. No download, no install.</p>
-          <a href="https://simplytest.me" class="btn btn-secondary" style="width:100%;">Launch in browser</a>
+          <a href="https://forge.drupal.org" class="btn btn-secondary" style="width:100%;">Try on Forge</a>
           <div class="time">Ready in 60 seconds</div>
         </div>
       </div>
@@ -1210,6 +1239,8 @@
       </div>
     </div>
   </section>
+
+  <div class="light-to-dark-transition"></div>
 
   <!-- FOOTER -->
   <footer class="footer">
@@ -1499,6 +1530,7 @@
           if (e.isIntersecting) {
             document.getElementById('fuseSpark').classList.add('active');
             document.getElementById('fuseTrail').classList.add('active');
+            document.getElementById('fuseBurst').classList.add('active');
             fuseObs.unobserve(e.target);
           }
         });
