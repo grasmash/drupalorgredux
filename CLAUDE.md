@@ -2,7 +2,11 @@
 
 ## Parallelization
 
-Maximize parallel work. Spawn multiple sub-agents in a single message when tasks are independent. Research areas concurrently before implementing. Use background agents for anything that doesn't block the next step.
+Maximize parallel work. Spawn multiple sub-agents in a single message when tasks are independent. Use agent teams for features spanning multiple concerns. Research areas concurrently before implementing. Use background agents for anything that doesn't block the next step.
+
+## Task Tracking (MANDATORY)
+
+ALWAYS use TaskCreate/TaskUpdate (beads) to track work. Create tasks BEFORE starting work. Mark in_progress when beginning, completed when done. The user has requested this repeatedly — it is non-negotiable. Every piece of work should have a corresponding task.
 
 ## Commit Discipline
 

@@ -596,18 +596,18 @@
       display: flex; flex-direction: column; gap: 0;
     }
     .proof-case {
-      display: flex; align-items: baseline; gap: 1rem;
+      display: grid; grid-template-columns: 160px 1fr; gap: 1.5rem; align-items: center;
       padding: 1.25rem 0; border-bottom: 1px solid var(--border);
     }
     .proof-case:first-child { padding-top: 0; }
     .proof-case:last-child { border-bottom: none; }
     .proof-case-org {
       font-family: var(--font-heading); font-size: 1rem; font-weight: 700;
-      color: var(--drupal-navy); white-space: nowrap; min-width: 160px;
+      color: var(--drupal-navy);
     }
     .proof-case-logo {
-      display: inline-block; vertical-align: middle; margin-right: 0.4rem;
-      filter: grayscale(1); opacity: 0.45;
+      display: block; max-width: 120px; height: auto;
+      filter: grayscale(1); opacity: 0.5;
     }
     .proof-case-detail {
       font-size: 0.88rem; color: var(--text-secondary); line-height: 1.5;
@@ -841,19 +841,46 @@
     }
 
     .fuse-burst {
-      position: absolute; right: -4px; top: 50%; transform: translateY(-50%);
-      width: 8px; height: 8px; border-radius: 50%;
-      background: var(--drupal-blue); opacity: 0;
-      box-shadow: 0 0 12px 4px rgba(0,156,222,0.6), 0 0 24px 8px rgba(0,156,222,0.3);
+      position: absolute; right: -6px; top: 50%; transform: translateY(-50%);
+      width: 12px; height: 12px; border-radius: 50%;
+      background: #fff; opacity: 0;
+      box-shadow:
+        0 0 6px 3px rgba(255,196,35,0.9),
+        0 0 20px 8px rgba(244,99,81,0.6),
+        0 0 40px 16px rgba(0,156,222,0.3);
     }
     .fuse-burst.active {
-      animation: fuse-burst-glow 1s ease-out 3s forwards;
+      animation: fuse-burst-flash 0.8s ease-out 3s forwards;
     }
-    @keyframes fuse-burst-glow {
-      0% { opacity: 0; transform: translateY(-50%) scale(0.5); }
-      30% { opacity: 1; transform: translateY(-50%) scale(2); }
-      100% { opacity: 0; transform: translateY(-50%) scale(3); }
+    @keyframes fuse-burst-flash {
+      0% { opacity: 0; transform: translateY(-50%) scale(0.3); }
+      15% { opacity: 1; transform: translateY(-50%) scale(2.5); background: #FFC423; }
+      40% { opacity: 0.8; transform: translateY(-50%) scale(1.5); background: #F46351; }
+      100% { opacity: 0; transform: translateY(-50%) scale(4); }
     }
+    /* Spark particles */
+    .fuse-sparks {
+      position: absolute; right: 0; top: 50%; width: 0; height: 0;
+      opacity: 0; pointer-events: none;
+    }
+    .fuse-sparks.active { animation: fuse-sparks-show 0.1s 3s forwards; }
+    @keyframes fuse-sparks-show { to { opacity: 1; } }
+    .fuse-spark-particle {
+      position: absolute; width: 3px; height: 3px; border-radius: 50%;
+      background: #FFC423;
+    }
+    .fuse-spark-particle:nth-child(1) { animation: spark1 0.6s ease-out 3s forwards; }
+    .fuse-spark-particle:nth-child(2) { animation: spark2 0.6s ease-out 3s forwards; }
+    .fuse-spark-particle:nth-child(3) { animation: spark3 0.6s ease-out 3s forwards; }
+    .fuse-spark-particle:nth-child(4) { animation: spark4 0.5s ease-out 3s forwards; }
+    .fuse-spark-particle:nth-child(5) { animation: spark5 0.7s ease-out 3s forwards; background: #F46351; }
+    .fuse-spark-particle:nth-child(6) { animation: spark6 0.5s ease-out 3s forwards; background: #F46351; }
+    @keyframes spark1 { 0%{opacity:1;transform:translate(0,0)} 100%{opacity:0;transform:translate(20px,-25px)} }
+    @keyframes spark2 { 0%{opacity:1;transform:translate(0,0)} 100%{opacity:0;transform:translate(15px,20px)} }
+    @keyframes spark3 { 0%{opacity:1;transform:translate(0,0)} 100%{opacity:0;transform:translate(30px,-10px)} }
+    @keyframes spark4 { 0%{opacity:1;transform:translate(0,0)} 100%{opacity:0;transform:translate(-10px,-20px)} }
+    @keyframes spark5 { 0%{opacity:1;transform:translate(0,0)} 100%{opacity:0;transform:translate(25px,15px)} }
+    @keyframes spark6 { 0%{opacity:1;transform:translate(0,0)} 100%{opacity:0;transform:translate(-5px,25px)} }
 
     .dark-to-light-transition, .light-to-dark-transition { display: none; }
 
@@ -1428,6 +1455,7 @@
           <div class="fuse-trail" id="fuseTrail"></div>
           <div class="fuse-spark" id="fuseSpark"></div>
           <div class="fuse-burst" id="fuseBurst"></div>
+          <div class="fuse-sparks" id="fuseSparks"><div class="fuse-spark-particle"></div><div class="fuse-spark-particle"></div><div class="fuse-spark-particle"></div><div class="fuse-spark-particle"></div><div class="fuse-spark-particle"></div><div class="fuse-spark-particle"></div></div>
         </div>
         <p class="mt-2" style="max-width:500px;margin-left:auto;margin-right:auto;">Three paths. All free. All open source. Choose the one that fits how you work.</p>
       </div>
@@ -1789,6 +1817,7 @@
             document.getElementById('fuseSpark').classList.add('active');
             document.getElementById('fuseTrail').classList.add('active');
             document.getElementById('fuseBurst').classList.add('active');
+            document.getElementById('fuseSparks').classList.add('active');
             fuseObs.unobserve(e.target);
           }
         });
