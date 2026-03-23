@@ -863,15 +863,20 @@
     }
     .canvas-text h2 { margin-bottom: 1rem; }
     .canvas-text > p { margin-bottom: 2rem; }
-    .canvas-features { display: flex; flex-direction: column; gap: 1rem; }
-    .canvas-feature {
-      padding-left: 1rem; border-left: 2px solid var(--drupal-blue);
+    .canvas-options { display: flex; flex-direction: column; gap: 1.5rem; }
+    .canvas-option {
+      display: flex; gap: 1rem; align-items: flex-start;
     }
-    .canvas-feature strong {
-      display: block; font-size: 0.9rem; color: var(--drupal-navy); margin-bottom: 0.2rem;
+    .canvas-option-num {
+      font-family: var(--font-heading); font-size: 1.5rem; font-weight: 700;
+      color: var(--drupal-blue); line-height: 1; flex-shrink: 0;
+      opacity: 0.4;
     }
-    .canvas-feature span {
-      font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5;
+    .canvas-option h3 {
+      font-size: 1.1rem; margin-bottom: 0.2rem;
+    }
+    .canvas-option p {
+      font-size: 0.88rem; color: var(--text-secondary); line-height: 1.5; margin: 0;
     }
     .canvas-mockup {
       background: #fff; border: 1px solid var(--border); border-radius: 10px;
@@ -1271,18 +1276,27 @@
           <span class="section-label">Canvas AI</span>
           <h2>The modern visual page builder.<br>For humans <span class="highlight">and</span> agents.</h2>
           <p>Start with a site template. Edit visually with drag-and-drop or let an AI agent build pages from a prompt. Under the hood, it's React — no PHP required.</p>
-          <div class="canvas-features">
-            <div class="canvas-feature">
-              <strong>Site templates</strong>
-              <span>Launch in minutes with pre-built designs. Customize everything.</span>
+          <div class="canvas-options">
+            <div class="canvas-option">
+              <span class="canvas-option-num">01</span>
+              <div>
+                <h3>Site templates</h3>
+                <p>Launch in minutes with pre-built designs. Customize everything.</p>
+              </div>
             </div>
-            <div class="canvas-feature">
-              <strong>React frontend</strong>
-              <span>Modern tools, modern stack. Use the JavaScript ecosystem you already know.</span>
+            <div class="canvas-option">
+              <span class="canvas-option-num">02</span>
+              <div>
+                <h3>React frontend</h3>
+                <p>Modern tools, modern stack. Use the JavaScript ecosystem you already know.</p>
+              </div>
             </div>
-            <div class="canvas-feature">
-              <strong>Go decoupled</strong>
-              <span>Start visual. Go fully headless when you need a custom app or mobile backend.</span>
+            <div class="canvas-option">
+              <span class="canvas-option-num">03</span>
+              <div>
+                <h3>Go decoupled</h3>
+                <p>Start visual. Go fully headless when you need a custom app or mobile backend.</p>
+              </div>
             </div>
           </div>
         </div>
