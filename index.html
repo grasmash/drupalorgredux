@@ -18,13 +18,13 @@
       --drupal-yellow: #FFC423;
       --drupal-red: #F46351;
       --drupal-green: #397618;
-      --bg: #ffffff;
-      --bg-alt: rgba(204, 237, 249, 0.10);
+      --bg: #fafaf9;
+      --bg-alt: #f5f4f1;
       --text: #12285F;
       --text-secondary: #475569;
       --text-muted: #7e8e98;
-      --border: #e2e8f0;
-      --border-strong: #cbd5e1;
+      --border: #e5e2dc;
+      --border-strong: #d1cdc5;
       --font: 'Noto Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
       --font-heading: 'Noto Sans', -apple-system, BlinkMacSystemFont, sans-serif;
       --mono: 'JetBrains Mono', 'Fira Code', monospace;
@@ -50,8 +50,8 @@
     a:hover { color: var(--drupal-dark); }
 
     h1 { font-family: var(--font-heading); font-size: clamp(2.75rem, 5.5vw, 4.25rem); font-weight: 700; line-height: 1.08; letter-spacing: -0.03em; }
-    h2 { font-family: var(--font-heading); font-size: clamp(2rem, 3.5vw, 2.75rem); font-weight: 700; line-height: 1.15; letter-spacing: -0.02em; color: var(--drupal-navy); }
-    h3 { font-family: var(--font-heading); font-size: 1.25rem; font-weight: 700; line-height: 1.3; color: var(--drupal-navy); }
+    h2 { font-family: var(--font-heading); font-size: clamp(2rem, 3.5vw, 2.75rem); font-weight: 600; line-height: 1.15; letter-spacing: -0.025em; color: var(--drupal-navy); }
+    h3 { font-family: var(--font-heading); font-size: 1.25rem; font-weight: 600; line-height: 1.3; color: var(--drupal-navy); }
     p { font-size: 1.1rem; color: var(--text-secondary); line-height: 1.7; }
     .highlight { background: var(--gradient-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
     .highlight-on-dark { color: var(--drupal-light); -webkit-text-fill-color: var(--drupal-light); }
@@ -104,10 +104,10 @@
       position: relative; overflow: hidden;
     }
     .btn-lg { padding: 0.85rem 2rem; font-size: 1rem; border-radius: 6px; }
-    .btn-primary { background: var(--drupal-blue); color: #fff; }
-    .btn-primary:hover { background: var(--drupal-dark); color: #fff; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,106,169,0.35); }
-    .btn-secondary { background: rgba(255,255,255,0.08); color: #fff; border: 1px solid rgba(255,255,255,0.2); }
-    .btn-secondary:hover { background: rgba(255,255,255,0.14); border-color: rgba(255,255,255,0.35); color: #fff; transform: translateY(-1px); }
+    .btn-primary { background: var(--drupal-blue); color: #fff; border: 1px solid rgba(255,255,255,0.1); }
+    .btn-primary:hover { background: var(--drupal-dark); color: #fff; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,106,169,0.3); }
+    .btn-secondary { background: rgba(255,255,255,0.06); color: #fff; border: 1px solid rgba(255,255,255,0.15); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+    .btn-secondary:hover { background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.3); color: #fff; transform: translateY(-1px); }
     .btn-secondary-dark { background: var(--bg); color: var(--drupal-navy); border: 1px solid var(--border-strong); }
     .btn-secondary-dark:hover { background: var(--drupal-navy); color: #fff; border-color: var(--drupal-navy); transform: translateY(-1px); }
 
@@ -469,18 +469,17 @@
     .growth-logo { font-size: 1rem; font-weight: 700; color: var(--text-muted); opacity: 0.5; }
     .growth-note { font-size: 0.85rem; color: var(--text-muted); margin-top: 1rem; }
 
-    /* CTA Section — clean white background */
+    /* CTA Section — warm off-white background */
     .cta-section {
       text-align: center; padding: 5rem 0;
-      background: var(--bg);
-      border-top: 1px solid var(--border);
+      background: var(--bg-alt);
     }
     .cta-section h2 { color: var(--drupal-navy); }
     .cta-section p { color: var(--text-secondary); }
     .cta-paths { display: grid; gap: 1.25rem; margin-top: 2rem; max-width: 1000px; margin-left: auto; margin-right: auto; }
     .cta-paths-2col { grid-template-columns: repeat(2, 1fr); }
     .cta-path {
-      background: var(--bg); border: 1px solid var(--border);
+      background: #fff; border: 1px solid var(--border);
       border-radius: var(--radius); padding: 2rem;
       text-align: center; transition: all 0.3s; box-shadow: var(--shadow-sm);
     }
