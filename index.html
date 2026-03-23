@@ -410,9 +410,9 @@
       position: relative; overflow: hidden;
     }
     .structured-section::before {
-      content: ''; position: absolute; inset: 0; pointer-events: none; opacity: 0.035;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Ccircle cx='40' cy='40' r='2' fill='%23009CDE'/%3E%3Ccircle cx='0' cy='0' r='2' fill='%23009CDE'/%3E%3Ccircle cx='80' cy='0' r='2' fill='%23009CDE'/%3E%3Ccircle cx='0' cy='80' r='2' fill='%23009CDE'/%3E%3Ccircle cx='80' cy='80' r='2' fill='%23009CDE'/%3E%3Cline x1='0' y1='0' x2='40' y2='40' stroke='%23009CDE' stroke-width='0.5'/%3E%3Cline x1='80' y1='0' x2='40' y2='40' stroke='%23009CDE' stroke-width='0.5'/%3E%3Cline x1='0' y1='80' x2='40' y2='40' stroke='%23009CDE' stroke-width='0.5'/%3E%3Cline x1='80' y1='80' x2='40' y2='40' stroke='%23009CDE' stroke-width='0.5'/%3E%3C/svg%3E");
-      background-size: 80px 80px;
+      content: ''; position: absolute; inset: 0; pointer-events: none; opacity: 0.08;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Ccircle cx='30' cy='30' r='1.5' fill='%23009CDE'/%3E%3Ccircle cx='0' cy='0' r='1.5' fill='%23009CDE'/%3E%3Ccircle cx='60' cy='0' r='1.5' fill='%23009CDE'/%3E%3Ccircle cx='0' cy='60' r='1.5' fill='%23009CDE'/%3E%3Ccircle cx='60' cy='60' r='1.5' fill='%23009CDE'/%3E%3Cline x1='0' y1='0' x2='30' y2='30' stroke='%23009CDE' stroke-width='0.4'/%3E%3Cline x1='60' y1='0' x2='30' y2='30' stroke='%23009CDE' stroke-width='0.4'/%3E%3Cline x1='0' y1='60' x2='30' y2='30' stroke='%23009CDE' stroke-width='0.4'/%3E%3Cline x1='60' y1='60' x2='30' y2='30' stroke='%23009CDE' stroke-width='0.4'/%3E%3Cline x1='30' y1='0' x2='30' y2='60' stroke='%23009CDE' stroke-width='0.25'/%3E%3Cline x1='0' y1='30' x2='60' y2='30' stroke='%23009CDE' stroke-width='0.25'/%3E%3C/svg%3E");
+      background-size: 60px 60px;
     }
     .structured-section > .container { position: relative; z-index: 1; }
     .structured-section .grid { grid-template-columns: 1fr 1fr; }
@@ -476,12 +476,23 @@
     }
     .initiative-quote cite { display: block; margin-top: 1rem; font-size: 0.9rem; color: var(--text-secondary); font-style: normal; text-align: left; }
 
-    /* "Start in minutes, never outgrow it" */
-    .growth-section { padding: 5.5rem 0 4rem; background: var(--bg-alt); }
-    .growth-inner { max-width: 800px; margin: 0 auto; text-align: center; }
-    .growth-logos { display: flex; justify-content: center; gap: 2.5rem; margin-top: 2rem; flex-wrap: wrap; }
-    .growth-logo { font-size: 1rem; font-weight: 700; color: var(--text-muted); opacity: 0.5; }
-    .growth-note { font-size: 0.85rem; color: var(--text-muted); margin-top: 1rem; }
+    /* Proven at scale — case studies */
+    .growth-section { padding: 5.5rem 0 4rem; background: var(--bg); }
+    .proof-cases {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem;
+      max-width: 900px; margin: 0 auto;
+    }
+    .proof-case {
+      padding: 1.75rem; border-left: 3px solid var(--drupal-blue);
+      background: var(--bg-alt); border-radius: 0 var(--radius) var(--radius) 0;
+    }
+    .proof-case-org {
+      font-family: var(--font-heading); font-size: 1.1rem; font-weight: 700;
+      color: var(--drupal-navy); margin-bottom: 0.5rem;
+    }
+    .proof-case-detail {
+      font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6;
+    }
 
     /* CTA Section — warm off-white background */
     .cta-section {
@@ -624,7 +635,7 @@
 
     /* Responsive */
     @media (max-width: 900px) {
-      .grid-3, .grid-4, .cta-paths, .initiative-stats, .agents-grid, .structured-section .grid { grid-template-columns: 1fr; }
+      .grid-3, .grid-4, .cta-paths, .initiative-stats, .agents-grid, .structured-section .grid, .proof-cases { grid-template-columns: 1fr; }
       .structured-section .card-wide { grid-column: span 1; }
       .card-mcp-inner, .card-providers-inner { flex-direction: column; align-items: flex-start; }
       .card-providers-logos { flex-wrap: wrap; }
@@ -1068,17 +1079,33 @@
     </div>
   </section>
 
-  <!-- START IN MINUTES, NEVER OUTGROW IT -->
+  <!-- PROVEN AT SCALE -->
   <section class="growth-section">
     <div class="container">
-      <div class="growth-inner reveal">
+      <div class="text-center reveal" style="max-width:700px;margin:0 auto 3rem;">
         <span class="section-label">Built to last</span>
-        <h2>Start in minutes,<br><span class="highlight">never outgrow it</span></h2>
-        <p class="mt-2">Right now, everything you need is built in. But if you ever need custom features, advanced integrations, or enterprise-scale infrastructure — Drupal has 40,000+ add-ons and a global community of developers. The same platform runs BBC, UNICEF, and Tesla. You'll never outgrow it.</p>
-        <div style="margin-top:2.5rem;">
-          <a href="https://simplytest.me" class="btn btn-primary btn-lg">Launch a free site</a>
+        <h2>Start in minutes, <span class="highlight">never outgrow it</span></h2>
+        <p class="mt-2">The same platform that launches in 60 seconds scales to the world's most demanding sites. These organizations have been building on Drupal for years — and they're still growing.</p>
+      </div>
+      <div class="proof-cases">
+        <div class="proof-case reveal">
+          <div class="proof-case-org">NASA</div>
+          <div class="proof-case-detail">Running on Drupal since 2009. Serves 200+ sites across missions, programs, and centers to millions of visitors.</div>
+        </div>
+        <div class="proof-case reveal">
+          <div class="proof-case-org">The Economist</div>
+          <div class="proof-case-detail">Migrated to Drupal to power their digital platform. Serves millions of readers globally with structured, multilingual content.</div>
+        </div>
+        <div class="proof-case reveal">
+          <div class="proof-case-org">UNICEF</div>
+          <div class="proof-case-detail">190+ country sites on a single Drupal platform. Delivers critical information in dozens of languages during global emergencies.</div>
+        </div>
+        <div class="proof-case reveal">
+          <div class="proof-case-org">University of Oxford</div>
+          <div class="proof-case-detail">One of the world's top universities trusts Drupal for its main web presence. Part of the 70% of leading universities running Drupal.</div>
         </div>
       </div>
+      <p class="text-center reveal" style="font-size:0.9rem;color:var(--text-muted);margin-top:2.5rem;">40,000+ modules and extensions. A global community of developers. When you need to grow, Drupal grows with you.</p>
     </div>
   </section>
 
