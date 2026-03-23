@@ -384,11 +384,14 @@
       border-left: var(--accent-border);
     }
     .card:hover { box-shadow: var(--shadow); transform: translateY(-3px); border-left-width: 4px; }
+    .card-header-row {
+      display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;
+    }
     .card-icon {
-      width: 48px; height: 48px; border-radius: 12px;
+      width: 36px; height: 36px; border-radius: 10px;
       background: rgba(0,156,222,0.06);
       display: flex; align-items: center; justify-content: center;
-      font-size: 1.25rem; margin-bottom: 1rem;
+      font-size: 1rem; flex-shrink: 0;
     }
 
     /* Stats */
@@ -893,6 +896,12 @@
         <span class="section-label">Built for this moment</span>
         <h2>Architecture that <span class="highlight">agents understand</span></h2>
         <p class="mt-2">Twenty years of structured content, semantic configuration, and API-first design — the foundation AI needs was in Drupal's DNA long before agents arrived.</p>
+        <div class="initiative-quote reveal" style="max-width:700px;margin:2.5rem auto 0;text-align:left;">
+          <blockquote>
+            "We were not thinking about AI at the time, but in hindsight, we built exactly the kind of modern, flexible foundation that makes deep AI integration possible today."
+          </blockquote>
+          <cite>Dries Buytaert — Drupal Founder &amp; Project Lead</cite>
+        </div>
       </div>
       <div class="grid grid-3">
         <div class="card card-wide card-mcp reveal">
@@ -912,23 +921,31 @@
           </div>
         </div>
         <div class="card reveal">
-          <div class="card-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="var(--drupal-blue)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
-          <h3>API-First by Design</h3>
+          <div class="card-header-row">
+            <div class="card-icon"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="var(--drupal-blue)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
+            <h3>API-First by Design</h3>
+          </div>
           <p style="font-size:0.95rem;">JSON:API ships in core. Typed content models, semantic configuration, and CLI automation give agents a complete, machine-readable interface — no scraping, no guessing.</p>
         </div>
         <div class="card reveal">
-          <div class="card-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="var(--drupal-blue)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-          <h3>Governance Built In</h3>
+          <div class="card-header-row">
+            <div class="card-icon"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="var(--drupal-blue)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+            <h3>Governance Built In</h3>
+          </div>
           <p style="font-size:0.95rem;">Roles, permissions, and access control at the foundational layer. Scope agent access precisely — "create articles, edit own drafts, can't touch users." Trust by architecture, not afterthought.</p>
         </div>
         <div class="card reveal">
-          <div class="card-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="var(--drupal-blue)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div>
-          <h3>Context Control Center</h3>
+          <div class="card-header-row">
+            <div class="card-icon"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="var(--drupal-blue)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div>
+            <h3>Context Control Center</h3>
+          </div>
           <p style="font-size:0.95rem;">Brand voice, audiences, and key messages in one place. Every agent — built-in or external — draws from this single source of truth. Your brand stays consistent at scale.</p>
         </div>
         <div class="card reveal">
-          <div class="card-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="var(--drupal-blue)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><polyline points="17 11 19 13 23 9"/></svg></div>
-          <h3>Human-in-the-Loop</h3>
+          <div class="card-header-row">
+            <div class="card-icon"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="var(--drupal-blue)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><polyline points="17 11 19 13 23 9"/></svg></div>
+            <h3>Human-in-the-Loop</h3>
+          </div>
           <p style="font-size:0.95rem;">Every AI action queued for review. Batch approvals, audit trails, revision history. The open web ethos of transparency and responsible use, applied to AI.</p>
         </div>
         <div class="card card-wide card-providers reveal">
@@ -948,12 +965,6 @@
             </div>
           </div>
         </div>
-      </div>
-      <div class="initiative-quote reveal" style="max-width:800px;margin:3rem auto 0;">
-        <blockquote>
-          "We were not thinking about AI at the time, but in hindsight, we built exactly the kind of modern, flexible foundation that makes deep AI integration possible today."
-        </blockquote>
-        <cite>Dries Buytaert — Drupal Founder &amp; Project Lead</cite>
       </div>
     </div>
   </section>
