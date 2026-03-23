@@ -749,15 +749,7 @@
       100% { opacity: 0; transform: translateY(-50%) scale(3); }
     }
 
-    .dark-to-light-transition {
-      height: 120px;
-      background: linear-gradient(180deg, var(--drupal-navy) 0%, var(--bg) 100%);
-    }
-
-    .light-to-dark-transition {
-      height: 80px;
-      background: linear-gradient(180deg, var(--bg-alt) 0%, var(--drupal-navy) 100%);
-    }
+    .dark-to-light-transition, .light-to-dark-transition { display: none; }
   </style>
 </head>
 <body>
@@ -1198,7 +1190,7 @@
         <div class="cta-path reveal">
           <h3>Launch a Free Site</h3>
           <p>Browser-based sandbox with AI tools enabled. No download, no install.</p>
-          <a href="https://forge.drupal.org" class="btn btn-secondary" style="width:100%;">Try on Forge</a>
+          <a href="https://forge.drupal.org" class="btn btn-secondary" style="width:100%;">Try free in your browser</a>
           <div class="time">Ready in 60 seconds</div>
         </div>
       </div>
