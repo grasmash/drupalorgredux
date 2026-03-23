@@ -9,6 +9,18 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="brand-tokens.css">
   <style>
+    @font-face {
+      font-family: 'ZT Gatha';
+      src: url('assets/fonts/zt-gatha-web/ZTGatha-SemiBold.woff2') format('woff2');
+      font-weight: 600;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'ZT Gatha';
+      src: url('assets/fonts/zt-gatha-web/ZTGatha-Bold.woff2') format('woff2');
+      font-weight: 700;
+      font-display: swap;
+    }
     :root {
       --drupal-blue: #009CDE;
       --drupal-dark: #006AA9;
@@ -26,7 +38,7 @@
       --border: #e5e2dc;
       --border-strong: #d1cdc5;
       --font: 'Noto Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      --font-heading: 'Noto Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-heading: 'ZT Gatha', 'Noto Sans', -apple-system, BlinkMacSystemFont, sans-serif;
       --mono: 'JetBrains Mono', 'Fira Code', monospace;
       --max-w: 1200px;
       --radius: 12px;
@@ -58,7 +70,7 @@
     .section-label { display: inline-block; font-size: 0.78rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--drupal-blue); margin-bottom: 1rem; }
 
     .container { max-width: var(--max-w); margin: 0 auto; padding: 0 2rem; }
-    .section { padding: 6rem 0; position: relative; }
+    .section { padding: 5.5rem 0 6rem; position: relative; }
     .section-alt { background: var(--bg-alt); }
     .grid { display: grid; gap: 1.5rem; }
     .grid-3 { grid-template-columns: repeat(3, 1fr); }
@@ -317,7 +329,7 @@
     .agents-section .section-label { color: var(--drupal-light); }
     .agents-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; max-width: 1100px; margin: 0 auto; }
     .agents-card {
-      background: rgba(255,255,255,0.05); backdrop-filter: blur(8px); border: none; border-radius: var(--radius);
+      background: rgba(255,255,255,0.05); backdrop-filter: blur(8px); border: none; border-radius: 8px;
       padding: 2.5rem;
       border-left: var(--accent-border); min-width: 0;
       transition: box-shadow 0.3s ease, transform 0.3s ease, border-left-width 0.2s ease;
@@ -356,7 +368,7 @@
     /* Shared MCP connect component */
     .mcp-connect {
       display: flex; align-items: center; gap: 0.5rem;
-      background: var(--drupal-navy); border-radius: 6px; padding: 0.6rem 0.75rem;
+      background: var(--drupal-navy); border-radius: 4px; padding: 0.6rem 0.75rem;
       border: 1px solid rgba(0,156,222,0.15);
       min-width: 0; overflow: hidden;
     }
@@ -385,7 +397,7 @@
     /* Cards — left border accent */
     .card {
       background: var(--bg); border: none;
-      border-radius: var(--radius); padding: 2rem;
+      border-radius: 8px; padding: 2rem;
       transition: all 0.3s ease; box-shadow: var(--shadow-sm);
       border-left: var(--accent-border);
     }
@@ -459,7 +471,7 @@
       content: attr(data-tip); position: absolute; bottom: calc(100% + 10px); left: 50%;
       transform: translateX(-50%) translateY(4px); opacity: 0; pointer-events: none;
       background: rgba(255,255,255,0.12); color: #fff; font-size: 0.7rem; font-weight: 600;
-      padding: 3px 10px; border-radius: 4px; white-space: nowrap;
+      padding: 3px 10px; border-radius: 3px; white-space: nowrap;
       backdrop-filter: blur(8px); transition: opacity 0.15s, transform 0.15s;
     }
     .provider-logo-lg:hover::after { opacity: 1; transform: translateX(-50%) translateY(0); }
@@ -484,7 +496,7 @@
       content: attr(data-tip); position: absolute; bottom: calc(100% + 8px); left: 50%;
       transform: translateX(-50%) translateY(4px); opacity: 0; pointer-events: none;
       background: var(--drupal-navy); color: #fff; font-size: 0.68rem; font-weight: 600;
-      padding: 3px 8px; border-radius: 4px; white-space: nowrap;
+      padding: 3px 8px; border-radius: 3px; white-space: nowrap;
       transition: opacity 0.15s, transform 0.15s;
     }
     .provider-logo:hover::after { opacity: 1; transform: translateX(-50%) translateY(0); }
@@ -499,7 +511,7 @@
     .initiative-stat-label { font-size: 0.9rem; color: var(--text-secondary); margin-top: 0.25rem; }
     .initiative-quote {
       margin-top: 3rem; padding: 2rem; padding-left: 3.5rem; background: var(--bg); border: none;
-      border-radius: var(--radius); box-shadow: var(--shadow-sm);
+      border-radius: 8px; box-shadow: var(--shadow-sm);
       position: relative;
     }
     .initiative-quote::before {
@@ -536,7 +548,7 @@
     }
     .proof-case {
       padding: 1.75rem; border-left: 3px solid var(--drupal-blue);
-      background: var(--bg-alt); border-radius: 0 var(--radius) var(--radius) 0;
+      background: var(--bg-alt); border-radius: 0 6px 6px 0;
     }
     .proof-case-org {
       font-family: var(--font-heading); font-size: 1.1rem; font-weight: 700;
@@ -548,7 +560,7 @@
 
     /* CTA Section — warm off-white background */
     .cta-section {
-      text-align: center; padding: 5rem 0;
+      text-align: center; padding: 4.5rem 0 5.5rem;
       background: var(--bg-alt);
     }
     .cta-section h2 { color: var(--drupal-navy); }
@@ -557,7 +569,7 @@
     .cta-paths-2col { grid-template-columns: repeat(2, 1fr); }
     .cta-path {
       background: #fff; border: 1px solid var(--border);
-      border-radius: var(--radius); padding: 2rem;
+      border-radius: 10px; padding: 2rem;
       text-align: center; transition: all 0.3s; box-shadow: var(--shadow-sm);
     }
     .cta-path:hover { box-shadow: var(--shadow); transform: translateY(-3px); border-color: var(--drupal-blue); }
@@ -580,7 +592,7 @@
     }
     .cta-dev-terminal {
       background: var(--drupal-navy); border: 1px solid rgba(18,40,95,0.15);
-      border-radius: 8px; overflow: hidden;
+      border-radius: 10px; overflow: hidden;
     }
     .cta-dev-terminal-bar {
       display: flex; align-items: center; gap: 6px;
@@ -968,7 +980,7 @@
         <!-- Left: Outside -> In -->
         <div class="agents-card reveal">
           <div class="agents-card-header">
-            <div class="agents-card-icon agents-card-icon-blue">&rarr;</div>
+            <div class="agents-card-icon agents-card-icon-blue"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
             <div>
               <div class="agents-card-label agents-card-label-blue">Outside &rarr; In</div>
               <div class="agents-card-title">Your agents, our CMS</div>
@@ -990,7 +1002,7 @@
         <!-- Right: Ships built-in -->
         <div class="agents-card reveal">
           <div class="agents-card-header">
-            <div class="agents-card-icon agents-card-icon-green">&#x26a1;</div>
+            <div class="agents-card-icon agents-card-icon-green"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
             <div>
               <div class="agents-card-label agents-card-label-green">Ships built-in</div>
               <div class="agents-card-title">22 agents, ready to go</div>
