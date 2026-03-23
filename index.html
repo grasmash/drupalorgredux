@@ -409,13 +409,9 @@
       padding: 6.5rem 0 5rem; background: var(--bg-alt);
       position: relative; overflow: hidden;
     }
-    .structured-section::before {
-      content: ''; position: absolute; inset: 0; pointer-events: none;
-      background-image:
-        radial-gradient(circle at 30px 30px, rgba(0,156,222,0.06) 1px, transparent 1px),
-        radial-gradient(circle at 0 0, rgba(0,156,222,0.06) 1px, transparent 1px);
-      background-size: 60px 60px;
-      background-position: 0 0, 30px 30px;
+    .matrix-canvas {
+      position: absolute; inset: 0; z-index: 0; pointer-events: none;
+      opacity: 0.07;
     }
     .structured-section > .container { position: relative; z-index: 1; }
     .structured-section .grid { grid-template-columns: 1fr 1fr; }
@@ -660,6 +656,38 @@
       .hero-actions .btn { width: 100%; }
       .hero-actions .hero-inline-link { text-align: center; }
     }
+
+    /* Fuse animation */
+    .fuse-line {
+      position: relative; height: 2px; max-width: 600px; margin: 1.5rem auto 0;
+      background: var(--border); border-radius: 1px; overflow: hidden;
+    }
+    .fuse-spark {
+      position: absolute; left: 0; top: -1px; width: 20px; height: 4px;
+      background: linear-gradient(90deg, transparent, var(--drupal-blue), #fff, var(--drupal-blue), transparent);
+      border-radius: 2px;
+      filter: blur(1px);
+      animation: fuse-burn 3s ease-in-out forwards;
+      animation-play-state: paused;
+    }
+    .fuse-spark.active { animation-play-state: running; }
+    @keyframes fuse-burn {
+      0% { left: -20px; opacity: 0; }
+      5% { opacity: 1; }
+      95% { opacity: 1; }
+      100% { left: 100%; opacity: 0; }
+    }
+    .fuse-trail {
+      position: absolute; left: 0; top: 0; height: 100%; width: 0;
+      background: var(--drupal-blue);
+      animation: fuse-fill 3s ease-in-out forwards;
+      animation-play-state: paused;
+    }
+    .fuse-trail.active { animation-play-state: running; }
+    @keyframes fuse-fill {
+      0% { width: 0; }
+      100% { width: 100%; }
+    }
   </style>
 </head>
 <body>
@@ -678,7 +706,7 @@
         <a href="https://new.drupal.org/drupal-cms#templates">Templates</a>
         <a href="https://www.drupal.org/docs">Docs</a>
         <a href="https://www.drupal.org/community">Community</a>
-        <a href="https://simplytest.me" class="btn btn-primary" style="margin-left:0.5rem;">Launch Free Site</a>
+        <a href="https://new.drupal.org/drupal-cms/launcher" class="btn btn-primary" style="margin-left:0.5rem;">Download</a>
       </nav>
     </div>
   </header>
@@ -693,8 +721,9 @@
           <h1 class="animate animate-d1">The best CMS for <span class="highlight-on-dark">agents</span> to use.</h1>
           <p class="hero-subhead animate animate-d2">Two decades of structured content, API-first architecture, and granular governance — exactly the foundation AI agents need. 22 ship out of the box. Any MCP-compatible agent can connect.</p>
           <div class="hero-actions animate animate-d3">
-            <a href="https://simplytest.me" class="btn btn-primary btn-lg">Launch a free site</a>
-            <a href="#agents" class="hero-inline-link">See it in action &darr;</a>
+            <a href="https://new.drupal.org/drupal-cms/launcher" class="btn btn-primary btn-lg">Download the desktop app</a>
+            <a href="https://simplytest.me" class="hero-inline-link">Launch a free site &rarr;</a>
+            <a href="#terminal" class="hero-inline-link">Skip to terminal &darr;</a>
           </div>
         </div>
         <div class="animate animate-d2">
@@ -916,6 +945,7 @@
 
   <!-- STRUCTURED CONTENT IS AI'S BEST FRIEND -->
   <section class="section structured-section">
+    <canvas class="matrix-canvas" id="matrixCanvas"></canvas>
     <div class="container">
       <div class="text-center reveal" style="max-width:700px;margin:0 auto 4rem;">
         <span class="section-label">Built for this moment</span>
@@ -999,7 +1029,7 @@
     <div class="container">
       <div class="initiative-inner reveal">
         <span class="section-label">Drupal AI Initiative</span>
-        <a href="https://www.drupal.org/about/starshot/initiatives/ai" style="text-decoration:none;color:inherit;"><h2>The largest open source<br><span class="highlight">AI Initiative</span> in CMS history</h2></a>
+        <a href="https://www.drupal.org/about/starshot/initiatives/ai" style="text-decoration:none;color:inherit;"><h2>The largest <span class="highlight">AI investment</span><br>in open source CMS</h2></a>
         <div class="initiative-stats" id="initiativeStats" style="grid-template-columns: repeat(4, 1fr);">
           <div>
             <div class="initiative-stat-number" data-counter="1.5" data-prefix="$" data-suffix="M+" data-decimals="1">$1.5M+</div>
@@ -1058,23 +1088,27 @@
     <div class="container">
       <div class="reveal">
         <h2>Start building in <span class="highlight">3 minutes</span></h2>
+        <div class="fuse-line">
+          <div class="fuse-trail" id="fuseTrail"></div>
+          <div class="fuse-spark" id="fuseSpark"></div>
+        </div>
         <p class="mt-2" style="max-width:500px;margin-left:auto;margin-right:auto;">Three paths. All free. All open source. Choose the one that fits how you work.</p>
       </div>
       <div class="cta-paths cta-paths-2col">
         <div class="cta-path reveal">
-          <h3>Launch a Free Site</h3>
-          <p>Browser-based sandbox with AI tools enabled. No download, no install.</p>
-          <a href="https://simplytest.me" class="btn btn-primary" style="width:100%;">Launch now</a>
-          <div class="time">Ready in 60 seconds</div>
-        </div>
-        <div class="cta-path reveal">
           <h3>Desktop App</h3>
           <p>Download and double-click. Full Drupal CMS running locally on your machine.</p>
-          <a href="https://new.drupal.org/drupal-cms/launcher" class="btn btn-secondary" style="width:100%;">Download for Mac</a>
+          <a href="https://new.drupal.org/drupal-cms/launcher" class="btn btn-primary" style="width:100%;">Download for Mac</a>
           <div class="time">Ready in 3 minutes</div>
         </div>
+        <div class="cta-path reveal">
+          <h3>Launch a Free Site</h3>
+          <p>Browser-based sandbox with AI tools enabled. No download, no install.</p>
+          <a href="https://simplytest.me" class="btn btn-secondary" style="width:100%;">Launch in browser</a>
+          <div class="time">Ready in 60 seconds</div>
+        </div>
       </div>
-      <div class="cta-dev-bar reveal">
+      <div class="cta-dev-bar reveal" id="terminal">
         <div class="cta-dev-label">Or skip the GUI entirely</div>
         <div class="cta-dev-terminal">
           <div class="cta-dev-terminal-bar">
@@ -1300,6 +1334,89 @@
 
       // Initial call
       onScroll();
+
+      // ===== I. Matrix Rain Background =====
+      (function() {
+        var canvas = document.getElementById('matrixCanvas');
+        if (!canvas) return;
+        var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (prefersReduced) return;
+
+        var ctx = canvas.getContext('2d');
+        var section = canvas.closest('.structured-section');
+        var chars = ['0','1','A','P','I','M','C','P','J','S','O','N','{','}','n','o','d','e','f','i','e','l','d'];
+        var fontSize = 11;
+        var columns = 0;
+        var drops = [];
+        var speeds = [];
+        var animId = null;
+        var isVisible = false;
+
+        function resizeCanvas() {
+          canvas.width = section.offsetWidth;
+          canvas.height = section.offsetHeight;
+          columns = Math.floor(canvas.width / fontSize);
+          drops = [];
+          speeds = [];
+          for (var i = 0; i < columns; i++) {
+            drops[i] = Math.random() * canvas.height / fontSize;
+            speeds[i] = 0.3 + Math.random() * 0.7;
+          }
+        }
+
+        function draw() {
+          ctx.fillStyle = 'rgba(244, 243, 240, 0.05)';
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+          ctx.fillStyle = '#009CDE';
+          ctx.font = fontSize + 'px monospace';
+
+          for (var i = 0; i < columns; i++) {
+            var text = chars[Math.floor(Math.random() * chars.length)];
+            var x = i * fontSize;
+            var y = drops[i] * fontSize;
+            ctx.globalAlpha = Math.max(0, 1 - (y / canvas.height) * 0.8);
+            ctx.fillText(text, x, y);
+            drops[i] += speeds[i];
+            if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+              drops[i] = 0;
+            }
+          }
+          ctx.globalAlpha = 1;
+          if (isVisible) {
+            animId = requestAnimationFrame(draw);
+          }
+        }
+
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        var matrixObs = new IntersectionObserver(function(entries) {
+          entries.forEach(function(e) {
+            if (e.isIntersecting) {
+              isVisible = true;
+              if (!animId) animId = requestAnimationFrame(draw);
+            } else {
+              isVisible = false;
+              if (animId) { cancelAnimationFrame(animId); animId = null; }
+            }
+          });
+        }, { threshold: 0 });
+        matrixObs.observe(section);
+      })();
+
+      // ===== J. Fuse Animation =====
+      var fuseObs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) {
+          if (e.isIntersecting) {
+            document.getElementById('fuseSpark').classList.add('active');
+            document.getElementById('fuseTrail').classList.add('active');
+            fuseObs.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.5 });
+      var fuseLine = document.querySelector('.fuse-line');
+      if (fuseLine) fuseObs.observe(fuseLine);
+
     })();
   </script>
 
