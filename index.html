@@ -301,7 +301,7 @@
     }
     .proof-ticker-logo:hover { color: rgba(255,255,255,0.6); }
     .proof-ticker-logo img {
-      height: auto;
+      width: auto;
       filter: brightness(0) invert(1);
       opacity: 0.7;
       transition: opacity 0.3s;
@@ -328,6 +328,17 @@
     }
 
     /* Works with every agent section */
+    /* Don't vibe your own CMS */
+    .vibe-section {
+      padding: 5rem 0; background: var(--bg);
+    }
+    .vibe-inner { max-width: 720px; }
+    .vibe-content h2 { margin-bottom: 1.5rem; }
+    .vibe-content p {
+      font-size: 1.05rem; color: var(--text-secondary); line-height: 1.75; margin-bottom: 1.25rem;
+    }
+    .vibe-content p:last-child { margin-bottom: 0; }
+
     .agents-section { padding: 5rem 0 6.5rem; background: linear-gradient(180deg, var(--drupal-navy) 0%, #0d2245 50%, var(--drupal-navy) 100%); color: #fff; }
     .agents-header { text-align: center; margin-bottom: 3rem; }
     .agents-header h2 { color: #fff; }
@@ -1002,6 +1013,21 @@
   </div>
   </div><!-- /hero-and-proof -->
 
+  <!-- DON'T VIBE YOUR OWN CMS -->
+  <section class="vibe-section">
+    <div class="container">
+      <div class="vibe-inner reveal">
+        <div class="vibe-content">
+          <span class="section-label" style="color:var(--drupal-blue);">A word about vibing</span>
+          <h2>Don't vibe your own CMS.<br><span class="highlight">Vibe with ours.</span></h2>
+          <p>Vibed software is a race car built for demo day. It's fast, it's sleek, it gets you from zero to launch in a weekend. But race cars don't have seatbelts, cargo space, or a warranty.</p>
+          <p>At $1M ARR, vibed software hits a wall. Content models that seemed fine with 50 pages collapse at 5,000. The permission system you never built becomes a security incident. The "just ship it" API breaks every integration you've sold.</p>
+          <p>Drupal is the production vehicle. 25 years of crash tests, security audits, and scale-proofing from organizations like Pfizer, The Economist, and NASA. You still get to vibe — Canvas AI, 22 agents, and MCP mean you move just as fast. You just don't have to rebuild the engine at Series B.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- WORKS WITH EVERY AGENT. SHIPS WITH 22. -->
   <section class="agents-section" id="agents">
     <div class="container">
@@ -1067,12 +1093,14 @@
         <span class="section-label">Built for this moment</span>
         <h2>Architecture that <span class="highlight">agents understand</span></h2>
         <p class="mt-2">25 years building the world's most scalable, secure CMS — structured content, API-first design, fine-grained access control, and robust configuration management. The foundation AI needs was in Drupal's DNA long before agents arrived.</p>
+        <!-- Dries quote hidden for now — revisit design placement
         <div class="initiative-quote reveal" style="max-width:700px;margin:2.5rem auto 0;text-align:left;">
           <blockquote>
             "We were not thinking about AI at the time, but in hindsight, we built exactly the kind of modern, flexible foundation that makes deep AI integration possible today."
           </blockquote>
           <cite>Dries Buytaert — Drupal Founder &amp; Project Lead</cite>
         </div>
+        -->
       </div>
       <div class="grid grid-3">
         <div class="card card-wide reveal">
