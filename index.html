@@ -336,6 +336,11 @@
       display: flex; align-items: center; gap: 0.75rem; padding: 0.625rem 0.75rem;
       border-radius: 8px; background: rgba(204, 237, 249, 0.15); border: 1px solid rgba(0,156,222,0.08);
     }
+    .agents-list-dot {
+      width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0;
+      background: var(--text-muted);
+    }
+    .agents-list-dot-drupal { background: var(--drupal-blue); }
     .agents-list-item span:first-child { font-size: 0.95rem; }
     .agents-list-item span:nth-child(2) { font-size: 0.82rem; font-weight: 600; color: var(--text); }
     .agents-list-item .muted-right { margin-left: auto; font-size: 0.7rem; color: var(--text-muted); font-weight: 400; }
@@ -464,40 +469,29 @@
     .growth-logo { font-size: 1rem; font-weight: 700; color: var(--text-muted); opacity: 0.5; }
     .growth-note { font-size: 0.85rem; color: var(--text-muted); margin-top: 1rem; }
 
-    /* CTA Section — V2: navy-to-blue gradient, frosted glass cards */
+    /* CTA Section — clean white background */
     .cta-section {
-      text-align: center; padding: 3.5rem 0;
-      background: var(--grad-cta-bg);
-      color: #fff;
-      position: relative;
+      text-align: center; padding: 5rem 0;
+      background: var(--bg);
+      border-top: 1px solid var(--border);
     }
-    .cta-section::after {
-      content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-      opacity: 0.04; mix-blend-mode: overlay;
-    }
-    .cta-section > .container { position: relative; z-index: 1; }
-    .cta-section h2 { color: #fff; }
-    .cta-section h2 .highlight {
-      background: linear-gradient(135deg, #CCEDF9, #FFC423);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-    }
-    .cta-section p { color: rgba(255,255,255,0.8); }
+    .cta-section h2 { color: var(--drupal-navy); }
+    .cta-section p { color: var(--text-secondary); }
     .cta-paths { display: grid; gap: 1.25rem; margin-top: 2rem; max-width: 1000px; margin-left: auto; margin-right: auto; }
     .cta-paths-2col { grid-template-columns: repeat(2, 1fr); }
     .cta-path {
-      background: rgba(255,255,255,0.1); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(255,255,255,0.15); border-radius: var(--radius);
-      padding: 1.75rem 1.75rem; text-align: center; transition: all 0.3s;
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 2rem;
+      text-align: center; transition: all 0.3s; box-shadow: var(--shadow-sm);
     }
-    .cta-path:hover { background: rgba(255,255,255,0.15); transform: translateY(-3px); box-shadow: 0 12px 40px rgba(0,0,0,0.15); }
-    .cta-path h3 { color: #fff; margin-bottom: 0.5rem; }
-    .cta-path p { font-size: 0.9rem; color: rgba(255,255,255,0.75); margin-bottom: 1.25rem; }
-    .cta-path .time { font-size: 0.8rem; color: var(--drupal-light); font-weight: 600; margin-top: 1rem; }
-    .cta-path .btn-primary { background: #fff; color: var(--drupal-navy); }
-    .cta-path .btn-primary:hover { background: #fff; color: var(--drupal-navy); transform: translateY(-1px); box-shadow: 0 4px 16px rgba(255,255,255,0.2); }
-    .cta-path .btn-secondary { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,0.3); }
-    .cta-path .btn-secondary:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.5); color: #fff; transform: translateY(-1px); }
+    .cta-path:hover { box-shadow: var(--shadow); transform: translateY(-3px); border-color: var(--drupal-blue); }
+    .cta-path h3 { color: var(--drupal-navy); margin-bottom: 0.5rem; }
+    .cta-path p { font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 1.25rem; }
+    .cta-path .time { font-size: 0.8rem; color: var(--drupal-blue); font-weight: 600; margin-top: 1rem; }
+    .cta-path .btn-primary { background: var(--drupal-blue); color: #fff; }
+    .cta-path .btn-primary:hover { background: var(--drupal-dark); color: #fff; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,106,169,0.35); }
+    .cta-path .btn-secondary { background: var(--bg); color: var(--drupal-navy); border: 1px solid var(--border-strong); }
+    .cta-path .btn-secondary:hover { border-color: var(--drupal-blue); color: var(--drupal-blue); transform: translateY(-1px); }
 
     /* Developer bar — terminal-style, full-width */
     .cta-dev-bar {
@@ -506,7 +500,7 @@
     }
     .cta-dev-label {
       font-size: 0.72rem; font-weight: 600; text-transform: uppercase;
-      letter-spacing: 0.08em; color: rgba(255,255,255,0.4); margin-bottom: 0.75rem;
+      letter-spacing: 0.08em; color: var(--text-muted); margin-bottom: 0.75rem;
     }
     .cta-dev-terminal {
       background: rgba(0,0,0,0.35); border: 1px solid rgba(255,255,255,0.08);
@@ -861,10 +855,10 @@
             <button class="mcp-connect-copy" onclick="navigator.clipboard.writeText('npx @anthropic/mcp-drupal --url https://yoursite.com').then(()=>{this.textContent='Copied!';setTimeout(()=>this.textContent='Copy',2000)})">Copy</button>
           </div>
           <div class="agents-list">
-            <div class="agents-list-item"><span>&#x1f4ac;</span><span>Claude Code / Claude Desktop</span></div>
-            <div class="agents-list-item"><span>&#x1f4bb;</span><span>Cursor / GitHub Copilot</span></div>
-            <div class="agents-list-item"><span>&#x2728;</span><span>OpenAI Codex / Google Gemini</span></div>
-            <div class="agents-list-item"><span>&#x1f527;</span><span>Your custom agents</span><span class="muted-right">via MCP or JSON:API</span></div>
+            <div class="agents-list-item"><span class="agents-list-dot"></span><span>Claude Code / Claude Desktop</span></div>
+            <div class="agents-list-item"><span class="agents-list-dot"></span><span>Cursor / GitHub Copilot</span></div>
+            <div class="agents-list-item"><span class="agents-list-dot"></span><span>OpenAI Codex / Google Gemini</span></div>
+            <div class="agents-list-item"><span class="agents-list-dot"></span><span>Your custom agents</span><span class="muted-right">via MCP or JSON:API</span></div>
           </div>
         </div>
         <!-- Right: Ships built-in -->
@@ -878,14 +872,14 @@
           </div>
           <p>Don't have your own agents? Drupal ships 22 that work out of the box — content generation, SEO, accessibility, translation, and more. All using your brand context.</p>
           <div class="agents-grid-2col">
-            <div class="agents-list-item"><span>&#x1f3a8;</span><span>Page Builder</span></div>
-            <div class="agents-list-item"><span>&#x267f;</span><span>Accessibility</span></div>
-            <div class="agents-list-item"><span>&#x1f50e;</span><span>SEO Optimizer</span></div>
-            <div class="agents-list-item"><span>&#x1f310;</span><span>Translation</span></div>
-            <div class="agents-list-item"><span>&#x1f4dd;</span><span>Content Writer</span></div>
-            <div class="agents-list-item"><span>&#x1f4f7;</span><span>Media Alt Text</span></div>
-            <div class="agents-list-item"><span>&#x1f4ac;</span><span>Chatbot</span></div>
-            <div class="agents-list-item"><span>&#x1f50d;</span><span>Content Audit</span></div>
+            <div class="agents-list-item"><span class="agents-list-dot agents-list-dot-drupal"></span><span>Page Builder</span></div>
+            <div class="agents-list-item"><span class="agents-list-dot agents-list-dot-drupal"></span><span>Accessibility</span></div>
+            <div class="agents-list-item"><span class="agents-list-dot agents-list-dot-drupal"></span><span>SEO Optimizer</span></div>
+            <div class="agents-list-item"><span class="agents-list-dot agents-list-dot-drupal"></span><span>Translation</span></div>
+            <div class="agents-list-item"><span class="agents-list-dot agents-list-dot-drupal"></span><span>Content Writer</span></div>
+            <div class="agents-list-item"><span class="agents-list-dot agents-list-dot-drupal"></span><span>Media Alt Text</span></div>
+            <div class="agents-list-item"><span class="agents-list-dot agents-list-dot-drupal"></span><span>Chatbot</span></div>
+            <div class="agents-list-item"><span class="agents-list-dot agents-list-dot-drupal"></span><span>Content Audit</span></div>
             <div class="agents-more">+14 more agents included free</div>
           </div>
         </div>
@@ -905,7 +899,7 @@
         <div class="card card-wide card-mcp reveal">
           <div class="card-mcp-inner">
             <div>
-              <div class="card-icon">&#x1f91d;</div>
+              <div class="card-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="var(--drupal-blue)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></div>
               <h3>MCP Protocol</h3>
               <p style="font-size:0.95rem;">Native Model Context Protocol support. Claude, Cursor, Copilot — any MCP-compatible agent connects and operates your site.</p>
             </div>
@@ -919,22 +913,22 @@
           </div>
         </div>
         <div class="card reveal">
-          <div class="card-icon">&#x1f9e9;</div>
+          <div class="card-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="var(--drupal-blue)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
           <h3>API-First by Design</h3>
           <p style="font-size:0.95rem;">JSON:API ships in core. Typed content models, semantic configuration, and CLI automation give agents a complete, machine-readable interface — no scraping, no guessing.</p>
         </div>
         <div class="card reveal">
-          <div class="card-icon">&#x1f512;</div>
+          <div class="card-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="var(--drupal-blue)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
           <h3>Governance Built In</h3>
           <p style="font-size:0.95rem;">Roles, permissions, and access control at the foundational layer. Scope agent access precisely — "create articles, edit own drafts, can't touch users." Trust by architecture, not afterthought.</p>
         </div>
         <div class="card reveal">
-          <div class="card-icon">&#x1f3af;</div>
+          <div class="card-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="var(--drupal-blue)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div>
           <h3>Context Control Center</h3>
           <p style="font-size:0.95rem;">Brand voice, audiences, and key messages in one place. Every agent — built-in or external — draws from this single source of truth. Your brand stays consistent at scale.</p>
         </div>
         <div class="card reveal">
-          <div class="card-icon">&#x1f4cb;</div>
+          <div class="card-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="var(--drupal-blue)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><polyline points="17 11 19 13 23 9"/></svg></div>
           <h3>Human-in-the-Loop</h3>
           <p style="font-size:0.95rem;">Every AI action queued for review. Batch approvals, audit trails, revision history. The open web ethos of transparency and responsible use, applied to AI.</p>
         </div>
@@ -1003,13 +997,13 @@
       </div>
       <div class="cta-paths cta-paths-2col">
         <div class="cta-path reveal">
-          <h3>&#x1f310; Launch a Free Site</h3>
+          <h3>Launch a Free Site</h3>
           <p>Browser-based sandbox with AI tools enabled. No download, no install.</p>
           <a href="https://simplytest.me" class="btn btn-primary" style="width:100%;">Launch now</a>
           <div class="time">Ready in 60 seconds</div>
         </div>
         <div class="cta-path reveal">
-          <h3>&#x1f4bb; Desktop App</h3>
+          <h3>Desktop App</h3>
           <p>Download and double-click. Full Drupal CMS running locally on your machine.</p>
           <a href="https://new.drupal.org/drupal-cms/launcher" class="btn btn-secondary" style="width:100%;">Download for Mac</a>
           <div class="time">Ready in 3 minutes</div>
