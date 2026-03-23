@@ -406,24 +406,42 @@
 
     /* Structured content section — light blue tint */
     .structured-section {
-      padding: 6.5rem 0 5rem; background: var(--bg-alt);
-      position: relative; overflow: hidden;
+      padding: 6.5rem 0 5rem; background: var(--drupal-navy);
+      position: relative; overflow: hidden; color: #fff;
     }
     .matrix-canvas {
       position: absolute; inset: 0; z-index: 0; pointer-events: none;
-      opacity: 0.07;
+      opacity: 0.15;
     }
     .structured-section > .container { position: relative; z-index: 1; }
+    .structured-section .section-label { color: var(--drupal-light); }
+    .structured-section h2 { color: #fff; }
+    .structured-section h2 .highlight { color: var(--drupal-light); }
+    .structured-section p { color: rgba(255,255,255,0.7); }
     .structured-section .grid { grid-template-columns: 1fr 1fr; }
     .structured-section .card-wide { grid-column: span 2; }
-
-    /* Featured wide cards — center-aligned, stacked layout */
-    .card-featured {
-      text-align: center; border-left: none; padding: 2.5rem 2rem;
-      background: var(--drupal-navy); color: #fff;
-      border: 1px solid rgba(0,156,222,0.15);
+    /* Cards on dark bg */
+    .structured-section .card {
+      background: rgba(255,255,255,0.05); border-left: 3px solid var(--drupal-blue);
+      border-color: rgba(0,156,222,0.2); backdrop-filter: blur(8px);
     }
-    .card-featured:hover { border-color: rgba(0,156,222,0.3); border-left: none; }
+    .structured-section .card:hover { background: rgba(255,255,255,0.08); border-left-width: 4px; }
+    .structured-section .card h3 { color: #fff; }
+    .structured-section .card p { color: rgba(255,255,255,0.65); }
+    .structured-section .card-icon { background: rgba(0,156,222,0.12); }
+    /* Quote on dark */
+    .structured-section .initiative-quote { background: rgba(255,255,255,0.04); border: none; }
+    .structured-section .initiative-quote blockquote { color: rgba(255,255,255,0.85); }
+    .structured-section .initiative-quote cite { color: rgba(255,255,255,0.5); }
+    .structured-section .initiative-quote::before { color: rgba(0,156,222,0.2); }
+
+    /* Featured wide cards — center-aligned, glass on dark */
+    .card-featured {
+      text-align: center; border-left: none !important; padding: 2.5rem 2rem;
+      background: rgba(0,156,222,0.08) !important;
+      border: 1px solid rgba(0,156,222,0.2) !important;
+    }
+    .card-featured:hover { background: rgba(0,156,222,0.12) !important; border-color: rgba(0,156,222,0.35) !important; }
     .card-featured h3 { color: #fff; }
     .card-featured p { color: rgba(255,255,255,0.7); }
     .card-featured-icon {
@@ -737,8 +755,7 @@
           <p class="hero-subhead animate animate-d2">Two decades of structured content, API-first architecture, and granular governance — exactly the foundation AI agents need. 22 ship out of the box. Any MCP-compatible agent can connect.</p>
           <div class="hero-actions animate animate-d3">
             <a href="https://new.drupal.org/drupal-cms/launcher" class="btn btn-primary btn-lg">Download the desktop app</a>
-            <a href="https://simplytest.me" class="hero-inline-link">Launch a free site &rarr;</a>
-            <a href="#terminal" class="hero-inline-link">Skip to terminal &darr;</a>
+            <a href="#terminal" class="hero-inline-link">Or use the terminal &darr;</a>
           </div>
         </div>
         <div class="animate animate-d2">
