@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Drupal CMS — The Best CMS for Agents to Use</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --drupal-blue: #009CDE;
+      --drupal-dark: #006AA9;
+      --drupal-navy: #12285F;
+      --drupal-light: #CCEDF9;
+      --drupal-white: #FFFFFF;
+      --drupal-black: #000000;
+      --text: #12285F;
+      --text-secondary: #475569;
+      --text-muted: #94a3b8;
+      --border: #e2e8f0;
+      --font: 'Noto Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --mono: 'JetBrains Mono', 'Fira Code', monospace;
+      --max-w: 1200px;
+      --radius: 12px;
+      --radius-sm: 8px;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+      --shadow: 0 4px 16px rgba(0,0,0,0.06), 0 1px 3px rgba(0,0,0,0.04);
+      --shadow-lg: 0 12px 40px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.04);
+      --shadow-blue: 0 8px 30px rgba(0,156,222,0.2);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+    body { font-family: var(--font); background: #fff; color: var(--text); line-height: 1.6; overflow-x: hidden; }
+    a { color: var(--drupal-blue); text-decoration: none; transition: color 0.2s; }
+    a:hover { color: var(--drupal-dark); }
+
+    h1 { font-family: var(--font); font-size: clamp(2.75rem, 5.5vw, 4.25rem); font-weight: 700; line-height: 1.1; letter-spacing: -0.03em; }
+    h2 { font-family: var(--font); font-size: clamp(2rem, 3.5vw, 2.75rem); font-weight: 700; line-height: 1.15; letter-spacing: -0.02em; }
+    h3 { font-family: var(--font); font-size: 1.25rem; font-weight: 600; line-height: 1.3; }
+    p { font-size: 1.1rem; line-height: 1.7; }
+
+    .container { max-width: var(--max-w); margin: 0 auto; padding: 0 2rem; }
+
+    /* GUI Block decorative accent — small rounded rectangles */
+    .gui-accent {
+      position: relative;
+    }
+    .gui-accent::before {
+      content: '';
+      position: absolute;
+      width: 32px;
+      height: 12px;
+      border-radius: 4px;
+      background: var(--drupal-blue);
+      opacity: 0.25;
+      top: -8px;
+      left: 0;
+    }
+    .gui-accent::after {
+      content: '';
+      position: absolute;
+      width: 18px;
+      height: 12px;
+      border-radius: 4px;
+      background: var(--drupal-light);
+      opacity: 0.6;
+      top: -8px;
+      left: 38px;
+    }
+
+    /* Header */
+    .header {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 0.75rem 0;
+      background: rgba(18, 40, 95, 0.95);
+      backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .header-inner { display: flex; justify-content: space-between; align-items: center; }
+    .logo { display: flex; align-items: center; gap: 0.6rem; color: #fff; text-decoration: none; }
+    .logo-text { font-size: 1.3rem; font-weight: 700; color: #fff; }
+    .nav { display: flex; gap: 1.75rem; align-items: center; }
+    .nav a { color: rgba(255,255,255,0.7); font-size: 0.9rem; font-weight: 500; }
+    .nav a:hover { color: #fff; }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+      padding: 0.7rem 1.5rem; border-radius: var(--radius-sm);
+      font-family: var(--font); font-size: 0.925rem; font-weight: 600;
+      cursor: pointer; transition: all 0.25s; border: none; white-space: nowrap;
+    }
+    .btn-lg { padding: 0.85rem 2rem; font-size: 1rem; border-radius: 10px; }
+    .btn-primary { background: var(--drupal-blue); color: #fff; }
+    .btn-primary:hover { background: var(--drupal-dark); color: #fff; transform: translateY(-1px); box-shadow: var(--shadow-blue); }
+    .btn-secondary { background: #fff; color: var(--drupal-navy); border: 1px solid rgba(255,255,255,0.3); }
+    .btn-secondary:hover { background: rgba(255,255,255,0.95); }
+    .btn-outline-navy { background: transparent; color: var(--drupal-navy); border: 2px solid var(--drupal-navy); }
+    .btn-outline-navy:hover { background: var(--drupal-navy); color: #fff; }
+
+    /* ========== HERO — Asymmetric Split ========== */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      overflow: hidden;
+    }
+    .hero-navy {
+      position: absolute;
+      top: 0; left: 0; bottom: 0;
+      width: 58%;
+      background: var(--drupal-navy);
+      clip-path: polygon(0 0, 100% 0, 88% 100%, 0 100%);
+      z-index: 1;
+    }
+    .hero-white {
+      position: absolute;
+      top: 0; right: 0; bottom: 0;
+      width: 50%;
+      background: #fff;
+      z-index: 0;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: grid;
+      grid-template-columns: 55% 45%;
+      align-items: center;
+      min-height: 100vh;
+      padding-top: 5rem;
+    }
+    .hero-left {
+      padding-right: 3rem;
+    }
+    .hero-badge {
+      display: inline-block;
+      padding: 0.35rem 1rem;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      background: rgba(0,156,222,0.15);
+      color: var(--drupal-light);
+      margin-bottom: 1.5rem;
+    }
+    .hero h1 { color: #fff; }
+    .hero .highlight {
+      background: linear-gradient(135deg, #009CDE, #CCEDF9);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-subhead {
+      font-size: clamp(1.05rem, 1.8vw, 1.15rem);
+      color: rgba(255,255,255,0.7);
+      max-width: 520px;
+      margin: 1.25rem 0 2rem;
+      line-height: 1.7;
+    }
+    .hero-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; align-items: center; }
+    .hero-right {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding-left: 2rem;
+    }
+
+    /* Hero Illustration */
+    @keyframes hero-pulse-ring {
+      0% { transform: translate(-50%, -50%) scale(1); opacity: 0.15; }
+      50% { transform: translate(-50%, -50%) scale(1.08); opacity: 0.06; }
+      100% { transform: translate(-50%, -50%) scale(1); opacity: 0.15; }
+    }
+    @keyframes hero-node-float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+    @keyframes hero-dash {
+      to { stroke-dashoffset: -16; }
+    }
+    .hero-illustration {
+      position: relative; display: flex; align-items: center; justify-content: center;
+      aspect-ratio: 1; width: 100%; max-width: 420px;
+    }
+    .hero-illustration .pulse-ring {
+      position: absolute; top: 50%; left: 50%; border-radius: 50%;
+      border: 1px solid rgba(0,156,222,0.2);
+      animation: hero-pulse-ring 3s ease-in-out infinite;
+    }
+    .hero-illustration .pulse-ring-1 { width: 180px; height: 180px; }
+    .hero-illustration .pulse-ring-2 { width: 280px; height: 280px; animation-delay: 1.5s; border-color: rgba(0,156,222,0.1); }
+    .hero-illustration .center-node {
+      position: relative; z-index: 3; display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      width: 80px; height: 80px; border-radius: 50%;
+      background: rgba(0,156,222,0.08); border: 2px solid var(--drupal-blue);
+      box-shadow: 0 0 40px rgba(0,156,222,0.2), 0 0 80px rgba(0,156,222,0.08);
+    }
+    .hero-illustration .center-node span {
+      margin-top: 2px; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.05em; color: var(--drupal-navy);
+    }
+    .hero-illustration .agent-node {
+      position: absolute; z-index: 3; display: flex; flex-direction: column;
+      align-items: center; gap: 5px; transition: transform 0.3s;
+      animation: hero-node-float 3s ease-in-out infinite;
+    }
+    .hero-illustration .agent-node:hover { transform: scale(1.1); }
+    .hero-illustration .agent-node .icon-box {
+      width: 44px; height: 44px; border-radius: 10px; background: #fff;
+      border: 1px solid var(--border); box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+      display: flex; align-items: center; justify-content: center; font-size: 1rem;
+    }
+    .hero-illustration .agent-node .node-label {
+      font-size: 0.58rem; font-weight: 600; color: var(--text-muted); white-space: nowrap;
+    }
+    .hero-illustration .lines-svg {
+      position: absolute; inset: 0; z-index: 1; pointer-events: none;
+    }
+    .hero-illustration .dash-line {
+      stroke: rgba(0,156,222,0.2); stroke-width: 1;
+      stroke-dasharray: 4 4; animation: hero-dash 2s linear infinite;
+    }
+    .hero-illustration .data-dot {
+      fill: #009CDE;
+    }
+
+    /* ========== SOCIAL PROOF BAR — Full-width Drupal Blue ========== */
+    .proof-bar {
+      background: var(--drupal-blue);
+      padding: 2rem 0;
+      position: relative;
+    }
+    .proof-bar p {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 1.25rem;
+      text-align: center;
+      font-weight: 500;
+    }
+    .proof-logos {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 3rem;
+      flex-wrap: wrap;
+    }
+    .proof-logo {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #fff;
+      opacity: 0.75;
+      letter-spacing: 0.02em;
+      transition: opacity 0.3s;
+    }
+    .proof-logo:hover { opacity: 1; }
+
+    /* ========== AGENTS SECTION — Asymmetric reverse ========== */
+    .agents-section {
+      position: relative;
+      padding: 6rem 0;
+      overflow: hidden;
+    }
+    .agents-accent-block {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 42%;
+      height: 100%;
+      background: var(--drupal-blue);
+      clip-path: polygon(0 0, 100% 0, 85% 100%, 0 100%);
+      z-index: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .agents-accent-number {
+      font-size: clamp(10rem, 18vw, 16rem);
+      font-weight: 900;
+      color: rgba(255,255,255,0.08);
+      line-height: 1;
+      user-select: none;
+      transform: rotate(-5deg);
+    }
+    .agents-content-wrap {
+      position: relative;
+      z-index: 1;
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: grid;
+      grid-template-columns: 38% 1fr;
+      gap: 3rem;
+    }
+    .agents-left-spacer {
+      /* Spacer over the blue accent block */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .agents-left-text {
+      color: #fff;
+      text-align: center;
+      padding: 2rem 3rem 2rem 2rem;
+    }
+    .agents-left-text .section-label-white {
+      display: inline-block;
+      font-size: 0.78rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 1rem;
+    }
+    .agents-left-text h2 {
+      color: #fff;
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
+    }
+    .agents-left-text p {
+      color: rgba(255,255,255,0.8);
+      font-size: 0.95rem;
+      margin-top: 1rem;
+    }
+    .agents-right {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .agents-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.25rem;
+      box-shadow: var(--shadow-sm);
+      transition: box-shadow 0.3s, transform 0.3s;
+    }
+    .agents-card:hover { box-shadow: var(--shadow); transform: translateY(-2px); }
+    .agents-card-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.25rem; }
+    .agents-card-icon {
+      width: 36px; height: 36px; border-radius: 8px; display: flex;
+      align-items: center; justify-content: center; font-size: 1rem;
+    }
+    .agents-card-icon-blue { background: rgba(0,156,222,0.08); border: 1px solid rgba(0,156,222,0.15); }
+    .agents-card-icon-green { background: rgba(57,118,24,0.08); border: 1px solid rgba(57,118,24,0.15); }
+    .agents-card-label { font-size: 0.68rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; }
+    .agents-card-label-blue { color: var(--drupal-blue); }
+    .agents-card-label-green { color: #397618; }
+    .agents-card-title { font-size: 1.15rem; font-weight: 600; color: var(--text); }
+    .agents-card p { font-size: 0.92rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 1.25rem; }
+    .agents-list { display: flex; flex-direction: column; gap: 0.5rem; }
+    .agents-list-item {
+      display: flex; align-items: center; gap: 0.75rem; padding: 0.5rem 0.75rem;
+      border-radius: 8px; background: #f8fafc; border: 1px solid var(--border);
+    }
+    .agents-list-item span:first-child { font-size: 0.95rem; }
+    .agents-list-item span:nth-child(2) { font-size: 0.82rem; font-weight: 600; color: var(--text); }
+    .agents-list-item .muted-right { margin-left: auto; font-size: 0.7rem; color: var(--text-muted); font-weight: 400; }
+    .agents-grid-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; }
+    .agents-grid-2col .agents-list-item { padding: 0.45rem 0.65rem; }
+    .agents-grid-2col .agents-list-item span:nth-child(2) { font-size: 0.78rem; }
+    .agents-more {
+      grid-column: span 2; text-align: center; padding: 0.5rem 0.75rem;
+      border-radius: 8px; font-size: 0.78rem; font-weight: 600;
+      background: rgba(0,156,222,0.04); border: 1px solid rgba(0,156,222,0.15); color: var(--drupal-blue);
+    }
+
+    /* ========== FEATURE CARDS — Masonry-stagger 2 rows of 3, offset ========== */
+    .features-section {
+      padding: 6rem 0;
+      background: #f8fafc;
+      position: relative;
+    }
+    .features-header {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 4rem;
+      position: relative;
+    }
+    .features-header .section-label {
+      display: inline-block; font-size: 0.78rem; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.1em; color: var(--drupal-blue); margin-bottom: 1rem;
+    }
+    .features-header h2 { color: var(--drupal-navy); }
+    .features-header .highlight {
+      background: linear-gradient(135deg, #006AA9, #009CDE);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .features-header p { color: var(--text-secondary); margin-top: 0.75rem; }
+    .features-masonry {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .features-row-2 {
+      margin-top: -0.5rem;
+      padding-left: calc(100% / 6);
+      padding-right: calc(100% / 6);
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      max-width: calc(1100px + (1100px / 3));
+      margin-left: auto;
+      margin-right: auto;
+      position: relative;
+    }
+    /* Stagger: offset second row by half a column */
+    .features-grid-wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .features-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .features-row-offset {
+      margin-top: 1.5rem;
+      margin-left: calc(1100px / 6 + 0.75rem);
+      margin-right: calc(-1100px / 6 - 0.75rem);
+    }
+    /* Simpler stagger approach using transform */
+    .features-row.stagger {
+      transform: translateX(calc(50% / 3));
+    }
+    .card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem;
+      transition: all 0.3s ease;
+      box-shadow: var(--shadow-sm);
+      position: relative;
+    }
+    .card:hover { box-shadow: var(--shadow); transform: translateY(-3px); border-color: var(--drupal-light); }
+    .card-icon {
+      width: 48px; height: 48px; border-radius: 12px;
+      background: rgba(0,156,222,0.06);
+      border: 1px solid rgba(0,156,222,0.1);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.25rem; margin-bottom: 1rem;
+    }
+    .card h3 { color: var(--drupal-navy); margin-bottom: 0.5rem; }
+    .card p { font-size: 0.95rem; color: var(--text-secondary); }
+
+    /* GUI block decorative near card section headings */
+    .gui-block-deco {
+      position: absolute;
+      width: 40px;
+      height: 16px;
+      border-radius: 5px;
+      opacity: 0.12;
+      top: -10px;
+      right: 20px;
+    }
+    .gui-block-deco::after {
+      content: '';
+      position: absolute;
+      width: 24px;
+      height: 16px;
+      border-radius: 5px;
+      background: inherit;
+      top: 6px;
+      left: 8px;
+      opacity: 0.7;
+    }
+
+    /* Quote box */
+    .quote-box {
+      max-width: 800px;
+      margin: 3rem auto 0;
+      padding: 2rem;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-sm);
+    }
+    .quote-box blockquote {
+      font-size: 1.15rem;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.7;
+      border-left: 3px solid var(--drupal-blue);
+      padding-left: 1.5rem;
+      text-align: left;
+    }
+    .quote-box cite {
+      display: block;
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      font-style: normal;
+      text-align: left;
+      padding-left: 1.5rem;
+    }
+
+    /* ========== STATS — Full-width Navy ========== */
+    .stats-section {
+      background: var(--drupal-navy);
+      padding: 4.5rem 0;
+      position: relative;
+      overflow: hidden;
+    }
+    /* Decorative GUI blocks in stats */
+    .stats-section::before {
+      content: '';
+      position: absolute;
+      top: 20px;
+      left: 5%;
+      width: 60px;
+      height: 22px;
+      border-radius: 6px;
+      background: rgba(0,156,222,0.1);
+    }
+    .stats-section::after {
+      content: '';
+      position: absolute;
+      bottom: 20px;
+      right: 8%;
+      width: 45px;
+      height: 18px;
+      border-radius: 5px;
+      background: rgba(204,237,249,0.08);
+    }
+    .stats-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0;
+      flex-wrap: wrap;
+    }
+    .stat-item {
+      flex: 1;
+      text-align: center;
+      padding: 1.5rem 2rem;
+      position: relative;
+    }
+    .stat-item:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: 15%;
+      height: 70%;
+      width: 1px;
+      background: rgba(255,255,255,0.12);
+    }
+    .stat-number {
+      font-family: var(--font);
+      font-size: clamp(2.5rem, 4vw, 3.25rem);
+      font-weight: 700;
+      color: var(--drupal-light);
+      line-height: 1.1;
+    }
+    .stat-label {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.6);
+      margin-top: 0.4rem;
+    }
+
+    /* ========== INITIATIVE — White bg, centered ========== */
+    .initiative-section {
+      padding: 6rem 0;
+      background: #fff;
+    }
+    .initiative-inner {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .initiative-inner .section-label {
+      display: inline-block; font-size: 0.78rem; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.1em; color: var(--drupal-blue); margin-bottom: 1rem;
+    }
+    .initiative-inner h2 { color: var(--drupal-navy); }
+    .initiative-inner .highlight {
+      background: linear-gradient(135deg, #006AA9, #009CDE);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .initiative-inner > p { color: var(--text-secondary); margin-top: 0.75rem; }
+
+    /* ========== GROWTH — White bg ========== */
+    .growth-section {
+      padding: 5rem 0;
+      background: #f8fafc;
+    }
+    .growth-inner {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .growth-inner .section-label {
+      display: inline-block; font-size: 0.78rem; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.1em; color: var(--drupal-blue); margin-bottom: 1rem;
+    }
+    .growth-inner h2 { color: var(--drupal-navy); }
+    .growth-inner .highlight {
+      background: linear-gradient(135deg, #006AA9, #009CDE);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .growth-inner > p { color: var(--text-secondary); margin-top: 0.75rem; }
+
+    /* ========== CTA — Light Blue full background ========== */
+    .cta-section {
+      background: var(--drupal-light);
+      padding: 6rem 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    /* Decorative GUI blocks */
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      top: 30px;
+      right: 10%;
+      width: 50px;
+      height: 20px;
+      border-radius: 6px;
+      background: rgba(0,156,222,0.1);
+    }
+    .cta-section::after {
+      content: '';
+      position: absolute;
+      bottom: 40px;
+      left: 8%;
+      width: 36px;
+      height: 14px;
+      border-radius: 4px;
+      background: rgba(18,40,95,0.06);
+    }
+    .cta-section h2 { color: var(--drupal-navy); }
+    .cta-section .highlight {
+      background: linear-gradient(135deg, #006AA9, #009CDE);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .cta-section > .container > p { color: var(--text-secondary); }
+    .cta-paths {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 3rem;
+      max-width: 1000px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .cta-path {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.5rem 2rem;
+      text-align: center;
+      transition: all 0.3s;
+      box-shadow: var(--shadow-sm);
+    }
+    .cta-path:hover { box-shadow: var(--shadow); transform: translateY(-3px); }
+    .cta-path h3 { color: var(--drupal-navy); margin-bottom: 0.5rem; }
+    .cta-path p { font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 1.5rem; }
+    .cta-path .time { font-size: 0.8rem; color: var(--drupal-blue); font-weight: 600; margin-top: 1rem; }
+    .cta-path .btn-primary { width: 100%; }
+    .cta-path .btn-outline-navy { width: 100%; }
+
+    /* ========== DEVELOPER — Navy background ========== */
+    .developer-section {
+      padding: 4rem 0;
+      text-align: center;
+      background: var(--drupal-navy);
+      color: #fff;
+    }
+    .developer-section .section-label {
+      display: inline-block; font-size: 0.78rem; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.1em;
+      color: var(--drupal-light);
+      margin-bottom: 1rem;
+    }
+    .developer-heading { color: #fff; margin-bottom: 0.75rem; }
+    .developer-subhead { color: rgba(255,255,255,0.65); margin-bottom: 2rem; }
+    .code-block {
+      display: inline-block; background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12); border-radius: 10px;
+      padding: 1rem 5.5rem 1rem 2rem; font-family: var(--mono); font-size: 1rem;
+      color: var(--drupal-light); position: relative; letter-spacing: 0.02em;
+      text-align: left;
+    }
+    .code-block-copy {
+      position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
+      background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.7); padding: 4px 12px; border-radius: 6px;
+      font-size: 0.72rem; font-weight: 600; cursor: pointer;
+      font-family: var(--font); transition: all 0.2s;
+    }
+    .code-block-copy:hover { background: rgba(255,255,255,0.18); color: #fff; }
+    .developer-links { display: flex; justify-content: center; gap: 2rem; margin-top: 2rem; }
+    .developer-links a {
+      color: rgba(255,255,255,0.6); font-size: 0.9rem; font-weight: 500;
+      display: flex; align-items: center; gap: 0.4rem; transition: color 0.2s;
+    }
+    .developer-links a:hover { color: #fff; }
+    .developer-links a svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; }
+
+    /* ========== FOOTER ========== */
+    .footer {
+      padding: 4rem 0 2rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      background: #fff;
+    }
+    .footer p { font-size: 0.85rem; color: var(--text-muted); }
+    .footer-links { display: flex; justify-content: center; gap: 2rem; margin-bottom: 2rem; flex-wrap: wrap; }
+    .footer-links a { font-size: 0.85rem; color: var(--text-secondary); }
+
+    /* Animations */
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+    .animate { animation: fadeInUp 0.6s ease-out both; }
+    .animate-d1 { animation-delay: 0.1s; }
+    .animate-d2 { animation-delay: 0.2s; }
+    .animate-d3 { animation-delay: 0.3s; }
+    .animate-d4 { animation-delay: 0.4s; }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .hero-content { grid-template-columns: 1fr; min-height: auto; padding-top: 7rem; padding-bottom: 3rem; }
+      .hero-navy { width: 100%; clip-path: none; }
+      .hero-white { display: none; }
+      .hero-left { padding-right: 0; }
+      .hero-right { padding-left: 0; margin-top: 2rem; }
+      .hero-illustration { max-width: 340px; margin: 0 auto; }
+      .hero-illustration .agent-node .node-label { color: rgba(255,255,255,0.5); }
+
+      .agents-content-wrap { grid-template-columns: 1fr; }
+      .agents-accent-block { display: none; }
+      .agents-left-spacer { display: none; }
+
+      .features-row.stagger { transform: none; }
+    }
+    @media (max-width: 900px) {
+      .features-row { grid-template-columns: 1fr; }
+      .cta-paths { grid-template-columns: 1fr; }
+      .stats-row { flex-direction: column; }
+      .stat-item:not(:last-child)::after { display: none; }
+      .nav { display: none; }
+      .developer-links { flex-direction: column; gap: 1rem; }
+    }
+    @media (max-width: 480px) {
+      h1 { font-size: 2.25rem; }
+      .hero-actions { flex-direction: column; width: 100%; }
+      .hero-actions .btn { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="container header-inner">
+      <a href="#" class="logo">
+        <svg width="32" height="44" viewBox="0 0 32 44" fill="none"><path d="M16 0S0 16 0 28c0 8.8 7.2 16 16 16s16-7.2 16-16C32 16 16 0 16 0z" fill="#009CDE"/></svg>
+        <span class="logo-text">Drupal</span>
+      </a>
+      <nav class="nav">
+        <a href="#">Product</a>
+        <a href="#">AI</a>
+        <a href="#">Templates</a>
+        <a href="#">Docs</a>
+        <a href="#">Community</a>
+        <a href="#" class="btn btn-primary" style="margin-left:0.5rem;">Launch Free Site</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO — Asymmetric Split -->
+  <section class="hero">
+    <div class="hero-navy"></div>
+    <div class="hero-white"></div>
+    <div class="hero-content">
+      <div class="hero-left">
+        <div class="hero-badge animate">Drupal CMS</div>
+        <h1 class="animate animate-d1">The best CMS for <span class="highlight">agents</span> to use.</h1>
+        <p class="hero-subhead animate animate-d2">The only major open source CMS with structured content modeling, a complete API in core, granular permissions, and Model Context Protocol support. 22 AI agents ship out of the box.</p>
+        <div class="hero-actions animate animate-d3">
+          <a href="#" class="btn btn-primary btn-lg">Launch a free site</a>
+          <a href="#" class="btn btn-secondary btn-lg">See it in action &darr;</a>
+        </div>
+      </div>
+      <div class="hero-right animate animate-d2">
+        <div class="hero-illustration">
+          <!-- Pulse rings -->
+          <div class="pulse-ring pulse-ring-1"></div>
+          <div class="pulse-ring pulse-ring-2"></div>
+
+          <!-- Connection lines + data packets -->
+          <svg viewBox="0 0 420 380" preserveAspectRatio="xMidYMid meet" class="lines-svg">
+            <line x1="210" y1="190" x2="210" y2="30" class="dash-line"/>
+            <line x1="210" y1="190" x2="370" y2="80" class="dash-line" style="animation-delay:0.3s"/>
+            <line x1="210" y1="190" x2="385" y2="230" class="dash-line" style="animation-delay:0.6s"/>
+            <line x1="210" y1="190" x2="310" y2="345" class="dash-line" style="animation-delay:0.9s"/>
+            <line x1="210" y1="190" x2="110" y2="345" class="dash-line" style="animation-delay:1.2s"/>
+            <line x1="210" y1="190" x2="35" y2="230" class="dash-line" style="animation-delay:1.5s"/>
+            <line x1="210" y1="190" x2="50" y2="80" class="dash-line" style="animation-delay:1.8s"/>
+            <!-- Data packets -->
+            <circle r="3" class="data-dot" style="offset-path:path('M 210 190 L 210 30');"><animate attributeName="opacity" values="0;0.8;0.8;0" keyTimes="0;0.1;0.9;1" dur="2.5s" repeatCount="indefinite"/></circle>
+            <circle r="3" class="data-dot" style="offset-path:path('M 210 190 L 370 80');animation-delay:0.8s;"><animate attributeName="opacity" values="0;0.8;0.8;0" keyTimes="0;0.1;0.9;1" dur="2.8s" begin="0.8s" repeatCount="indefinite"/></circle>
+            <circle r="3" class="data-dot" style="offset-path:path('M 210 190 L 385 230');animation-delay:1.6s;"><animate attributeName="opacity" values="0;0.8;0.8;0" keyTimes="0;0.1;0.9;1" dur="3.1s" begin="1.6s" repeatCount="indefinite"/></circle>
+            <circle r="3" class="data-dot" style="offset-path:path('M 210 190 L 310 345');animation-delay:2.4s;"><animate attributeName="opacity" values="0;0.8;0.8;0" keyTimes="0;0.1;0.9;1" dur="3.4s" begin="2.4s" repeatCount="indefinite"/></circle>
+            <circle r="3" class="data-dot" style="offset-path:path('M 210 190 L 110 345');animation-delay:3.2s;"><animate attributeName="opacity" values="0;0.8;0.8;0" keyTimes="0;0.1;0.9;1" dur="3.7s" begin="3.2s" repeatCount="indefinite"/></circle>
+            <circle r="3" class="data-dot" style="offset-path:path('M 210 190 L 35 230');animation-delay:4s;"><animate attributeName="opacity" values="0;0.8;0.8;0" keyTimes="0;0.1;0.9;1" dur="4s" begin="4s" repeatCount="indefinite"/></circle>
+            <circle r="3" class="data-dot" style="offset-path:path('M 210 190 L 50 80');animation-delay:4.8s;"><animate attributeName="opacity" values="0;0.8;0.8;0" keyTimes="0;0.1;0.9;1" dur="4.3s" begin="4.8s" repeatCount="indefinite"/></circle>
+          </svg>
+
+          <!-- Center Drupal node -->
+          <div class="center-node">
+            <svg width="28" height="38" viewBox="0 0 32 44" fill="none"><path d="M16 0S0 16 0 28c0 8.8 7.2 16 16 16s16-7.2 16-16C32 16 16 0 16 0z" fill="#009CDE"/></svg>
+            <span>Drupal</span>
+          </div>
+
+          <!-- Agent nodes -->
+          <div class="agent-node" style="top:calc(8% - 22px);left:calc(50% - 22px);animation-delay:2.5s;">
+            <div class="icon-box">&#x1f4ac;</div>
+            <span class="node-label">Chatbot</span>
+          </div>
+          <div class="agent-node" style="top:calc(15% - 22px);left:calc(78% - 22px);animation-delay:3s;">
+            <div class="icon-box">&#x1f512;</div>
+            <span class="node-label">Governance</span>
+          </div>
+          <div class="agent-node" style="top:calc(50% - 22px);left:calc(92% - 22px);animation-delay:0s;">
+            <div class="icon-box">&#x1f3a8;</div>
+            <span class="node-label">Page Gen</span>
+          </div>
+          <div class="agent-node" style="top:calc(83% - 22px);left:calc(76% - 22px);animation-delay:0.5s;">
+            <div class="icon-box">&#x267f;</div>
+            <span class="node-label">Accessibility</span>
+          </div>
+          <div class="agent-node" style="top:calc(91% - 22px);left:calc(40% - 22px);animation-delay:1s;">
+            <div class="icon-box">&#x1f50e;</div>
+            <span class="node-label">SEO</span>
+          </div>
+          <div class="agent-node" style="top:calc(68% - 22px);left:calc(8% - 22px);animation-delay:1.5s;">
+            <div class="icon-box">&#x1f310;</div>
+            <span class="node-label">Translation</span>
+          </div>
+          <div class="agent-node" style="top:calc(30% - 22px);left:calc(8% - 22px);animation-delay:2s;">
+            <div class="icon-box">&#x1f4dd;</div>
+            <span class="node-label">Content</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOCIAL PROOF — Full-width Drupal Blue -->
+  <div class="proof-bar">
+    <div class="container">
+      <p>Trusted by organizations worldwide</p>
+      <div class="proof-logos">
+        <span class="proof-logo">NASA</span>
+        <span class="proof-logo">Tesla</span>
+        <span class="proof-logo">UNICEF</span>
+        <span class="proof-logo">Harvard</span>
+        <span class="proof-logo">BBC</span>
+        <span class="proof-logo">Pfizer</span>
+        <span class="proof-logo">The Economist</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- WORKS WITH EVERY AGENT — Asymmetric reverse -->
+  <section class="agents-section">
+    <div class="agents-accent-block">
+      <span class="agents-accent-number">22</span>
+    </div>
+    <div class="agents-content-wrap">
+      <div class="agents-left-spacer">
+        <div class="agents-left-text">
+          <div class="section-label-white">AI that works both ways</div>
+          <h2>Works with every agent.<br><em style="font-style:italic;opacity:0.9;">Ships with 22.</em></h2>
+          <p>Drupal is the only CMS designed to be a tool for external AI agents AND to ship its own agents built in.</p>
+        </div>
+      </div>
+      <div class="agents-right">
+        <!-- Outside In -->
+        <div class="agents-card">
+          <div class="agents-card-header">
+            <div class="agents-card-icon agents-card-icon-blue">&rarr;</div>
+            <div>
+              <div class="agents-card-label agents-card-label-blue">Outside &rarr; In</div>
+              <div class="agents-card-title">Your agents, our CMS</div>
+            </div>
+          </div>
+          <p>Any MCP-compatible agent can connect to Drupal and operate it as a tool — read content models, create pages, manage media, respect permissions. No Drupal knowledge required.</p>
+          <div class="agents-list">
+            <div class="agents-list-item"><span>&#x1f4ac;</span><span>Claude Code / Claude Desktop</span></div>
+            <div class="agents-list-item"><span>&#x1f4bb;</span><span>Cursor / GitHub Copilot</span></div>
+            <div class="agents-list-item"><span>&#x2728;</span><span>OpenAI Codex / Google Gemini</span></div>
+            <div class="agents-list-item"><span>&#x1f527;</span><span>Your custom agents</span><span class="muted-right">via MCP or JSON:API</span></div>
+          </div>
+        </div>
+        <!-- Ships built-in -->
+        <div class="agents-card">
+          <div class="agents-card-header">
+            <div class="agents-card-icon agents-card-icon-green">&#x26a1;</div>
+            <div>
+              <div class="agents-card-label agents-card-label-green">Ships built-in</div>
+              <div class="agents-card-title">22 agents, ready to go</div>
+            </div>
+          </div>
+          <p>Don't have your own agents? Drupal ships 22 that work out of the box — content generation, SEO, accessibility, translation, and more. All using your brand context.</p>
+          <div class="agents-grid-2col">
+            <div class="agents-list-item"><span>&#x1f3a8;</span><span>Page Builder</span></div>
+            <div class="agents-list-item"><span>&#x267f;</span><span>Accessibility</span></div>
+            <div class="agents-list-item"><span>&#x1f50e;</span><span>SEO Optimizer</span></div>
+            <div class="agents-list-item"><span>&#x1f310;</span><span>Translation</span></div>
+            <div class="agents-list-item"><span>&#x1f4dd;</span><span>Content Writer</span></div>
+            <div class="agents-list-item"><span>&#x1f4f7;</span><span>Media Alt Text</span></div>
+            <div class="agents-list-item"><span>&#x1f4ac;</span><span>Chatbot</span></div>
+            <div class="agents-list-item"><span>&#x1f50d;</span><span>Content Audit</span></div>
+            <div class="agents-more">+14 more agents included free</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STRUCTURED CONTENT — Feature cards with masonry stagger -->
+  <section class="features-section">
+    <div class="container">
+      <div class="features-header gui-accent">
+        <span class="section-label">Why AI agents prefer Drupal</span>
+        <h2>Structured content is<br><span class="highlight">AI's best friend</span></h2>
+        <p>AI agents don't just generate content in Drupal. They understand its structure, respect its permissions, and operate within its workflows.</p>
+      </div>
+      <div class="features-grid-wrap">
+        <!-- Row 1 -->
+        <div class="features-row">
+          <div class="card animate">
+            <div class="gui-block-deco" style="background:var(--drupal-blue);"></div>
+            <div class="card-icon">&#x1f91d;</div>
+            <h3>MCP Protocol</h3>
+            <p>Native Model Context Protocol support. Claude, Cursor, Copilot — any MCP-compatible agent connects and operates your site.</p>
+          </div>
+          <div class="card animate animate-d1">
+            <div class="gui-block-deco" style="background:var(--drupal-navy);"></div>
+            <div class="card-icon">&#x1f3af;</div>
+            <h3>Context Control Center</h3>
+            <p>Define your brand voice, target audiences, and key messages in one place. Every AI agent draws from this single source of truth.</p>
+          </div>
+          <div class="card animate animate-d2">
+            <div class="gui-block-deco" style="background:var(--drupal-dark);"></div>
+            <div class="card-icon">&#x1f4cb;</div>
+            <h3>Human-in-the-Loop</h3>
+            <p>Every AI action is queued for review. Batch approvals, audit trails, revision history. Nothing reaches production without human consent.</p>
+          </div>
+        </div>
+        <!-- Row 2 — staggered half column -->
+        <div class="features-row stagger" style="margin-top:1.5rem;">
+          <div class="card animate animate-d2">
+            <div class="gui-block-deco" style="background:var(--drupal-blue);"></div>
+            <div class="card-icon">&#x1f9e9;</div>
+            <h3>Structured &amp; API-First</h3>
+            <p>Typed content models, JSON:API in core, Drush for CLI automation, and semantic config that AI can read, reason about, and modify. No scraping. No guessing.</p>
+          </div>
+          <div class="card animate animate-d3">
+            <div class="gui-block-deco" style="background:var(--drupal-navy);"></div>
+            <div class="card-icon">&#x1f512;</div>
+            <h3>Granular Permissions</h3>
+            <p>Scope agent access precisely: "create articles, edit own drafts, can't touch users." The most granular permission system of any major CMS.</p>
+          </div>
+          <div class="card animate animate-d4">
+            <div class="gui-block-deco" style="background:var(--drupal-dark);"></div>
+            <div class="card-icon">&#x1f310;</div>
+            <h3>Any AI Provider, No Lock-in</h3>
+            <p>OpenAI, Anthropic, Google Gemini, Azure, AWS Bedrock, self-hosted models. Swap providers without code changes. Self-host if you need to.</p>
+          </div>
+        </div>
+      </div>
+      <div class="quote-box">
+        <blockquote>
+          "We were not thinking about AI at the time, but in hindsight, we built exactly the kind of modern, flexible foundation that makes deep AI integration possible today."
+        </blockquote>
+        <cite>Dries Buytaert — Drupal Founder &amp; Project Lead</cite>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS — Full-width Navy with horizontal row -->
+  <section class="stats-section">
+    <div class="container">
+      <div class="stats-row">
+        <div class="stat-item">
+          <div class="stat-number">$1.5M+</div>
+          <div class="stat-label">Invested in the Drupal AI Initiative</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">28</div>
+          <div class="stat-label">Organizations sponsoring AI development</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">22+</div>
+          <div class="stat-label">AI agents shipping with Drupal CMS today</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">48+</div>
+          <div class="stat-label">AI providers supported</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INITIATIVE — White bg, centered -->
+  <section class="initiative-section">
+    <div class="container">
+      <div class="initiative-inner gui-accent" style="position:relative;">
+        <span class="section-label">Drupal AI Initiative</span>
+        <h2>The largest open source<br><span class="highlight">AI Initiative</span> in CMS history</h2>
+      </div>
+    </div>
+  </section>
+
+  <!-- START IN MINUTES, NEVER OUTGROW IT -->
+  <section class="growth-section">
+    <div class="container">
+      <div class="growth-inner gui-accent" style="position:relative;">
+        <span class="section-label">Built to last</span>
+        <h2>Start in minutes,<br><span class="highlight">never outgrow it</span></h2>
+        <p style="margin-top:0.75rem;">Right now, everything you need is built in. But if you ever need custom features, advanced integrations, or enterprise-scale infrastructure — Drupal has 40,000+ add-ons and a global community of developers. The same platform runs BBC, UNICEF, and Tesla. You'll never outgrow it.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- START BUILDING IN 3 MINUTES — Light Blue background -->
+  <section class="cta-section">
+    <div class="container">
+      <h2>Start building in <span class="highlight">3 minutes</span></h2>
+      <p style="max-width:500px;margin-left:auto;margin-right:auto;margin-top:1rem;">Three paths. All free. All open source. Choose the one that fits how you work.</p>
+      <div class="cta-paths">
+        <div class="cta-path">
+          <h3>&#x1f310; Launch a Free Site</h3>
+          <p>Browser-based sandbox with AI tools enabled. No download, no install.</p>
+          <a href="#" class="btn btn-primary">Launch now</a>
+          <div class="time">Ready in 60 seconds</div>
+        </div>
+        <div class="cta-path">
+          <h3>&#x1f4bb; Desktop App</h3>
+          <p>Download and double-click. Full Drupal CMS running locally on your machine.</p>
+          <a href="#" class="btn btn-outline-navy">Download for Mac</a>
+          <div class="time">Ready in 3 minutes</div>
+        </div>
+        <div class="cta-path">
+          <h3>&#x1f4d6; For Developers</h3>
+          <p>CLI install, API docs, Drupal Core framework access.</p>
+          <a href="#" class="btn btn-outline-navy">Developer docs</a>
+          <div class="time">ddev composer create-project drupal/cms</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DEVELOPER SECTION — Navy background -->
+  <section class="developer-section">
+    <div class="container">
+      <span class="section-label">Developer escape hatch</span>
+      <h2 class="developer-heading">Are you a developer?</h2>
+      <p class="developer-subhead">Skip the GUI. Two commands and you're running.</p>
+      <div class="code-block">
+        <button class="code-block-copy" onclick="navigator.clipboard.writeText('curl -fsSL https://ddev.com/install.sh | bash\nmkdir my-site && cd my-site && ddev config --project-type=drupal --docroot=web && ddev composer create-project drupal/cms && ddev launch')">Copy</button>
+        curl -fsSL https://ddev.com/install.sh | bash<br>
+        mkdir my-site && cd my-site && ddev config --project-type=drupal \<br>
+        &nbsp;&nbsp;--docroot=web && ddev composer create-project drupal/cms && ddev launch
+      </div>
+      <div class="developer-links">
+        <a href="#">
+          <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          API Docs
+        </a>
+        <a href="#">
+          <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          GitHub
+        </a>
+        <a href="#">
+          <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          Developer Guide
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-links">
+        <a href="#">About Drupal</a>
+        <a href="#">Drupal Core</a>
+        <a href="#">Documentation</a>
+        <a href="#">Community</a>
+        <a href="#">Security</a>
+        <a href="#">Contribute</a>
+      </div>
+      <p>&copy; 2026 Drupal. Free and open source under GPL v2+</p>
+      <p style="margin-top:0.5rem;font-size:0.75rem;">Drupal is a registered trademark of Dries Buytaert.</p>
+    </div>
+  </footer>
+
+</body>
+</html>

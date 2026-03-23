@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Drupal CMS — The Best CMS for Agents to Use</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #ffffff;
+      --bg-warm: #fafbfc;
+      --bg-card: #ffffff;
+      --border: #e2e8f0;
+      --border-strong: #cbd5e1;
+      --text: #0f172a;
+      --text-secondary: #475569;
+      --text-muted: #94a3b8;
+      --drupal-blue: #2AA9E0;
+      --drupal-dark: #0077C0;
+      --drupal-light: #81CEFF;
+      --drupal-bg: #eef8fd;
+      --gradient: linear-gradient(135deg, #2AA9E0, #0077C0);
+      --gradient-text: linear-gradient(135deg, #0077C0, #2AA9E0);
+      --success: #059669;
+      --success-bg: #ecfdf5;
+      --warning: #d97706;
+      --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --mono: 'JetBrains Mono', 'Fira Code', monospace;
+      --max-w: 1200px;
+      --radius: 16px;
+      --radius-sm: 8px;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+      --shadow: 0 4px 16px rgba(0,0,0,0.06), 0 1px 3px rgba(0,0,0,0.04);
+      --shadow-lg: 0 12px 40px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.04);
+      --shadow-blue: 0 8px 30px rgba(42,169,224,0.2);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+    body { font-family: var(--font); background: var(--bg); color: var(--text); line-height: 1.6; overflow-x: hidden; }
+    a { color: var(--drupal-blue); text-decoration: none; transition: color 0.2s; }
+    a:hover { color: var(--drupal-dark); }
+
+    h1 { font-size: clamp(2.75rem, 5.5vw, 4.25rem); font-weight: 800; line-height: 1.1; letter-spacing: -0.03em; color: var(--text); }
+    h2 { font-size: clamp(2rem, 3.5vw, 2.75rem); font-weight: 700; line-height: 1.15; letter-spacing: -0.02em; color: var(--text); }
+    h3 { font-size: 1.25rem; font-weight: 600; line-height: 1.3; color: var(--text); }
+    p { font-size: 1.1rem; color: var(--text-secondary); line-height: 1.7; }
+    .highlight { background: var(--gradient-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .section-label { display: inline-block; font-size: 0.78rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--drupal-blue); margin-bottom: 1rem; }
+
+    .container { max-width: var(--max-w); margin: 0 auto; padding: 0 2rem; }
+    .section { padding: 6rem 0; position: relative; }
+    .section-alt { background: var(--bg-warm); }
+    .grid { display: grid; gap: 1.5rem; }
+    .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    .grid-4 { grid-template-columns: repeat(4, 1fr); }
+    .text-center { text-align: center; }
+    .mt-2 { margin-top: 1rem; }
+
+    /* Header */
+    .header {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 0.75rem 0;
+      background: rgba(255,255,255,0.9);
+      backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+      border-bottom: 1px solid var(--border);
+    }
+    .header-inner { display: flex; justify-content: space-between; align-items: center; }
+    .logo { display: flex; align-items: center; gap: 0.6rem; color: var(--text); text-decoration: none; }
+    .logo-text { font-size: 1.3rem; font-weight: 700; }
+    .nav { display: flex; gap: 1.75rem; align-items: center; }
+    .nav a { color: var(--text-secondary); font-size: 0.9rem; font-weight: 500; }
+    .nav a:hover { color: var(--text); }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+      padding: 0.7rem 1.5rem; border-radius: var(--radius-sm);
+      font-family: var(--font); font-size: 0.925rem; font-weight: 600;
+      cursor: pointer; transition: all 0.25s; border: none; white-space: nowrap;
+    }
+    .btn-lg { padding: 0.85rem 2rem; font-size: 1rem; border-radius: 10px; }
+    .btn-primary { background: var(--drupal-blue); color: #fff; }
+    .btn-primary:hover { background: var(--drupal-dark); color: #fff; transform: translateY(-1px); box-shadow: var(--shadow-blue); }
+    .btn-secondary { background: var(--bg); color: var(--text); border: 1px solid var(--border-strong); }
+    .btn-secondary:hover { border-color: var(--drupal-blue); color: var(--drupal-blue); }
+
+    /* Hero */
+    .hero {
+      min-height: 100vh; display: flex; align-items: center;
+      padding: 7rem 0 4rem; position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse 70% 50% at 50% -5%, rgba(42,169,224,0.06), transparent 60%);
+      pointer-events: none;
+    }
+    .hero-content { position: relative; z-index: 2; width: 100%; }
+    .hero-subhead { font-size: clamp(1.05rem, 1.8vw, 1.2rem); color: var(--text-secondary); max-width: 580px; margin: 1.25rem 0 2rem; line-height: 1.7; }
+    .hero-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; align-items: center; }
+    .hero-split { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+
+    /* Hero Illustration — agent network */
+    @keyframes hero-pulse-ring {
+      0% { transform: translate(-50%, -50%) scale(1); opacity: 0.15; }
+      50% { transform: translate(-50%, -50%) scale(1.08); opacity: 0.06; }
+      100% { transform: translate(-50%, -50%) scale(1); opacity: 0.15; }
+    }
+    @keyframes hero-node-float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+    @keyframes hero-dash {
+      to { stroke-dashoffset: -16; }
+    }
+    @keyframes hero-data-packet {
+      0% { offset-distance: 0%; opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { offset-distance: 100%; opacity: 0; }
+    }
+    .hero-illustration {
+      position: relative; display: flex; align-items: center; justify-content: center;
+      aspect-ratio: 1; width: 100%;
+    }
+    .hero-illustration .pulse-ring {
+      position: absolute; top: 50%; left: 50%; border-radius: 50%;
+      border: 1px solid rgba(42,169,224,0.15);
+      animation: hero-pulse-ring 3s ease-in-out infinite;
+    }
+    .hero-illustration .pulse-ring-1 { width: 200px; height: 200px; }
+    .hero-illustration .pulse-ring-2 { width: 310px; height: 310px; animation-delay: 1.5s; border-color: rgba(42,169,224,0.08); }
+    .hero-illustration .center-node {
+      position: relative; z-index: 3; display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      width: 88px; height: 88px; border-radius: 50%;
+      background: rgba(42,169,224,0.06); border: 2px solid var(--drupal-blue);
+      box-shadow: 0 0 40px rgba(42,169,224,0.15), 0 0 80px rgba(42,169,224,0.05);
+    }
+    .hero-illustration .center-node span {
+      margin-top: 2px; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.05em; color: var(--drupal-dark);
+    }
+    .hero-illustration .agent-node {
+      position: absolute; z-index: 3; display: flex; flex-direction: column;
+      align-items: center; gap: 6px; transition: transform 0.3s;
+      animation: hero-node-float 3s ease-in-out infinite;
+    }
+    .hero-illustration .agent-node:hover { transform: scale(1.1); }
+    .hero-illustration .agent-node .icon-box {
+      width: 48px; height: 48px; border-radius: 12px; background: #fff;
+      border: 1px solid var(--border); box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+      display: flex; align-items: center; justify-content: center; font-size: 1.1rem;
+    }
+    .hero-illustration .agent-node .node-label {
+      font-size: 0.62rem; font-weight: 600; color: var(--text-muted); white-space: nowrap;
+    }
+    .hero-illustration .lines-svg {
+      position: absolute; inset: 0; z-index: 1; pointer-events: none;
+    }
+    .hero-illustration .dash-line {
+      stroke: rgba(42,169,224,0.15); stroke-width: 1;
+      stroke-dasharray: 4 4; animation: hero-dash 2s linear infinite;
+    }
+    .hero-illustration .data-dot {
+      fill: #2AA9E0; animation: hero-data-packet 3s ease-in-out infinite;
+    }
+    .hero-illustration .data-dot-rev {
+      fill: #7dd3fc; animation: hero-data-packet 3.5s ease-in-out infinite;
+    }
+
+    /* Works with every agent section */
+    .agents-section { padding: 6rem 0; }
+    .agents-header { text-align: center; margin-bottom: 3rem; }
+    .agents-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; max-width: 1100px; margin: 0 auto; }
+    .agents-card {
+      background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 2.5rem; box-shadow: var(--shadow-sm);
+    }
+    .agents-card-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.5rem; }
+    .agents-card-icon {
+      width: 36px; height: 36px; border-radius: 8px; display: flex;
+      align-items: center; justify-content: center; font-size: 1rem;
+    }
+    .agents-card-icon-blue { background: rgba(42,169,224,0.08); border: 1px solid rgba(42,169,224,0.15); }
+    .agents-card-icon-green { background: rgba(16,185,129,0.08); border: 1px solid rgba(16,185,129,0.15); }
+    .agents-card-label { font-size: 0.68rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; }
+    .agents-card-label-blue { color: var(--drupal-blue); }
+    .agents-card-label-green { color: var(--success); }
+    .agents-card-title { font-size: 1.15rem; font-weight: 600; color: var(--text); }
+    .agents-card p { font-size: 0.92rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 1.5rem; }
+    .agents-list { display: flex; flex-direction: column; gap: 0.625rem; }
+    .agents-list-item {
+      display: flex; align-items: center; gap: 0.75rem; padding: 0.625rem 0.75rem;
+      border-radius: 8px; background: var(--bg-warm); border: 1px solid var(--border);
+    }
+    .agents-list-item span:first-child { font-size: 0.95rem; }
+    .agents-list-item span:nth-child(2) { font-size: 0.82rem; font-weight: 600; color: var(--text); }
+    .agents-list-item .muted-right { margin-left: auto; font-size: 0.7rem; color: var(--text-muted); font-weight: 400; }
+    .agents-grid-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; }
+    .agents-grid-2col .agents-list-item { padding: 0.5rem 0.75rem; }
+    .agents-grid-2col .agents-list-item span:nth-child(2) { font-size: 0.78rem; }
+    .agents-more {
+      grid-column: span 2; text-align: center; padding: 0.5rem 0.75rem;
+      border-radius: 8px; font-size: 0.78rem; font-weight: 600;
+      background: rgba(42,169,224,0.04); border: 1px solid rgba(42,169,224,0.15); color: var(--drupal-blue);
+    }
+
+    /* Badge */
+    .badge { display: inline-block; padding: 0.3rem 0.8rem; border-radius: 999px; font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
+    .badge-blue { background: var(--drupal-bg); color: var(--drupal-dark); }
+    .badge-green { background: var(--success-bg); color: var(--success); }
+
+    /* Proof bar with logos */
+    .proof-bar { padding: 2.5rem 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: var(--bg-warm); }
+    .proof-bar p { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 1.5rem; text-align: center; }
+    .proof-logos { display: flex; justify-content: center; align-items: center; gap: 3rem; flex-wrap: wrap; }
+    .proof-logo { font-size: 1.05rem; font-weight: 700; color: var(--text-muted); opacity: 0.5; letter-spacing: 0.02em; transition: opacity 0.3s; }
+    .proof-logo:hover { opacity: 0.8; }
+
+    /* Cards */
+    .card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 2rem;
+      transition: all 0.3s ease; box-shadow: var(--shadow-sm);
+    }
+    .card:hover { box-shadow: var(--shadow); transform: translateY(-3px); border-color: var(--drupal-light); }
+    .card-icon {
+      width: 48px; height: 48px; border-radius: 12px;
+      background: var(--drupal-bg);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.25rem; margin-bottom: 1rem;
+    }
+
+    /* Stats */
+    .stat-number {
+      font-size: clamp(2.5rem, 4vw, 3.5rem); font-weight: 800;
+      background: var(--gradient-text); -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent; background-clip: text; line-height: 1.1;
+    }
+    .stat-label { font-size: 0.9rem; color: var(--text-secondary); margin-top: 0.4rem; }
+
+    /* Drupal AI Initiative */
+    .initiative-section { padding: 5rem 0; background: var(--bg); }
+    .initiative-inner {
+      max-width: 900px; margin: 0 auto; text-align: center;
+    }
+    .initiative-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; margin-top: 2.5rem; }
+    .initiative-stat-number { font-size: 2.5rem; font-weight: 800; background: var(--gradient-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .initiative-stat-label { font-size: 0.9rem; color: var(--text-secondary); margin-top: 0.25rem; }
+    .initiative-quote {
+      margin-top: 3rem; padding: 2rem; background: var(--bg); border: 1px solid var(--border);
+      border-radius: var(--radius); box-shadow: var(--shadow-sm);
+    }
+    .initiative-quote blockquote {
+      font-size: 1.15rem; font-style: italic; color: var(--text); line-height: 1.7;
+      border-left: 3px solid var(--drupal-blue); padding-left: 1.5rem; text-align: left;
+    }
+    .initiative-quote cite { display: block; margin-top: 1rem; font-size: 0.9rem; color: var(--text-secondary); font-style: normal; text-align: left; padding-left: 1.5rem; }
+
+    /* "Start in minutes, never outgrow it" */
+    .growth-section { padding: 5rem 0; }
+    .growth-inner { max-width: 800px; margin: 0 auto; text-align: center; }
+    .growth-logos { display: flex; justify-content: center; gap: 2.5rem; margin-top: 2rem; flex-wrap: wrap; }
+    .growth-logo { font-size: 1rem; font-weight: 700; color: var(--text-muted); opacity: 0.5; }
+    .growth-note { font-size: 0.85rem; color: var(--text-muted); margin-top: 1rem; }
+
+    /* CTA Section - 3 ways to build */
+    .cta-section { text-align: center; padding: 6rem 0; background: linear-gradient(180deg, var(--bg) 0%, var(--drupal-bg) 100%); }
+    .cta-paths { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 3rem; max-width: 1000px; margin-left: auto; margin-right: auto; }
+    .cta-path { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 2.5rem 2rem; text-align: center; transition: all 0.3s; box-shadow: var(--shadow-sm); }
+    .cta-path:hover { box-shadow: var(--shadow); transform: translateY(-3px); }
+    .cta-path h3 { margin-bottom: 0.5rem; }
+    .cta-path p { font-size: 0.95rem; margin-bottom: 1.5rem; }
+    .cta-path .time { font-size: 0.8rem; color: var(--drupal-blue); font-weight: 600; margin-top: 1rem; }
+
+    /* Developer section */
+    .developer-section {
+      padding: 4rem 0; text-align: center;
+      background: var(--text); color: #fff;
+    }
+    .developer-section .section-label { color: var(--drupal-light); }
+    .developer-heading { color: #fff; margin-bottom: 0.75rem; }
+    .developer-subhead { color: rgba(255,255,255,0.65); margin-bottom: 2rem; }
+    .code-block {
+      display: inline-block; background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12); border-radius: 10px;
+      padding: 1rem 5.5rem 1rem 2rem; font-family: var(--mono); font-size: 1rem;
+      color: var(--drupal-light); position: relative; letter-spacing: 0.02em;
+    }
+    .code-block-copy {
+      position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
+      background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.7); padding: 4px 12px; border-radius: 6px;
+      font-size: 0.72rem; font-weight: 600; cursor: pointer;
+      font-family: var(--font); transition: all 0.2s;
+    }
+    .code-block-copy:hover { background: rgba(255,255,255,0.18); color: #fff; }
+    .developer-links { display: flex; justify-content: center; gap: 2rem; margin-top: 2rem; }
+    .developer-links a {
+      color: rgba(255,255,255,0.6); font-size: 0.9rem; font-weight: 500;
+      display: flex; align-items: center; gap: 0.4rem; transition: color 0.2s;
+    }
+    .developer-links a:hover { color: #fff; }
+    .developer-links a svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; }
+
+    /* Footer */
+    .footer { padding: 4rem 0 2rem; border-top: 1px solid var(--border); text-align: center; }
+    .footer p { font-size: 0.85rem; color: var(--text-muted); }
+    .footer-links { display: flex; justify-content: center; gap: 2rem; margin-bottom: 2rem; flex-wrap: wrap; }
+    .footer-links a { font-size: 0.85rem; color: var(--text-secondary); }
+
+    /* Animations */
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+    .animate { animation: fadeInUp 0.6s ease-out both; }
+    .animate-d1 { animation-delay: 0.1s; }
+    .animate-d2 { animation-delay: 0.2s; }
+    .animate-d3 { animation-delay: 0.3s; }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .grid-3, .grid-4, .cta-paths, .initiative-stats, .agents-grid { grid-template-columns: 1fr; }
+      .hero-split { grid-template-columns: 1fr; gap: 2rem; }
+      .hero { min-height: auto; padding: 7rem 0 3rem; }
+      .nav { display: none; }
+      .proof-logos { gap: 1.5rem; }
+      .developer-links { flex-direction: column; gap: 1rem; }
+    }
+    @media (max-width: 480px) {
+      h1 { font-size: 2.25rem; }
+      .hero-actions { flex-direction: column; width: 100%; }
+      .hero-actions .btn { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <div class="container header-inner">
+      <a href="#" class="logo">
+        <svg width="32" height="44" viewBox="0 0 32 44" fill="none"><path d="M16 0S0 16 0 28c0 8.8 7.2 16 16 16s16-7.2 16-16C32 16 16 0 16 0z" fill="#2AA9E0"/></svg>
+        <span class="logo-text">Drupal</span>
+      </a>
+      <nav class="nav">
+        <a href="#">Product</a>
+        <a href="#">AI</a>
+        <a href="#">Templates</a>
+        <a href="#">Docs</a>
+        <a href="#">Community</a>
+        <a href="#" class="btn btn-primary" style="margin-left:0.5rem;">Launch Free Site</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container hero-content">
+      <div class="hero-split">
+        <div>
+          <div class="badge badge-blue animate" style="margin-bottom:1.25rem;">Drupal CMS</div>
+          <h1 class="animate animate-d1">The best CMS for <span class="highlight">agents</span> to use.</h1>
+          <p class="hero-subhead animate animate-d2">The only major open source CMS with structured content modeling, a complete API in core, granular permissions, and Model Context Protocol support. 22 AI agents ship out of the box.</p>
+          <div class="hero-actions animate animate-d3">
+            <a href="#" class="btn btn-primary btn-lg">Launch a free site</a>
+            <a href="#" class="btn btn-secondary btn-lg">See it in action &darr;</a>
+          </div>
+        </div>
+        <div class="animate animate-d2">
+          <div class="hero-illustration">
+            <!-- Pulse rings -->
+            <div class="pulse-ring pulse-ring-1"></div>
+            <div class="pulse-ring pulse-ring-2"></div>
+
+            <!-- Connection lines + data packets -->
+            <svg viewBox="0 0 460 380" preserveAspectRatio="xMidYMid meet" class="lines-svg">
+              <line x1="230" y1="190" x2="230" y2="30" class="dash-line"/>
+              <line x1="230" y1="190" x2="395" y2="80" class="dash-line" style="animation-delay:0.3s"/>
+              <line x1="230" y1="190" x2="410" y2="230" class="dash-line" style="animation-delay:0.6s"/>
+              <line x1="230" y1="190" x2="330" y2="350" class="dash-line" style="animation-delay:0.9s"/>
+              <line x1="230" y1="190" x2="130" y2="350" class="dash-line" style="animation-delay:1.2s"/>
+              <line x1="230" y1="190" x2="50" y2="230" class="dash-line" style="animation-delay:1.5s"/>
+              <line x1="230" y1="190" x2="65" y2="80" class="dash-line" style="animation-delay:1.8s"/>
+              <!-- Data packets -->
+              <circle r="3" class="data-dot" style="offset-path:path('M 230 190 L 230 30');"><animate attributeName="opacity" values="0;0.8;0.8;0" keyTimes="0;0.1;0.9;1" dur="2.5s" repeatCount="indefinite"/></circle>
+              <circle r="3" class="data-dot" style="offset-path:path('M 230 190 L 395 80');animation-delay:0.8s;"><animate attributeName="opacity" values="0;0.8;0.8;0" keyTimes="0;0.1;0.9;1" dur="2.8s" begin="0.8s" repeatCount="indefinite"/></circle>
+              <circle r="3" class="data-dot" style="offset-path:path('M 230 190 L 410 230');animation-delay:1.6s;"><animate attributeName="opacity" values="0;0.8;0.8;0" keyTimes="0;0.1;0.9;1" dur="3.1s" begin="1.6s" repeatCount="indefinite"/></circle>
+              <circle r="3" class="data-dot" style="offset-path:path('M 230 190 L 330 350');animation-delay:2.4s;"><animate attributeName="opacity" values="0;0.8;0.8;0" keyTimes="0;0.1;0.9;1" dur="3.4s" begin="2.4s" repeatCount="indefinite"/></circle>
+              <circle r="3" class="data-dot" style="offset-path:path('M 230 190 L 130 350');animation-delay:3.2s;"><animate attributeName="opacity" values="0;0.8;0.8;0" keyTimes="0;0.1;0.9;1" dur="3.7s" begin="3.2s" repeatCount="indefinite"/></circle>
+              <circle r="3" class="data-dot" style="offset-path:path('M 230 190 L 50 230');animation-delay:4s;"><animate attributeName="opacity" values="0;0.8;0.8;0" keyTimes="0;0.1;0.9;1" dur="4s" begin="4s" repeatCount="indefinite"/></circle>
+              <circle r="3" class="data-dot" style="offset-path:path('M 230 190 L 65 80');animation-delay:4.8s;"><animate attributeName="opacity" values="0;0.8;0.8;0" keyTimes="0;0.1;0.9;1" dur="4.3s" begin="4.8s" repeatCount="indefinite"/></circle>
+            </svg>
+
+            <!-- Center Drupal node -->
+            <div class="center-node">
+              <svg width="28" height="38" viewBox="0 0 32 44" fill="none"><path d="M16 0S0 16 0 28c0 8.8 7.2 16 16 16s16-7.2 16-16C32 16 16 0 16 0z" fill="#2AA9E0"/></svg>
+              <span>Drupal</span>
+            </div>
+
+            <!-- Agent nodes -->
+            <div class="agent-node" style="top:calc(8% - 24px);left:calc(50% - 24px);animation-delay:2.5s;">
+              <div class="icon-box">&#x1f4ac;</div>
+              <span class="node-label">Chatbot</span>
+            </div>
+            <div class="agent-node" style="top:calc(15% - 24px);left:calc(78% - 24px);animation-delay:3s;">
+              <div class="icon-box">&#x1f512;</div>
+              <span class="node-label">Governance</span>
+            </div>
+            <div class="agent-node" style="top:calc(50% - 24px);left:calc(92% - 24px);animation-delay:0s;">
+              <div class="icon-box">&#x1f3a8;</div>
+              <span class="node-label">Page Gen</span>
+            </div>
+            <div class="agent-node" style="top:calc(83% - 24px);left:calc(76% - 24px);animation-delay:0.5s;">
+              <div class="icon-box">&#x267f;</div>
+              <span class="node-label">Accessibility</span>
+            </div>
+            <div class="agent-node" style="top:calc(91% - 24px);left:calc(40% - 24px);animation-delay:1s;">
+              <div class="icon-box">&#x1f50e;</div>
+              <span class="node-label">SEO</span>
+            </div>
+            <div class="agent-node" style="top:calc(68% - 24px);left:calc(8% - 24px);animation-delay:1.5s;">
+              <div class="icon-box">&#x1f310;</div>
+              <span class="node-label">Translation</span>
+            </div>
+            <div class="agent-node" style="top:calc(30% - 24px);left:calc(8% - 24px);animation-delay:2s;">
+              <div class="icon-box">&#x1f4dd;</div>
+              <span class="node-label">Content</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOCIAL PROOF LOGOS -->
+  <div class="proof-bar">
+    <div class="container">
+      <p>Trusted by organizations worldwide</p>
+      <div class="proof-logos">
+        <span class="proof-logo">NASA</span>
+        <span class="proof-logo">Tesla</span>
+        <span class="proof-logo">UNICEF</span>
+        <span class="proof-logo">Harvard</span>
+        <span class="proof-logo">BBC</span>
+        <span class="proof-logo">Pfizer</span>
+        <span class="proof-logo">The Economist</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- WORKS WITH EVERY AGENT. SHIPS WITH 22. -->
+  <section class="agents-section">
+    <div class="container">
+      <div class="agents-header">
+        <span class="section-label">AI that works both ways</span>
+        <h2>Works with every agent.<br><span class="highlight" style="font-style:italic;">Ships with 22.</span></h2>
+        <p class="mt-2" style="max-width:620px;margin-left:auto;margin-right:auto;">Drupal is the only CMS designed to be a tool for external AI agents AND to ship its own agents built in.</p>
+      </div>
+      <div class="agents-grid">
+        <!-- Left: Outside → In -->
+        <div class="agents-card">
+          <div class="agents-card-header">
+            <div class="agents-card-icon agents-card-icon-blue">&rarr;</div>
+            <div>
+              <div class="agents-card-label agents-card-label-blue">Outside &rarr; In</div>
+              <div class="agents-card-title">Your agents, our CMS</div>
+            </div>
+          </div>
+          <p>Any MCP-compatible agent can connect to Drupal and operate it as a tool — read content models, create pages, manage media, respect permissions. No Drupal knowledge required.</p>
+          <div class="agents-list">
+            <div class="agents-list-item"><span>&#x1f4ac;</span><span>Claude Code / Claude Desktop</span></div>
+            <div class="agents-list-item"><span>&#x1f4bb;</span><span>Cursor / GitHub Copilot</span></div>
+            <div class="agents-list-item"><span>&#x2728;</span><span>OpenAI Codex / Google Gemini</span></div>
+            <div class="agents-list-item"><span>&#x1f527;</span><span>Your custom agents</span><span class="muted-right">via MCP or JSON:API</span></div>
+          </div>
+        </div>
+        <!-- Right: Ships built-in -->
+        <div class="agents-card">
+          <div class="agents-card-header">
+            <div class="agents-card-icon agents-card-icon-green">&#x26a1;</div>
+            <div>
+              <div class="agents-card-label agents-card-label-green">Ships built-in</div>
+              <div class="agents-card-title">22 agents, ready to go</div>
+            </div>
+          </div>
+          <p>Don't have your own agents? Drupal ships 22 that work out of the box — content generation, SEO, accessibility, translation, and more. All using your brand context.</p>
+          <div class="agents-grid-2col">
+            <div class="agents-list-item"><span>&#x1f3a8;</span><span>Page Builder</span></div>
+            <div class="agents-list-item"><span>&#x267f;</span><span>Accessibility</span></div>
+            <div class="agents-list-item"><span>&#x1f50e;</span><span>SEO Optimizer</span></div>
+            <div class="agents-list-item"><span>&#x1f310;</span><span>Translation</span></div>
+            <div class="agents-list-item"><span>&#x1f4dd;</span><span>Content Writer</span></div>
+            <div class="agents-list-item"><span>&#x1f4f7;</span><span>Media Alt Text</span></div>
+            <div class="agents-list-item"><span>&#x1f4ac;</span><span>Chatbot</span></div>
+            <div class="agents-list-item"><span>&#x1f50d;</span><span>Content Audit</span></div>
+            <div class="agents-more">+14 more agents included free</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STRUCTURED CONTENT IS AI'S BEST FRIEND -->
+  <section class="section" style="background:var(--bg-warm);">
+
+    <div class="container">
+      <div class="text-center" style="max-width:700px;margin:0 auto 4rem;">
+        <span class="section-label">Why AI agents prefer Drupal</span>
+        <h2>Structured content is<br><span class="highlight">AI's best friend</span></h2>
+        <p class="mt-2">AI agents don't just generate content in Drupal. They understand its structure, respect its permissions, and operate within its workflows.</p>
+      </div>
+      <div class="grid grid-3">
+        <div class="card">
+          <div class="card-icon">&#x1f91d;</div>
+          <h3>MCP Protocol</h3>
+          <p style="font-size:0.95rem;">Native Model Context Protocol support. Claude, Cursor, Copilot — any MCP-compatible agent connects and operates your site.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">&#x1f3af;</div>
+          <h3>Context Control Center</h3>
+          <p style="font-size:0.95rem;">Define your brand voice, target audiences, and key messages in one place. Every AI agent draws from this single source of truth.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">&#x1f4cb;</div>
+          <h3>Human-in-the-Loop</h3>
+          <p style="font-size:0.95rem;">Every AI action is queued for review. Batch approvals, audit trails, revision history. Nothing reaches production without human consent.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">&#x1f9e9;</div>
+          <h3>Structured &amp; API-First</h3>
+          <p style="font-size:0.95rem;">Typed content models, JSON:API in core, Drush for CLI automation, and semantic config that AI can read, reason about, and modify. No scraping. No guessing.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">&#x1f512;</div>
+          <h3>Granular Permissions</h3>
+          <p style="font-size:0.95rem;">Scope agent access precisely: "create articles, edit own drafts, can't touch users." The most granular permission system of any major CMS.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">&#x1f310;</div>
+          <h3>Any AI Provider, No Lock-in</h3>
+          <p style="font-size:0.95rem;">OpenAI, Anthropic, Google Gemini, Azure, AWS Bedrock, self-hosted models. Swap providers without code changes. Self-host if you need to.</p>
+        </div>
+      </div>
+      <div class="initiative-quote" style="max-width:800px;margin:3rem auto 0;">
+        <blockquote>
+          "We were not thinking about AI at the time, but in hindsight, we built exactly the kind of modern, flexible foundation that makes deep AI integration possible today."
+        </blockquote>
+        <cite>Dries Buytaert — Drupal Founder &amp; Project Lead</cite>
+      </div>
+    </div>
+  </section>
+
+  <!-- DRUPAL AI INITIATIVE -->
+  <section class="initiative-section">
+    <div class="container">
+      <div class="initiative-inner">
+        <span class="section-label">Drupal AI Initiative</span>
+        <h2>The largest open source<br><span class="highlight">AI Initiative</span> in CMS history</h2>
+        <div class="initiative-stats" style="grid-template-columns: repeat(4, 1fr);">
+          <div>
+            <div class="initiative-stat-number">$1.5M+</div>
+            <div class="initiative-stat-label">Invested in the Drupal AI Initiative</div>
+          </div>
+          <div>
+            <div class="initiative-stat-number">28</div>
+            <div class="initiative-stat-label">Organizations sponsoring AI development</div>
+          </div>
+          <div>
+            <div class="initiative-stat-number">22+</div>
+            <div class="initiative-stat-label">AI agents shipping with Drupal CMS today</div>
+          </div>
+          <div>
+            <div class="initiative-stat-number">48+</div>
+            <div class="initiative-stat-label">AI providers supported</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- START IN MINUTES, NEVER OUTGROW IT -->
+  <section class="growth-section" style="background:var(--bg-warm);">
+
+    <div class="container">
+      <div class="growth-inner">
+        <span class="section-label">Built to last</span>
+        <h2>Start in minutes,<br><span class="highlight">never outgrow it</span></h2>
+        <p class="mt-2">Right now, everything you need is built in. But if you ever need custom features, advanced integrations, or enterprise-scale infrastructure — Drupal has 40,000+ add-ons and a global community of developers. The same platform runs BBC, UNICEF, and Tesla. You'll never outgrow it.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- START BUILDING IN 3 MINUTES -->
+  <section class="cta-section">
+    <div class="container">
+      <h2>Start building in <span class="highlight">3 minutes</span></h2>
+      <p class="mt-2" style="max-width:500px;margin-left:auto;margin-right:auto;">Three paths. All free. All open source. Choose the one that fits how you work.</p>
+      <div class="cta-paths">
+        <div class="cta-path">
+          <h3>&#x1f310; Launch a Free Site</h3>
+          <p>Browser-based sandbox with AI tools enabled. No download, no install.</p>
+          <a href="#" class="btn btn-primary" style="width:100%;">Launch now</a>
+          <div class="time">Ready in 60 seconds</div>
+        </div>
+        <div class="cta-path">
+          <h3>&#x1f4bb; Desktop App</h3>
+          <p>Download and double-click. Full Drupal CMS running locally on your machine.</p>
+          <a href="#" class="btn btn-secondary" style="width:100%;">Download for Mac</a>
+          <div class="time">Ready in 3 minutes</div>
+        </div>
+        <div class="cta-path">
+          <h3>&#x1f4d6; For Developers</h3>
+          <p>CLI install, API docs, Drupal Core framework access.</p>
+          <a href="#" class="btn btn-secondary" style="width:100%;">Developer docs</a>
+          <div class="time">ddev composer create-project drupal/cms</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ARE YOU A DEVELOPER? -->
+  <section class="developer-section">
+    <div class="container">
+      <span class="section-label">Developer escape hatch</span>
+      <h2 class="developer-heading">Are you a developer?</h2>
+      <p class="developer-subhead">Skip the GUI. Two commands and you're running.</p>
+      <div class="code-block">
+        <button class="code-block-copy" onclick="navigator.clipboard.writeText('curl -fsSL https://ddev.com/install.sh | bash\nmkdir my-site && cd my-site && ddev config --project-type=drupal --docroot=web && ddev composer create-project drupal/cms && ddev launch')">Copy</button>
+        curl -fsSL https://ddev.com/install.sh | bash<br>
+        mkdir my-site && cd my-site && ddev config --project-type=drupal \<br>
+        &nbsp;&nbsp;--docroot=web && ddev composer create-project drupal/cms && ddev launch
+      </div>
+      <div class="developer-links">
+        <a href="#">
+          <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          API Docs
+        </a>
+        <a href="#">
+          <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          GitHub
+        </a>
+        <a href="#">
+          <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          Developer Guide
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-links">
+        <a href="#">About Drupal</a>
+        <a href="#">Drupal Core</a>
+        <a href="#">Documentation</a>
+        <a href="#">Community</a>
+        <a href="#">Security</a>
+        <a href="#">Contribute</a>
+      </div>
+      <p>&copy; 2026 Drupal. Free and open source under GPL v2+</p>
+    </div>
+  </footer>
+
+</body>
+</html>

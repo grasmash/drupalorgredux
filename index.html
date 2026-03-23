@@ -1,0 +1,1191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Drupal CMS — The Best CMS for Agents to Use</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="brand-tokens.css">
+  <style>
+    :root {
+      --drupal-blue: #009CDE;
+      --drupal-dark: #006AA9;
+      --drupal-navy: #12285F;
+      --drupal-light: #CCEDF9;
+      --drupal-purple: #CCBAF4;
+      --drupal-yellow: #FFC423;
+      --drupal-red: #F46351;
+      --drupal-green: #397618;
+      --bg: #ffffff;
+      --bg-alt: rgba(204, 237, 249, 0.10);
+      --text: #12285F;
+      --text-secondary: #475569;
+      --text-muted: #7e8e98;
+      --border: #e2e8f0;
+      --border-strong: #cbd5e1;
+      --font: 'Noto Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --font-heading: 'Noto Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --mono: 'JetBrains Mono', 'Fira Code', monospace;
+      --max-w: 1200px;
+      --radius: 12px;
+      --radius-sm: 6px;
+      --shadow-sm: 0 1px 3px rgba(18,40,95,0.06), 0 1px 2px rgba(18,40,95,0.04);
+      --shadow: 0 4px 16px rgba(18,40,95,0.06), 0 1px 3px rgba(18,40,95,0.04);
+      --shadow-lg: 0 12px 40px rgba(18,40,95,0.08), 0 4px 12px rgba(18,40,95,0.04);
+      --shadow-blue: 0 8px 30px rgba(0,156,222,0.25);
+      --gradient-text: linear-gradient(135deg, #009CDE, #CCEDF9);
+      --accent-border: 3px solid var(--drupal-blue);
+      /* V2 gradient variables */
+      --grad-cta-bg: linear-gradient(135deg, #12285F, #009CDE);
+      --grad-blue-purple: linear-gradient(135deg, #009CDE, #CCBAF4);
+      --grad-stat-text: linear-gradient(135deg, #009CDE, #CCBAF4);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+    body { font-family: var(--font); background: var(--bg); color: var(--text); line-height: 1.6; overflow-x: hidden; }
+    a { color: var(--drupal-blue); text-decoration: none; transition: color 0.2s; }
+    a:hover { color: var(--drupal-dark); }
+
+    h1 { font-family: var(--font-heading); font-size: clamp(2.75rem, 5.5vw, 4.25rem); font-weight: 700; line-height: 1.08; letter-spacing: -0.03em; }
+    h2 { font-family: var(--font-heading); font-size: clamp(2rem, 3.5vw, 2.75rem); font-weight: 700; line-height: 1.15; letter-spacing: -0.02em; color: var(--drupal-navy); }
+    h3 { font-family: var(--font-heading); font-size: 1.25rem; font-weight: 700; line-height: 1.3; color: var(--drupal-navy); }
+    p { font-size: 1.1rem; color: var(--text-secondary); line-height: 1.7; }
+    .highlight { background: var(--gradient-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .highlight-on-dark { color: var(--drupal-light); -webkit-text-fill-color: var(--drupal-light); }
+    .section-label { display: inline-block; font-size: 0.78rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--drupal-blue); margin-bottom: 1rem; }
+
+    .container { max-width: var(--max-w); margin: 0 auto; padding: 0 2rem; }
+    .section { padding: 6rem 0; position: relative; }
+    .section-alt { background: var(--bg-alt); }
+    .grid { display: grid; gap: 1.5rem; }
+    .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    .grid-4 { grid-template-columns: repeat(4, 1fr); }
+    .text-center { text-align: center; }
+    .mt-2 { margin-top: 1rem; }
+
+    /* Scroll progress bar */
+    .scroll-progress-track {
+      position: fixed; top: 0; left: 0; right: 0; height: 3px;
+      background: var(--drupal-navy); z-index: 101; pointer-events: none;
+    }
+    .scroll-progress {
+      height: 100%; width: 0%;
+      background: linear-gradient(90deg, #009CDE, #CCBAF4);
+    }
+
+    /* Header — translucent navy */
+    .header {
+      position: fixed; top: 3px; left: 0; right: 0; z-index: 100;
+      padding: 0.6rem 0;
+      background: rgba(18, 40, 95, 0.92);
+      backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      transition: padding 0.3s ease;
+    }
+    .header.header-shrink {
+      padding: 0.5rem 0;
+    }
+    .header-inner { display: flex; justify-content: space-between; align-items: center; }
+    .logo { display: flex; align-items: center; gap: 0.6rem; color: #fff; text-decoration: none; }
+    .logo-text { font-size: 1.3rem; font-weight: 700; color: #fff; }
+    .nav { display: flex; gap: 1.75rem; align-items: center; }
+    .nav a { color: rgba(255,255,255,0.7); font-size: 0.9rem; font-weight: 500; }
+    .nav a:hover { color: #fff; }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+      padding: 0.7rem 1.5rem; border-radius: var(--radius-sm);
+      font-family: var(--font); font-size: 0.925rem; font-weight: 600;
+      cursor: pointer; transition: all 0.2s; border: none; white-space: nowrap;
+      position: relative; overflow: hidden;
+    }
+    .btn-lg { padding: 0.85rem 2rem; font-size: 1rem; border-radius: 6px; }
+    .btn-primary { background: var(--drupal-blue); color: #fff; }
+    .btn-primary:hover { background: var(--drupal-dark); color: #fff; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,106,169,0.35); }
+    .btn-secondary { background: rgba(255,255,255,0.08); color: #fff; border: 1px solid rgba(255,255,255,0.2); }
+    .btn-secondary:hover { background: rgba(255,255,255,0.14); border-color: rgba(255,255,255,0.35); color: #fff; transform: translateY(-1px); }
+    .btn-secondary-dark { background: var(--bg); color: var(--drupal-navy); border: 1px solid var(--border-strong); }
+    .btn-secondary-dark:hover { background: var(--drupal-navy); color: #fff; border-color: var(--drupal-navy); transform: translateY(-1px); }
+
+    /* Hero inline link (replaces ghost button) */
+    .hero-inline-link {
+      color: rgba(255,255,255,0.7); font-size: 1rem; font-weight: 600;
+      display: inline-flex; align-items: center; gap: 0.35rem;
+      transition: color 0.2s;
+    }
+    .hero-inline-link:hover { color: #fff; }
+
+    /* Hero — full navy immersive */
+    .hero-and-proof {
+      display: flex; flex-direction: column;
+      min-height: 100vh; min-height: 100dvh;
+      background: var(--drupal-navy);
+      position: relative;
+    }
+    .hero-and-proof::after {
+      content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      opacity: 0.03; mix-blend-mode: overlay;
+    }
+    @media (max-width: 900px) {
+      .hero-and-proof { min-height: auto; }
+    }
+    .hero {
+      display: flex; align-items: center; flex: 1;
+      padding: 5rem 0 1.5rem; position: relative; overflow: hidden; z-index: 2;
+    }
+    .hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 60% 40%, rgba(0,156,222,0.12), rgba(204,186,244,0.05) 40%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero::after {
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px;
+      background: rgba(255,255,255,0.06);
+    }
+    .hero-content { position: relative; z-index: 2; width: 100%; }
+    .hero h1 { color: #fff; }
+    .hero-subhead { font-size: clamp(1.05rem, 1.8vw, 1.2rem); color: rgba(255,255,255,0.7); max-width: 560px; margin: 1.25rem 0 2rem; line-height: 1.7; }
+    .hero-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; align-items: center; }
+    .hero-split { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: center; }
+
+    /* Hero badge */
+    .badge { display: inline-block; padding: 0.3rem 0.8rem; border-radius: 999px; font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
+    .badge-blue { background: rgba(0,156,222,0.15); color: var(--drupal-light); border: 1px solid rgba(0,156,222,0.25); }
+    .badge-green { background: rgba(57,118,24,0.1); color: var(--drupal-green); }
+
+    /* Hero Illustration — agent network */
+    @keyframes hero-pulse-ring {
+      0% { transform: translate(-50%, -50%) scale(1); opacity: 0.15; }
+      50% { transform: translate(-50%, -50%) scale(1.08); opacity: 0.06; }
+      100% { transform: translate(-50%, -50%) scale(1); opacity: 0.15; }
+    }
+    @keyframes hero-node-float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+    @keyframes hero-dash {
+      to { stroke-dashoffset: -16; }
+    }
+    @keyframes hero-data-packet {
+      0% { offset-distance: 0%; opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { offset-distance: 100%; opacity: 0; }
+    }
+    .hero-illustration {
+      position: relative; display: flex; align-items: center; justify-content: center;
+      aspect-ratio: 1; width: 100%;
+    }
+    .hero-illustration .pulse-ring {
+      position: absolute; top: 50%; left: 50%; border-radius: 50%;
+      border: 1px solid rgba(0,156,222,0.2);
+      animation: hero-pulse-ring 3s ease-in-out infinite;
+    }
+    .hero-illustration .pulse-ring-1 { width: 200px; height: 200px; }
+    .hero-illustration .pulse-ring-2 { width: 310px; height: 310px; animation-delay: 1.5s; border-color: rgba(0,156,222,0.1); }
+    .hero-illustration .center-node {
+      position: relative; z-index: 3; display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      width: 88px; height: 88px; border-radius: 50%;
+      background: rgba(0,156,222,0.1); border: 2px solid var(--drupal-blue);
+      box-shadow: 0 0 40px rgba(0,156,222,0.2), 0 0 80px rgba(0,156,222,0.08);
+    }
+    .hero-illustration .center-node span {
+      margin-top: 2px; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.05em; color: #fff;
+    }
+    .hero-illustration .agent-node {
+      position: absolute; z-index: 3; display: flex; flex-direction: column;
+      align-items: center; gap: 6px; transition: transform 0.3s;
+      animation: hero-node-float 3s ease-in-out infinite;
+    }
+    .hero-illustration .agent-node:hover { transform: scale(1.1); }
+    .hero-illustration .agent-node .icon-box {
+      width: 48px; height: 48px; border-radius: 10px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+      display: flex; align-items: center; justify-content: center; font-size: 1.1rem;
+    }
+    .hero-illustration .agent-node .node-label {
+      font-size: 0.62rem; font-weight: 600; color: rgba(255,255,255,0.5); white-space: nowrap;
+    }
+    .hero-illustration .agent-node .icon-box-drupal {
+      border-color: rgba(0,156,222,0.25);
+      background: rgba(0,156,222,0.08);
+      position: relative;
+    }
+    .hero-illustration .agent-node .icon-box-drupal::after {
+      content: ''; position: absolute; bottom: -3px; right: -3px;
+      width: 16px; height: 16px; border-radius: 50%;
+      background: var(--drupal-navy); border: 1.5px solid rgba(0,156,222,0.4);
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 32 44' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M16 0S0 16 0 28c0 8.8 7.2 16 16 16s16-7.2 16-16C32 16 16 0 16 0z' fill='%23009CDE'/%3E%3C/svg%3E");
+      background-size: 8px 11px; background-repeat: no-repeat; background-position: center;
+    }
+    .hero-illustration .lines-svg {
+      position: absolute; inset: 0; z-index: 1; pointer-events: none;
+    }
+    .hero-illustration .dash-line {
+      stroke: rgba(0,156,222,0.2); stroke-width: 1;
+      stroke-dasharray: 4 4; animation: hero-dash 2s linear infinite;
+    }
+    .hero-illustration .data-dot {
+      fill: #009CDE; animation: hero-data-packet 3s ease-in-out infinite;
+    }
+    .hero-illustration .data-dot-rev {
+      fill: #CCEDF9; animation: hero-data-packet 3.5s ease-in-out infinite;
+    }
+
+    /* Social proof — logo ticker + stats */
+    .proof-section {
+      border-top: 1px solid rgba(255,255,255,0.06);
+      flex-shrink: 0; position: relative; z-index: 2;
+    }
+
+    /* Logo ticker — infinite scroll */
+    .proof-ticker {
+      padding: 1.25rem 0;
+      display: flex; align-items: center;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      overflow: hidden; position: relative;
+    }
+    .proof-ticker-label {
+      flex: 0 0 auto; padding: 0 2.5rem;
+      border-right: 1px solid rgba(255,255,255,0.08);
+      font-size: 0.72rem; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.1em; color: rgba(255,255,255,0.4);
+      max-width: 200px; line-height: 1.6;
+    }
+    .proof-ticker-track {
+      display: flex; overflow: hidden; flex: 1; position: relative;
+    }
+    .proof-ticker-track::before,
+    .proof-ticker-track::after {
+      content: ''; position: absolute; top: 0; bottom: 0; width: 80px; z-index: 2; pointer-events: none;
+    }
+    .proof-ticker-track::before { left: 0; background: linear-gradient(to right, var(--drupal-navy), transparent); }
+    .proof-ticker-track::after { right: 0; background: linear-gradient(to left, var(--drupal-navy), transparent); }
+    @keyframes ticker-scroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .proof-ticker-logos {
+      display: flex; align-items: center;
+      animation: ticker-scroll 45s linear infinite;
+    }
+    .proof-ticker-track:hover .proof-ticker-logos {
+      animation-play-state: paused;
+    }
+    .proof-ticker-logo {
+      flex: 0 0 auto; padding: 0 2.5rem;
+      font-size: 1.1rem; font-weight: 700; color: rgba(255,255,255,0.3);
+      white-space: nowrap; letter-spacing: 0.02em;
+      transition: color 0.3s;
+    }
+    .proof-ticker-logo:hover { color: rgba(255,255,255,0.6); }
+
+    /* Stats bar */
+    .proof-stats {
+      display: flex; justify-content: center; align-items: center;
+      padding: 1.25rem 0; gap: 0;
+    }
+    .proof-stat {
+      flex: 1; text-align: center; padding: 0.5rem 2rem;
+      border-right: 1px solid rgba(255,255,255,0.06);
+    }
+    .proof-stat:last-child { border-right: none; }
+    .proof-stat-number {
+      font-family: var(--font-heading); font-size: 1.5rem; font-weight: 700;
+      color: var(--drupal-light); line-height: 1.1;
+    }
+    .proof-stat-label {
+      font-size: 0.75rem; color: rgba(255,255,255,0.4);
+      margin-top: 0.25rem;
+    }
+
+    /* Works with every agent section */
+    .agents-section { padding: 5rem 0 6.5rem; background: var(--bg); }
+    .agents-header { text-align: center; margin-bottom: 3rem; }
+    .agents-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; max-width: 1100px; margin: 0 auto; }
+    .agents-card {
+      background: var(--bg); border: none; border-radius: var(--radius);
+      padding: 2.5rem; box-shadow: var(--shadow-sm);
+      border-left: var(--accent-border);
+      transition: box-shadow 0.3s ease, transform 0.3s ease, border-left-width 0.2s ease;
+    }
+    .agents-card:hover { box-shadow: var(--shadow); transform: translateY(-3px); border-left-width: 4px; }
+    .agents-card-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.5rem; }
+    .agents-card-icon {
+      width: 36px; height: 36px; border-radius: 10px; display: flex;
+      align-items: center; justify-content: center; font-size: 1rem;
+    }
+    .agents-card-icon-blue { background: rgba(0,156,222,0.08); border: 1px solid rgba(0,156,222,0.15); }
+    .agents-card-icon-green { background: rgba(57,118,24,0.08); border: 1px solid rgba(57,118,24,0.15); }
+    .agents-card-label { font-size: 0.68rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; }
+    .agents-card-label-blue { color: var(--drupal-blue); }
+    .agents-card-label-green { color: var(--drupal-green); }
+    .agents-card-title { font-size: 1.15rem; font-weight: 700; color: var(--text); }
+    .agents-card p { font-size: 0.92rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 1.5rem; }
+    .agents-list { display: flex; flex-direction: column; gap: 0.625rem; }
+    .agents-list-item {
+      display: flex; align-items: center; gap: 0.75rem; padding: 0.625rem 0.75rem;
+      border-radius: 8px; background: rgba(204, 237, 249, 0.15); border: 1px solid rgba(0,156,222,0.08);
+    }
+    .agents-list-item span:first-child { font-size: 0.95rem; }
+    .agents-list-item span:nth-child(2) { font-size: 0.82rem; font-weight: 600; color: var(--text); }
+    .agents-list-item .muted-right { margin-left: auto; font-size: 0.7rem; color: var(--text-muted); font-weight: 400; }
+    .agents-grid-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; }
+    .agents-grid-2col .agents-list-item { padding: 0.5rem 0.75rem; }
+    .agents-grid-2col .agents-list-item span:nth-child(2) { font-size: 0.78rem; }
+    .agents-mcp-snippet {
+      margin-bottom: 1.25rem; padding: 0.75rem 1rem; border-radius: 8px;
+      background: var(--drupal-navy); border: 1px solid rgba(0,156,222,0.15);
+    }
+    .agents-mcp-label {
+      font-size: 0.68rem; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.06em; color: rgba(255,255,255,0.4); margin-bottom: 0.35rem;
+    }
+    .agents-mcp-code {
+      font-family: var(--mono); font-size: 0.82rem; color: var(--drupal-light);
+      user-select: all; cursor: text;
+    }
+    .agents-more {
+      grid-column: span 2; text-align: center; padding: 0.5rem 0.75rem;
+      border-radius: 8px; font-size: 0.78rem; font-weight: 600;
+      background: rgba(0,156,222,0.04); border: 1px solid rgba(0,156,222,0.15); color: var(--drupal-blue);
+    }
+
+    /* Cards — left border accent */
+    .card {
+      background: var(--bg); border: none;
+      border-radius: var(--radius); padding: 2rem;
+      transition: all 0.3s ease; box-shadow: var(--shadow-sm);
+      border-left: var(--accent-border);
+    }
+    .card:hover { box-shadow: var(--shadow); transform: translateY(-3px); border-left-width: 4px; }
+    .card-icon {
+      width: 48px; height: 48px; border-radius: 12px;
+      background: rgba(0,156,222,0.06);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.25rem; margin-bottom: 1rem;
+    }
+
+    /* Stats */
+    .stat-number {
+      font-family: var(--font-heading); font-size: clamp(2.5rem, 4vw, 3.5rem); font-weight: 700;
+      background: var(--gradient-text); -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent; background-clip: text; line-height: 1.1;
+    }
+    .stat-label { font-size: 0.9rem; color: var(--text-secondary); margin-top: 0.4rem; }
+
+    /* Structured content section — light blue tint */
+    .structured-section { padding: 6.5rem 0 5rem; background: var(--bg-alt); }
+    .structured-section .grid { grid-template-columns: 1fr 1fr; }
+    .structured-section .card-wide { grid-column: span 2; }
+
+    /* Drupal AI Initiative */
+    .initiative-section { padding: 4rem 0 5rem; background: var(--bg); }
+    .initiative-inner {
+      max-width: 900px; margin: 0 auto; text-align: center;
+    }
+    .initiative-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; margin-top: 2.5rem; }
+    .initiative-stat-number { font-family: var(--font-heading); font-size: 2.5rem; font-weight: 700; background: var(--gradient-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .initiative-stat-label { font-size: 0.9rem; color: var(--text-secondary); margin-top: 0.25rem; }
+    .initiative-quote {
+      margin-top: 3rem; padding: 2rem; padding-left: 3.5rem; background: var(--bg); border: none;
+      border-radius: var(--radius); box-shadow: var(--shadow-sm);
+      position: relative;
+    }
+    .initiative-quote::before {
+      content: '\201C';
+      position: absolute;
+      top: -10px;
+      left: 20px;
+      font-size: 5rem;
+      color: rgba(0,156,222,0.12);
+      font-family: Georgia, serif;
+      line-height: 1;
+    }
+    .initiative-quote blockquote {
+      font-size: 1.15rem; font-style: italic; color: var(--text); line-height: 1.7;
+      padding-left: 0; text-align: left; border: none;
+    }
+    .initiative-quote cite { display: block; margin-top: 1rem; font-size: 0.9rem; color: var(--text-secondary); font-style: normal; text-align: left; }
+
+    /* "Start in minutes, never outgrow it" */
+    .growth-section { padding: 5.5rem 0 4rem; background: var(--bg-alt); }
+    .growth-inner { max-width: 800px; margin: 0 auto; text-align: center; }
+    .growth-logos { display: flex; justify-content: center; gap: 2.5rem; margin-top: 2rem; flex-wrap: wrap; }
+    .growth-logo { font-size: 1rem; font-weight: 700; color: var(--text-muted); opacity: 0.5; }
+    .growth-note { font-size: 0.85rem; color: var(--text-muted); margin-top: 1rem; }
+
+    /* CTA Section — V2: navy-to-blue gradient, frosted glass cards */
+    .cta-section {
+      text-align: center; padding: 3.5rem 0;
+      background: var(--grad-cta-bg);
+      color: #fff;
+      position: relative;
+    }
+    .cta-section::after {
+      content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      opacity: 0.04; mix-blend-mode: overlay;
+    }
+    .cta-section > .container { position: relative; z-index: 1; }
+    .cta-section h2 { color: #fff; }
+    .cta-section h2 .highlight {
+      background: linear-gradient(135deg, #CCEDF9, #FFC423);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .cta-section p { color: rgba(255,255,255,0.8); }
+    .cta-paths { display: grid; gap: 1.25rem; margin-top: 2rem; max-width: 1000px; margin-left: auto; margin-right: auto; }
+    .cta-paths-2col { grid-template-columns: repeat(2, 1fr); }
+    .cta-path {
+      background: rgba(255,255,255,0.1); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.15); border-radius: var(--radius);
+      padding: 1.75rem 1.75rem; text-align: center; transition: all 0.3s;
+    }
+    .cta-path:hover { background: rgba(255,255,255,0.15); transform: translateY(-3px); box-shadow: 0 12px 40px rgba(0,0,0,0.15); }
+    .cta-path h3 { color: #fff; margin-bottom: 0.5rem; }
+    .cta-path p { font-size: 0.9rem; color: rgba(255,255,255,0.75); margin-bottom: 1.25rem; }
+    .cta-path .time { font-size: 0.8rem; color: var(--drupal-light); font-weight: 600; margin-top: 1rem; }
+    .cta-path .btn-primary { background: #fff; color: var(--drupal-navy); }
+    .cta-path .btn-primary:hover { background: #fff; color: var(--drupal-navy); transform: translateY(-1px); box-shadow: 0 4px 16px rgba(255,255,255,0.2); }
+    .cta-path .btn-secondary { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,0.3); }
+    .cta-path .btn-secondary:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.5); color: #fff; transform: translateY(-1px); }
+
+    /* Developer bar — terminal-style, full-width */
+    .cta-dev-bar {
+      margin-top: 1.25rem; max-width: 1000px; margin-left: auto; margin-right: auto;
+      text-align: left;
+    }
+    .cta-dev-label {
+      font-size: 0.72rem; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.08em; color: rgba(255,255,255,0.4); margin-bottom: 0.75rem;
+    }
+    .cta-dev-terminal {
+      background: rgba(0,0,0,0.35); border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 8px; overflow: hidden;
+    }
+    .cta-dev-terminal-bar {
+      display: flex; align-items: center; gap: 6px;
+      padding: 0.6rem 1rem; background: rgba(255,255,255,0.04);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .cta-dev-terminal-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+    }
+    .cta-dev-terminal-dot-r { background: #F46351; }
+    .cta-dev-terminal-dot-y { background: #FFC423; }
+    .cta-dev-terminal-dot-g { background: #397618; }
+    .cta-dev-terminal-title {
+      margin-left: 0.5rem; font-size: 0.7rem; color: rgba(255,255,255,0.35);
+      font-family: var(--mono);
+    }
+    .cta-dev-terminal-body {
+      padding: 1.25rem 1.5rem; font-family: var(--mono); font-size: 0.85rem;
+      color: var(--drupal-light); line-height: 1.8; position: relative;
+    }
+    .cta-dev-terminal-body .prompt { color: var(--drupal-blue); user-select: none; }
+    .cta-dev-terminal-body .comment { color: rgba(255,255,255,0.25); }
+    .cta-dev-terminal-copy {
+      position: absolute; right: 12px; top: 12px;
+      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.5); padding: 4px 12px; border-radius: 6px;
+      font-size: 0.7rem; font-weight: 600; cursor: pointer;
+      font-family: var(--font); transition: all 0.2s;
+    }
+    .cta-dev-terminal-copy:hover { background: rgba(255,255,255,0.15); color: #fff; }
+    .cta-dev-terminal-copy.copied { background: rgba(57,118,24,0.3); border-color: rgba(57,118,24,0.5); color: #7ddc5f; }
+    .cta-dev-links {
+      display: flex; gap: 1.5rem; margin-top: 1rem;
+    }
+    .cta-dev-links a {
+      color: rgba(255,255,255,0.45); font-size: 0.8rem; font-weight: 500;
+      display: flex; align-items: center; gap: 0.35rem; transition: color 0.2s;
+    }
+    .cta-dev-links a:hover { color: #fff; }
+    .cta-dev-links a svg { width: 13px; height: 13px; stroke: currentColor; fill: none; stroke-width: 2; }
+    /* (old code-block styles removed — replaced by terminal) */
+    .developer-links a:hover { color: #fff; }
+    .developer-links a svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; }
+
+    /* Footer */
+    .footer { padding: 4rem 0 2rem; border-top: 1px solid var(--border); text-align: center; background: var(--bg); }
+    .footer p { font-size: 0.85rem; color: var(--text-muted); }
+    .footer-links { display: flex; justify-content: center; gap: 2rem; margin-bottom: 2rem; flex-wrap: wrap; }
+    .footer-links a { font-size: 0.85rem; color: var(--text-secondary); }
+
+    /* Scroll-triggered reveal animations */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Hero animations — immediate, not scroll-triggered */
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+    .animate { animation: fadeInUp 0.6s ease-out both; }
+    .animate-d1 { animation-delay: 0.1s; }
+    .animate-d2 { animation-delay: 0.2s; }
+    .animate-d3 { animation-delay: 0.3s; }
+
+    /* Focus states for keyboard navigation */
+    a:focus-visible, .btn:focus-visible, button:focus-visible {
+      outline: 2px solid var(--drupal-blue);
+      outline-offset: 2px;
+    }
+
+    /* Cursor pointer on all clickable elements */
+    a, button, .btn, .code-block-copy { cursor: pointer; }
+
+    /* prefers-reduced-motion */
+    @media (prefers-reduced-motion: reduce) {
+      .reveal {
+        transform: none;
+        transition: opacity 0.4s ease;
+      }
+      .reveal.revealed {
+        transform: none;
+      }
+      .hero-illustration .pulse-ring,
+      .hero-illustration .agent-node,
+      .hero-illustration .dash-line,
+      .hero-illustration .data-dot,
+      .hero-illustration .data-dot-rev {
+        animation: none;
+      }
+      @keyframes fadeInUp { from { opacity: 0; } to { opacity: 1; } }
+      /* btn::after removed — no shine sweep */
+      .card, .cta-path, .agents-card {
+        transition: box-shadow 0.2s ease;
+      }
+      .card:hover, .cta-path:hover, .agents-card:hover {
+        transform: none;
+      }
+      .scroll-progress-track { display: none; }
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .grid-3, .grid-4, .cta-paths, .initiative-stats, .agents-grid, .structured-section .grid { grid-template-columns: 1fr; }
+      .structured-section .card-wide { grid-column: span 1; }
+      .hero-split { grid-template-columns: 1fr; gap: 2rem; }
+      .hero { padding: 6rem 0 2rem; }
+      .nav { display: none; }
+      .proof-ticker { flex-direction: column; }
+      .proof-ticker-label { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.08); padding: 0 1.5rem 1rem; max-width: none; text-align: center; }
+      .proof-stats { flex-wrap: wrap; }
+      .proof-stat { flex: 0 0 50%; border-bottom: 1px solid rgba(255,255,255,0.06); padding: 1rem; }
+      .proof-stat:nth-child(odd) { border-right: 1px solid rgba(255,255,255,0.06); }
+      .proof-stat:nth-child(3), .proof-stat:nth-child(4) { border-bottom: none; }
+      .cta-dev-links { flex-wrap: wrap; justify-content: center; }
+      .cta-dev-terminal-body { font-size: 0.72rem; overflow-x: auto; }
+    }
+    @media (max-width: 480px) {
+      h1 { font-size: 2.25rem; }
+      .hero-actions { flex-direction: column; width: 100%; }
+      .hero-actions .btn { width: 100%; }
+      .hero-actions .hero-inline-link { text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Scroll progress bar -->
+  <div class="scroll-progress-track"><div class="scroll-progress" id="scrollProgress"></div></div>
+
+  <header class="header" id="siteHeader">
+    <div class="container header-inner">
+      <a href="#" class="logo" aria-label="Drupal home">
+        <img src="assets/logos/Original/Drupal Logo_Horizontal_White.svg" alt="Drupal" height="32" style="display:block;">
+      </a>
+      <nav class="nav">
+        <a href="#">Product</a>
+        <a href="#">AI</a>
+        <a href="#">Templates</a>
+        <a href="#">Docs</a>
+        <a href="#">Community</a>
+        <a href="#" class="btn btn-primary" style="margin-left:0.5rem;">Launch Free Site</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO + PROOF wrapper — fills viewport -->
+  <div class="hero-and-proof">
+  <section class="hero">
+    <div class="container hero-content">
+      <div class="hero-split">
+        <div>
+          <div class="badge badge-blue animate" style="margin-bottom:1.25rem;">Drupal CMS</div>
+          <h1 class="animate animate-d1">The best CMS for <span class="highlight-on-dark">agents</span> to use.</h1>
+          <p class="hero-subhead animate animate-d2">The only major open source CMS with structured content modeling, a complete API in core, granular permissions, and Model Context Protocol support. 22 AI agents ship out of the box.</p>
+          <div class="hero-actions animate animate-d3">
+            <a href="#" class="btn btn-primary btn-lg">Launch a free site</a>
+            <a href="#" class="hero-inline-link">See it in action &darr;</a>
+          </div>
+        </div>
+        <div class="animate animate-d2">
+          <div class="hero-illustration">
+            <!-- Pulse rings -->
+            <div class="pulse-ring pulse-ring-1"></div>
+            <div class="pulse-ring pulse-ring-2"></div>
+
+            <!-- Connection lines — 10 nodes evenly around circle, center at 230,200, radius ~175 -->
+            <!-- Positions (36° apart): 0°=top, going clockwise -->
+            <!-- N0: 230,25  N1: 333,45  N2: 405,130  N3: 420,260  N4: 360,355 -->
+            <!-- N5: 230,390 N6: 100,355 N7: 40,260   N8: 55,130  N9: 127,45  -->
+            <svg viewBox="0 0 460 460" preserveAspectRatio="xMidYMid meet" class="lines-svg">
+              <!-- Lines to all 10 nodes -->
+              <line x1="230" y1="230" x2="230" y2="25" class="dash-line"/>
+              <line x1="230" y1="230" x2="333" y2="45" class="dash-line" style="animation-delay:0.3s"/>
+              <line x1="230" y1="230" x2="405" y2="130" class="dash-line" style="animation-delay:0.6s"/>
+              <line x1="230" y1="230" x2="420" y2="260" class="dash-line" style="animation-delay:0.9s"/>
+              <line x1="230" y1="230" x2="360" y2="355" class="dash-line" style="animation-delay:1.2s"/>
+              <line x1="230" y1="230" x2="230" y2="390" class="dash-line" style="animation-delay:1.5s"/>
+              <line x1="230" y1="230" x2="100" y2="355" class="dash-line" style="animation-delay:1.8s"/>
+              <line x1="230" y1="230" x2="40" y2="260" class="dash-line" style="animation-delay:2.1s"/>
+              <line x1="230" y1="230" x2="55" y2="130" class="dash-line" style="animation-delay:2.4s"/>
+              <line x1="230" y1="230" x2="127" y2="45" class="dash-line" style="animation-delay:2.7s"/>
+              <!-- Data packets — external agents (blue, inward) -->
+              <circle r="3" class="data-dot" style="offset-path:path('M 230 25 L 230 230');"><animate attributeName="opacity" values="0;0.8;0.8;0" keyTimes="0;0.1;0.9;1" dur="2.5s" repeatCount="indefinite"/></circle>
+              <circle r="3" class="data-dot" style="offset-path:path('M 405 130 L 230 230');animation-delay:0.6s;"><animate attributeName="opacity" values="0;0.8;0.8;0" keyTimes="0;0.1;0.9;1" dur="2.8s" begin="0.6s" repeatCount="indefinite"/></circle>
+              <circle r="3" class="data-dot" style="offset-path:path('M 360 355 L 230 230');animation-delay:1.2s;"><animate attributeName="opacity" values="0;0.8;0.8;0" keyTimes="0;0.1;0.9;1" dur="3.1s" begin="1.2s" repeatCount="indefinite"/></circle>
+              <circle r="3" class="data-dot" style="offset-path:path('M 100 355 L 230 230');animation-delay:1.8s;"><animate attributeName="opacity" values="0;0.8;0.8;0" keyTimes="0;0.1;0.9;1" dur="3.4s" begin="1.8s" repeatCount="indefinite"/></circle>
+              <circle r="3" class="data-dot" style="offset-path:path('M 55 130 L 230 230');animation-delay:2.4s;"><animate attributeName="opacity" values="0;0.8;0.8;0" keyTimes="0;0.1;0.9;1" dur="3.7s" begin="2.4s" repeatCount="indefinite"/></circle>
+              <!-- Data packets — Drupal agents (light blue, outward) -->
+              <circle r="3" class="data-dot-rev" style="offset-path:path('M 230 230 L 333 45');"><animate attributeName="opacity" values="0;0.8;0.8;0" keyTimes="0;0.1;0.9;1" dur="2.6s" repeatCount="indefinite"/></circle>
+              <circle r="3" class="data-dot-rev" style="offset-path:path('M 230 230 L 420 260');animation-delay:0.5s;"><animate attributeName="opacity" values="0;0.8;0.8;0" keyTimes="0;0.1;0.9;1" dur="2.9s" begin="0.5s" repeatCount="indefinite"/></circle>
+              <circle r="3" class="data-dot-rev" style="offset-path:path('M 230 230 L 230 390');animation-delay:1.0s;"><animate attributeName="opacity" values="0;0.8;0.8;0" keyTimes="0;0.1;0.9;1" dur="3.2s" begin="1.0s" repeatCount="indefinite"/></circle>
+              <circle r="3" class="data-dot-rev" style="offset-path:path('M 230 230 L 40 260');animation-delay:1.5s;"><animate attributeName="opacity" values="0;0.8;0.8;0" keyTimes="0;0.1;0.9;1" dur="3.5s" begin="1.5s" repeatCount="indefinite"/></circle>
+              <circle r="3" class="data-dot-rev" style="offset-path:path('M 230 230 L 127 45');animation-delay:2.0s;"><animate attributeName="opacity" values="0;0.8;0.8;0" keyTimes="0;0.1;0.9;1" dur="3.8s" begin="2.0s" repeatCount="indefinite"/></circle>
+            </svg>
+
+            <!-- Center Drupal node -->
+            <div class="center-node">
+              <img src="assets/logos/Original/Drupal Drop_Blue.svg" alt="Drupal" width="36" height="36" style="object-fit:contain;">
+              <span>Drupal</span>
+            </div>
+
+            <!-- 10 nodes around the circle, alternating external/drupal -->
+            <!-- N0: top center — Figma (external) -->
+            <div class="agent-node" style="top:calc(5% - 24px);left:calc(50% - 24px);animation-delay:0s;">
+              <div class="icon-box"><svg viewBox="0 0 24 24" width="22" height="22" fill="#F24E1E"><path d="M15.852 8.981h-4.588V0h4.588c2.476 0 4.49 2.014 4.49 4.49s-2.014 4.491-4.49 4.491zM12.735 7.51h3.117c1.665 0 3.019-1.355 3.019-3.019s-1.355-3.019-3.019-3.019h-3.117V7.51zm0 1.471H8.148c-2.476 0-4.49-2.014-4.49-4.49S5.672 0 8.148 0h4.588v8.981zm-4.587-7.51c-1.665 0-3.019 1.355-3.019 3.019s1.354 3.02 3.019 3.02h3.117V1.471H8.148zm4.587 15.019H8.148c-2.476 0-4.49-2.014-4.49-4.49s2.014-4.49 4.49-4.49h4.588v8.98zM8.148 8.981c-1.665 0-3.019 1.355-3.019 3.019s1.355 3.019 3.019 3.019h3.117V8.981H8.148zM8.172 24c-2.489 0-4.515-2.014-4.515-4.49s2.014-4.49 4.49-4.49h4.588v4.441c0 2.503-2.047 4.539-4.563 4.539zm-.024-7.51a3.023 3.023 0 0 0-3.019 3.019c0 1.665 1.365 3.019 3.044 3.019 1.705 0 3.093-1.376 3.093-3.068v-2.97H8.148zm7.704 0h-.098c-2.476 0-4.49-2.014-4.49-4.49s2.014-4.49 4.49-4.49h.098c2.476 0 4.49 2.014 4.49 4.49s-2.014 4.49-4.49 4.49zm-.097-7.509c-1.665 0-3.019 1.355-3.019 3.019s1.355 3.019 3.019 3.019h.098c1.665 0 3.019-1.355 3.019-3.019s-1.355-3.019-3.019-3.019h-.098z"/></svg></div>
+              <span class="node-label">Figma</span>
+            </div>
+            <!-- N1: upper right — Accessibility (drupal) -->
+            <div class="agent-node" style="top:calc(10% - 24px);left:calc(74% - 24px);animation-delay:0.25s;">
+              <div class="icon-box icon-box-drupal"><svg viewBox="0 0 24 24" width="18" height="18" fill="none"><circle cx="12" cy="12" r="10" fill="none" stroke="#009CDE" stroke-width="1.5"/><path d="M12 6v12M8 10h8M8 14h8" stroke="#009CDE" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+              <span class="node-label">Accessibility</span>
+            </div>
+            <!-- N2: right upper — Cursor (external) -->
+            <div class="agent-node" style="top:calc(30% - 24px);left:calc(90% - 24px);animation-delay:0.5s;">
+              <div class="icon-box"><svg viewBox="0 0 24 24" width="20" height="20" fill="#fff"><path d="M11.503.131 1.891 5.678a.84.84 0 0 0-.42.726v11.188c0 .3.162.575.42.724l9.609 5.55a1 1 0 0 0 .998 0l9.61-5.55a.84.84 0 0 0 .42-.724V6.404a.84.84 0 0 0-.42-.726L12.497.131a1.01 1.01 0 0 0-.996 0M2.657 6.338h18.55c.263 0 .43.287.297.515L12.23 22.918c-.062.107-.229.064-.229-.06V12.335a.59.59 0 0 0-.295-.51l-9.11-5.257c-.109-.063-.064-.23.061-.23"/></svg></div>
+              <span class="node-label">Cursor</span>
+            </div>
+            <!-- N3: right lower — SEO (drupal) -->
+            <div class="agent-node" style="top:calc(62% - 24px);left:calc(90% - 24px);animation-delay:0.75s;">
+              <div class="icon-box icon-box-drupal"><svg viewBox="0 0 24 24" width="18" height="18" fill="none"><circle cx="11" cy="11" r="7" stroke="#009CDE" stroke-width="1.5"/><path d="M21 21l-4.35-4.35" stroke="#009CDE" stroke-width="1.5" stroke-linecap="round"/><path d="M8 11h6M11 8v6" stroke="#009CDE" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+              <span class="node-label">SEO</span>
+            </div>
+            <!-- N4: lower right — Copilot (external) -->
+            <div class="agent-node" style="top:calc(83% - 24px);left:calc(74% - 24px);animation-delay:1s;">
+              <div class="icon-box"><svg viewBox="0 0 24 24" width="20" height="20" fill="#fff"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></div>
+              <span class="node-label">Copilot</span>
+            </div>
+            <!-- N5: bottom center — Page Builder (drupal) -->
+            <div class="agent-node" style="top:calc(90% - 24px);left:calc(50% - 24px);animation-delay:1.25s;">
+              <div class="icon-box icon-box-drupal"><svg viewBox="0 0 24 24" width="18" height="18" fill="none"><rect x="3" y="3" width="18" height="18" rx="2" stroke="#009CDE" stroke-width="1.5"/><path d="M3 9h18M9 9v12" stroke="#009CDE" stroke-width="1.5"/><circle cx="15" cy="15" r="2" fill="#009CDE"/></svg></div>
+              <span class="node-label">Page Builder</span>
+            </div>
+            <!-- N6: lower left — Replit (external) -->
+            <div class="agent-node" style="top:calc(83% - 24px);left:calc(20% - 24px);animation-delay:1.5s;">
+              <div class="icon-box"><svg viewBox="0 0 24 24" width="20" height="20" fill="#F26207"><path d="M2 1.5A1.5 1.5 0 0 1 3.5 0h7A1.5 1.5 0 0 1 12 1.5V8H3.5A1.5 1.5 0 0 1 2 6.5ZM12 8h8.5A1.5 1.5 0 0 1 22 9.5v5a1.5 1.5 0 0 1-1.5 1.5H12ZM2 17.5A1.5 1.5 0 0 1 3.5 16H12v6.5a1.5 1.5 0 0 1-1.5 1.5h-7A1.5 1.5 0 0 1 2 22.5Z"/></svg></div>
+              <span class="node-label">Replit</span>
+            </div>
+            <!-- N7: left lower — Translation (drupal) -->
+            <div class="agent-node" style="top:calc(62% - 24px);left:calc(4% - 24px);animation-delay:1.75s;">
+              <div class="icon-box icon-box-drupal"><svg viewBox="0 0 24 24" width="18" height="18" fill="none"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="#009CDE" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <span class="node-label">Translation</span>
+            </div>
+            <!-- N8: left upper — Claude (external) -->
+            <div class="agent-node" style="top:calc(30% - 24px);left:calc(4% - 24px);animation-delay:2s;">
+              <div class="icon-box"><svg viewBox="0 0 24 24" width="20" height="20" fill="#D97757"><path d="M17.3041 3.541h-3.6718l6.696 16.918H24Zm-10.6082 0L0 20.459h3.7442l1.3693-3.5527h7.0052l1.3693 3.5528h3.7442L10.5363 3.5409Zm-.3712 10.2232 2.2914-5.9456 2.2914 5.9456Z"/></svg></div>
+              <span class="node-label">Claude</span>
+            </div>
+            <!-- N9: upper left — Content (drupal) -->
+            <div class="agent-node" style="top:calc(10% - 24px);left:calc(20% - 24px);animation-delay:2.25s;">
+              <div class="icon-box icon-box-drupal"><svg viewBox="0 0 24 24" width="18" height="18" fill="none"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z" stroke="#009CDE" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <span class="node-label">Content</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOCIAL PROOF — Logo ticker + stats -->
+  <div class="proof-section">
+    <!-- Infinite scroll logo ticker -->
+    <div class="proof-ticker">
+      <div class="proof-ticker-label">Trusted by the world's most ambitious organizations</div>
+      <div class="proof-ticker-track">
+        <div class="proof-ticker-logos">
+          <span class="proof-ticker-logo">NASA</span>
+          <span class="proof-ticker-logo">Tesla</span>
+          <span class="proof-ticker-logo">UNICEF</span>
+          <span class="proof-ticker-logo">Pfizer</span>
+          <span class="proof-ticker-logo">BBC</span>
+          <span class="proof-ticker-logo">Harvard</span>
+          <span class="proof-ticker-logo">The Economist</span>
+          <span class="proof-ticker-logo">Johnson & Johnson</span>
+          <span class="proof-ticker-logo">Pinterest</span>
+          <span class="proof-ticker-logo">Charles Schwab</span>
+          <span class="proof-ticker-logo">Amnesty International</span>
+          <span class="proof-ticker-logo">The Weather Channel</span>
+          <span class="proof-ticker-logo">University of Oxford</span>
+          <span class="proof-ticker-logo">General Electric</span>
+          <!-- Duplicate for seamless loop -->
+          <span class="proof-ticker-logo" aria-hidden="true">NASA</span>
+          <span class="proof-ticker-logo" aria-hidden="true">Tesla</span>
+          <span class="proof-ticker-logo" aria-hidden="true">UNICEF</span>
+          <span class="proof-ticker-logo" aria-hidden="true">Pfizer</span>
+          <span class="proof-ticker-logo" aria-hidden="true">BBC</span>
+          <span class="proof-ticker-logo" aria-hidden="true">Harvard</span>
+          <span class="proof-ticker-logo" aria-hidden="true">The Economist</span>
+          <span class="proof-ticker-logo" aria-hidden="true">Johnson & Johnson</span>
+          <span class="proof-ticker-logo" aria-hidden="true">Pinterest</span>
+          <span class="proof-ticker-logo" aria-hidden="true">Charles Schwab</span>
+          <span class="proof-ticker-logo" aria-hidden="true">Amnesty International</span>
+          <span class="proof-ticker-logo" aria-hidden="true">The Weather Channel</span>
+          <span class="proof-ticker-logo" aria-hidden="true">University of Oxford</span>
+          <span class="proof-ticker-logo" aria-hidden="true">General Electric</span>
+        </div>
+      </div>
+    </div>
+    <!-- Stats bar -->
+    <div class="proof-stats">
+      <div class="proof-stat">
+        <div class="proof-stat-number" data-count="1000000" data-suffix="+">1,000,000+</div>
+        <div class="proof-stat-label">Community members</div>
+      </div>
+      <div class="proof-stat">
+        <div class="proof-stat-number" data-count="60000" data-suffix="+">60,000+</div>
+        <div class="proof-stat-label">Modules, themes & distributions</div>
+      </div>
+      <div class="proof-stat">
+        <div class="proof-stat-number" data-count="25" data-suffix=" years">25 years</div>
+        <div class="proof-stat-label">Of continuous innovation</div>
+      </div>
+      <div class="proof-stat">
+        <div class="proof-stat-number" data-count="47000" data-suffix="+">47,000+</div>
+        <div class="proof-stat-label">Core commits</div>
+      </div>
+    </div>
+  </div>
+  </div><!-- /hero-and-proof -->
+
+  <!-- START BUILDING — Unified CTA -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="reveal">
+        <h2>Start building in <span class="highlight">3 minutes</span></h2>
+        <p class="mt-2" style="max-width:500px;margin-left:auto;margin-right:auto;">Three paths. All free. All open source. Choose the one that fits how you work.</p>
+      </div>
+      <div class="cta-paths cta-paths-2col">
+        <div class="cta-path reveal">
+          <h3>&#x1f310; Launch a Free Site</h3>
+          <p>Browser-based sandbox with AI tools enabled. No download, no install.</p>
+          <a href="#" class="btn btn-primary" style="width:100%;">Launch now</a>
+          <div class="time">Ready in 60 seconds</div>
+        </div>
+        <div class="cta-path reveal">
+          <h3>&#x1f4bb; Desktop App</h3>
+          <p>Download and double-click. Full Drupal CMS running locally on your machine.</p>
+          <a href="#" class="btn btn-secondary" style="width:100%;">Download for Mac</a>
+          <div class="time">Ready in 3 minutes</div>
+        </div>
+      </div>
+      <div class="cta-dev-bar reveal">
+        <div class="cta-dev-label">Or skip the GUI entirely</div>
+        <div class="cta-dev-terminal">
+          <div class="cta-dev-terminal-bar">
+            <span class="cta-dev-terminal-dot cta-dev-terminal-dot-r"></span>
+            <span class="cta-dev-terminal-dot cta-dev-terminal-dot-y"></span>
+            <span class="cta-dev-terminal-dot cta-dev-terminal-dot-g"></span>
+            <span class="cta-dev-terminal-title">Terminal</span>
+          </div>
+          <div class="cta-dev-terminal-body">
+            <button class="cta-dev-terminal-copy" id="copyBtn">Copy</button>
+            <span class="comment"># Install DDEV (local dev environment)</span><br>
+            <span class="prompt">$</span> curl -fsSL https://ddev.com/install.sh | bash<br><br>
+            <span class="comment"># Create & launch your Drupal CMS site</span><br>
+            <span class="prompt">$</span> mkdir my-site && cd my-site<br>
+            <span class="prompt">$</span> ddev config --project-type=drupal --docroot=web<br>
+            <span class="prompt">$</span> ddev composer create-project drupal/cms<br>
+            <span class="prompt">$</span> ddev launch
+          </div>
+        </div>
+        <div class="cta-dev-links">
+          <a href="#">
+            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            API Docs
+          </a>
+          <a href="#">
+            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            GitHub
+          </a>
+          <a href="#">
+            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Developer Guide
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORKS WITH EVERY AGENT. SHIPS WITH 22. -->
+  <section class="agents-section">
+    <div class="container">
+      <div class="agents-header reveal">
+        <span class="section-label">AI that works both ways</span>
+        <h2>Works with every agent.<br><span class="highlight" style="font-style:italic;">Ships with 22.</span></h2>
+        <p class="mt-2" style="max-width:620px;margin-left:auto;margin-right:auto;">Drupal is the only CMS designed to be a tool for external AI agents AND to ship its own agents built in.</p>
+      </div>
+      <div class="agents-grid">
+        <!-- Left: Outside -> In -->
+        <div class="agents-card reveal">
+          <div class="agents-card-header">
+            <div class="agents-card-icon agents-card-icon-blue">&rarr;</div>
+            <div>
+              <div class="agents-card-label agents-card-label-blue">Outside &rarr; In</div>
+              <div class="agents-card-title">Your agents, our CMS</div>
+            </div>
+          </div>
+          <p>Any MCP-compatible agent can connect to Drupal and operate it as a tool — read content models, create pages, manage media, respect permissions. No Drupal knowledge required.</p>
+          <div class="agents-mcp-snippet">
+            <div class="agents-mcp-label">Connect in one line:</div>
+            <code class="agents-mcp-code">npx @anthropic/mcp-drupal --url https://yoursite.com</code>
+          </div>
+          <div class="agents-list">
+            <div class="agents-list-item"><span>&#x1f4ac;</span><span>Claude Code / Claude Desktop</span></div>
+            <div class="agents-list-item"><span>&#x1f4bb;</span><span>Cursor / GitHub Copilot</span></div>
+            <div class="agents-list-item"><span>&#x2728;</span><span>OpenAI Codex / Google Gemini</span></div>
+            <div class="agents-list-item"><span>&#x1f527;</span><span>Your custom agents</span><span class="muted-right">via MCP or JSON:API</span></div>
+          </div>
+        </div>
+        <!-- Right: Ships built-in -->
+        <div class="agents-card reveal">
+          <div class="agents-card-header">
+            <div class="agents-card-icon agents-card-icon-green">&#x26a1;</div>
+            <div>
+              <div class="agents-card-label agents-card-label-green">Ships built-in</div>
+              <div class="agents-card-title">22 agents, ready to go</div>
+            </div>
+          </div>
+          <p>Don't have your own agents? Drupal ships 22 that work out of the box — content generation, SEO, accessibility, translation, and more. All using your brand context.</p>
+          <div class="agents-grid-2col">
+            <div class="agents-list-item"><span>&#x1f3a8;</span><span>Page Builder</span></div>
+            <div class="agents-list-item"><span>&#x267f;</span><span>Accessibility</span></div>
+            <div class="agents-list-item"><span>&#x1f50e;</span><span>SEO Optimizer</span></div>
+            <div class="agents-list-item"><span>&#x1f310;</span><span>Translation</span></div>
+            <div class="agents-list-item"><span>&#x1f4dd;</span><span>Content Writer</span></div>
+            <div class="agents-list-item"><span>&#x1f4f7;</span><span>Media Alt Text</span></div>
+            <div class="agents-list-item"><span>&#x1f4ac;</span><span>Chatbot</span></div>
+            <div class="agents-list-item"><span>&#x1f50d;</span><span>Content Audit</span></div>
+            <div class="agents-more">+14 more agents included free</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STRUCTURED CONTENT IS AI'S BEST FRIEND -->
+  <section class="section structured-section">
+    <div class="container">
+      <div class="text-center reveal" style="max-width:700px;margin:0 auto 4rem;">
+        <span class="section-label">Why AI agents prefer Drupal</span>
+        <h2>Structured content is<br><span class="highlight">AI's best friend</span></h2>
+        <p class="mt-2">AI agents don't just generate content in Drupal. They understand its structure, respect its permissions, and operate within its workflows.</p>
+      </div>
+      <div class="grid grid-3">
+        <div class="card card-wide reveal">
+          <div class="card-icon">&#x1f91d;</div>
+          <h3>MCP Protocol</h3>
+          <p style="font-size:0.95rem;">Native Model Context Protocol support. Claude, Cursor, Copilot — any MCP-compatible agent connects and operates your site.</p>
+        </div>
+        <div class="card reveal">
+          <div class="card-icon">&#x1f3af;</div>
+          <h3>Context Control Center</h3>
+          <p style="font-size:0.95rem;">Define your brand voice, target audiences, and key messages in one place. Every AI agent draws from this single source of truth.</p>
+        </div>
+        <div class="card reveal">
+          <div class="card-icon">&#x1f4cb;</div>
+          <h3>Human-in-the-Loop</h3>
+          <p style="font-size:0.95rem;">Every AI action is queued for review. Batch approvals, audit trails, revision history. Nothing reaches production without human consent.</p>
+        </div>
+        <div class="card reveal">
+          <div class="card-icon">&#x1f9e9;</div>
+          <h3>Structured &amp; API-First</h3>
+          <p style="font-size:0.95rem;">Typed content models, JSON:API in core, Drush for CLI automation, and semantic config that AI can read, reason about, and modify. No scraping. No guessing.</p>
+        </div>
+        <div class="card reveal">
+          <div class="card-icon">&#x1f512;</div>
+          <h3>Granular Permissions</h3>
+          <p style="font-size:0.95rem;">Scope agent access precisely: "create articles, edit own drafts, can't touch users." The most granular permission system of any major CMS.</p>
+        </div>
+        <div class="card reveal">
+          <div class="card-icon">&#x1f310;</div>
+          <h3>Any AI Provider, No Lock-in</h3>
+          <p style="font-size:0.95rem;">OpenAI, Anthropic, Google Gemini, Azure, AWS Bedrock, self-hosted models. Swap providers without code changes. Self-host if you need to.</p>
+        </div>
+      </div>
+      <div class="initiative-quote reveal" style="max-width:800px;margin:3rem auto 0;">
+        <blockquote>
+          "We were not thinking about AI at the time, but in hindsight, we built exactly the kind of modern, flexible foundation that makes deep AI integration possible today."
+        </blockquote>
+        <cite>Dries Buytaert — Drupal Founder &amp; Project Lead</cite>
+      </div>
+    </div>
+  </section>
+
+  <!-- DRUPAL AI INITIATIVE -->
+  <section class="initiative-section">
+    <div class="container">
+      <div class="initiative-inner reveal">
+        <span class="section-label">Drupal AI Initiative</span>
+        <h2>The largest open source<br><span class="highlight">AI Initiative</span> in CMS history</h2>
+        <div class="initiative-stats" id="initiativeStats" style="grid-template-columns: repeat(4, 1fr);">
+          <div>
+            <div class="initiative-stat-number" data-counter="1.5" data-prefix="$" data-suffix="M+" data-decimals="1">$1.5M+</div>
+            <div class="initiative-stat-label">Invested in the Drupal AI Initiative</div>
+          </div>
+          <div>
+            <div class="initiative-stat-number" data-counter="28" data-prefix="" data-suffix="" data-decimals="0">28</div>
+            <div class="initiative-stat-label">Organizations sponsoring AI development</div>
+          </div>
+          <div>
+            <div class="initiative-stat-number" data-counter="22" data-prefix="" data-suffix="+" data-decimals="0">22+</div>
+            <div class="initiative-stat-label">AI agents shipping with Drupal CMS today</div>
+          </div>
+          <div>
+            <div class="initiative-stat-number" data-counter="48" data-prefix="" data-suffix="+" data-decimals="0">48+</div>
+            <div class="initiative-stat-label">AI providers supported</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- START IN MINUTES, NEVER OUTGROW IT -->
+  <section class="growth-section">
+    <div class="container">
+      <div class="growth-inner reveal">
+        <span class="section-label">Built to last</span>
+        <h2>Start in minutes,<br><span class="highlight">never outgrow it</span></h2>
+        <p class="mt-2">Right now, everything you need is built in. But if you ever need custom features, advanced integrations, or enterprise-scale infrastructure — Drupal has 40,000+ add-ons and a global community of developers. The same platform runs BBC, UNICEF, and Tesla. You'll never outgrow it.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-links">
+        <a href="#">About Drupal</a>
+        <a href="#">Drupal Core</a>
+        <a href="#">Documentation</a>
+        <a href="#">Community</a>
+        <a href="#">Security</a>
+        <a href="#">Contribute</a>
+      </div>
+      <p>&copy; 2026 Drupal. Free and open source under GPL v2+</p>
+      <p style="margin-top:0.5rem;font-size:0.75rem;">Drupal is a registered trademark of Dries Buytaert.</p>
+    </div>
+  </footer>
+
+  <script>
+    (function() {
+      'use strict';
+
+      var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      // ===== A. Scroll-triggered reveals with staggered delays for grid children =====
+      var revealObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            var parent = entry.target.parentElement;
+            if (parent && (parent.classList.contains('grid') || parent.classList.contains('cta-paths') || parent.classList.contains('agents-grid') || parent.classList.contains('proof-logos'))) {
+              var siblings = Array.from(parent.children);
+              var index = siblings.indexOf(entry.target);
+              entry.target.style.transitionDelay = (index * 0.1) + 's';
+            }
+            entry.target.classList.add('revealed');
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -40px 0px'
+      });
+
+      document.querySelectorAll('.reveal').forEach(function(el) {
+        revealObserver.observe(el);
+      });
+
+      // ===== B. Number counter animation =====
+      var countersAnimated = false;
+      var counterObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting && !countersAnimated) {
+            countersAnimated = true;
+            animateCounters();
+            counterObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.5 });
+
+      var statsContainer = document.getElementById('initiativeStats');
+      if (statsContainer) {
+        counterObserver.observe(statsContainer);
+      }
+
+      function animateCounters() {
+        var counters = document.querySelectorAll('[data-counter]');
+        counters.forEach(function(el) {
+          var target = parseFloat(el.getAttribute('data-counter'));
+          var prefix = el.getAttribute('data-prefix') || '';
+          var suffix = el.getAttribute('data-suffix') || '';
+          var decimals = parseInt(el.getAttribute('data-decimals')) || 0;
+          var duration = 1500;
+          var startTime = null;
+
+          if (prefersReducedMotion) {
+            if (decimals > 0) {
+              el.textContent = prefix + target.toFixed(decimals) + suffix;
+            } else {
+              el.textContent = prefix + Math.round(target) + suffix;
+            }
+            return;
+          }
+
+          el.textContent = prefix + '0' + suffix;
+
+          function step(timestamp) {
+            if (!startTime) startTime = timestamp;
+            var progress = Math.min((timestamp - startTime) / duration, 1);
+            var eased = 1 - Math.pow(1 - progress, 3);
+            var current = eased * target;
+
+            if (decimals > 0) {
+              el.textContent = prefix + current.toFixed(decimals) + suffix;
+            } else {
+              el.textContent = prefix + Math.round(current) + suffix;
+            }
+
+            if (progress < 1) {
+              requestAnimationFrame(step);
+            }
+          }
+
+          requestAnimationFrame(step);
+        });
+      }
+
+      // ===== B2. Proof stats counter =====
+      var proofStatsAnimated = false;
+      var proofObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting && !proofStatsAnimated) {
+            proofStatsAnimated = true;
+            document.querySelectorAll('.proof-stat-number[data-count]').forEach(function(el) {
+              var target = parseInt(el.getAttribute('data-count'));
+              var suffix = el.getAttribute('data-suffix') || '';
+              var duration = 2000;
+              var startTime = null;
+
+              if (prefersReducedMotion) {
+                el.textContent = target.toLocaleString() + suffix;
+                return;
+              }
+              el.textContent = '0' + suffix;
+
+              function step(timestamp) {
+                if (!startTime) startTime = timestamp;
+                var progress = Math.min((timestamp - startTime) / duration, 1);
+                var eased = 1 - Math.pow(1 - progress, 3);
+                el.textContent = Math.round(eased * target).toLocaleString() + suffix;
+                if (progress < 1) requestAnimationFrame(step);
+              }
+              requestAnimationFrame(step);
+            });
+            proofObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.3 });
+
+      var proofStats = document.querySelector('.proof-stats');
+      if (proofStats) proofObserver.observe(proofStats);
+
+      // ===== E. Header shrink on scroll + F. Scroll progress indicator =====
+      var header = document.getElementById('siteHeader');
+      var progressBar = document.getElementById('scrollProgress');
+
+      function onScroll() {
+        var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        var docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+
+        if (scrollTop > 50) {
+          header.classList.add('header-shrink');
+        } else {
+          header.classList.remove('header-shrink');
+        }
+
+        if (docHeight > 0) {
+          var progress = (scrollTop / docHeight) * 100;
+          progressBar.style.width = progress + '%';
+        }
+      }
+
+      var scrollTicking = false;
+      window.addEventListener('scroll', function() {
+        if (!scrollTicking) {
+          requestAnimationFrame(function() {
+            onScroll();
+            scrollTicking = false;
+          });
+          scrollTicking = true;
+        }
+      }, { passive: true });
+
+      // ===== H. Code block copy feedback =====
+      var copyBtn = document.getElementById('copyBtn');
+      if (copyBtn) {
+        copyBtn.addEventListener('click', function() {
+          var codeText = 'curl -fsSL https://ddev.com/install.sh | bash\nmkdir my-site && cd my-site && ddev config --project-type=drupal --docroot=web && ddev composer create-project drupal/cms && ddev launch';
+          navigator.clipboard.writeText(codeText).then(function() {
+            copyBtn.textContent = '\u2714 Copied!';
+            copyBtn.classList.add('copied');
+            setTimeout(function() {
+              copyBtn.textContent = 'Copy';
+              copyBtn.classList.remove('copied');
+            }, 2000);
+          });
+        });
+      }
+
+      // Initial call
+      onScroll();
+    })();
+  </script>
+
+</body>
+</html>

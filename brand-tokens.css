@@ -1,0 +1,608 @@
+/**
+ * ============================================================================
+ * DRUPAL BRAND DESIGN TOKENS
+ * ============================================================================
+ *
+ * Single source of truth for implementing the Drupal brand identity.
+ * Compiled from the Drupal Brand Portal, Media Kit, Olivero theme tokens,
+ * and official brand guidelines.
+ *
+ * Source: brand-guidelines.md
+ * Last updated: 2026-03-23
+ *
+ * Usage: @import url('brand-tokens.css'); or <link> in your HTML.
+ * All tokens are scoped to :root for global availability.
+ *
+ * ============================================================================
+ */
+
+:root {
+
+  /* ==========================================================================
+   * 1. COLORS
+   * ==========================================================================
+   * The Drupal color palette has been carefully selected to create a wide
+   * variety of options for screen and print. The palette gives options for
+   * diversity as wide as the community can be.
+   * ========================================================================== */
+
+  /* --------------------------------------------------------------------------
+   * 1.1 Primary Colors
+   * ------------------------------------------------------------------------ */
+  --brand-blue:      #009CDE; /* Drupal Blue   | RGB 0,156,222   | PMS 7460 C */
+  --brand-dark-blue: #006AA9; /* Drupal Dk Blue| RGB 0,106,169   | PMS 363 C  */
+  --brand-navy:      #12285F; /* Drupal Navy   | RGB 18,40,95    | PMS 540 C  */
+
+  /* --------------------------------------------------------------------------
+   * 1.2 Secondary Colors
+   * ------------------------------------------------------------------------ */
+  --brand-light-blue: #CCEDF9; /* Drupal Lt Blue| RGB 204,237,249 | PMS 2975 C */
+  --brand-black:      #000000; /* Drupal Black  | RGB 0,0,0       | BLACK 6C   */
+  --brand-white:      #FFFFFF; /* Drupal White  | RGB 255,255,255 |            */
+
+  /* --------------------------------------------------------------------------
+   * 1.3 Tertiary Colors
+   * ------------------------------------------------------------------------ */
+  --brand-purple: #CCBAF4; /* Drupal Purple | RGB 204,186,244 | PMS 2645 C   */
+  --brand-yellow: #FFC423; /* Drupal Yellow | RGB 255,196,35  | PMS 1235 C   */
+  --brand-red:    #F46351; /* Drupal Red    | RGB 244,99,81   | PMS WARM RED */
+  --brand-green:  #397618; /* Drupal Green  | RGB 57,118,43   | PMS 363 C    */
+
+  /* --------------------------------------------------------------------------
+   * 1.4 RGBA Variants — Common Opacities
+   *
+   * Useful for overlays, hover states, tinted backgrounds, borders, etc.
+   * ------------------------------------------------------------------------ */
+
+  /* Drupal Blue (0, 156, 222) */
+  --brand-blue-5:  rgba(0, 156, 222, 0.05);
+  --brand-blue-8:  rgba(0, 156, 222, 0.08);
+  --brand-blue-10: rgba(0, 156, 222, 0.10);
+  --brand-blue-15: rgba(0, 156, 222, 0.15);
+  --brand-blue-20: rgba(0, 156, 222, 0.20);
+
+  /* Drupal Dark Blue (0, 106, 169) */
+  --brand-dark-blue-5:  rgba(0, 106, 169, 0.05);
+  --brand-dark-blue-8:  rgba(0, 106, 169, 0.08);
+  --brand-dark-blue-10: rgba(0, 106, 169, 0.10);
+  --brand-dark-blue-15: rgba(0, 106, 169, 0.15);
+  --brand-dark-blue-20: rgba(0, 106, 169, 0.20);
+
+  /* Drupal Navy (18, 40, 95) */
+  --brand-navy-5:  rgba(18, 40, 95, 0.05);
+  --brand-navy-8:  rgba(18, 40, 95, 0.08);
+  --brand-navy-10: rgba(18, 40, 95, 0.10);
+  --brand-navy-15: rgba(18, 40, 95, 0.15);
+  --brand-navy-20: rgba(18, 40, 95, 0.20);
+
+  /* Drupal Light Blue (204, 237, 249) */
+  --brand-light-blue-5:  rgba(204, 237, 249, 0.05);
+  --brand-light-blue-8:  rgba(204, 237, 249, 0.08);
+  --brand-light-blue-10: rgba(204, 237, 249, 0.10);
+  --brand-light-blue-15: rgba(204, 237, 249, 0.15);
+  --brand-light-blue-20: rgba(204, 237, 249, 0.20);
+
+  /* Drupal Black (0, 0, 0) */
+  --brand-black-5:  rgba(0, 0, 0, 0.05);
+  --brand-black-8:  rgba(0, 0, 0, 0.08);
+  --brand-black-10: rgba(0, 0, 0, 0.10);
+  --brand-black-15: rgba(0, 0, 0, 0.15);
+  --brand-black-20: rgba(0, 0, 0, 0.20);
+
+  /* Drupal White (255, 255, 255) */
+  --brand-white-5:  rgba(255, 255, 255, 0.05);
+  --brand-white-8:  rgba(255, 255, 255, 0.08);
+  --brand-white-10: rgba(255, 255, 255, 0.10);
+  --brand-white-15: rgba(255, 255, 255, 0.15);
+  --brand-white-20: rgba(255, 255, 255, 0.20);
+
+  /* Drupal Purple (204, 186, 244) */
+  --brand-purple-5:  rgba(204, 186, 244, 0.05);
+  --brand-purple-8:  rgba(204, 186, 244, 0.08);
+  --brand-purple-10: rgba(204, 186, 244, 0.10);
+  --brand-purple-15: rgba(204, 186, 244, 0.15);
+  --brand-purple-20: rgba(204, 186, 244, 0.20);
+
+  /* Drupal Yellow (255, 196, 35) */
+  --brand-yellow-5:  rgba(255, 196, 35, 0.05);
+  --brand-yellow-8:  rgba(255, 196, 35, 0.08);
+  --brand-yellow-10: rgba(255, 196, 35, 0.10);
+  --brand-yellow-15: rgba(255, 196, 35, 0.15);
+  --brand-yellow-20: rgba(255, 196, 35, 0.20);
+
+  /* Drupal Red (244, 99, 81) */
+  --brand-red-5:  rgba(244, 99, 81, 0.05);
+  --brand-red-8:  rgba(244, 99, 81, 0.08);
+  --brand-red-10: rgba(244, 99, 81, 0.10);
+  --brand-red-15: rgba(244, 99, 81, 0.15);
+  --brand-red-20: rgba(244, 99, 81, 0.20);
+
+  /* Drupal Green (57, 118, 43) */
+  --brand-green-5:  rgba(57, 118, 43, 0.05);
+  --brand-green-8:  rgba(57, 118, 43, 0.08);
+  --brand-green-10: rgba(57, 118, 43, 0.10);
+  --brand-green-15: rgba(57, 118, 43, 0.15);
+  --brand-green-20: rgba(57, 118, 43, 0.20);
+
+  /* --------------------------------------------------------------------------
+   * 1.5 Olivero Theme — Blue Palette (HSL-based)
+   *
+   * These are the Olivero CMS theme tokens, built from
+   * HSL base hue 202, saturation 79%.
+   * ------------------------------------------------------------------------ */
+  --color--primary-30: hsl(202, 79%, 32%); /* #115E92 — loud text, headings   */
+  --color--primary-40: hsl(202, 79%, 38%); /* #1470AE — medium text, links    */
+  --color--primary-50: hsl(202, 79%, 50%); /* #1B8FE6 — interactive elements  */
+  --color--primary-60: hsl(202, 79%, 62%); /* #52AAEE — lighter interactions   */
+  --color--primary-80: hsl(202, 79%, 85%); /* #B8DCF6 — backgrounds, hilights */
+
+  /* --------------------------------------------------------------------------
+   * 1.6 Olivero Theme — Neutral Gray Palette
+   *
+   * Built from HSL base hue 201, saturation 15%.
+   * ------------------------------------------------------------------------ */
+  --color--gray-5:   hsl(201, 15%,  5%); /* #0B0D0E — darkest text          */
+  --color--gray-10:  hsl(201, 15%, 11%); /* #181C1E — near-black text       */
+  --color--gray-20:  hsl(201, 15%, 20%); /* #2B3135 — body text             */
+  --color--gray-45:  hsl(201, 15%, 44%); /* #5F6D76 — soft/muted text       */
+  --color--gray-60:  hsl(201, 15%, 57%); /* #7E8E98 — borders, dividers     */
+  --color--gray-65:  hsl(201, 15%, 63%); /* #8FA0AA — light borders         */
+  --color--gray-70:  hsl(201, 15%, 72%); /* #A8B5BD — disabled states       */
+  --color--gray-90:  hsl(201, 15%, 88%); /* #D8DEE2 — light backgrounds     */
+  --color--gray-95:  hsl(201, 15%, 93%); /* #E8ECEE — subtle backgrounds    */
+  --color--gray-100: hsl(201, 15%, 97%); /* #F5F6F7 — near-white backgrounds*/
+
+  /* --------------------------------------------------------------------------
+   * 1.7 Olivero Theme — Semantic / Accent Colors
+   * ------------------------------------------------------------------------ */
+  --color--red:   #E33F1E; /* Error states, destructive actions */
+  --color--gold:  #FDCA40; /* Warnings, highlights, accents     */
+  --color--green: #3FA21C; /* Success states, positive actions   */
+
+
+  /* ==========================================================================
+   * 2. GRADIENTS
+   * ==========================================================================
+   * The color palette can be combined into different gradients for exciting
+   * and fun combinations. These are a wonderful way to create a dynamic and
+   * vibrant element using the Drupal brand.
+   *
+   * Each gradient is provided at 135deg (diagonal) and 180deg (top-to-bottom).
+   * ========================================================================== */
+
+  /* --------------------------------------------------------------------------
+   * 2.1 Primary Gradients
+   * ------------------------------------------------------------------------ */
+
+  /* Blue -> Light Blue */
+  --gradient-blue-lightblue-135: linear-gradient(135deg, #009CDE, #CCEDF9);
+  --gradient-blue-lightblue-180: linear-gradient(180deg, #009CDE, #CCEDF9);
+
+  /* Navy -> Light Blue */
+  --gradient-navy-lightblue-135: linear-gradient(135deg, #12285F, #CCEDF9);
+  --gradient-navy-lightblue-180: linear-gradient(180deg, #12285F, #CCEDF9);
+
+  /* --------------------------------------------------------------------------
+   * 2.2 Secondary Gradients
+   * ------------------------------------------------------------------------ */
+
+  /* Blue -> Purple */
+  --gradient-blue-purple-135: linear-gradient(135deg, #009CDE, #CCBAF4);
+  --gradient-blue-purple-180: linear-gradient(180deg, #009CDE, #CCBAF4);
+
+  /* Blue -> Yellow */
+  --gradient-blue-yellow-135: linear-gradient(135deg, #009CDE, #FFC423);
+  --gradient-blue-yellow-180: linear-gradient(180deg, #009CDE, #FFC423);
+
+  /* --------------------------------------------------------------------------
+   * 2.3 Tertiary Gradients
+   * ------------------------------------------------------------------------ */
+
+  /* Purple -> Yellow */
+  --gradient-purple-yellow-135: linear-gradient(135deg, #CCBAF4, #FFC423);
+  --gradient-purple-yellow-180: linear-gradient(180deg, #CCBAF4, #FFC423);
+
+  /* Red -> Light Blue */
+  --gradient-red-lightblue-135: linear-gradient(135deg, #F46351, #CCEDF9);
+  --gradient-red-lightblue-180: linear-gradient(180deg, #F46351, #CCEDF9);
+
+
+  /* ==========================================================================
+   * 3. TYPOGRAPHY
+   * ==========================================================================
+   * Typographic system:
+   *   - ZT Gatha: headlines, subheads, H1 tags (Bold 700, Semi-Bold 600)
+   *   - Noto Sans: H2, eyebrows, body copy (Bold 700, Medium 500, Regular 400)
+   *
+   * When ZT Gatha does not support a language, use Noto Sans Bold as fallback.
+   * The Drupal wordmark is set in ZT Gatha — never retype it.
+   * ========================================================================== */
+
+  /* --------------------------------------------------------------------------
+   * 3.1 Font Families
+   * ------------------------------------------------------------------------ */
+  --font-heading:  "ZT Gatha", "Noto Sans", sans-serif;
+  --font-body:     "Noto Sans", sans-serif;
+
+  /* Olivero CMS theme fonts (different context — admin/default theme UI) */
+  --font-sans:  "Metropolis", sans-serif;
+  --font-serif: "Lora", "Georgia", serif;
+
+  /* --------------------------------------------------------------------------
+   * 3.2 Font Weights
+   *
+   * | Weight | Name      | Font         | Usage                        |
+   * |--------|-----------|--------------|------------------------------|
+   * | 700    | Bold      | ZT Gatha     | H1, headlines, subheads      |
+   * | 600    | Semi-Bold | ZT Gatha     | H1, headlines, subheads      |
+   * | 700    | Bold      | Noto Sans    | H2, eyebrows, sub-branding   |
+   * | 500    | Medium    | Noto Sans    | H2, eyebrows, body emphasis  |
+   * | 400    | Regular   | Noto Sans    | Body copy                    |
+   * ------------------------------------------------------------------------ */
+  --font-weight-regular:  400;
+  --font-weight-medium:   500;
+  --font-weight-semibold: 600;
+  --font-weight-bold:     700;
+
+  /* --------------------------------------------------------------------------
+   * 3.3 Font Size Scale
+   *
+   * Based on a 16px root with a modular scale for the brand hierarchy.
+   * Olivero base sizes included where relevant.
+   * ------------------------------------------------------------------------ */
+  --font-size-caption: 0.75rem;   /* 12px — captions, legal, fine print     */
+  --font-size-small:   0.875rem;  /* 14px — small text, metadata            */
+  --font-size-body:    1rem;      /* 16px — base body copy                  */
+  --font-size-body-lg: 1.125rem;  /* 18px — large body / lead text          */
+  --font-size-eyebrow: 0.875rem;  /* 14px — eyebrow / overline labels       */
+  --font-size-h3:      1.25rem;   /* 20px — subheadings                     */
+  --font-size-h2:      1.5rem;    /* 24px — section headings (Noto Sans)    */
+  --font-size-h1:      2.25rem;   /* 36px — page headings (ZT Gatha)        */
+  --font-size-display: 3rem;      /* 48px — hero / display headings         */
+
+  /* Olivero font sizes */
+  --font-size-base: 1rem;        /* 16px */
+  --font-size-l:    1.125rem;    /* 18px */
+  --font-size-s:    0.875rem;    /* 14px */
+  --font-size-xs:   0.8125rem;   /* 13px */
+  --font-size-xxs:  0.75rem;     /* 12px */
+
+  /* --------------------------------------------------------------------------
+   * 3.4 Line Heights
+   * ------------------------------------------------------------------------ */
+  --line-height-tight:   1.2;  /* Headings, display text    */
+  --line-height-snug:    1.35; /* Subheadings               */
+  --line-height-normal:  1.5;  /* Body copy                 */
+  --line-height-relaxed: 1.65; /* Large body, lead text     */
+
+  /* --------------------------------------------------------------------------
+   * 3.5 Letter Spacing
+   * ------------------------------------------------------------------------ */
+  --letter-spacing-tight:   -0.02em;  /* Display headings         */
+  --letter-spacing-normal:   0;       /* Body text (default)      */
+  --letter-spacing-wide:     0.04em;  /* Eyebrows, overlines      */
+  --letter-spacing-wider:    0.08em;  /* All-caps labels, buttons */
+
+
+  /* ==========================================================================
+   * 4. SPACING
+   * ==========================================================================
+   * Based on the Olivero spacing system.
+   * Base unit: 1.125rem (18px), referred to as --sp.
+   * ========================================================================== */
+
+  --sp:     1.125rem;     /* 18px   — base unit        */
+  --sp0-25: 0.28125rem;   /*  4.5px — quarter          */
+  --sp0-5:  0.5625rem;    /*  9px   — half             */
+  --sp0-75: 0.84375rem;   /* 13.5px — three-quarters   */
+  --sp1:    1.125rem;     /* 18px   — 1x               */
+  --sp1-5:  1.6875rem;    /* 27px   — 1.5x             */
+  --sp2:    2.25rem;      /* 36px   — 2x               */
+  --sp3:    3.375rem;     /* 54px   — 3x               */
+  --sp4:    4.5rem;       /* 72px   — 4x               */
+  --sp5:    5.625rem;     /* 90px   — 5x               */
+  --sp6:    6.75rem;      /* 108px  — 6x               */
+
+
+  /* ==========================================================================
+   * 5. BORDER RADIUS
+   * ==========================================================================
+   * Olivero default: 3px (0.1875rem).
+   * Extended scale for cards, buttons, GUI Blocks, and pill shapes.
+   * ========================================================================== */
+
+  --radius-sm:   0.1875rem;  /*  3px — Olivero default, inputs, small elements */
+  --radius-md:   0.375rem;   /*  6px — cards, containers                       */
+  --radius-lg:   0.75rem;    /* 12px — modals, large cards, GUI Blocks         */
+  --radius-xl:   1.5rem;     /* 24px — pills, tags, prominent cards            */
+  --radius-full: 9999px;     /* Full pill / circle                             */
+
+
+  /* ==========================================================================
+   * 6. SHADOWS
+   * ==========================================================================
+   * Elevation system for cards, dropdowns, modals, and interactive states.
+   * ========================================================================== */
+
+  --shadow-sm:        0 1px  3px rgba(0, 0, 0, 0.08),
+                      0 1px  2px rgba(0, 0, 0, 0.06);
+  --shadow-md:        0 4px  6px rgba(0, 0, 0, 0.07),
+                      0 2px  4px rgba(0, 0, 0, 0.06);
+  --shadow-lg:        0 10px 20px rgba(0, 0, 0, 0.10),
+                      0  4px  8px rgba(0, 0, 0, 0.06);
+  --shadow-blue-glow: 0  0  20px rgba(0, 156, 222, 0.35),
+                      0  0   6px rgba(0, 156, 222, 0.20);
+
+
+  /* ==========================================================================
+   * 7. LAYOUT
+   * ==========================================================================
+   * Core layout values from Olivero. Breakpoints are documented as comments
+   * since CSS custom properties cannot be used in @media queries.
+   *
+   * BREAKPOINTS (for reference — use in @media queries directly):
+   *   --bp-sm:   576px   (36rem)
+   *   --bp-md:   768px   (48rem)
+   *   --bp-lg:   1024px  (64rem)
+   *   --bp-xl:   1350px  (84.375rem)  — matches --max-width
+   *   --bp-xxl:  1570px  (98.125rem)  — matches --max-bg-color
+   *
+   * ========================================================================== */
+
+  --max-width:      84.375rem;  /* 1350px — maximum content width    */
+  --max-bg-color:   98.125rem;  /* 1570px — maximum background width */
+  --grid-col-count: 6;          /* Olivero grid column count         */
+  --grid-gap:       1.125rem;   /* 18px — matches --sp1              */
+
+
+  /* ==========================================================================
+   * 8. SEMANTIC TOKENS
+   * ==========================================================================
+   * Map raw brand colors to semantic usage. These are the tokens you should
+   * use in component styles — they describe *purpose*, not *appearance*.
+   * ========================================================================== */
+
+  /* --------------------------------------------------------------------------
+   * 8.1 Text Colors
+   * ------------------------------------------------------------------------ */
+  --color-text-primary:   var(--brand-navy);       /* Main body text             */
+  --color-text-secondary: var(--color--gray-20);   /* Secondary body text        */
+  --color-text-muted:     var(--color--gray-45);   /* De-emphasized text         */
+  --color-text-on-dark:   var(--brand-white);      /* Text on dark backgrounds   */
+  --color-text-on-blue:   var(--brand-white);      /* Text on Drupal Blue bg     */
+
+  /* --------------------------------------------------------------------------
+   * 8.2 Background Colors
+   * ------------------------------------------------------------------------ */
+  --color-bg-primary:   var(--brand-white);        /* Default page background    */
+  --color-bg-secondary: var(--color--gray-100);    /* Subtle alternate sections  */
+  --color-bg-card:      var(--brand-white);        /* Card / surface background  */
+  --color-bg-navy:      var(--brand-navy);         /* Dark branded sections      */
+  --color-bg-blue:      var(--brand-blue);         /* Blue branded sections      */
+
+  /* --------------------------------------------------------------------------
+   * 8.3 Border Colors
+   * ------------------------------------------------------------------------ */
+  --color-border:        var(--color--gray-90);    /* Default subtle border      */
+  --color-border-strong: var(--color--gray-60);    /* Emphasized border          */
+
+  /* --------------------------------------------------------------------------
+   * 8.4 Interactive Colors
+   * ------------------------------------------------------------------------ */
+  --color-link:       var(--brand-blue);           /* Default link color         */
+  --color-link-hover: var(--brand-dark-blue);      /* Link hover state           */
+
+  /* --------------------------------------------------------------------------
+   * 8.5 Accent & Status Colors
+   * ------------------------------------------------------------------------ */
+  --color-accent:  var(--brand-blue);              /* Primary accent / CTA       */
+  --color-success: var(--brand-green);             /* Success states             */
+  --color-warning: var(--brand-yellow);            /* Warning states             */
+  --color-error:   var(--brand-red);               /* Error / destructive states */
+
+
+  /* ==========================================================================
+   * 9. ANIMATION TOKENS
+   * ==========================================================================
+   * Standard transition durations and easing curves for consistent motion.
+   * ========================================================================== */
+
+  --transition-fast: 150ms;
+  --transition-base: 250ms;
+  --transition-slow: 400ms;
+
+  --ease-out:    cubic-bezier(0.0, 0.0, 0.2, 1.0);
+  --ease-in-out: cubic-bezier(0.4, 0.0, 0.2, 1.0);
+  --ease-in:     cubic-bezier(0.4, 0.0, 1.0, 1.0);
+
+  /* Shorthand transition helpers */
+  --transition-colors-fast: color var(--transition-fast) var(--ease-out),
+                            background-color var(--transition-fast) var(--ease-out),
+                            border-color var(--transition-fast) var(--ease-out);
+  --transition-colors-base: color var(--transition-base) var(--ease-out),
+                            background-color var(--transition-base) var(--ease-out),
+                            border-color var(--transition-base) var(--ease-out);
+  --transition-transform:   transform var(--transition-base) var(--ease-out);
+  --transition-opacity:     opacity var(--transition-base) var(--ease-out);
+}
+
+
+/* ============================================================================
+ * 10. W3C CONTRAST-SAFE PAIRINGS
+ * ============================================================================
+ * Per the brand guidelines, these text/background combinations meet W3C
+ * contrast compliance for visual accessibility.
+ *
+ * COLOR               SAFE TEXT COLORS ON THIS BACKGROUND
+ * --------------------------------------------------------------------------
+ * Drupal Blue bg      Black, White, Drupal Red
+ * Drupal Navy bg      Light Blue, White, Yellow
+ * Drupal Dark Blue bg Light Blue, White, Yellow
+ * Drupal Light Blue bg Navy, Dark Blue, Black
+ * Black bg            Blue, Light Blue, White, Yellow, Red, Green
+ * White bg            Blue, Navy, Dark Blue, Black, Purple
+ * Drupal Yellow bg    Navy, Dark Blue, Black, Purple
+ * Drupal Red bg       Black, White
+ * Drupal Purple bg    White, Yellow
+ * Drupal Green bg     Black, White
+ *
+ * GRADIENT RULES:
+ * - 50/50 gradients: text must be compliant with BOTH gradient colors.
+ * - Uneven gradients: text must be compliant with the color directly beneath.
+ *
+ * GREY NOTE:
+ * Grey is allowed in many applications. Always choose a W3C-compliant value.
+ * ============================================================================ */
+
+
+/* ============================================================================
+ * 11. LOGO (THE DROP)
+ * ============================================================================
+ *
+ * 11.1 ABOUT THE DROP
+ * The Drupal Drop represents the fluid nature of the open web. It creates a
+ * ripple that extends outward, creating an impact greater than its size.
+ *
+ * Drop anatomy:
+ *   - The Greater Drop: classic Drupal and its impact on the open web.
+ *   - The Community Drop: many parts coming together as a cohesive whole.
+ *   - The Individual Drop: individual contributions, immeasurable impact.
+ *
+ * 11.2 OFFICIAL SVG FILES
+ * Always use official logo files. Never retype or recreate the wordmark.
+ *
+ * Horizontal logos:
+ *   Drupal Logo_Horizontal_Blue.svg
+ *   Drupal Logo_Horizontal_Navy.svg
+ *   Drupal Logo_Horizontal_White.svg
+ *   Drupal Logo_Horizontal_Black.svg
+ *
+ * Vertical (stacked) logos:
+ *   Drupal Logo_Vertical_Blue.svg
+ *   Drupal Logo_Vertical_Navy.svg
+ *   Drupal Logo_Vertical_White.svg
+ *   Drupal Logo_Vertical_Black.svg
+ *
+ * Drop only:
+ *   Drupal Drop_Blue.svg
+ *   Drupal Drop_Navy.svg
+ *   Drupal Drop_White.svg
+ *   Drupal Drop_Black.svg
+ *
+ * Product logos (Drupal CMS):
+ *   Drupal Product Logo-CMS-Horizontal-Wordmark-Blue.svg
+ *   Drupal Product Logo-CMS-Horizontal-Wordmark-White.svg
+ *   Drupal Product Logo-CMS-Vertical-Wordmark-Blue.svg
+ *   Drupal Product Logo-CMS-Vertical-Wordmark-White.svg
+ *   Drupal Product Logo-CMS-Horizontal-No Wordmark-Blue.svg
+ *   Drupal Product Logo-CMS-Horizontal-No Wordmark-White.svg
+ *   Drupal Product Logo-CMS-Vertical-No Wordmark-Blue.svg
+ *   Drupal Product Logo-CMS-Vertical-No Wordmark-White.svg
+ *
+ * 11.3 APPROVED LOGO COLORS
+ * The Drop may only appear in: Drupal Blue, Drupal Navy, White, or Black.
+ *
+ *   Background          | Approved Logo Colors
+ *   --------------------|---------------------------------------------
+ *   Light backgrounds   | Drupal Blue, Drupal Navy, or Black
+ *   Navy / Black bg     | Drupal Blue and White only
+ *   Other dark bg       | White only
+ *   Gradients           | Navy, White, or Black (match gradient context)
+ *   Yellow bg           | Drupal Blue or Drupal Navy
+ *   Medium Blue bg      | White only
+ *
+ * 11.4 CLEARSPACE
+ * The logo must always have clearspace equal to the width of the
+ * Individual Drop within the Drupal Drop logo (the small inner drop).
+ *
+ * 11.5 LOGO MISUSE — DO NOT:
+ *   - Change the size relationship between Drop and wordmark
+ *   - Use non-approved colors
+ *   - Outline the logo
+ *   - Add drop shadow or glow effects
+ *   - Stretch or non-proportionally resize
+ *   - Rotate any part
+ *   - Retype the wordmark in another font
+ *   - Place on busy backgrounds or images
+ *   - Change opacity/transparency
+ *   - Use as a transparent window
+ *   - Integrate into other logos or marks
+ *   - Suggest endorsement without permission
+ *   - Create derivative works without DA approval
+ *
+ * ============================================================================ */
+
+
+/* ============================================================================
+ * 12. PHOTOGRAPHY & GRAPHIC ELEMENTS
+ * ============================================================================
+ *
+ * 12.1 PHOTOGRAPHY ATTRIBUTES
+ * The four key attributes of Drupal photography:
+ *   1. Warmth       — inviting, comfortable feeling
+ *   2. Cooperation  — people working together, collaboration
+ *   3. Diversity    — representative of the broad Drupal community
+ *   4. Friendliness — approachable, positive tone
+ *
+ * Photography style rules:
+ *   DO:    Use natural light, realistic settings, expressive bright colors.
+ *   DON'T: Use black & white, sepia, duotone, HDR, muting, or filters.
+ *
+ * Diversity & Inclusion:
+ *   Photography must represent people from a wide range of races, ethnicities,
+ *   ages, gender expressions, sexual orientations, and abilities.
+ *
+ * 12.2 GUI BLOCKS
+ * Inspired by classic computing GUI elements to create a dynamic,
+ * user-friendly visual system.
+ *
+ * Anatomy:
+ *   - Control Dots (0-3, unfilled, based on available space)
+ *   - GUI Block (main rounded rectangle)
+ *   - Line Shadow (shifted 45deg, within 3 line-widths of main block)
+ *
+ * Rules:
+ *   - Maximum 3 colors (including white) per GUI Block
+ *   - Color fills, line combinations, or image fills are allowed
+ *   - Shadow lines and control dots are optional
+ *   - No gradients inside a GUI Block
+ *   - Matching corners must have equal radii
+ *
+ * Construction:
+ *   1. Create a rectangle and round the corners
+ *   2. Duplicate and shift diagonally at 45deg (no closer/further than 3 line-widths)
+ *   3. Match inner/outer corner radii
+ *   4. Add control dots and shadow lines at 45deg
+ *
+ * Usage modes:
+ *   - As a FRAME: focus on 1-2 people, detail shots, impactful headlines
+ *   - As a WINDOW: more copy space, multiple images, pair bg color with theme
+ *
+ * Available files: Drupal GUI Block-01 through -05 (.svg and .png)
+ *
+ * 12.3 DROP WINDOW
+ * The Drupal Drop shape can be used as a clipping mask for photography or
+ * video. Size up sections of the Drop to create interesting window shapes.
+ *
+ * 12.4 DYNAMIC PATTERNS
+ * Official patterns only — do not create unapproved patterns.
+ *
+ *   Pattern 01: Diagonal crosshatch / grid
+ *   Pattern 02: Repeating small diamond / drop
+ *   Pattern 03: Repeating small Drupal drop icon
+ *   Pattern 04: Diagonal striped
+ *   Pattern 05: Organic / abstract flowing shapes
+ *   Pattern 06: Flowing wavy lines
+ *
+ * Available files: Drupal_Dynamic Patterns-01 through -06 (.svg)
+ *
+ * ============================================================================ */
+
+
+/* ============================================================================
+ * TRADEMARK NOTICE
+ * ============================================================================
+ * "Drupal" is a registered trademark of Dries Buytaert.
+ * Brand materials are copyright the Drupal Association.
+ * See: https://www.drupal.org/about/trademark
+ * ============================================================================ */
