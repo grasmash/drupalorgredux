@@ -346,10 +346,15 @@
     }
 
     .agents-section { padding: 5rem 0 6.5rem; background: linear-gradient(180deg, var(--drupal-navy) 0%, #0d2245 50%, var(--drupal-navy) 100%); color: #fff; }
-    /* Bring your own agent — editorial left-aligned */
-    .agents-byoa { max-width: 620px; }
+    /* Bring your own agent — full width two-column */
+    .agents-byoa {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center;
+    }
     .agents-logos-row {
       display: flex; align-items: center; gap: 1rem; margin-top: 1.5rem;
+    }
+    @media (max-width: 900px) {
+      .agents-byoa { grid-template-columns: 1fr; }
     }
     /* Ships with 22 — asymmetric right-heavy layout */
     .agents-builtin-header {
@@ -1018,7 +1023,7 @@
         <div class="vibe-content">
           <span class="section-label" style="color:var(--drupal-blue);">The vibe coding trap</span>
           <h2>Don't vibe your own CMS.<br><span class="highlight">Vibe with ours.</span></h2>
-          <p>Vibed software is a race car built for demo day. It's fast, it's sleek, it gets you from zero to launch in a weekend. But race cars weren't built for the highway.</p>
+          <p>Vibing a CMS from scratch is like building a house without an architect. The first floor looks great on Instagram. Then you try to add plumbing.</p>
           <p class="vibe-callout">At $1M ARR, vibed software hits a wall.</p>
           <p>Content models that seemed fine with 50 pages collapse at 5,000. The permission system you never built becomes a security incident. The "just ship it" API breaks every integration you've sold.</p>
           <p>Drupal is the production vehicle. 25 years of crash tests, security audits, and scale-proofing from organizations like Pfizer, The Economist, and NASA. You still get to vibe — Canvas AI, 22 agents, and MCP mean you move just as fast. You just don't have to rebuild the engine at Series B.</p>
@@ -1037,16 +1042,12 @@
         <p style="color:rgba(255,255,255,0.6);max-width:620px;margin:1rem auto 0;">Drupal is the only CMS designed to be a tool for external AI agents AND to ship its own agents built in.</p>
       </div>
 
-      <!-- Your agents — left-aligned editorial block -->
+      <!-- Your agents — two column -->
       <div class="agents-byoa reveal">
-        <h3 style="color:#fff;margin-bottom:0.75rem;">Your agents, our CMS</h3>
-        <p style="color:rgba(255,255,255,0.6);max-width:520px;margin:0 0 1.5rem;">Any MCP-compatible agent can connect to Drupal and operate it as a tool — read content models, create pages, manage media, respect permissions. No Drupal knowledge required.</p>
-        <div class="mcp-connect" style="max-width:440px;">
-          <span class="mcp-connect-label">Install:</span>
-          <code>composer require drupal/mcp && drush en mcp</code>
-          <button class="mcp-connect-copy" onclick="navigator.clipboard.writeText('composer require drupal/mcp && drush en mcp').then(()=>{this.textContent='Copied!';setTimeout(()=>this.textContent='Copy',2000)})">Copy</button>
-        </div>
-        <div class="agents-logos-row">
+        <div>
+          <h3 style="color:#fff;margin-bottom:0.75rem;">Your agents, our CMS</h3>
+          <p style="color:rgba(255,255,255,0.6);margin:0 0 1.5rem;">Any MCP-compatible agent can connect to Drupal and operate it as a tool — read content models, create pages, manage media, respect permissions. No Drupal knowledge required.</p>
+          <div class="agents-logos-row">
           <svg viewBox="0 0 24 24" width="20" height="20" fill="rgba(255,255,255,0.35)"><path d="M17.3041 3.541h-3.6718l6.696 16.918H24Zm-10.6082 0L0 20.459h3.7442l1.3693-3.5527h7.0052l1.3693 3.5528h3.7442L10.5363 3.5409Zm-.3712 10.2232 2.2914-5.9456 2.2914 5.9456Z"/></svg>
           <svg viewBox="0 0 24 24" width="20" height="20" fill="rgba(255,255,255,0.35)"><path d="M11.503.131 1.891 5.678a.84.84 0 0 0-.42.726v11.188c0 .3.162.575.42.724l9.609 5.55a1 1 0 0 0 .998 0l9.61-5.55a.84.84 0 0 0 .42-.724V6.404a.84.84 0 0 0-.42-.726L12.497.131a1.01 1.01 0 0 0-.996 0M2.657 6.338h18.55c.263 0 .43.287.297.515L12.23 22.918c-.062.107-.229.064-.229-.06V12.335a.59.59 0 0 0-.295-.51l-9.11-5.257c-.109-.063-.064-.23.061-.23"/></svg>
           <svg viewBox="0 0 24 24" width="20" height="20" fill="rgba(255,255,255,0.35)"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
@@ -1054,6 +1055,15 @@
           <svg viewBox="0 0 24 24" width="20" height="20" fill="rgba(255,255,255,0.35)"><path d="M11.04 19.32Q12 21.51 12 24q0-2.49.93-4.68.96-2.19 2.58-3.81t3.81-2.55Q21.51 12 24 12q-2.49 0-4.68-.93a12.3 12.3 0 0 1-3.81-2.58 12.3 12.3 0 0 1-2.58-3.81Q12 2.49 12 0q0 2.49-.96 4.68-.93 2.19-2.55 3.81a12.3 12.3 0 0 1-3.81 2.58Q2.49 12 0 12q2.49 0 4.68.96 2.19.93 3.81 2.55t2.55 3.81"/></svg>
           <svg viewBox="0 0 24 24" width="20" height="20" fill="rgba(255,255,255,0.35)"><path d="M2 1.5A1.5 1.5 0 0 1 3.5 0h7A1.5 1.5 0 0 1 12 1.5V8H3.5A1.5 1.5 0 0 1 2 6.5ZM12 8h8.5A1.5 1.5 0 0 1 22 9.5v5a1.5 1.5 0 0 1-1.5 1.5H12ZM2 17.5A1.5 1.5 0 0 1 3.5 16H12v6.5a1.5 1.5 0 0 1-1.5 1.5h-7A1.5 1.5 0 0 1 2 22.5Z"/></svg>
           <span style="font-size:0.75rem;color:rgba(255,255,255,0.25);margin-left:0.25rem;">+ any MCP client</span>
+          </div>
+        </div>
+        <div>
+          <div class="mcp-connect">
+            <span class="mcp-connect-label">Install:</span>
+            <code>composer require drupal/mcp && drush en mcp</code>
+            <button class="mcp-connect-copy" onclick="navigator.clipboard.writeText('composer require drupal/mcp && drush en mcp').then(()=>{this.textContent='Copied!';setTimeout(()=>this.textContent='Copy',2000)})">Copy</button>
+          </div>
+          <p style="font-size:0.8rem;color:rgba(255,255,255,0.35);margin-top:0.75rem;">Agents connect to <code style="font-family:var(--mono);color:var(--drupal-light);">https://yoursite.com/_mcp</code></p>
         </div>
       </div>
 
