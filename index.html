@@ -411,7 +411,7 @@
     }
     .matrix-canvas {
       position: absolute; inset: 0; z-index: 0; pointer-events: none;
-      opacity: 0.15;
+      opacity: 0.4;
     }
     .structured-section > .container { position: relative; z-index: 1; }
     .structured-section .section-label { color: var(--drupal-light); }
@@ -1378,74 +1378,98 @@
       // Initial call
       onScroll();
 
-      // ===== I. Matrix Rain Background =====
-      (function() {
-        var canvas = document.getElementById('matrixCanvas');
-        if (!canvas) return;
-        var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        if (prefersReduced) return;
+      // ===== I. Matrix Rain Background (ported from Memnos) =====
+      var matrixCanvas = document.getElementById('matrixCanvas');
+      if (matrixCanvas && !prefersReducedMotion) {
+        var mCtx = matrixCanvas.getContext('2d');
+        var greekChars = '\u0391\u0392\u0393\u0394\u0395\u0396\u0397\u0398\u0399\u039A\u039B\u039C\u039D\u039E\u039F\u03A0\u03A1\u03A3\u03A4\u03A5\u03A6\u03A7\u03A8\u03A9\u03B1\u03B2\u03B3\u03B4\u03B5\u03B6\u03B7\u03B8\u03B9\u03BA\u03BB\u03BC\u03BD\u03BE\u03BF\u03C0\u03C1\u03C3\u03C4\u03C5\u03C6\u03C7\u03C8\u03C90123456789';
+        var easterEggs = '\u2666\u2B21\u2B22a\u00E6\u0251';
+        var allChars = greekChars + greekChars + greekChars + easterEggs;
+        var mFontSize = 16;
+        var mColumns, mDrops;
+        var matrixSection = matrixCanvas.parentElement;
+        var matrixVisible = false;
 
-        var ctx = canvas.getContext('2d');
-        var section = canvas.closest('.structured-section');
-        var chars = ['0','1','A','P','I','M','C','P','J','S','O','N','{','}','n','o','d','e','f','i','e','l','d'];
-        var fontSize = 11;
-        var columns = 0;
-        var drops = [];
-        var speeds = [];
-        var animId = null;
-        var isVisible = false;
-
-        function resizeCanvas() {
-          canvas.width = section.offsetWidth;
-          canvas.height = section.offsetHeight;
-          columns = Math.floor(canvas.width / fontSize);
-          drops = [];
-          speeds = [];
-          for (var i = 0; i < columns; i++) {
-            drops[i] = Math.random() * canvas.height / fontSize;
-            speeds[i] = 0.3 + Math.random() * 0.7;
-          }
+        function drawDrupalDrop(x, y, size) {
+          mCtx.save();
+          mCtx.translate(x, y);
+          mCtx.scale(size / 20, size / 20);
+          mCtx.beginPath();
+          mCtx.moveTo(0, -10);
+          mCtx.bezierCurveTo(-2, -6, -8, 2, -8, 6);
+          mCtx.bezierCurveTo(-8, 11, -4, 14, 0, 14);
+          mCtx.bezierCurveTo(4, 14, 8, 11, 8, 6);
+          mCtx.bezierCurveTo(8, 2, 2, -6, 0, -10);
+          mCtx.closePath();
+          mCtx.fillStyle = 'rgba(6, 120, 190, 0.7)';
+          mCtx.fill();
+          mCtx.strokeStyle = 'rgba(135, 206, 250, 0.9)';
+          mCtx.lineWidth = 0.8;
+          mCtx.stroke();
+          mCtx.restore();
         }
 
-        function draw() {
-          ctx.fillStyle = 'rgba(244, 243, 240, 0.05)';
-          ctx.fillRect(0, 0, canvas.width, canvas.height);
-          ctx.fillStyle = '#009CDE';
-          ctx.font = fontSize + 'px monospace';
+        function matrixResize() {
+          matrixCanvas.width = matrixSection.offsetWidth;
+          matrixCanvas.height = matrixSection.offsetHeight;
+          mColumns = Math.floor(matrixCanvas.width / mFontSize);
+          mDrops = [];
+          for (var i = 0; i < mColumns; i++) mDrops.push(Math.random() * -100);
+        }
 
-          for (var i = 0; i < columns; i++) {
-            var text = chars[Math.floor(Math.random() * chars.length)];
-            var x = i * fontSize;
-            var y = drops[i] * fontSize;
-            ctx.globalAlpha = Math.max(0, 1 - (y / canvas.height) * 0.8);
-            ctx.fillText(text, x, y);
-            drops[i] += speeds[i];
-            if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-              drops[i] = 0;
+        function matrixDraw() {
+          mCtx.fillStyle = 'rgba(10, 26, 58, 0.06)';
+          mCtx.fillRect(0, 0, matrixCanvas.width, matrixCanvas.height);
+
+          for (var i = 0; i < mColumns; i++) {
+            var char = allChars[Math.floor(Math.random() * allChars.length)];
+            var x = i * mFontSize;
+            var y = mDrops[i] * mFontSize;
+            var isEgg = easterEggs.indexOf(char) !== -1;
+            var brightness = Math.random();
+
+            if (isEgg) {
+              mCtx.fillStyle = 'rgba(100, 200, 255, 0.95)';
+              mCtx.font = 'bold ' + (mFontSize + 2) + 'px monospace';
+            } else if (brightness > 0.95) {
+              mCtx.fillStyle = 'rgba(135, 206, 250, 0.9)';
+              mCtx.font = 'bold ' + mFontSize + 'px monospace';
+            } else {
+              mCtx.fillStyle = 'rgba(0, 156, 222, ' + (0.15 + brightness * 0.35) + ')';
+              mCtx.font = mFontSize + 'px monospace';
             }
-          }
-          ctx.globalAlpha = 1;
-          if (isVisible) {
-            animId = requestAnimationFrame(draw);
+
+            if (Math.random() > 0.997) {
+              drawDrupalDrop(x + mFontSize / 2, y, mFontSize * 1.2);
+            } else {
+              mCtx.fillText(char, x, y);
+            }
+
+            if (y > matrixCanvas.height && Math.random() > 0.985) {
+              mDrops[i] = 0;
+            }
+            mDrops[i] += 0.3 + Math.random() * 0.4;
           }
         }
 
-        resizeCanvas();
-        window.addEventListener('resize', resizeCanvas);
+        matrixResize();
+        window.addEventListener('resize', matrixResize);
 
+        var matrixInterval;
         var matrixObs = new IntersectionObserver(function(entries) {
           entries.forEach(function(e) {
-            if (e.isIntersecting) {
-              isVisible = true;
-              if (!animId) animId = requestAnimationFrame(draw);
-            } else {
-              isVisible = false;
-              if (animId) { cancelAnimationFrame(animId); animId = null; }
+            if (e.isIntersecting && !matrixVisible) {
+              matrixVisible = true;
+              matrixResize();
+              matrixInterval = setInterval(matrixDraw, 45);
+            } else if (!e.isIntersecting && matrixVisible) {
+              matrixVisible = false;
+              clearInterval(matrixInterval);
             }
           });
         }, { threshold: 0 });
-        matrixObs.observe(section);
-      })();
+        matrixObs.observe(matrixSection);
+      }
 
       // ===== J. Fuse Animation =====
       var fuseObs = new IntersectionObserver(function(entries) {
