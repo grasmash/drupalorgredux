@@ -11,9 +11,20 @@
   <link rel="stylesheet" href="https://new.drupal.org/assets/css/css_ChRsPMNjgzCRgvIBqaH1-DjMQX-7nnoo82zVL-EM4rc.css">
   <link rel="stylesheet" href="https://new.drupal.org/assets/css/css_V629T-vzSWFKYElkDUrqEcBuf3Oz5eE_kG0PgaRM26g.css">
   <style>
-    /* Override drupal.org header for our page */
+    /* Override drupal.org header/footer for our page */
     #header { position: fixed; top: 3px; left: 0; right: 0; z-index: 100; }
+    #header .header__inner { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
     .hero { padding-top: 120px; }
+    /* Fix icon fonts — load from drupal.org */
+    @font-face {
+      font-family: 'drupal-icons';
+      src: url('https://new.drupal.org/themes/contrib/bluecheese/fonts/icons/drupal-icons.woff2') format('woff2');
+      font-display: swap;
+    }
+    .icon-arrow-right::before { font-family: 'drupal-icons'; }
+    /* Fix footer container */
+    #footer .footer__primary-section,
+    #footer .footer__secondary-section { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
     @font-face {
       font-family: 'ZT Gatha';
       src: url('assets/fonts/zt-gatha-web/ZTGatha-SemiBold.woff2') format('woff2');
