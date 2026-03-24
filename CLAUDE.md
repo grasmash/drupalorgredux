@@ -32,6 +32,21 @@ See `ai-design-tells.md` for full research. Key rules:
 - Colors: Navy #0a1a3a, Blue #009CDE, Dark Blue #006AA9, Light Blue #CCEDF9
 - See `brand-guidelines.md` and `brand-tokens.css` for full spec
 
+## Verification Gates
+
+Before declaring any pixel-perfect work "done", run the verification agent:
+
+```
+Agent: verify-pixel-perfect
+```
+
+This agent fetches drupal.org's live CSS, compares every property against ours, and returns PASS or FAIL. Do NOT claim completion until it returns PASS. The workflow is:
+
+1. Make fixes
+2. Run verify-pixel-perfect agent
+3. If FAIL → fix the reported mismatches, go to step 2
+4. If PASS → commit, push, mark task complete
+
 ## Key URLs
 
 - GitHub Pages: https://grasmash.github.io/drupalorgredux/

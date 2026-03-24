@@ -281,7 +281,7 @@
     }
     /* Nav container — navy bg */
     #footer .footer__nav-container {
-      display: flex; flex-direction: column; gap: 40px;
+      display: flex; flex-direction: column; gap: 40px; margin: 0;
       padding: 48px 1rem 28px;
       background-color: #12285F;
     }
@@ -289,7 +289,10 @@
       #footer .footer__nav-container { padding-left: 2rem; }
     }
     @media (min-width: 1024px) {
-      #footer .footer__nav-container { width: 55%; }
+      #footer .footer__nav-container { flex-direction: row; width: 55%; padding-top: 64px; padding-bottom: 96px; }
+    }
+    @media (min-width: 1330px) {
+      #footer .footer__nav-container { width: 66%; padding-left: 112px; }
     }
     #footer .footer__drupal-logo svg { width: 185px; height: auto; }
     #footer .footer__drupal-logo svg path { fill: #fff; }
@@ -299,6 +302,9 @@
     }
     @media (min-width: 1024px) {
       #footer .footer__menu { padding-top: 25px; }
+    }
+    @media (min-width: 1330px) {
+      #footer .footer__menu { padding-top: 30px; grid-template-columns: 1fr 1fr; }
     }
     #footer .footer__menu-item a {
       display: block; padding-bottom: 20px; text-decoration: none;
@@ -313,6 +319,9 @@
     }
     @media (min-width: 1024px) {
       #footer .footer__social-container { justify-content: center; width: 45%; }
+    }
+    @media (min-width: 1330px) {
+      #footer .footer__social-container { width: 34%; }
     }
     #footer .footer__social-menu {
       list-style: none; display: grid;
@@ -338,16 +347,21 @@
     @media (min-width: 768px) {
       #footer .footer__secondary-section { padding-left: 2rem; }
     }
-    @media (min-width: 1024px) {
+    @media (min-width: 1330px) {
       #footer .footer__secondary-section {
         flex-direction: row; justify-content: space-between; align-items: flex-start;
+        padding-left: 112px; padding-right: 112px;
       }
     }
     #footer .footer__sponsorship {
       display: flex; flex-direction: column; gap: 0.25rem;
     }
-    @media (min-width: 1024px) {
-      #footer .footer__sponsorship { width: 55%; }
+    @media (min-width: 1330px) {
+      #footer .footer__sponsorship {
+        display: grid; grid-template-columns: max-content 1fr;
+        column-gap: 32px; align-self: center; width: 66%;
+      }
+      #footer .footer__sponsorship-logo { width: fit-content; grid-column: 1; grid-row: 1 / span 2; }
     }
     #footer .footer__sponsorship-logo img { height: 22px; }
     #footer .footer__sponsorship-management,
@@ -355,14 +369,20 @@
       font-size: 14px; line-height: 1.6; text-decoration: none; color: #12285F;
     }
     #footer .footer__sponsorship-management { font-weight: 600; }
+    @media (min-width: 1330px) {
+      #footer .footer__sponsorship-management { grid-column: 2; grid-row: 1; }
+    }
     #footer .footer__sponsorship-support { font-weight: 400; }
+    @media (min-width: 1330px) {
+      #footer .footer__sponsorship-support { grid-column: 2; grid-row: 2; }
+    }
     #footer .footer__sponsorship-support span { text-decoration: underline; }
     #footer .footer__copyright {
       padding-top: 48px; font-size: 14px; font-weight: 400;
       line-height: 1.6; color: #12285F;
     }
-    @media (min-width: 1024px) {
-      #footer .footer__copyright { width: 45%; padding-top: 0; }
+    @media (min-width: 1330px) {
+      #footer .footer__copyright { width: 34%; padding-top: 0; text-align: right; }
     }
     #footer .footer__copyright a { color: #12285F; text-decoration: underline; }
     #footer .footer__copyright-year { margin-top: 0.25rem; }
