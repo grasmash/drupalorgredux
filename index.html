@@ -310,6 +310,33 @@
       overflow: hidden; clip: rect(0,0,0,0); clip-path: inset(50%);
       white-space: nowrap; border: 0; padding: 0; margin: -1px;
     }
+    /* ---- Header dark mode (for overlay on dark backgrounds) ---- */
+    #header[data-mode="dark"] {
+      background: transparent; box-shadow: none; border-color: transparent;
+    }
+    #header[data-mode="dark"] .drupal-logo.drupal-navy svg path { fill: #fff; }
+    #header[data-mode="dark"] .menu-main__link--level-1 { color: #fff; }
+    #header[data-mode="dark"] .menu-main__link--level-1.support-drupal { border-color: rgba(255,255,255,0.5); }
+    #header[data-mode="dark"] .menu-main__link--level-1.support-drupal::after {
+      filter: brightness(0) invert(1);
+    }
+    #header[data-mode="dark"] .menu-main__link--has-children::after { background-color: #fff; }
+    #header[data-mode="dark"] .menu__link--has-children::after { background-color: #fff; }
+    #header[data-mode="dark"] .header-search-button__icon {
+      filter: brightness(0) invert(1);
+    }
+    #header[data-mode="dark"] .header-user-menu__picture { filter: brightness(0) invert(1); }
+    #header[data-mode="dark"] .button--primary,
+    #header[data-mode="dark"] .button.button--primary {
+      background: #fff; color: #12285F; border-color: #fff;
+    }
+    #header[data-mode="dark"] .button--primary:hover {
+      background: transparent; color: #fff; border-color: #fff;
+    }
+    #header[data-mode="dark"] .icon-arrow-right::before { color: inherit; }
+    #header[data-mode="dark"] .header__nav-section { border-bottom-color: transparent; }
+    #header[data-mode="dark"] .🍔-menu-toggle svg { color: #fff; }
+
     /* Hero padding */
     .hero { padding-top: 6rem; }
     /* Responsive — matches drupal.org 1330px breakpoint */
@@ -1420,7 +1447,7 @@
   <!-- Scroll progress bar -->
   <div class="scroll-progress-track"><div class="scroll-progress" id="scrollProgress"></div></div>
 
-  <header id="header" class="header l-section-container">
+  <header id="header" class="header l-section-container" data-mode="dark">
     <div class="header__nav-section">
       <button data-component-id="bluecheese:header-search-button" class="header-search-button header__mobile-search-button" aria-expanded="false" aria-controls="">
   <span class="visually-hidden">Search</span>
