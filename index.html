@@ -603,10 +603,11 @@
     .proof-featured {
       display: flex; gap: 1.25rem;
       max-width: 900px; margin: 0 auto;
+      align-items: stretch;
     }
     .proof-featured-item {
       background: var(--bg-alt); padding: 2rem; border-radius: 8px;
-      flex: 1; min-width: 0; min-height: 180px;
+      flex: 1; min-width: 0; max-height: 200px;
       transition: flex 0.4s ease, box-shadow 0.4s;
       cursor: default; overflow: hidden;
     }
@@ -624,7 +625,7 @@
       transition: font-size 0.4s;
     }
     .proof-featured:hover .proof-featured-item:hover .proof-featured-stat {
-      font-size: 2.5rem;
+      font-size: 2rem;
     }
     .proof-featured-desc {
       font-size: 0.88rem; color: var(--text-secondary); line-height: 1.5;
@@ -1014,7 +1015,7 @@
           <h1 class="animate animate-d1">The best CMS for <span class="highlight-on-dark">agents</span> to use.</h1>
           <p class="hero-subhead animate animate-d2">Two decades of structured content, API-first architecture, and granular governance — exactly the foundation AI agents need. 22 ship out of the box. Any MCP-compatible agent can connect.</p>
           <div class="hero-actions animate animate-d3">
-            <a href="https://new.drupal.org/drupal-cms/launcher" class="btn btn-primary btn-lg">Download the desktop app</a>
+            <a href="https://new.drupal.org/drupal-cms/launcher" class="btn btn-primary btn-lg os-download">Download the desktop app</a>
             <a href="#terminal" class="hero-inline-link">Or use the terminal &darr;</a>
           </div>
         </div>
@@ -1496,7 +1497,7 @@
         <div class="cta-path reveal">
           <h3>Desktop App</h3>
           <p>Download and double-click. Full Drupal CMS running locally on your machine.</p>
-          <a href="https://new.drupal.org/drupal-cms/launcher" class="btn btn-primary" style="width:100%;">Download for Mac</a>
+          <a href="https://new.drupal.org/drupal-cms/launcher" class="btn btn-primary os-download" style="width:100%;">Download for Mac</a>
           <div class="time">Ready in 3 minutes</div>
         </div>
         <div class="cta-path reveal">
@@ -1584,6 +1585,21 @@
       var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 
+
+      // ===== OS Detection for download buttons =====
+      (function() {
+        var ua = navigator.userAgent;
+        var os = 'your OS';
+        if (ua.indexOf('Mac') !== -1) os = 'macOS';
+        else if (ua.indexOf('Win') !== -1) os = 'Windows';
+        else if (ua.indexOf('Linux') !== -1) os = 'Linux';
+
+        document.querySelectorAll('.os-download').forEach(function(btn) {
+          if (os === 'macOS') btn.textContent = btn.textContent.replace(/Download.*/, 'Download for Mac');
+          else if (os === 'Windows') btn.textContent = btn.textContent.replace(/Download.*/, 'Download for Windows');
+          else if (os === 'Linux') btn.textContent = btn.textContent.replace(/Download.*/, 'Download for Linux');
+        });
+      })();
 
       // ===== A. Scroll-triggered reveals with staggered delays for grid children =====
       var revealObserver = new IntersectionObserver(function(entries) {
