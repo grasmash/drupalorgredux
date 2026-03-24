@@ -11,23 +11,31 @@
   <style>
     /* ============ HEADER ============ */
     #header {
-      position: absolute; z-index: 100;
+      position: absolute; z-index: 2;
       top: 0; left: 1rem; right: 1rem;
-      max-width: 1780px; margin: 20px auto 0;
+      max-width: 1780px; height: auto; margin: 20px auto 0;
       padding: 13.5px 25px 0;
-      background: #fff; border-radius: 10px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      border: solid 1px transparent; border-radius: 10px;
+      background: #fff;
+      box-shadow: 0 2px 10px 0 rgba(0,0,0,0.05);
       font-family: 'Noto Sans', sans-serif;
+      transition: border-radius 0.2s linear;
     }
     #header * { box-sizing: border-box; }
     /* Main flex container: logo left, nav center, actions right */
     #header .header__nav-section {
-      display: flex; align-items: center; gap: 8px;
+      display: flex; align-items: center;
       padding-bottom: 13.5px;
       border-bottom: 1px solid transparent;
     }
     @media (min-width: 1330px) {
-      #header .header__nav-section { column-gap: 28px; }
+      #header .header__nav-section { column-gap: 12px; }
+    }
+    @media (min-width: 1400px) {
+      #header .header__nav-section { column-gap: 20px; }
+    }
+    @media (min-width: 1920px) {
+      #header .header__nav-section { column-gap: 40px; }
     }
     /* Logo */
     #header .header-logo { display: flex; align-items: center; flex-shrink: 0; order: 1; margin: auto; }
@@ -45,18 +53,26 @@
     /* Main nav */
     #header .main-navigation { flex: 1; display: flex; justify-content: center; order: 2; }
     /* Top-level menu list */
-    #header .menu-main--level-1 { display: flex; align-items: center; gap: 28px; list-style: none; margin: 0; padding: 0; }
+    #header .menu-main--level-1 { display: flex; align-items: center; gap: 12px; list-style: none; margin: 0; padding: 0; }
+    @media (min-width: 1400px) {
+      #header .menu-main--level-1 { gap: 20px; }
+    }
+    @media (min-width: 1920px) {
+      #header .menu-main--level-1 { gap: 40px; }
+    }
     #header .menu-main__item { position: relative; }
     /* Level 1 links & buttons */
     #header .menu-main__link--level-1 {
-      display: inline-flex; align-items: center;
+      display: block;
       padding: 16px 0; font-size: 12px; font-weight: 700;
-      text-transform: uppercase; letter-spacing: 1.5px;
+      text-transform: uppercase; letter-spacing: 1.5px; line-height: normal;
       color: #12285F; text-decoration: none; border: none; background: none;
       cursor: pointer; white-space: nowrap;
-      font-family: 'Noto Sans', sans-serif;
+      font-family: inherit;
     }
-    #header .menu-main__link--level-1:hover { color: #009CDE; }
+    @media (min-width: 1330px) {
+      #header .menu-main__link--level-1 { padding: 8px 0; }
+    }
     /* Support Drupal pill */
     #header .menu-main__link--level-1.support-drupal {
       border: 1px solid #12285F; border-radius: 999px; padding: 8px 16px;
@@ -70,11 +86,8 @@
     /* Dropdown panels (submenu wrapper) */
     #header .menu-main__submenu-wrapper {
       display: none; position: absolute; top: 100%; left: 0;
-      min-width: 700px; padding: 16px 25px 32px;
-      background: #fff; border-radius: 0 0 10px 10px;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
-      border: solid 1px transparent; border-top: 0;
-      z-index: 50;
+      width: 100%; z-index: 2;
+      overflow: clip;
     }
     #header:has([aria-expanded="true"]) {
       border-bottom-right-radius: 0; border-bottom-left-radius: 0;
@@ -85,11 +98,13 @@
     #header .menu-main__link--level-1[aria-expanded="true"] + .menu-main__submenu-wrapper {
       display: block;
     }
-    /* Sub-menu list */
-    #header .menu-main--level-2 { list-style: none; margin: 0; padding: 0; }
-    /* Dropdown links */
+    /* Sub-menu list — row layout on desktop matching drupal.org */
     #header .menu-main--level-2 {
-      display: flex; flex-direction: column; gap: 16px;
+      display: flex; flex-direction: row; flex-wrap: wrap;
+      gap: 32px; list-style: none; margin: 0;
+      padding: 32px 25px;
+      background: #fff; border: solid 1px transparent; border-top: 0;
+      border-radius: 0 0 10px 10px;
     }
     #header .menu-main__link--level-2 {
       display: block; padding: 0; font-size: 18px; font-weight: 700;
@@ -109,9 +124,11 @@
     #header .search-drawer { display: none; padding: 16px 25px; border-top: 1px solid #eee; }
     /* Search button */
     #header .header-search-button {
-      width: 44px; height: 44px; border: none; background: none; cursor: pointer;
-      border-radius: 50%; transition: background-color 0.2s;
+      position: relative; width: 44px; height: 44px;
+      border: 1px solid transparent; background: transparent; color: inherit;
+      border-radius: 50%; margin: 0 -10px;
       padding: 8px; display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
     }
     #header .header-search-button:hover { background-color: transparent; }
     #header .header-search-button__icon {
@@ -138,12 +155,12 @@
       #header .header-user-menu { display: flex; }
     }
     #header .header-user-menu__button {
-      width: 44px; height: 44px; border: none; background: none; cursor: pointer;
+      width: 44px; height: 44px; border: 1px solid transparent; background: transparent; color: inherit;
       display: flex; align-items: center; justify-content: center;
-      margin: 0 -10px; padding: 0; border-radius: 50%;
+      margin: 0 -10px; padding: 0; border-radius: 50%; cursor: pointer;
     }
     #header .header-user-menu__button:hover { background: transparent; }
-    #header .header-user-menu__picture { width: 40px; height: 40px; object-fit: cover; border-radius: 50%; }
+    #header .header-user-menu__picture { display: block; max-width: 40px; max-height: 40px; object-fit: cover; border-radius: 50%; }
     /* User menu dropdown */
     #header .header-user-menu .menu--level-1 {
       display: none; position: absolute; top: calc(100% + 13.5px); left: 50%;
@@ -179,7 +196,8 @@
     #header .button.button--primary {
       display: inline-flex; align-items: center; gap: 6px;
       padding: 1rem 1.25rem; background: #12285F; color: #fff;
-      border: solid 3px #12285F; border-radius: 6px; font-size: 12px; font-weight: 600;
+      border: solid 3px #12285F; border-radius: 6px; font-size: 14px; font-weight: 500;
+      line-height: 1rem; width: fit-content;
       cursor: pointer; text-decoration: none; white-space: nowrap;
       font-family: 'Noto Sans', sans-serif;
       transition: background 0.2s, transform 0.15s;
@@ -209,17 +227,19 @@
     }
     #header .icon-arrow-right::before {
       font-family: 'fontello' !important;
-      content: '\e802'; float: right; padding-left: 6px;
+      content: '\e802'; float: right; padding-left: 0.5rem; font-size: 1rem; font-weight: 600; line-height: 1rem;
     }
-    /* Chevron on dropdown buttons */
+    /* Chevron on dropdown buttons — hidden on desktop per drupal.org */
     #header .menu-main__link--has-children::after {
-      content: ''; display: inline-block; width: 12px; height: 12px; margin-left: 6px;
+      content: ''; display: none; width: 16px; height: 16px; margin-right: 12px; float: right;
       background-color: #12285F;
       mask-image: url('assets/drupal-theme/chevron-down.svg');
       mask-repeat: no-repeat; mask-size: contain;
       -webkit-mask-image: url('assets/drupal-theme/chevron-down.svg');
       -webkit-mask-repeat: no-repeat; -webkit-mask-size: contain;
-      transition: transform 0.2s;
+    }
+    @media (max-width: 1329px) {
+      #header .menu-main__link--has-children::after { display: inline-block; }
     }
     #header .menu__link--has-children::after {
       content: ''; display: inline-block; width: 12px; height: 12px; margin-left: 6px;
@@ -242,10 +262,9 @@
     .hero { padding-top: 6rem; }
     /* Responsive — matches drupal.org 1330px breakpoint */
     @media (max-width: 1329px) {
-      #header { padding: 10px 16px; }
       #header .main-navigation { display: none; }
       #header .search-drawer { display: none; }
-      #header .🍔-menu-toggle { display: block; border: none; background: none; cursor: pointer; padding: 8px; }
+      #header .🍔-menu-toggle { display: block; width: 35px; height: 35px; margin: 0; padding: 0; border: none; background: transparent; cursor: pointer; }
     }
 
     /* ============ FOOTER ============ */
