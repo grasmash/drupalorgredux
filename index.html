@@ -12,9 +12,20 @@
   <link rel="stylesheet" href="https://new.drupal.org/assets/css/css_V629T-vzSWFKYElkDUrqEcBuf3Oz5eE_kG0PgaRM26g.css">
   <style>
     /* Override drupal.org header/footer for our page */
-    #header { position: fixed; top: 3px; left: 0; right: 0; z-index: 100; }
+    #header { position: fixed; top: 3px; left: 0; right: 0; z-index: 100; overflow: hidden; }
     #header .header__inner { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+    @media (max-width: 900px) {
+      #header { overflow: visible; }
+      #header .header__inner { padding: 0 1rem; }
+      #header .menu-main { display: none; }
+      #header .header__secondary-menu { display: none; }
+    }
     .hero { padding-top: 120px; }
+    /* Header hover effects */
+    #header .menu-main__link--level-1 { transition: color 0.2s, opacity 0.2s; }
+    #header .menu-main__link--level-1:hover { opacity: 0.7; }
+    #header .button--primary { transition: background-color 0.2s, transform 0.15s; }
+    #header .button--primary:hover { transform: translateY(-1px); }
     /* Fix icon fonts — load from drupal.org */
     @font-face {
       font-family: 'drupal-icons';
@@ -2869,6 +2880,8 @@
       });
     });
   </script>
+  <!-- Drupal.org header/footer JS for dropdown menus -->
+  <script src="https://new.drupal.org/assets/js/js_2oEUfD5z_v6cpFxm43ABfkfttqlgClI6I5xjiAimxEk.js?scope=header&delta=0&language=en&theme=bluecheese"></script>
 
 </body>
 </html>
