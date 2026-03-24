@@ -130,15 +130,29 @@ Known past bugs to watch for:
 - [ ] Footer: two-column at desktop (nav 55-66%, social 34-45%)
 - [ ] Footer secondary: side-by-side at >=1330px
 
-### Phase 5: BEHAVIOR AUDIT — Check interactions
+### Phase 5: BEHAVIOR AUDIT — Click every interactive element and screenshot
 
-Check the JavaScript at the bottom of index.html:
-- [ ] Dropdown toggle: clicking nav buttons toggles aria-expanded and shows/hides submenu
-- [ ] Only one dropdown open at a time (clicking one closes others)
-- [ ] Click outside closes dropdowns
-- [ ] Search drawer toggle works
-- [ ] Support Drupal click opens its dropdown (not navigating away)
-- [ ] Get Started click opens its dropdown
+Do NOT just read the JS code. Actually CLICK each element using headless Chrome and verify visually.
+
+For each test, create a temp copy of index.html with an injected auto-click:
+```bash
+cp /Users/matthewgrasmick/Sites/drupalorgredux/index.html /tmp/test-click-X.html
+echo '<script>setTimeout(()=>{document.querySelector("SELECTOR").click()},500)</script>' >> /tmp/test-click-X.html
+"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless --disable-gpu --screenshot=/tmp/click-X.png --window-size=1600,500 --virtual-time-budget=3000 --run-all-compositor-stages-before-draw "file:///tmp/test-click-X.html"
+```
+
+Tests to run:
+- [ ] Click `.menu-main__link--level-1` (Discover Drupal) → dropdown opens with full-width submenu items in row layout
+- [ ] Click `.support-drupal` → dropdown opens showing Association, Member, Partner, Donate links
+- [ ] Click `.header-search__desktop-button` → search drawer opens below header with search input
+- [ ] Click `.block-bluecheese-secondarymenu .button--primary` → dropdown opens with Try Drupal CMS, Try hosting
+
+Read each screenshot and verify the dropdown/drawer actually appeared with correct content.
+
+Also test net-new page elements:
+- [ ] Terminal copy button works (click `.cta-dev-terminal-copy`)
+- [ ] MCP connect copy button works (click `.mcp-connect-copy`)
+- [ ] Canvas tab switching works (click `.canvas-option[data-tab="2"]`)
 
 ### Phase 6: CSS VALUE AUDIT — Property comparison
 
