@@ -3269,13 +3269,30 @@
       });
     });
     // Toggle search drawer
-    var searchBtn = document.querySelector('.header__search-button');
-    var searchDrawer = document.querySelector('.search-drawer');
-    if (searchBtn && searchDrawer) {
-      searchDrawer.style.display = 'none';
-      searchBtn.addEventListener('click', function() {
-        var open = searchDrawer.style.display !== 'none';
-        searchDrawer.style.display = open ? 'none' : 'block';
+    var searchDesktopBtn = document.querySelector('.header-search__desktop-button');
+    var searchDrawerEl = document.querySelector('.header-search__drawer');
+    if (searchDesktopBtn && searchDrawerEl) {
+      searchDesktopBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        var isOpen = searchDrawerEl.style.visibility === 'visible';
+        // Close any open nav dropdowns first
+        document.querySelectorAll('#header button[aria-expanded="true"]').forEach(function(btn) {
+          if (btn !== searchDesktopBtn) {
+            btn.setAttribute('aria-expanded', 'false');
+            var panel = btn.nextElementSibling;
+            if (panel) panel.style.display = 'none';
+          }
+        });
+        if (isOpen) {
+          searchDrawerEl.style.visibility = 'hidden';
+          searchDrawerEl.style.height = '0';
+          searchDrawerEl.style.paddingBlock = '0';
+        } else {
+          searchDrawerEl.style.visibility = 'visible';
+          searchDrawerEl.style.height = 'auto';
+          searchDrawerEl.style.paddingBlock = '16px';
+        }
+        searchDesktopBtn.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
       });
     }
     // Close dropdowns on outside click
@@ -3286,7 +3303,11 @@
           var panel = btn.nextElementSibling;
           if (panel) panel.style.display = 'none';
         });
-        if (searchDrawer) searchDrawer.style.display = 'none';
+        if (searchDrawerEl) {
+          searchDrawerEl.style.visibility = 'hidden';
+          searchDrawerEl.style.height = '0';
+          searchDrawerEl.style.paddingBlock = '0';
+        }
       }
     });
   </script>
