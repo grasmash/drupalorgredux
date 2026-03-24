@@ -16,16 +16,46 @@ You are a strict QA agent. Your job is to verify that the header and footer in i
 
 ## CRITICAL: What previous versions of this agent got wrong
 
-Previous versions ONLY compared CSS property values. This missed:
-- Elements that were styled correctly but **not visible** (hidden by parent)
-- Elements that were **missing entirely** from the HTML (heart icon)
-- **Layout issues** (centered vs left-aligned) caused by flex properties
-- **Interaction bugs** (click behavior, dropdown positioning)
-- **Icon/asset issues** (wrong side, wrong size, missing)
+Version 1 ONLY compared CSS property values. It missed elements that were invisible, missing, or broken.
+Version 2 checked code structure but never RENDERED the page. It missed:
+- CSS specificity conflicts (mask-image from chevron rule bleeding into heart ::after)
+- Positioning context bugs (position:relative on parent changing width:100% meaning)
+- Any visual issue that requires seeing the actual rendered output
 
-You MUST check all of these categories, not just CSS values.
+**YOU MUST TAKE SCREENSHOTS.** Use headless Chrome:
+```bash
+"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless --disable-gpu --screenshot=/tmp/verify-screenshot.png --window-size=1600,900 "file:///Users/matthewgrasmick/Sites/drupalorgredux/index.html"
+```
+Then read the screenshot with the Read tool and visually inspect it.
 
 ## Process
+
+### Phase 0: SCREENSHOT — Actually look at the page
+
+This is the most important phase. Take a screenshot and visually inspect it.
+
+```bash
+"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless --disable-gpu --screenshot=/tmp/verify-header.png --window-size=1600,200 "file:///Users/matthewgrasmick/Sites/drupalorgredux/index.html"
+```
+
+Read the screenshot with the Read tool. Check:
+- Is the search magnifying glass icon visible?
+- Is the heart icon on Support Drupal visible?
+- Is the Get Started button the right size with arrow on right?
+- Are nav items left-aligned (not centered)?
+- Does everything look proportionally correct?
+
+If anything is visually wrong, FAIL immediately and describe what you see.
+
+Also take a full-page screenshot:
+```bash
+"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless --disable-gpu --screenshot=/tmp/verify-full.png --window-size=1600,3000 "file:///Users/matthewgrasmick/Sites/drupalorgredux/index.html"
+```
+
+Check the footer:
+- Is the social section showing the purple gradient?
+- Is the secondary section light blue?
+- Are social icons 60x60?
 
 ### Phase 1: Fetch drupal.org ground truth (HTML + CSS)
 
@@ -76,6 +106,19 @@ Critical checks:
 - User menu: shown at >=1330px?
 - Secondary menu (Get Started): shown at >=1330px?
 - Support Drupal pill styling: only at >=1330px?
+
+### Phase 3.5: CSS CASCADE AUDIT — Check for specificity conflicts
+
+For elements with MULTIPLE classes that have ::after or ::before pseudo-elements, check if rules from different selectors conflict:
+
+1. Find all elements that have 2+ classes with CSS rules targeting the same pseudo-element
+2. For each, list ALL properties from ALL matching rules, ordered by specificity
+3. Check if a lower-specificity rule sets a property (like mask-image) that the higher-specificity rule doesn't explicitly clear
+4. Check positioning context: does any parent with `position: relative` change the meaning of `width: 100%` or `top: 100%` on positioned children?
+
+Known past bugs to watch for:
+- `.menu-main__link--has-children::after` sets `mask-image` that bleeds into `.support-drupal::after`
+- `.menu-main__item { position: relative }` changes containing block for dropdown wrappers
 
 ### Phase 4: LAYOUT AUDIT — Check alignment and flow
 
