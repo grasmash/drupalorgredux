@@ -551,13 +551,18 @@
     .provider-logo:hover::after { opacity: 1; transform: translateX(-50%) translateY(0); }
 
     /* Drupal AI Initiative */
-    .initiative-section { padding: 4rem 0 5rem; background: var(--bg); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .initiative-section {
+      padding: 4.5rem 0 5rem; background: var(--drupal-navy); color: #fff;
+    }
+    .initiative-section .section-label { color: var(--drupal-light); }
+    .initiative-section h2 { color: #fff; }
+    .initiative-section h2 .highlight { color: var(--drupal-light); }
     .initiative-inner {
       max-width: 900px; margin: 0 auto; text-align: center;
     }
     .initiative-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; margin-top: 2.5rem; }
-    .initiative-stat-number { font-family: var(--font-heading); font-size: 2.5rem; font-weight: 700; background: var(--gradient-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-    .initiative-stat-label { font-size: 0.9rem; color: var(--text-secondary); margin-top: 0.25rem; }
+    .initiative-stat-number { font-family: var(--font-heading); font-size: 2.5rem; font-weight: 700; color: var(--drupal-light); }
+    .initiative-stat-label { font-size: 0.9rem; color: rgba(255,255,255,0.5); margin-top: 0.25rem; }
     .initiative-quote {
       margin-top: 3rem; padding: 2rem; padding-left: 3.5rem; background: var(--bg); border: none;
       border-radius: 8px; box-shadow: var(--shadow-sm);
@@ -582,12 +587,12 @@
       display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem;
     }
     .sponsor-name {
-      font-size: 0.75rem; font-weight: 500; color: var(--text-muted);
-      padding: 0.3rem 0.75rem; border: 1px solid var(--border);
-      border-radius: 999px; background: var(--bg); transition: all 0.2s;
+      font-size: 0.75rem; font-weight: 500; color: rgba(255,255,255,0.45);
+      padding: 0.3rem 0.75rem; border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 999px; background: rgba(255,255,255,0.04); transition: all 0.2s;
     }
-    .sponsor-name:hover { border-color: var(--drupal-blue); color: var(--drupal-blue); }
-    .sponsor-founding { font-weight: 700; color: var(--text-secondary); border-color: var(--border-strong); }
+    .sponsor-name:hover { border-color: rgba(0,156,222,0.4); color: var(--drupal-light); }
+    .sponsor-founding { font-weight: 700; color: rgba(255,255,255,0.6); border-color: rgba(255,255,255,0.15); }
 
     /* Proven at scale — case studies */
     .growth-section { padding: 5.5rem 0 4rem; background: var(--bg); }
@@ -609,6 +614,10 @@
     }
     .proof-featured-main {
       background: var(--bg-alt); padding: 2.5rem; border-radius: 8px;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .proof-featured-main:hover {
+      transform: translateY(-3px); box-shadow: var(--shadow-lg);
     }
     .proof-featured-stat {
       font-family: var(--font-heading); font-size: 2.5rem; font-weight: 700;
@@ -622,6 +631,15 @@
     }
     .proof-featured-card {
       background: var(--bg-alt); padding: 1.5rem; border-radius: 8px; flex: 1;
+      transition: transform 0.3s, box-shadow 0.3s, flex 0.4s;
+      cursor: default;
+    }
+    .proof-featured-card:hover {
+      transform: scale(1.04); box-shadow: var(--shadow-lg);
+      z-index: 1; position: relative;
+    }
+    .proof-featured-card:hover img {
+      opacity: 0.9; filter: none;
     }
     .proof-featured-card p {
       font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5; margin-top: 0.75rem;
@@ -1443,7 +1461,7 @@
           </div>
         </div>
         <div class="initiative-sponsors reveal" style="margin-top:2.5rem;">
-          <div style="font-size:0.7rem;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);margin-bottom:1rem;">Founding &amp; Gold Partners</div>
+          <div style="font-size:0.7rem;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,255,255,0.3);margin-bottom:1rem;">Founding &amp; Gold Partners</div>
           <div class="sponsor-grid">
             <span class="sponsor-name sponsor-founding">1xINTERNET</span>
             <span class="sponsor-name sponsor-founding">Acquia</span>
@@ -1463,7 +1481,7 @@
             <span class="sponsor-name">+10 more</span>
           </div>
         </div>
-        <a href="https://www.drupal.org/about/starshot/initiatives/ai" style="display:inline-block;margin-top:1.5rem;font-size:0.95rem;font-weight:600;color:var(--drupal-blue);">Learn more about the AI Initiative &rarr;</a>
+        <a href="https://www.drupal.org/about/starshot/initiatives/ai" style="display:inline-block;margin-top:1.5rem;font-size:0.95rem;font-weight:600;color:var(--drupal-light);">Learn more about the AI Initiative &rarr;</a>
       </div>
     </div>
   </section>
