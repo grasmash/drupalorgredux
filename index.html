@@ -1379,6 +1379,40 @@
       padding: 0.75rem; display: flex; flex-direction: column; gap: 0.5rem;
     }
     .canvas-mockup-block { border-radius: 4px; }
+
+    /* Canvas lightbox */
+    .canvas-image-group img { cursor: zoom-in; }
+    #canvas-lightbox {
+      position: fixed; inset: 0; z-index: 9999;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(0,0,0,0.82);
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+    #canvas-lightbox.is-open {
+      opacity: 1; pointer-events: auto;
+    }
+    #canvas-lightbox img {
+      max-width: calc(100vw - 4rem);
+      max-height: calc(100vh - 4rem);
+      border-radius: 8px;
+      box-shadow: 0 8px 48px rgba(0,0,0,0.6);
+      display: block;
+      transform: scale(0.96);
+      transition: transform 0.25s ease;
+    }
+    #canvas-lightbox.is-open img {
+      transform: scale(1);
+    }
+    #canvas-lightbox-close {
+      position: absolute; top: 1.25rem; right: 1.5rem;
+      background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.25);
+      color: #fff; font-size: 1.4rem; line-height: 1;
+      width: 2.5rem; height: 2.5rem; border-radius: 50%;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      transition: background 0.15s;
+    }
+    #canvas-lightbox-close:hover { background: rgba(255,255,255,0.22); }
   </style>
 </head>
 <body>
@@ -2469,7 +2503,7 @@
               <img src="assets/canvas-ai.webp" alt="Canvas AI page generation" style="width:100%;border-radius:8px;box-shadow:var(--shadow);margin-top:0.75rem;">
             </div>
             <div class="canvas-image-group" data-for="2" style="display:none;">
-              <img src="assets/canvas-editor.png" alt="Canvas visual editor with layers and preview" style="width:100%;border-radius:8px;box-shadow:var(--shadow);">
+              <img src="assets/canvas-react-editor.png" alt="Drupal Canvas in-browser code editor showing React JSX components" style="width:100%;border-radius:8px;box-shadow:var(--shadow);">
             </div>
             <div class="canvas-image-group" data-for="3" style="display:none;">
               <img src="assets/jsonapi-query-builder.png" alt="JSON:API Query Builder" style="width:100%;border-radius:8px;box-shadow:var(--shadow);">
@@ -3283,6 +3317,41 @@
         });
       });
     });
+
+    // Canvas lightbox
+    (function() {
+      var lightbox = document.getElementById('canvas-lightbox');
+      var lightboxImg = document.getElementById('canvas-lightbox-img');
+      var closeBtn = document.getElementById('canvas-lightbox-close');
+
+      function openLightbox(src, alt) {
+        lightboxImg.src = src;
+        lightboxImg.alt = alt || '';
+        lightbox.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeLightbox() {
+        lightbox.classList.remove('is-open');
+        document.body.style.overflow = '';
+      }
+
+      document.querySelectorAll('.canvas-image-group img').forEach(function(img) {
+        img.addEventListener('click', function() {
+          openLightbox(img.src, img.alt);
+        });
+      });
+
+      closeBtn.addEventListener('click', closeLightbox);
+
+      lightbox.addEventListener('click', function(e) {
+        if (e.target === lightbox) closeLightbox();
+      });
+
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') closeLightbox();
+      });
+    })();
   </script>
   <!-- Vanilla JS fallback for drupal.org header interactions -->
   <script>
@@ -3334,6 +3403,12 @@
       }
     });
   </script>
+
+  <!-- Canvas lightbox overlay -->
+  <div id="canvas-lightbox" role="dialog" aria-modal="true" aria-label="Image preview">
+    <button id="canvas-lightbox-close" aria-label="Close">&times;</button>
+    <img id="canvas-lightbox-img" src="" alt="">
+  </div>
 
 </body>
 </html>
