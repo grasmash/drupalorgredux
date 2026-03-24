@@ -32,7 +32,7 @@
       #header .header__nav-section { column-gap: 28px; }
     }
     /* Logo */
-    #header .header-logo { display: flex; align-items: center; flex-shrink: 0; order: 1; margin: auto; }
+    #header .header-logo { margin: auto; }
     @media (min-width: 1330px) {
       #header .header-logo { margin: 0 12px 0 0; }
     }
@@ -45,7 +45,7 @@
     /* Hamburger — hidden on desktop */
     #header .🍔-menu-toggle { display: none; }
     /* Main nav */
-    #header .main-navigation { flex: 1; display: flex; order: 2; }
+    #header .main-navigation { flex: 1; display: flex; }
     /* Top-level menu list */
     #header .menu-main--level-1 { display: flex; align-items: center; gap: 12px; list-style: none; margin: 0; padding: 0; }
     @media (min-width: 1400px) {
@@ -148,15 +148,17 @@
     }
     #header .header-search-button:hover { background-color: transparent; }
     #header .header-search-button__icon {
-      display: block; width: 28px; height: 28px;
+      position: absolute; inset: 0;
+      width: 28px; height: 28px;
+      display: block; margin: auto;
       background-color: #12285F;
       mask-image: url('assets/drupal-theme/magnifying-glass.svg');
       mask-position: center; mask-repeat: no-repeat; mask-size: contain;
       -webkit-mask-image: url('assets/drupal-theme/magnifying-glass.svg');
       -webkit-mask-position: center; -webkit-mask-repeat: no-repeat; -webkit-mask-size: contain;
+      pointer-events: none;
     }
-    /* Search button — positioned right, after nav */
-    #header .header-search-button { order: 3; }
+    /* Search button — positioned by source order, after nav */
     /* Desktop search button hidden below 1330px (mobile search button shown instead) */
     #header .header-search__desktop-button { display: none; }
     @media (min-width: 1330px) {
@@ -165,7 +167,7 @@
     }
     /* Right side — user menu + get started (secondary menu) */
     #header .header-user-menu {
-      position: relative; display: none; align-items: center; gap: 12px; flex-shrink: 0; order: 4;
+      position: relative; display: none;
     }
     @media (min-width: 1330px) {
       #header .header-user-menu { display: flex; }
@@ -198,7 +200,7 @@
     #header .header-user-menu .menu__link:hover { color: #006AA9; }
     /* Secondary menu (Get Started button area) */
     #header .block-bluecheese-secondarymenu {
-      position: relative; display: none; flex-shrink: 0; order: 5;
+      position: relative; display: none;
     }
     @media (min-width: 1330px) {
       #header .block-bluecheese-secondarymenu { display: block; }
@@ -1962,7 +1964,7 @@
 <nav data-component-id="bluecheese:header-user-menu" class="header-user-menu" aria-labelledby="user-menu">
   <h2 id="user-menu" class="visually-hidden">User menu</h2>
   <button class="header-user-menu__button" aria-expanded="false" aria-labelledby="user-menu">
-          <img class="header-user-menu__picture" src="https://new.drupal.org/themes/contrib/bluecheese/images/user.svg" alt>
+          <img class="header-user-menu__picture" src="assets/drupal-theme/user.svg" alt>
         
   </button>
   
