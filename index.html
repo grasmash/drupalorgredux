@@ -606,15 +606,14 @@
     }
     .proof-featured-item {
       background: var(--bg-alt); padding: 2rem; border-radius: 8px;
-      flex: 1; min-width: 0;
-      transition: flex 0.4s ease, box-shadow 0.4s, padding 0.4s;
+      flex: 1; min-width: 0; min-height: 180px;
+      transition: flex 0.4s ease, box-shadow 0.4s;
       cursor: default; overflow: hidden;
     }
     .proof-featured-item:first-child { flex: 1.6; }
     .proof-featured:hover .proof-featured-item { flex: 0.8; }
     .proof-featured:hover .proof-featured-item:hover {
       flex: 2.5; box-shadow: var(--shadow-lg);
-      padding: 2.5rem;
     }
     .proof-featured:hover .proof-featured-item:hover img {
       opacity: 0.9; filter: none;
@@ -1414,12 +1413,12 @@
           <p class="proof-featured-desc">Across 48 brands worldwide on their CANVAS Drupal multisite platform.</p>
         </div>
         <div class="proof-featured-item">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Pfizer_%282021%29.svg/250px-Pfizer_%282021%29.svg.png" alt="Pfizer" height="18" style="filter:grayscale(1);opacity:0.5;">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Pfizer_%282021%29.svg/250px-Pfizer_%282021%29.svg.png" alt="Pfizer" height="26" style="filter:grayscale(1);opacity:0.5;">
           <p class="proof-featured-stat">~500 sites</p>
           <p>Mandates open source contribution from all agency partners.</p>
         </div>
         <div class="proof-featured-item">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/The_Economist_Logo.svg/250px-The_Economist_Logo.svg.png" alt="The Economist" height="18" style="filter:grayscale(1);opacity:0.5;">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/The_Economist_Logo.svg/250px-The_Economist_Logo.svg.png" alt="The Economist" height="26" style="filter:grayscale(1);opacity:0.5;">
           <p class="proof-featured-stat">20M+ readers</p>
           <p>On Drupal since 2010. Funded the open-sourcing of Drupal's Migrate module.</p>
         </div>
