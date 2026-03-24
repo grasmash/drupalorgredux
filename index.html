@@ -134,9 +134,31 @@
       position: absolute; top: 100%; left: 0; width: 100%;
       display: flex; align-items: center;
       visibility: hidden; height: 0; overflow: clip;
-      padding: 0 25px;
+      padding-block: 0; padding-inline: 25px;
+      interpolate-size: allow-keywords;
       background: #fff; border: solid 1px transparent; border-top: 0;
       border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;
+      transition: height 0.1s linear, padding 0.1s linear, visibility 0.1s linear;
+    }
+    #header .header-search-button[aria-expanded="true"] + .header-search__drawer {
+      visibility: visible; height: auto;
+    }
+    #header .header-search__inner { max-width: 750px; margin-inline: auto; width: 100%; display: flex; align-items: center; }
+    /* Search form styling inside drawer */
+    #header .header-search__drawer .form-item__label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); }
+    #header .header-search__drawer .form-text {
+      width: 100%; padding: 12px 16px; border: 2px solid #e7ebf3; border-radius: 6px;
+      font-size: 1rem; font-family: 'Noto Sans', sans-serif; color: #12285F;
+      outline: none; transition: border-color 0.2s;
+    }
+    #header .header-search__drawer .form-text:focus { border-color: #009CDE; }
+    #header .header-search__drawer .form-text::placeholder { color: #a2acbe; }
+    #header .header-search__drawer input[type="submit"] {
+      width: 40px; height: 40px; border: solid 1px transparent;
+      background-color: transparent;
+      background-image: url('assets/drupal-theme/magnifying-glass.svg');
+      background-repeat: no-repeat; background-position: center; background-size: 24px;
+      font-size: 0; cursor: pointer; flex-shrink: 0; margin-left: 8px;
     }
     /* Search button */
     #header .header-search-button {
@@ -148,10 +170,28 @@
     }
     #header .header-search-button:hover { background-color: transparent; }
     #header .header-search-button__icon {
-      display: block; width: 28px; height: 28px;
+      position: absolute; inset: 0; width: 28px; height: 28px;
+      display: block; margin: auto;
       background-image: url('assets/drupal-theme/magnifying-glass.svg');
       background-size: contain; background-repeat: no-repeat; background-position: center;
       pointer-events: none;
+    }
+    /* When expanded, transform icon into X close button */
+    #header .header-search-button[aria-expanded="true"] .header-search-button__icon {
+      background: none;
+    }
+    #header .header-search-button[aria-expanded="true"] .header-search-button__icon::before,
+    #header .header-search-button[aria-expanded="true"] .header-search-button__icon::after {
+      position: absolute; top: calc(50% - 1px); left: 0;
+      height: 0; width: 100%;
+      border-top: solid 2px currentColor;
+      content: "";
+    }
+    #header .header-search-button[aria-expanded="true"] .header-search-button__icon::before {
+      transform: rotate(45deg);
+    }
+    #header .header-search-button[aria-expanded="true"] .header-search-button__icon::after {
+      transform: rotate(-45deg);
     }
     /* Search button — positioned by source order, after nav */
     /* Desktop search button hidden below 1330px (mobile search button shown instead) */
@@ -3246,30 +3286,32 @@
   </script>
   <!-- Vanilla JS fallback for drupal.org header interactions -->
   <script>
-    // Toggle dropdowns
+    // Toggle dropdowns (exclude search button — handled separately via CSS)
+    var searchDesktopBtn = document.querySelector('.header-search__desktop-button');
     document.querySelectorAll('#header button[aria-expanded]').forEach(function(btn) {
+      if (btn === searchDesktopBtn) return; // skip — search uses CSS-driven toggle
       btn.addEventListener('click', function(e) {
         var expanded = btn.getAttribute('aria-expanded') === 'true';
         // Close all others first
         document.querySelectorAll('#header button[aria-expanded="true"]').forEach(function(other) {
-          if (other !== btn) {
+          if (other !== btn && other !== searchDesktopBtn) {
             other.setAttribute('aria-expanded', 'false');
             var otherPanel = other.nextElementSibling;
             if (otherPanel) otherPanel.style.display = 'none';
           }
         });
+        // Also close search drawer if open
+        if (searchDesktopBtn) searchDesktopBtn.setAttribute('aria-expanded', 'false');
         btn.setAttribute('aria-expanded', expanded ? 'false' : 'true');
         var panel = btn.nextElementSibling;
         if (panel) panel.style.display = expanded ? 'none' : 'block';
       });
     });
-    // Toggle search drawer
-    var searchDesktopBtn = document.querySelector('.header-search__desktop-button');
-    var searchDrawerEl = document.querySelector('.header-search__drawer');
-    if (searchDesktopBtn && searchDrawerEl) {
+    // Toggle search drawer (CSS-driven via aria-expanded)
+    if (searchDesktopBtn) {
       searchDesktopBtn.addEventListener('click', function(e) {
         e.stopPropagation();
-        var isOpen = searchDrawerEl.style.visibility === 'visible';
+        var isOpen = searchDesktopBtn.getAttribute('aria-expanded') === 'true';
         // Close any open nav dropdowns first
         document.querySelectorAll('#header button[aria-expanded="true"]').forEach(function(btn) {
           if (btn !== searchDesktopBtn) {
@@ -3278,15 +3320,6 @@
             if (panel) panel.style.display = 'none';
           }
         });
-        if (isOpen) {
-          searchDrawerEl.style.visibility = 'hidden';
-          searchDrawerEl.style.height = '0';
-          searchDrawerEl.style.paddingBlock = '0';
-        } else {
-          searchDrawerEl.style.visibility = 'visible';
-          searchDrawerEl.style.height = 'auto';
-          searchDrawerEl.style.paddingBlock = '16px';
-        }
         searchDesktopBtn.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
       });
     }
@@ -3298,11 +3331,6 @@
           var panel = btn.nextElementSibling;
           if (panel) panel.style.display = 'none';
         });
-        if (searchDrawerEl) {
-          searchDrawerEl.style.visibility = 'hidden';
-          searchDrawerEl.style.height = '0';
-          searchDrawerEl.style.paddingBlock = '0';
-        }
       }
     });
   </script>
