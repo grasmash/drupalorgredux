@@ -904,6 +904,23 @@
     }
     .canvas-text h2 { margin-bottom: 1rem; }
     .canvas-text > p { margin-bottom: 2rem; }
+    .canvas-momentum {
+      margin: 1.5rem 0 2rem; padding: 1.25rem; border-radius: 6px;
+      background: var(--bg); border: 1px solid var(--border);
+    }
+    .canvas-momentum-lead {
+      font-family: var(--font-heading); font-size: 1rem; font-weight: 600;
+      color: var(--drupal-navy); margin-bottom: 0.75rem;
+    }
+    .canvas-momentum-stats {
+      display: flex; gap: 1.5rem; flex-wrap: wrap;
+    }
+    .canvas-momentum-stats span {
+      font-size: 0.8rem; color: var(--text-secondary);
+    }
+    .canvas-momentum-stats strong {
+      color: var(--drupal-blue); font-weight: 700;
+    }
     .canvas-options { display: flex; flex-direction: column; gap: 1.5rem; }
     .canvas-option {
       display: flex; gap: 1rem; align-items: flex-start;
@@ -1321,6 +1338,14 @@
           <span class="section-label">Canvas AI</span>
           <h2>The modern visual page builder for <span class="highlight">humans and agents</span>.</h2>
           <p>Start with a site template. Edit visually with drag-and-drop or let an AI agent build pages from a prompt. Under the hood, it's React — no PHP required.</p>
+          <div class="canvas-momentum">
+            <p class="canvas-momentum-lead">This isn't the Drupal you remember.</p>
+            <div class="canvas-momentum-stats">
+              <span><strong>3x</strong> contribution growth since 2019</span>
+              <span><strong>Drupal CMS 2.0</strong> shipped Jan 2026</span>
+              <span><strong>Canvas 1.0</strong> shipped Feb 2026</span>
+            </div>
+          </div>
           <div class="canvas-options">
             <div class="canvas-option active" data-tab="1">
               <span class="canvas-option-num">01</span>
