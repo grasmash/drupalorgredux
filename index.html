@@ -22,24 +22,24 @@
     #header * { box-sizing: border-box; }
     /* Main flex container: logo left, nav center, actions right */
     #header .header__nav-section {
-      display: flex; align-items: center; justify-content: space-between;
+      display: flex; align-items: center; gap: 8px;
     }
     /* Logo */
-    #header .header-logo { display: flex; align-items: center; flex-shrink: 0; }
+    #header .header-logo { display: flex; align-items: center; flex-shrink: 0; order: 1; }
     #header .drupal-logo { display: inline-flex; align-items: center; text-decoration: none; }
     #header .drupal-logo svg { height: 40px; width: auto; }
     #header .drupal-logo.drupal-navy svg path { fill: #0a1929; }
     /* Hamburger — hidden on desktop */
     #header .🍔-menu-toggle { display: none; }
-    /* Main nav (the <nav> block) */
-    #header .main-navigation { flex: 1; display: flex; justify-content: center; }
+    /* Main nav */
+    #header .main-navigation { flex: 1; display: flex; justify-content: center; order: 2; }
     /* Top-level menu list */
     #header .menu-main--level-1 { display: flex; align-items: center; gap: 0; list-style: none; margin: 0; padding: 0; }
     #header .menu-main__item { position: relative; }
     /* Level 1 links & buttons */
     #header .menu-main__link--level-1 {
       display: inline-flex; align-items: center;
-      padding: 8px 14px; font-size: 0.72rem; font-weight: 700;
+      padding: 8px 12px; font-size: 0.68rem; font-weight: 700;
       text-transform: uppercase; letter-spacing: 0.06em;
       color: #0a1929; text-decoration: none; border: none; background: none;
       cursor: pointer; white-space: nowrap;
@@ -91,10 +91,11 @@
       background-image: url('assets/drupal-theme/magnifying-glass.svg');
       background-size: contain; background-repeat: no-repeat; background-position: center;
     }
-    /* Search button — visible on all sizes */
+    /* Search button — positioned right, after nav */
+    #header .header-search-button { order: 3; }
     /* Right side — user menu + get started (secondary menu) */
     #header .header-user-menu {
-      display: flex; align-items: center; gap: 12px; flex-shrink: 0;
+      display: flex; align-items: center; gap: 12px; flex-shrink: 0; order: 4;
     }
     #header .header-user-menu__button {
       width: 36px; height: 36px; border: none; background: none; cursor: pointer;
@@ -119,7 +120,7 @@
     #header .header-user-menu .menu__link:hover { color: #006AA9; }
     /* Secondary menu (Get Started button area) */
     #header .block-bluecheese-secondarymenu {
-      display: flex; align-items: center; flex-shrink: 0;
+      display: flex; align-items: center; flex-shrink: 0; order: 5;
     }
     #header .block-bluecheese-secondarymenu .menu--level-1 {
       display: flex; align-items: center; list-style: none; margin: 0; padding: 0;
