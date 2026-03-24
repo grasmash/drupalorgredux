@@ -596,6 +596,20 @@
     .proof-headline-stats span {
       font-size: 1rem; color: var(--text-secondary);
     }
+    .proof-stat-sourced {
+      position: relative; cursor: help;
+      border-bottom: 1px dotted var(--text-muted);
+    }
+    .proof-stat-sourced::after {
+      content: attr(data-tip); position: absolute; bottom: calc(100% + 10px); left: 50%;
+      transform: translateX(-50%) translateY(4px); opacity: 0; pointer-events: none;
+      background: var(--drupal-navy); color: rgba(255,255,255,0.9); font-size: 0.68rem;
+      padding: 8px 12px; border-radius: 6px; white-space: normal; width: 260px;
+      line-height: 1.4; text-align: left; font-weight: 400;
+      transition: opacity 0.15s, transform 0.15s; z-index: 10;
+      box-shadow: var(--shadow-lg);
+    }
+    .proof-stat-sourced:hover::after { opacity: 1; transform: translateX(-50%) translateY(0); }
     .proof-headline-stats strong {
       font-family: var(--font-heading); font-size: 2rem; font-weight: 700;
       color: var(--drupal-navy); display: block; line-height: 1.1;
@@ -1403,9 +1417,9 @@
       </div>
       <div class="proof-headline reveal">
         <div class="proof-headline-stats">
-          <span><strong>47</strong> Fortune 500 companies</span>
-          <span><strong>71%</strong> of top universities</span>
-          <span><strong>150+</strong> government agencies</span>
+          <span class="proof-stat-sourced" data-tip="71-80% per multiple studies. All 8 Ivy League schools use Drupal. Source: Zyxware, BuiltWith"><strong>71%</strong> of top 100 universities</span>
+          <span class="proof-stat-sourced" data-tip="150+ federal sites including Dept of Education, Energy, Commerce, Defense, NASA, IRS. Source: EvolvingWeb, DropTimes"><strong>150+</strong> US federal sites</span>
+          <span class="proof-stat-sourced" data-tip="56% of government websites worldwide as of 2021. 100% of open-source market share among large US state gov sites. Source: DropTimes"><strong>56%</strong> of gov websites worldwide</span>
         </div>
       </div>
       <div class="proof-featured reveal">
@@ -1426,7 +1440,7 @@
         </div>
       </div>
       <p class="proof-more reveal" style="font-size:0.88rem;color:var(--text-muted);margin-top:2rem;text-align:center;">
-        All Ivy League schools. NASA (40M page views in a day). 56% of government websites worldwide. 40,000+ modules.
+        All 8 Ivy League schools. NASA (40M page views in a day, 2M concurrent during the 2017 eclipse). NBC Olympics (100M unique viewers, 3.3B streaming minutes). 40,000+ modules.
       </p>
     </div>
   </section>
