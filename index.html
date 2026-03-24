@@ -54,7 +54,7 @@
     @media (min-width: 1920px) {
       #header .menu-main--level-1 { gap: 40px; }
     }
-    #header .menu-main__item { position: relative; }
+    /* No position:relative on menu items — dropdowns position relative to #header */
     /* Level 1 links & buttons */
     #header .menu-main__link--level-1 {
       display: block;
@@ -79,6 +79,10 @@
         content: "";
         background-image: url('assets/drupal-theme/heart-duotone.svg');
         background-repeat: no-repeat; background-size: contain;
+        /* Clear chevron mask-image that bleeds from lower-specificity rule */
+        mask-image: none; -webkit-mask-image: none;
+        background-color: transparent;
+        float: none; margin-right: 0;
       }
     }
     /* Hide "User Menu" and "Get Started" items from main nav (they repeat in secondary areas) */
