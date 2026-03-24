@@ -107,8 +107,8 @@
     }
     /* Sub-menu list — row layout on desktop matching drupal.org */
     #header .menu-main--level-2 {
-      display: flex; flex-direction: row; flex-wrap: wrap;
-      gap: 32px; list-style: none; margin: 0;
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 24px 32px; list-style: none; margin: 0;
       padding: 32px 25px;
       background: #fff; border: solid 1px transparent; border-top: 0;
       border-radius: 0 0 10px 10px;
@@ -143,7 +143,9 @@
     #header .header-search-button[aria-expanded="true"] + .header-search__drawer {
       visibility: visible; height: auto;
     }
-    #header .header-search__inner { max-width: 750px; margin-inline: auto; width: 100%; display: flex; align-items: center; }
+    #header .header-search__inner { max-width: 750px; margin-inline: auto; width: 100%; }
+    #header .header-search__inner form { display: flex; align-items: center; width: 100%; }
+    #header .header-search__inner .form-item--query { flex: 1; }
     /* Search form styling inside drawer */
     #header .header-search__drawer .form-item__label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); }
     #header .header-search__drawer .form-text {
@@ -318,7 +320,7 @@
     #header[data-mode="dark"] .menu-main__link--level-1 { color: #fff; }
     #header[data-mode="dark"] .menu-main__link--level-1.support-drupal { border-color: rgba(255,255,255,0.5); }
     #header[data-mode="dark"] .menu-main__link--level-1.support-drupal::after {
-      filter: brightness(0) invert(1);
+      background-image: url('assets/drupal-theme/heart-duotone-white.svg');
     }
     #header[data-mode="dark"] .menu-main__link--has-children::after { background-color: #fff; }
     #header[data-mode="dark"] .menu__link--has-children::after { background-color: #fff; }
@@ -356,7 +358,9 @@
     }
     #header[data-mode="dark"] .header-search__drawer .form-text::placeholder { color: rgba(255,255,255,0.4); }
     #header[data-mode="dark"] .header-search__drawer .form-text:focus { border-color: #009CDE; }
-    #header[data-mode="dark"] .header-search__drawer input[type="submit"] { filter: brightness(0) invert(1); }
+    #header[data-mode="dark"] .header-search__drawer input[type="submit"] {
+      background-image: url('assets/drupal-theme/magnifying-glass-white.svg');
+    }
     /* Dark mode — Get Started dropdown */
     #header[data-mode="dark"] .block-bluecheese-secondarymenu .menu--level-2 {
       background: #0a1a3a; box-shadow: 0 8px 24px rgba(0,0,0,0.3);
