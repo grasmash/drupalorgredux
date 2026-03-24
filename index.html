@@ -8,7 +8,12 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="brand-tokens.css">
+  <link rel="stylesheet" href="https://new.drupal.org/assets/css/css_ChRsPMNjgzCRgvIBqaH1-DjMQX-7nnoo82zVL-EM4rc.css">
+  <link rel="stylesheet" href="https://new.drupal.org/assets/css/css_V629T-vzSWFKYElkDUrqEcBuf3Oz5eE_kG0PgaRM26g.css">
   <style>
+    /* Override drupal.org header for our page */
+    #header { position: fixed; top: 3px; left: 0; right: 0; z-index: 100; }
+    .hero { padding-top: 120px; }
     @font-face {
       font-family: 'ZT Gatha';
       src: url('assets/fonts/zt-gatha-web/ZTGatha-SemiBold.woff2') format('woff2');
@@ -88,25 +93,6 @@
       background: linear-gradient(90deg, #009CDE, #CCBAF4);
     }
 
-    /* Header — translucent navy */
-    .header {
-      position: fixed; top: 3px; left: 0; right: 0; z-index: 100;
-      padding: 0.6rem 0;
-      background: rgba(18, 40, 95, 0.92);
-      backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-      transition: padding 0.3s ease;
-    }
-    .header.header-shrink {
-      padding: 0.5rem 0;
-    }
-    .header-inner { display: flex; justify-content: space-between; align-items: center; }
-    .logo { display: flex; align-items: center; gap: 0.6rem; color: #fff; text-decoration: none; }
-    .logo-text { font-size: 1.3rem; font-weight: 700; color: #fff; }
-    .nav { display: flex; gap: 1.75rem; align-items: center; }
-    .nav a { color: rgba(255,255,255,0.7); font-size: 0.9rem; font-weight: 500; }
-    .nav a:hover { color: #fff; }
-    .nav-icon { display: flex; align-items: center; padding: 0.25rem; }
 
     /* Buttons */
     .btn {
@@ -727,39 +713,6 @@
     .developer-links a:hover { color: #fff; }
     .developer-links a svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; }
 
-    /* Footer */
-    .footer {
-      padding: 3rem 0 2rem; background: var(--drupal-navy); border-top: none;
-    }
-    .footer-top {
-      display: flex; align-items: flex-start; gap: 3rem; margin-bottom: 2rem;
-      flex-wrap: wrap;
-    }
-    .footer-logo { flex-shrink: 0; }
-    .footer-nav {
-      flex: 1; display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem;
-    }
-    .footer-nav a {
-      font-size: 0.8rem; color: rgba(255,255,255,0.45); transition: color 0.2s;
-    }
-    .footer-nav a:hover { color: #fff; }
-    .footer-social {
-      display: flex; gap: 1rem; flex-shrink: 0;
-    }
-    .footer-social a {
-      color: rgba(255,255,255,0.35); transition: color 0.2s;
-    }
-    .footer-social a:hover { color: #fff; }
-    .footer-bottom {
-      border-top: 1px solid rgba(255,255,255,0.08); padding-top: 1.5rem;
-    }
-    .footer-bottom p {
-      font-size: 0.75rem; color: rgba(255,255,255,0.3);
-    }
-    .footer-bottom a {
-      color: rgba(255,255,255,0.45); text-decoration: underline; text-underline-offset: 2px;
-    }
-    .footer-bottom a:hover { color: #fff; }
 
     /* Scroll-triggered reveal animations */
     .reveal {
@@ -1003,21 +956,700 @@
   <!-- Scroll progress bar -->
   <div class="scroll-progress-track"><div class="scroll-progress" id="scrollProgress"></div></div>
 
-  <header class="header" id="siteHeader">
-    <div class="container header-inner">
-      <a href="https://new.drupal.org" class="logo" aria-label="Drupal home">
-        <img src="assets/logos/Original/Drupal Logo_Horizontal_White.svg" alt="Drupal" height="32" style="display:block;">
-      </a>
-      <nav class="nav">
-        <a href="https://new.drupal.org/drupal-cms">Drupal CMS</a>
-        <a href="https://new.drupal.org/ai">AI</a>
-        <a href="https://www.drupal.org/community">Community</a>
-        <a href="https://www.drupal.org/docs">Docs</a>
-        <a href="https://www.drupal.org/support">Support</a>
-        <a href="https://www.drupal.org/user/login" class="nav-icon" aria-label="Log in"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></a>
-        <a href="https://new.drupal.org/drupal-cms/launcher" class="btn btn-primary" style="margin-left:0.25rem;">Download</a>
-      </nav>
+  <header id="header" class="header l-section-container">
+    <div class="header__nav-section">
+      <button data-component-id="bluecheese:header-search-button" class="header-search-button header__mobile-search-button" aria-expanded="false" aria-controls="">
+  <span class="visually-hidden">Search</span>
+  <span class="header-search-button__icon"></span>
+</button>
+
+      <div data-component-id="bluecheese:header-logo" class="header-logo">
+    <a class="drupal-logo drupal-navy" href="https://new.drupal.org/" title="Drupal.org">
+    <span class="element-focusable">Drupal.org</span>
+    <svg width="185" height="67" viewBox="0 0 150 53" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M36.654 19.6521C36.6249 19.594 36.5958 19.5649 36.5376 19.5067C33.688 16.3082 29.6462 11.772 26.7384 8.54434C25.8369 7.58476 24.9355 6.62519 24.0923 5.63654C23.8887 5.40391 23.7143 5.17129 23.5107 4.93867C23.3362 4.7642 23.249 4.64789 23.249 4.64789H23.2781C22.2894 3.48477 21.5043 2.17626 20.9518 0.780513L20.8064 0.460655C20.8064 0.431577 20.7774 0.431577 20.7483 0.402499C20.7192 0.402499 20.6611 0.373421 20.632 0.373421H20.6029C20.5448 0.373421 20.5157 0.402499 20.4866 0.402499C20.4575 0.431577 20.4575 0.431577 20.4284 0.460655L20.283 0.780513C19.7015 2.17626 18.9164 3.48477 17.9568 4.64789H17.9859C17.9859 4.64789 17.8987 4.7642 17.7242 4.93867C17.5206 5.17129 17.3462 5.40391 17.1426 5.63654C16.2703 6.62519 15.3979 7.58476 14.4965 8.54434C11.5887 11.772 7.51781 16.3082 4.66816 19.5067C4.63908 19.5649 4.61001 19.594 4.55185 19.6521C-6.20701 33.9876 5.48235 45.6769 5.48235 45.6769H5.45327C8.91355 49.6897 13.8277 52.1613 19.0908 52.5393C19.5561 52.5975 20.0504 52.6266 20.5738 52.6266H20.6029C21.0972 52.6266 21.5916 52.5975 22.0859 52.5393C27.3781 52.1613 32.2632 49.6897 35.7235 45.6769H35.6944C35.7235 45.6769 47.4128 33.9876 36.654 19.6521ZM11.5887 29.7422L11.327 30.1493L11.2979 30.1784C9.32064 32.5628 8.15752 35.1216 7.77951 37.6514C7.72135 37.9713 7.43057 38.1748 7.13979 38.1167C6.93625 38.0876 6.79086 37.9422 6.70362 37.7677C6.18022 36.5465 5.83128 35.267 5.65681 33.9585C5.0171 29.3351 6.41284 25.2933 9.3788 21.833C10.571 20.4663 11.7632 19.0997 12.9554 17.733C13.1589 17.5004 13.5079 17.4713 13.7405 17.6748C13.7696 17.7039 13.7696 17.7039 13.7987 17.733C14.7582 18.8379 16.0086 20.2628 17.4043 21.8911C17.5788 22.0947 17.5788 22.4145 17.4043 22.6472C15.4852 24.9443 13.4497 27.3869 11.6178 29.7131L11.5887 29.7422ZM28.1341 41.7223C27.0291 44.6301 24.8483 46.3748 21.766 46.8691C17.3752 47.5379 13.2752 44.5429 12.6065 40.1521C12.6065 40.094 12.6065 40.0649 12.5774 40.0067C12.2284 37.5351 12.9845 35.3543 14.5838 33.4933C16.4447 31.3124 20.5448 26.2528 20.6029 26.1656C20.6901 26.2528 25.0518 31.6904 26.6802 33.6096C28.7447 36.023 29.2391 38.7855 28.1341 41.7223ZM34.6185 37.1571C34.5894 37.2443 34.5313 37.3606 34.5022 37.4479C34.3859 37.7386 34.066 37.884 33.7752 37.7677C33.6008 37.6805 33.4554 37.5351 33.4263 37.3316C33.0192 34.889 31.8561 32.4465 29.966 30.1493L29.9369 30.1202L29.7625 29.8585L29.6462 29.7131C28.1341 27.794 20.1377 18.4309 16.6483 14.3309C16.4738 14.1273 16.4738 13.8075 16.6483 13.5748C17.8114 12.2954 18.9745 11.016 20.1086 9.70746C20.3121 9.47483 20.6611 9.47483 20.8937 9.67838L20.9228 9.70746C21.4462 10.2599 21.9405 10.8124 22.4348 11.394C25.6043 14.9415 28.8029 18.4309 31.8852 22.0075C35.7816 26.5145 36.683 31.6904 34.6185 37.1571Z"/>
+      <path d="M141.073 16.9188H144.708V17.6458H143.254V21.2515H142.527V17.6749H141.073V16.9188Z"/>
+      <path d="M149.244 21.2515L148.924 18.111L148.721 19.1578L147.964 21.2515H147.034L146.278 19.1578L146.074 18.111L145.755 21.2515H144.999L145.435 16.9188H146.249L147.499 20.3791L148.75 16.9188H149.564L150 21.2515H149.244Z" />
+      <path d="M56.4851 18.082H48.3433V39.3671H56.4851C62.3589 39.3671 67.1276 34.5983 67.1276 28.7246C67.1276 22.8508 62.3589 18.082 56.4851 18.082ZM61.5156 33.7551C60.178 35.0927 58.3752 35.8487 56.4851 35.8196H51.8908V21.6005H56.4851C60.4397 21.6295 63.6092 24.8572 63.5801 28.7827C63.5801 30.6437 62.8241 32.4466 61.5156 33.7551ZM136.013 39.3671H139.561V16.8317H136.013V39.3671ZM73.1177 24.8863V23.5778H69.5702V39.3962H73.1177V29.626C73.1177 27.9104 74.5425 27.1253 75.8801 27.1253H78.0901V23.5487H75.8801C74.8333 23.5778 73.8156 24.0721 73.1177 24.8863ZM92.0475 31.7487C92.0766 32.97 91.6986 34.1331 90.9716 35.1217C90.2447 36.0232 89.1397 36.5175 87.9766 36.4884C87.017 36.5175 86.0865 36.1685 85.3596 35.5288C84.6035 34.8019 84.2255 33.726 84.2255 32.3302V23.8686H80.678V33.1444C80.6489 34.9182 81.3759 36.6338 82.6844 37.8551C84.022 39.1054 85.7957 39.7742 87.5986 39.7451C89.2269 39.7742 90.8262 39.1927 92.0184 38.0586V39.3962H95.5659V23.8686H92.0184V31.7487H92.0475ZM106.935 23.4615C105.133 23.4615 103.388 24.1012 102.021 25.2934V23.8395H98.4737V46.4331H102.021V37.9132C103.388 39.1054 105.133 39.7451 106.935 39.7451C111.297 39.7451 114.874 36.1104 114.874 31.6324C114.874 27.1253 111.326 23.4615 106.935 23.4615ZM110.018 34.86C109.204 35.7033 108.099 36.1976 106.935 36.1976C104.435 36.1395 102.457 34.104 102.486 31.6033C102.486 30.382 102.952 29.2189 103.795 28.3175C104.609 27.4451 105.743 26.9799 106.935 26.9799C109.349 26.9799 111.326 29.0444 111.326 31.6033C111.326 32.8246 110.861 33.9877 110.018 34.86ZM129.384 25.2934C128.017 24.1012 126.272 23.4324 124.469 23.4615C120.108 23.4615 116.531 27.0962 116.531 31.5742C116.531 36.0522 120.079 39.7161 124.469 39.7161C126.272 39.7451 128.046 39.0763 129.384 37.8841V39.3671H132.931V23.8104H129.384V25.2934ZM124.469 36.2267C122.027 36.2267 120.05 34.1622 120.05 31.6033C120.05 29.0735 122.027 27.009 124.469 27.009C126.912 27.009 128.889 29.0735 128.889 31.6033C128.889 34.1331 126.883 36.2267 124.469 36.2267Z"/>
+    </svg>
+  </a>
+
+</div>
+
+      <button class="🍔-menu-toggle">
+  <span class="visually-hidden">Menu</span>
+  <span class="🍔-menu-toggle__icon">
+    <span class="🍔-menu-toggle__line-1"></span>
+    <span class="🍔-menu-toggle__line-2"></span>
+    <span class="🍔-menu-toggle__line-3"></span>
+  </span>
+</button>
+
+      <nav id="block-bluecheese-mainmenu" class="block block-system main-navigation" aria-labelledby="block-bluecheese-mainmenu-menu">
+          <h2 class="visually-hidden" id="block-bluecheese-mainmenu-menu">Main menu</h2>
+          <ul class="menu-main menu-main--level-1">
+      
+                          
+        
+        
+        <li class="menu-main__item menu-main__item--level-1 menu-main__item--expanded">
+          <button aria-expanded="false" class="menu-main__link menu-main__link--button menu-main__link--level-1 menu-main__link--has-children" type="button">Discover Drupal</button>
+
+          
+                      <div class="menu-main__submenu-wrapper">
+                      <ul class="menu-main menu-main--level-2">
+      
+                          
+        
+        
+        <li class="menu-main__item menu-main__item--level-2">
+          <a href="https://www.drupal.org/about/overview/technical" title="The open source framework behind millions of websites" aria-expanded="" class="menu-main__link menu-main__link--link menu-main__link--level-2">Drupal Core</a>
+
+                      <span class="menu-main__description">The open source framework behind millions of websites</span>           
+                  </li>
+      
+                          
+        
+        
+        <li class="menu-main__item menu-main__item--level-2">
+          <a href="https://new.drupal.org/drupal-cms" title="Drupal CMS puts the power of Drupal into the hands of marketers, designers and content creators" aria-expanded="" class="menu-main__link menu-main__link--link menu-main__link--level-2" data-drupal-link-system-path="node/10000002">Drupal CMS</a>
+
+                      <span class="menu-main__description">Drupal CMS puts the power of Drupal into the hands of marketers, designers and content creators</span>           
+                  </li>
+      
+                          
+        
+        
+        <li class="menu-main__item menu-main__item--level-2">
+          <a href="https://new.drupal.org/ai" title="Open limitless possibilities with Drupal AI" aria-expanded="" class="menu-main__link menu-main__link--link menu-main__link--level-2" data-drupal-link-system-path="node/11427519">Drupal AI</a>
+
+                      <span class="menu-main__description">Open limitless possibilities with Drupal AI</span>           
+                  </li>
+      
+                          
+        
+        
+        <li class="menu-main__item menu-main__item--level-2">
+          <a href="https://www.drupal.org/case-studies" title="Powerful stories that show Drupal solutions in the real world" aria-expanded="" class="menu-main__link menu-main__link--link menu-main__link--level-2">Case Studies</a>
+
+                      <span class="menu-main__description">Powerful stories that show Drupal solutions in the real world</span>           
+                  </li>
+      
+                          
+        
+        
+        <li class="menu-main__item menu-main__item--level-2">
+          <a href="https://www.drupal.org/industries/government" title="Drupal is the open-source CMS that enables digital transformation of government and increases citizen engagement" aria-expanded="" class="menu-main__link menu-main__link--link menu-main__link--level-2">Drupal for Government</a>
+
+                      <span class="menu-main__description">Drupal is the open-source CMS that enables digital transformation of government and increases citizen engagement</span>           
+                  </li>
+      
+                          
+        
+        
+        <li class="menu-main__item menu-main__item--level-2">
+          <a href="https://www.drupal.org/industries/education" title="See why 70% of the world&#039;s leading universities chose Drupal" aria-expanded="" class="menu-main__link menu-main__link--link menu-main__link--level-2">Drupal for Higher Education</a>
+
+                      <span class="menu-main__description">See why 70% of the world&#039;s leading universities chose Drupal</span>           
+                  </li>
+      
+                          
+        
+        
+        <li class="menu-main__item menu-main__item--level-2">
+          <a href="https://www.drupal.org/industries/nonprofit" title="See why Drupal is the open-source CMS choice for some of the world’s most influential nonprofits" aria-expanded="" class="menu-main__link menu-main__link--link menu-main__link--level-2">Drupal for Nonprofit</a>
+
+                      <span class="menu-main__description">See why Drupal is the open-source CMS choice for some of the world’s most influential nonprofits</span>           
+                  </li>
+      
+                          
+        
+        
+        <li class="menu-main__item menu-main__item--level-2">
+          <a href="https://www.drupal.org/industries/ecommerce" title="Natively integrate content and commerce" aria-expanded="" class="menu-main__link menu-main__link--link menu-main__link--level-2">Drupal for eCommerce</a>
+
+                      <span class="menu-main__description">Natively integrate content and commerce</span>           
+                  </li>
+      
+                          
+        
+        
+        <li class="menu-main__item menu-main__item--level-2">
+          <a href="https://www.drupal.org/industries/fintech" title="Secure and trustworthy FinTech infrastructure" aria-expanded="" class="menu-main__link menu-main__link--link menu-main__link--level-2">Drupal for FinTech</a>
+
+                      <span class="menu-main__description">Secure and trustworthy FinTech infrastructure</span>           
+                  </li>
+      
+                          
+        
+        
+        <li class="menu-main__item menu-main__item--level-2">
+          <a href="https://www.drupal.org/industries/healthcare" title="Drupal powers systems that are secure, patient-centric and engaging" aria-expanded="" class="menu-main__link menu-main__link--link menu-main__link--level-2">Drupal for Healthcare</a>
+
+                      <span class="menu-main__description">Drupal powers systems that are secure, patient-centric and engaging</span>           
+                  </li>
+      
+                          
+        
+        
+        <li class="menu-main__item menu-main__item--level-2">
+          <a href="https://new.drupal.org/industries/enterprise" title="Why enterprise organizations choose Drupal for multi-brand governance and global scale." aria-expanded="" class="menu-main__link menu-main__link--link menu-main__link--level-2" data-drupal-link-system-path="node/11429533">Drupal for Enterprise</a>
+
+                      <span class="menu-main__description">Why enterprise organizations choose Drupal for multi-brand governance and global scale.</span>           
+                  </li>
+      
+                          
+        
+        
+        <li class="menu-main__item menu-main__item--level-2">
+          <a href="https://new.drupal.org/industries/retail" title="See how Drupal delivers retail experiences across every channel and touchpoint." aria-expanded="" class="menu-main__link menu-main__link--link menu-main__link--level-2" data-drupal-link-system-path="node/11429532">Drupal for Retail</a>
+
+                      <span class="menu-main__description">See how Drupal delivers retail experiences across every channel and touchpoint.</span>           
+                  </li>
+      
+                          
+        
+        
+        <li class="menu-main__item menu-main__item--level-2">
+          <a href="https://new.drupal.org/industries/travel" title="Discover how Drupal powers travel across websites, mobile, and onboard experiences." aria-expanded="" class="menu-main__link menu-main__link--link menu-main__link--level-2" data-drupal-link-system-path="node/11429043">Drupal for Travel &amp; Tourism</a>
+
+                      <span class="menu-main__description">Discover how Drupal powers travel across websites, mobile, and onboard experiences.</span>           
+                  </li>
+          </ul>
+  
+            </div>
+                  </li>
+      
+                          
+        
+        
+        <li class="menu-main__item menu-main__item--level-1 menu-main__item--expanded">
+          <button aria-expanded="false" class="menu-main__link menu-main__link--button menu-main__link--level-1 menu-main__link--has-children" type="button">Build with Drupal</button>
+
+          
+                      <div class="menu-main__submenu-wrapper">
+                      <ul class="menu-main menu-main--level-2">
+      
+                          
+        
+        
+        <li class="menu-main__item menu-main__item--level-2">
+          <a href="https://www.drupal.org/download" title="Download Drupal and the extensions you need" aria-expanded="" class="menu-main__link menu-main__link--link menu-main__link--level-2">Download Drupal</a>
+
+                      <span class="menu-main__description">Download Drupal and the extensions you need</span>           
+                  </li>
+      
+                          
+        
+        
+        <li class="menu-main__item menu-main__item--level-2">
+          <a href="https://www.drupal.org/documentation" title="Full knowledgebase including Drupal 7 resources" aria-expanded="" class="menu-main__link menu-main__link--link menu-main__link--level-2">Documentation</a>
+
+                      <span class="menu-main__description">Full knowledgebase including Drupal 7 resources</span>           
+                  </li>
+      
+                          
+        
+        
+        <li class="menu-main__item menu-main__item--level-2">
+          <a href="https://www.drupal.org/docs/getting-started" title="Guide to installing Drupal on a server" aria-expanded="" class="menu-main__link menu-main__link--link menu-main__link--level-2">Getting Started</a>
+
+                      <span class="menu-main__description">Guide to installing Drupal on a server</span>           
+                  </li>
+      
+                          
+        
+        
+        <li class="menu-main__item menu-main__item--level-2">
+          <a href="https://www.drupal.org/docs/official_docs/local-development-guide" title="Guide to installing Drupal locally with Docker and DDEV" aria-expanded="" class="menu-main__link menu-main__link--link menu-main__link--level-2">Local Development Guide</a>
+
+                      <span class="menu-main__description">Guide to installing Drupal locally with Docker and DDEV</span>           
+                  </li>
+      
+                          
+        
+        
+        <li class="menu-main__item menu-main__item--level-2">
+          <a href="https://www.drupal.org/docs/develop" title="Step-by-step guide for learning Drupal" aria-expanded="" class="menu-main__link menu-main__link--link menu-main__link--level-2">Developer Resources</a>
+
+                      <span class="menu-main__description">Step-by-step guide for learning Drupal</span>           
+                  </li>
+      
+                          
+        
+        
+        <li class="menu-main__item menu-main__item--level-2">
+          <a href="https://www.drupal.org/docs/user_guide/en/index.html" title="Learn to build with Drupal" aria-expanded="" class="menu-main__link menu-main__link--link menu-main__link--level-2">Drupal User Guide</a>
+
+                      <span class="menu-main__description">Learn to build with Drupal</span>           
+                  </li>
+      
+                          
+        
+        
+        <li class="menu-main__item menu-main__item--level-2">
+          <a href="https://api.drupal.org/" title="Complete documentation of Drupal Core APIs" aria-expanded="" class="menu-main__link menu-main__link--link menu-main__link--level-2">API</a>
+
+                      <span class="menu-main__description">Complete documentation of Drupal Core APIs</span>           
+                  </li>
+      
+                          
+        
+        
+        <li class="menu-main__item menu-main__item--level-2">
+          <a href="https://www.drupal.org/project/modules" title="Extend your project&#039;s functionality" aria-expanded="" class="menu-main__link menu-main__link--link menu-main__link--level-2">Modules</a>
+
+                      <span class="menu-main__description">Extend your project&#039;s functionality</span>           
+                  </li>
+      
+                          
+        
+        
+        <li class="menu-main__item menu-main__item--level-2">
+          <a href="https://www.drupal.org/project/themes" title="Change your project&#039;s look and feel" aria-expanded="" class="menu-main__link menu-main__link--link menu-main__link--level-2">Themes</a>
+
+                      <span class="menu-main__description">Change your project&#039;s look and feel</span>           
+                  </li>
+      
+                          
+        
+        
+        <li class="menu-main__item menu-main__item--level-2">
+          <a href="https://www.drupal.org/project/distributions" title="Jumpstart your project with a pre-configured install" aria-expanded="" class="menu-main__link menu-main__link--link menu-main__link--level-2">Distributions</a>
+
+                      <span class="menu-main__description">Jumpstart your project with a pre-configured install</span>           
+                  </li>
+      
+                          
+        
+        
+        <li class="menu-main__item menu-main__item--level-2">
+          <a href="https://www.drupal.org/project/issues" title="Report issues and contribute improvements" aria-expanded="" class="menu-main__link menu-main__link--link menu-main__link--level-2">Issues Queue</a>
+
+                      <span class="menu-main__description">Report issues and contribute improvements</span>           
+                  </li>
+      
+                          
+        
+        
+        <li class="menu-main__item menu-main__item--level-2">
+          <a href="https://www.drupal.org/security" title="Stay on top of the latest security alerts and updates" aria-expanded="" class="menu-main__link menu-main__link--link menu-main__link--level-2">Security Advisories</a>
+
+                      <span class="menu-main__description">Stay on top of the latest security alerts and updates</span>           
+                  </li>
+          </ul>
+  
+            </div>
+                  </li>
+      
+                          
+        
+        
+        <li class="menu-main__item menu-main__item--level-1 menu-main__item--expanded">
+          <button aria-expanded="false" class="menu-main__link menu-main__link--button menu-main__link--level-1 menu-main__link--has-children" type="button">Partners &amp; Services</button>
+
+          
+                      <div class="menu-main__submenu-wrapper">
+                      <ul class="menu-main menu-main--level-2">
+      
+                          
+        
+        
+        <li class="menu-main__item menu-main__item--level-2">
+          <a href="https://www.drupal.org/drupal-services" title="Connect with the best Drupal agencies around the world" aria-expanded="" class="menu-main__link menu-main__link--link menu-main__link--level-2">Find a Drupal Certified Partner</a>
+
+                      <span class="menu-main__description">Connect with the best Drupal agencies around the world</span>           
+                  </li>
+      
+                          
+        
+        
+        <li class="menu-main__item menu-main__item--level-2">
+          <a href="https://new.drupal.org/association/become-a-drupal-certified-partner" title="Join an elite network of agencies committed to Drupal excellence and innovation" aria-expanded="" class="menu-main__link menu-main__link--link menu-main__link--level-2">Become a Drupal Certified Partner</a>
+
+                      <span class="menu-main__description">Join an elite network of agencies committed to Drupal excellence and innovation</span>           
+                  </li>
+      
+                          
+        
+        
+        <li class="menu-main__item menu-main__item--level-2">
+          <a href="https://www.drupal.org/hosting" title="Find a hosting provider for your Drupal project" aria-expanded="" class="menu-main__link menu-main__link--link menu-main__link--level-2">Find a Hosting Provider</a>
+
+                      <span class="menu-main__description">Find a hosting provider for your Drupal project</span>           
+                  </li>
+      
+                          
+        
+        
+        <li class="menu-main__item menu-main__item--level-2">
+          <a href="https://www.drupal.org/about/drupal-7/d7eol/migration-resource-center/enterprise" title="Get help with your migration to the latest version of Drupal" aria-expanded="" class="menu-main__link menu-main__link--link menu-main__link--level-2">Find a Migration Partner</a>
+
+                      <span class="menu-main__description">Get help with your migration to the latest version of Drupal</span>           
+                  </li>
+      
+                          
+        
+        
+        <li class="menu-main__item menu-main__item--level-2">
+          <a href="https://www.drupal.org/training" title="Upskill your Drupal team" aria-expanded="" class="menu-main__link menu-main__link--link menu-main__link--level-2">Find Training</a>
+
+                      <span class="menu-main__description">Upskill your Drupal team</span>           
+                  </li>
+      
+                          
+        
+        
+        <li class="menu-main__item menu-main__item--level-2">
+          <a href="https://www.drupal.org/steward" title="Ensure your website is protected with Drupal Steward" aria-expanded="" class="menu-main__link menu-main__link--link menu-main__link--level-2">Drupal Steward</a>
+
+                      <span class="menu-main__description">Ensure your website is protected with Drupal Steward</span>           
+                  </li>
+          </ul>
+  
+            </div>
+                  </li>
+      
+                          
+        
+        
+        <li class="menu-main__item menu-main__item--level-1 menu-main__item--expanded">
+          <button aria-expanded="false" class="menu-main__link menu-main__link--button menu-main__link--level-1 menu-main__link--has-children" type="button">Community</button>
+
+          
+                      <div class="menu-main__submenu-wrapper">
+                      <ul class="menu-main menu-main--level-2">
+      
+                          
+        
+        
+        <li class="menu-main__item menu-main__item--level-2">
+          <a href="https://www.drupal.org/community" title="Come for the code, stay for the community" aria-expanded="" class="menu-main__link menu-main__link--link menu-main__link--level-2">About the Community</a>
+
+                      <span class="menu-main__description">Come for the code, stay for the community</span>           
+                  </li>
+      
+                          
+        
+        
+        <li class="menu-main__item menu-main__item--level-2">
+          <a href="https://new.drupal.org/community/contributor-guide" title="Get involved in growing and evolving Drupal" aria-expanded="" class="menu-main__link menu-main__link--link menu-main__link--level-2">How to Contribute</a>
+
+                      <span class="menu-main__description">Get involved in growing and evolving Drupal</span>           
+                  </li>
+      
+                          
+        
+        
+        <li class="menu-main__item menu-main__item--level-2">
+          <a href="https://events.drupal.org/" title="DrupalCon unites experts from around the globe who create ambitious digital experiences. Network, learn, and be inspired" aria-expanded="" class="menu-main__link menu-main__link--link menu-main__link--level-2">DrupalCon</a>
+
+                      <span class="menu-main__description">DrupalCon unites experts from around the globe who create ambitious digital experiences. Network, learn, and be inspired</span>           
+                  </li>
+      
+                          
+        
+        
+        <li class="menu-main__item menu-main__item--level-2">
+          <a href="https://www.drupal.org/community/events" title="Discover local events, meet-ups, and training" aria-expanded="" class="menu-main__link menu-main__link--link menu-main__link--level-2">Events</a>
+
+                      <span class="menu-main__description">Discover local events, meet-ups, and training</span>           
+                  </li>
+      
+                          
+        
+        
+        <li class="menu-main__item menu-main__item--level-2">
+          <a href="https://jobs.drupal.org/home" title="Find opportunities to work in Drupal" aria-expanded="" class="menu-main__link menu-main__link--link menu-main__link--level-2">Jobs / Careers</a>
+
+                      <span class="menu-main__description">Find opportunities to work in Drupal</span>           
+                  </li>
+      
+                          
+        
+        
+        <li class="menu-main__item menu-main__item--level-2">
+          <a href="https://www.drupal.org/blog" title="News and stories about Drupal" aria-expanded="" class="menu-main__link menu-main__link--link menu-main__link--level-2">News &amp; Blogs</a>
+
+                      <span class="menu-main__description">News and stories about Drupal</span>           
+                  </li>
+      
+                          
+        
+        
+        <li class="menu-main__item menu-main__item--level-2">
+          <a href="https://www.drupal.org/forum" title="Got a question about Drupal? Find answers on the Drupal forums" aria-expanded="" class="menu-main__link menu-main__link--link menu-main__link--level-2">Forum</a>
+
+                      <span class="menu-main__description">Got a question about Drupal? Find answers on the Drupal forums</span>           
+                  </li>
+      
+                          
+        
+        
+        <li class="menu-main__item menu-main__item--level-2">
+          <a href="https://www.drupal.org/slack" title="Get support and communicate with the global Drupal community" aria-expanded="" class="menu-main__link menu-main__link--link menu-main__link--level-2">Slack</a>
+
+                      <span class="menu-main__description">Get support and communicate with the global Drupal community</span>           
+                  </li>
+      
+                          
+        
+        
+        <li class="menu-main__item menu-main__item--level-2">
+          <a href="https://www.drupal.org/subscribe" title="Sign up for Drupal news and manage your subscriptions" aria-expanded="" class="menu-main__link menu-main__link--link menu-main__link--level-2">Newsletters</a>
+
+                      <span class="menu-main__description">Sign up for Drupal news and manage your subscriptions</span>           
+                  </li>
+      
+                          
+        
+        
+        <li class="menu-main__item menu-main__item--level-2">
+          <a href="https://www.drupal.org/swag" title="Get your Drupal branded merch!" aria-expanded="" class="menu-main__link menu-main__link--link menu-main__link--level-2">Drupal Swag Shop</a>
+
+                      <span class="menu-main__description">Get your Drupal branded merch!</span>           
+                  </li>
+          </ul>
+  
+            </div>
+                  </li>
+      
+                          
+        
+        
+        <li class="menu-main__item menu-main__item--level-1 menu-main__item--expanded">
+          <button aria-expanded="false" class="menu-main__link menu-main__link--button menu-main__link--level-1 menu-main__link--has-children support-drupal" type="button">Support Drupal</button>
+
+          
+                      <div class="menu-main__submenu-wrapper">
+                      <ul class="menu-main menu-main--level-2">
+      
+                          
+        
+        
+        <li class="menu-main__item menu-main__item--level-2">
+          <a href="https://www.drupal.org/association" title="Learn how we support Drupal&#039;s growth and innovation - and how you can help" aria-expanded="" class="menu-main__link menu-main__link--link menu-main__link--level-2">The Drupal Association</a>
+
+                      <span class="menu-main__description">Learn how we support Drupal&#039;s growth and innovation - and how you can help</span>           
+                  </li>
+      
+                          
+        
+        
+        <li class="menu-main__item menu-main__item--level-2">
+          <a href="https://www.drupal.org/association/RippleMakers" title="Become a Ripplemaker and support the Drupal Association" aria-expanded="" class="menu-main__link menu-main__link--link menu-main__link--level-2">Become a Member</a>
+
+                      <span class="menu-main__description">Become a Ripplemaker and support the Drupal Association</span>           
+                  </li>
+      
+                          
+        
+        
+        <li class="menu-main__item menu-main__item--level-2">
+          <a href="https://www.drupal.org/association/become-a-drupal-certified-partner" title="Join an elite network of agencies committed to Drupal excellence and innovation" aria-expanded="" class="menu-main__link menu-main__link--link menu-main__link--level-2">Become a Drupal Certified Partner</a>
+
+                      <span class="menu-main__description">Join an elite network of agencies committed to Drupal excellence and innovation</span>           
+                  </li>
+      
+                          
+        
+        
+        <li class="menu-main__item menu-main__item--level-2">
+          <a href="https://www.drupal.org/association/donate" title="Make a donation to the nonprofit that supports Drupal" aria-expanded="" class="menu-main__link menu-main__link--link menu-main__link--level-2">Donate</a>
+
+                      <span class="menu-main__description">Make a donation to the nonprofit that supports Drupal</span>           
+                  </li>
+          </ul>
+  
+            </div>
+                  </li>
+      
+                          
+        
+        
+        <li class="menu-main__item menu-main__item--level-1 menu-main__item--expanded">
+          <button aria-expanded="false" class="menu-main__link menu-main__link--button menu-main__link--level-1 menu-main__link--has-children" type="button">User Menu</button>
+
+          
+                      <div class="menu-main__submenu-wrapper">
+                      <ul class="menu-main menu-main--level-2">
+      
+                          
+        
+        
+        <li class="menu-main__item menu-main__item--level-2">
+          <a href="https://new.drupal.org/user/login/keycloak" aria-expanded="" class="menu-main__link menu-main__link--link menu-main__link--level-2" data-drupal-link-system-path="user/login/keycloak">Log in</a>
+
+          
+                  </li>
+      
+                          
+        
+        
+        <li class="menu-main__item menu-main__item--level-2">
+          <a href="https://www.drupal.org/user/register" aria-expanded="" class="menu-main__link menu-main__link--link menu-main__link--level-2">Create account</a>
+
+          
+                  </li>
+          </ul>
+  
+            </div>
+                  </li>
+      
+                          
+        
+        
+        <li class="menu-main__item menu-main__item--level-1 menu-main__item--expanded">
+          <button class="button button--primary icon-arrow-right menu-main__link menu-main__link--button menu-main__link--level-1 menu-main__link--has-children" aria-expanded="false" type="button">Get Started</button>
+
+          
+                      <div class="menu-main__submenu-wrapper">
+                      <ul class="menu-main menu-main--level-2">
+      
+                          
+        
+        
+        <li class="menu-main__item menu-main__item--level-2">
+          <a href="https://new.drupal.org/drupal-cms/trial" aria-expanded="" class="menu-main__link menu-main__link--link menu-main__link--level-2" data-drupal-link-system-path="node/10000081">Try Drupal CMS</a>
+
+          
+                  </li>
+      
+                          
+        
+        
+        <li class="menu-main__item menu-main__item--level-2">
+          <a href="https://new.drupal.org/try-hosting" aria-expanded="" class="menu-main__link menu-main__link--link menu-main__link--level-2" data-drupal-link-system-path="node/10000066">Try hosting</a>
+
+          
+                  </li>
+          </ul>
+  
+            </div>
+                  </li>
+          </ul>
+  
+
+
+
+</nav>
+
+
+      
+<search data-component-id="bluecheese:header-search" class="search-drawer">
+  <button data-component-id="bluecheese:header-search-button" class="header-search-button header-search__desktop-button" aria-expanded="false" aria-controls="">
+  <span class="visually-hidden">Search</span>
+  <span class="header-search-button__icon"></span>
+</button>
+
+  <div class="header-search__drawer">
+    <div class="header-search__inner">
+      <div class="drupalorg-search-form global-text--form block block-drupalorg-crosssite" data-drupal-selector="drupalorg-search-form">
+  <div class="block-inner">
+    
+        
+          <div class="content">
+        <form action="/home" method="post" id="drupalorg-search-form" accept-charset="UTF-8">
+  <div class="js-form-item form-item js-form-type-textfield form-type--textfield js-form-item-query form-item--query">
+      <label for="edit-query" class="form-item__label">Search</label>
+        <input placeholder="What are you searching for..." data-drupal-selector="edit-query" type="text" id="edit-query" name="query" value="" size="60" maxlength="128" class="form-text form-element form-element--type-text form-element--api-textfield"/>
+        </div>
+<input data-drupal-selector="edit-submit" type="submit" id="edit-submit" name="op" value="Search" class="button js-form-submit form-submit"/><input autocomplete="off" data-drupal-selector="form-o5wd0-7q-h-hn1kdxtd8lkg-c1u1lf01r-cumj83sp8" type="hidden" name="form_build_id" value="form-O5Wd0_7q-H_HN1KdxTD8lKg-c1u1Lf01R_CUMJ83SP8"/><input data-drupal-selector="edit-drupalorg-search-form" type="hidden" name="form_id" value="drupalorg_search_form"/>
+</form>
+
+      </div>
+      </div>
+</div>
+
     </div>
+  </div>
+</search>
+
+      
+<nav data-component-id="bluecheese:header-user-menu" class="header-user-menu" aria-labelledby="user-menu">
+  <h2 id="user-menu" class="visually-hidden">User menu</h2>
+  <button class="header-user-menu__button" aria-expanded="false" aria-labelledby="user-menu">
+          <img class="header-user-menu__picture" src="https://new.drupal.org/themes/contrib/bluecheese/images/user.svg" alt>
+        
+  </button>
+  
+          <ul  class="menu menu--level-1">
+            
+                          
+        
+        
+        <li class="menu__item menu__item--level-1">
+                    
+          <a href="https://new.drupal.org/user/login" class="menu__link menu__link--link menu__link--level-1" data-drupal-link-system-path="user/login">Log in</a>
+
+          
+        </li>
+      
+                          
+        
+        
+        <li class="menu__item menu__item--level-1">
+                    
+          <a href="https://www.drupal.org/user/register" class="menu__link menu__link--link menu__link--level-1">Create account</a>
+
+          
+        </li>
+          </ul>
+  
+
+
+</nav>
+
+
+      <nav id="block-bluecheese-secondarymenu" class="block block-system block-bluecheese-secondarymenu" aria-labelledby="block-bluecheese-secondarymenu-menu">
+            
+  <h2 class="visually-hidden" id="block-bluecheese-secondarymenu-menu">Secondary menu</h2>
+  
+
+        
+          <ul  class="menu menu--level-1">
+            
+                          
+        
+        
+        <li class="menu__item menu__item--level-1 menu__item--has-children">
+                    
+          <button class="button button--primary icon-arrow-right menu__link menu__link--button menu__link--level-1 menu__link--has-children" type="button">Get Started</button>
+
+                                <ul  class="menu menu--level-2">
+            
+                          
+        
+        
+        <li class="menu__item menu__item--level-2">
+                    
+          <a href="https://new.drupal.org/drupal-cms/trial" class="menu__link menu__link--link menu__link--level-2" data-drupal-link-system-path="node/10000081">Try Drupal CMS</a>
+
+          
+        </li>
+      
+                          
+        
+        
+        <li class="menu__item menu__item--level-2">
+                    
+          <a href="https://new.drupal.org/try-hosting" class="menu__link menu__link--link menu__link--level-2" data-drupal-link-system-path="node/10000066">Try Hosting</a>
+
+          
+        </li>
+          </ul>
+  
+          
+        </li>
+          </ul>
+  
+
+
+  </nav>
+
+
+    </div>
+
   </header>
 
   <!-- HERO + PROOF wrapper — fills viewport -->
@@ -1574,35 +2206,119 @@
   <div class="light-to-dark-transition"></div>
 
   <!-- FOOTER -->
-<footer class="footer">
-  <div class="container">
-    <div class="footer-top">
-      <div class="footer-logo">
-        <img src="assets/logos/Original/Drupal Logo_Horizontal_White.svg" alt="Drupal" height="28">
-      </div>
-      <div class="footer-nav">
-        <a href="https://www.drupal.org/drupalorg">About Drupal</a>
-        <a href="https://www.drupal.org/dcoc">Code of Conduct</a>
-        <a href="https://www.drupal.org/news">News</a>
-        <a href="https://www.drupal.org/docs">Documentation</a>
-        <a href="https://www.drupal.org/community">Community</a>
-        <a href="https://www.drupal.org/security">Security</a>
-        <a href="https://www.drupal.org/contribute">Contribute</a>
-        <a href="https://www.drupal.org/privacy">Privacy Policy</a>
-        <a href="https://www.drupal.org/terms">Terms of Service</a>
-      </div>
-      <div class="footer-social">
-        <a href="https://www.linkedin.com/company/drupal-project/" aria-label="LinkedIn"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
-        <a href="https://mastodon.social/@drupal" aria-label="Mastodon"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M23.268 5.313c-.35-2.578-2.617-4.61-5.304-5.004C17.51.242 15.792 0 11.813 0h-.03c-3.98 0-4.835.242-5.288.309C3.882.692 1.496 2.518.917 5.127.64 6.412.61 7.837.661 9.143c.074 1.874.088 3.745.26 5.611.118 1.24.325 2.47.62 3.68.55 2.237 2.777 4.098 4.96 4.857 2.336.792 4.849.923 7.256.38.265-.061.527-.132.786-.213.585-.184 1.27-.39 1.774-.753a.057.057 0 00.023-.043v-1.809a.052.052 0 00-.02-.041.053.053 0 00-.046-.01 20.282 20.282 0 01-4.709.547c-2.73 0-3.463-1.284-3.674-1.818a5.593 5.593 0 01-.319-1.433.053.053 0 01.066-.054 19.648 19.648 0 004.581.536h.427c1.587-.007 3.178-.063 4.741-.36.043-.008.086-.017.124-.028 2.132-.429 4.161-1.77 4.37-8.644.008-.317.046-3.276.046-3.597 0-.107.036-3.397-.048-5.186z"/></svg></a>
-        <a href="https://www.drupal.org/slack" aria-label="Slack"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M5.042 15.165a2.528 2.528 0 01-2.52 2.523A2.528 2.528 0 010 15.165a2.527 2.527 0 012.522-2.52h2.52v2.52zM6.313 15.165a2.527 2.527 0 012.521-2.52 2.527 2.527 0 012.521 2.52v6.313A2.528 2.528 0 018.834 24a2.528 2.528 0 01-2.521-2.522v-6.313zM8.834 5.042a2.528 2.528 0 01-2.521-2.52A2.528 2.528 0 018.834 0a2.528 2.528 0 012.521 2.522v2.52H8.834zM8.834 6.313a2.528 2.528 0 012.521 2.521 2.528 2.528 0 01-2.521 2.521H2.522A2.528 2.528 0 010 8.834a2.528 2.528 0 012.522-2.521h6.312zM18.956 8.834a2.528 2.528 0 012.522-2.521A2.528 2.528 0 0124 8.834a2.528 2.528 0 01-2.522 2.521h-2.522V8.834zM17.688 8.834a2.528 2.528 0 01-2.523 2.521 2.527 2.527 0 01-2.52-2.521V2.522A2.527 2.527 0 0115.165 0a2.528 2.528 0 012.523 2.522v6.312zM15.165 18.956a2.528 2.528 0 012.523 2.522A2.528 2.528 0 0115.165 24a2.527 2.527 0 01-2.52-2.522v-2.522h2.52zM15.165 17.688a2.527 2.527 0 01-2.52-2.523 2.526 2.526 0 012.52-2.52h6.313A2.527 2.527 0 0124 15.165a2.528 2.528 0 01-2.522 2.523h-6.313z"/></svg></a>
-        <a href="https://www.youtube.com/@DrupalAssociation" aria-label="YouTube"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <p>Drupal is a <a href="https://www.drupal.org/about/trademark">registered trademark</a> of <a href="https://dri.es/">Dries Buytaert</a>. &copy; 2026</p>
-    </div>
+<footer id="footer" role="contentinfo">
+    <div class="footer__primary-section">
+      <div class="footer__nav-container">
+        <div class="footer__drupal-logo">
+            <a class="drupal-logo drupal-blue" href="https://new.drupal.org/" title="Drupal.org">
+    <span class="element-focusable">Drupal.org</span>
+    <svg width="185" height="67" viewBox="0 0 150 53" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M36.654 19.6521C36.6249 19.594 36.5958 19.5649 36.5376 19.5067C33.688 16.3082 29.6462 11.772 26.7384 8.54434C25.8369 7.58476 24.9355 6.62519 24.0923 5.63654C23.8887 5.40391 23.7143 5.17129 23.5107 4.93867C23.3362 4.7642 23.249 4.64789 23.249 4.64789H23.2781C22.2894 3.48477 21.5043 2.17626 20.9518 0.780513L20.8064 0.460655C20.8064 0.431577 20.7774 0.431577 20.7483 0.402499C20.7192 0.402499 20.6611 0.373421 20.632 0.373421H20.6029C20.5448 0.373421 20.5157 0.402499 20.4866 0.402499C20.4575 0.431577 20.4575 0.431577 20.4284 0.460655L20.283 0.780513C19.7015 2.17626 18.9164 3.48477 17.9568 4.64789H17.9859C17.9859 4.64789 17.8987 4.7642 17.7242 4.93867C17.5206 5.17129 17.3462 5.40391 17.1426 5.63654C16.2703 6.62519 15.3979 7.58476 14.4965 8.54434C11.5887 11.772 7.51781 16.3082 4.66816 19.5067C4.63908 19.5649 4.61001 19.594 4.55185 19.6521C-6.20701 33.9876 5.48235 45.6769 5.48235 45.6769H5.45327C8.91355 49.6897 13.8277 52.1613 19.0908 52.5393C19.5561 52.5975 20.0504 52.6266 20.5738 52.6266H20.6029C21.0972 52.6266 21.5916 52.5975 22.0859 52.5393C27.3781 52.1613 32.2632 49.6897 35.7235 45.6769H35.6944C35.7235 45.6769 47.4128 33.9876 36.654 19.6521ZM11.5887 29.7422L11.327 30.1493L11.2979 30.1784C9.32064 32.5628 8.15752 35.1216 7.77951 37.6514C7.72135 37.9713 7.43057 38.1748 7.13979 38.1167C6.93625 38.0876 6.79086 37.9422 6.70362 37.7677C6.18022 36.5465 5.83128 35.267 5.65681 33.9585C5.0171 29.3351 6.41284 25.2933 9.3788 21.833C10.571 20.4663 11.7632 19.0997 12.9554 17.733C13.1589 17.5004 13.5079 17.4713 13.7405 17.6748C13.7696 17.7039 13.7696 17.7039 13.7987 17.733C14.7582 18.8379 16.0086 20.2628 17.4043 21.8911C17.5788 22.0947 17.5788 22.4145 17.4043 22.6472C15.4852 24.9443 13.4497 27.3869 11.6178 29.7131L11.5887 29.7422ZM28.1341 41.7223C27.0291 44.6301 24.8483 46.3748 21.766 46.8691C17.3752 47.5379 13.2752 44.5429 12.6065 40.1521C12.6065 40.094 12.6065 40.0649 12.5774 40.0067C12.2284 37.5351 12.9845 35.3543 14.5838 33.4933C16.4447 31.3124 20.5448 26.2528 20.6029 26.1656C20.6901 26.2528 25.0518 31.6904 26.6802 33.6096C28.7447 36.023 29.2391 38.7855 28.1341 41.7223ZM34.6185 37.1571C34.5894 37.2443 34.5313 37.3606 34.5022 37.4479C34.3859 37.7386 34.066 37.884 33.7752 37.7677C33.6008 37.6805 33.4554 37.5351 33.4263 37.3316C33.0192 34.889 31.8561 32.4465 29.966 30.1493L29.9369 30.1202L29.7625 29.8585L29.6462 29.7131C28.1341 27.794 20.1377 18.4309 16.6483 14.3309C16.4738 14.1273 16.4738 13.8075 16.6483 13.5748C17.8114 12.2954 18.9745 11.016 20.1086 9.70746C20.3121 9.47483 20.6611 9.47483 20.8937 9.67838L20.9228 9.70746C21.4462 10.2599 21.9405 10.8124 22.4348 11.394C25.6043 14.9415 28.8029 18.4309 31.8852 22.0075C35.7816 26.5145 36.683 31.6904 34.6185 37.1571Z"/>
+      <path d="M141.073 16.9188H144.708V17.6458H143.254V21.2515H142.527V17.6749H141.073V16.9188Z"/>
+      <path d="M149.244 21.2515L148.924 18.111L148.721 19.1578L147.964 21.2515H147.034L146.278 19.1578L146.074 18.111L145.755 21.2515H144.999L145.435 16.9188H146.249L147.499 20.3791L148.75 16.9188H149.564L150 21.2515H149.244Z" />
+      <path d="M56.4851 18.082H48.3433V39.3671H56.4851C62.3589 39.3671 67.1276 34.5983 67.1276 28.7246C67.1276 22.8508 62.3589 18.082 56.4851 18.082ZM61.5156 33.7551C60.178 35.0927 58.3752 35.8487 56.4851 35.8196H51.8908V21.6005H56.4851C60.4397 21.6295 63.6092 24.8572 63.5801 28.7827C63.5801 30.6437 62.8241 32.4466 61.5156 33.7551ZM136.013 39.3671H139.561V16.8317H136.013V39.3671ZM73.1177 24.8863V23.5778H69.5702V39.3962H73.1177V29.626C73.1177 27.9104 74.5425 27.1253 75.8801 27.1253H78.0901V23.5487H75.8801C74.8333 23.5778 73.8156 24.0721 73.1177 24.8863ZM92.0475 31.7487C92.0766 32.97 91.6986 34.1331 90.9716 35.1217C90.2447 36.0232 89.1397 36.5175 87.9766 36.4884C87.017 36.5175 86.0865 36.1685 85.3596 35.5288C84.6035 34.8019 84.2255 33.726 84.2255 32.3302V23.8686H80.678V33.1444C80.6489 34.9182 81.3759 36.6338 82.6844 37.8551C84.022 39.1054 85.7957 39.7742 87.5986 39.7451C89.2269 39.7742 90.8262 39.1927 92.0184 38.0586V39.3962H95.5659V23.8686H92.0184V31.7487H92.0475ZM106.935 23.4615C105.133 23.4615 103.388 24.1012 102.021 25.2934V23.8395H98.4737V46.4331H102.021V37.9132C103.388 39.1054 105.133 39.7451 106.935 39.7451C111.297 39.7451 114.874 36.1104 114.874 31.6324C114.874 27.1253 111.326 23.4615 106.935 23.4615ZM110.018 34.86C109.204 35.7033 108.099 36.1976 106.935 36.1976C104.435 36.1395 102.457 34.104 102.486 31.6033C102.486 30.382 102.952 29.2189 103.795 28.3175C104.609 27.4451 105.743 26.9799 106.935 26.9799C109.349 26.9799 111.326 29.0444 111.326 31.6033C111.326 32.8246 110.861 33.9877 110.018 34.86ZM129.384 25.2934C128.017 24.1012 126.272 23.4324 124.469 23.4615C120.108 23.4615 116.531 27.0962 116.531 31.5742C116.531 36.0522 120.079 39.7161 124.469 39.7161C126.272 39.7451 128.046 39.0763 129.384 37.8841V39.3671H132.931V23.8104H129.384V25.2934ZM124.469 36.2267C122.027 36.2267 120.05 34.1622 120.05 31.6033C120.05 29.0735 122.027 27.009 124.469 27.009C126.912 27.009 128.889 29.0735 128.889 31.6033C128.889 34.1331 126.883 36.2267 124.469 36.2267Z"/>
+    </svg>
+  </a>
+        </div>
+          <div class="region region-footer-nav">
+      <nav role="navigation" aria-label="Footer navigation">
+  <ul class="footer__menu">
+          <li class="footer__menu-item">
+          <a href="https://www.drupal.org/drupalorg">About Drupal</a>
+      </li>
+          <li class="footer__menu-item">
+          <a href="https://www.drupal.org/dcoc">Code of Conduct</a>
+      </li>
+          <li class="footer__menu-item">
+          <a href="https://www.drupal.org/news">News</a>
+      </li>
+          <li class="footer__menu-item">
+          <a href="https://www.drupal.org/planet">Planet Drupal</a>
+      </li>
+          <li class="footer__menu-item">
+          <a href="https://www.drupal.org/privacy">Privacy Policy</a>
+      </li>
+          <li class="footer__menu-item">
+          <a href="https://www.drupal.org/subscribe">Signup for Drupal News</a>
+      </li>
+          <li class="footer__menu-item">
+          <a href="https://www.drupal.org/terms">Terms of Service</a>
+      </li>
+          <li class="footer__menu-item">
+          <a href="https://www.drupal.org/about/features/accessibility">Web Accessibility</a>
+      </li>
+      </ul>
+</nav>
+
+
+
   </div>
-</footer>
+
+      </div>
+      <div class="footer__social-container">
+          <div class="region region-footer-social">
+      <ul class="footer__social-menu">
+      <li class="footer__social-menu-item">
+      <a href="https://www.facebook.com/DrupalOpenSource/">
+        <img src="https://new.drupal.org/themes/contrib/bluecheese/images/socials/facebook-logo.svg">
+        <span class="visually-hidden">facebook</span>
+      </a>
+    </li>
+      <li class="footer__social-menu-item">
+      <a href="https://www.instagram.com/drupalassociation/">
+        <img src="https://new.drupal.org/themes/contrib/bluecheese/images/socials/instagram-logo.svg">
+        <span class="visually-hidden">instagram</span>
+      </a>
+    </li>
+      <li class="footer__social-menu-item">
+      <a href="https://www.linkedin.com/company/drupal-project/">
+        <img src="https://new.drupal.org/themes/contrib/bluecheese/images/socials/linkedin-logo.svg">
+        <span class="visually-hidden">linkedin</span>
+      </a>
+    </li>
+      <li class="footer__social-menu-item">
+      <a href="https://mastodon.social/@drupal">
+        <img src="https://new.drupal.org/themes/contrib/bluecheese/images/socials/mastodon-logo.svg">
+        <span class="visually-hidden">mastodon</span>
+      </a>
+    </li>
+      <li class="footer__social-menu-item">
+      <a href="https://www.drupal.org/slack">
+        <img src="https://new.drupal.org/themes/contrib/bluecheese/images/socials/slack-logo.svg">
+        <span class="visually-hidden">slack</span>
+      </a>
+    </li>
+      <li class="footer__social-menu-item">
+      <a href="https://www.youtube.com/@DrupalAssociation">
+        <img src="https://new.drupal.org/themes/contrib/bluecheese/images/socials/youtube-logo.svg">
+        <span class="visually-hidden">youtube</span>
+      </a>
+    </li>
+  </ul>
+
+
+
+  </div>
+
+      </div>
+    </div>
+    <div class="footer__secondary-section">
+      <div class="footer__sponsorship">
+        <a class="footer__sponsorship-logo" href=https://www.tag1.com/?utm_source=DA&utm_medium=referral&utm_campaign=drupal-org-footer"><img alt="Tag1 logo" src="https://new.drupal.org/themes/contrib/bluecheese/images/tag1logo-n.svg"></a>
+        <a class="footer__sponsorship-management" href="https://www.tag1.com/?utm_source=DA&utm_medium=referral&utm_campaign=drupal-org-footer">Tag1 provides infrastructure management for Drupal.org</a>
+        <a class="footer__sponsorship-support" href="https://d7es.tag1.com/plans?utm_source=DA&utm_medium=footer&utm_campaign=EOL&utm_id=d7es&utm_term=plans&utm_content=Dec">Need a Drupal 7 extended support partner? <span>Consider Tag1.</span></a>
+      </div>
+      <div class="footer__copyright">
+        <div class="footer__copyright-trademark">
+          <span>Drupal is a</span>
+          <a href="https://www.drupal.org/about/trademark">registered trademark</a>
+          <span>of</span>
+          <a href="https://dri.es/">Dries Buytaert</a>.
+        </div>
+        <div class="footer__copyright-year">Copyright 2026</div>
+      </div>
+    </div>
+  </footer>
 
   <script>
     (function() {
