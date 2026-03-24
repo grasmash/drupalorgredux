@@ -11,16 +11,13 @@
   <link rel="stylesheet" href="https://new.drupal.org/assets/css/css_ChRsPMNjgzCRgvIBqaH1-DjMQX-7nnoo82zVL-EM4rc.css">
   <link rel="stylesheet" href="https://new.drupal.org/assets/css/css_V629T-vzSWFKYElkDUrqEcBuf3Oz5eE_kG0PgaRM26g.css">
   <style>
-    /* Override drupal.org header/footer for our page */
-    #header { position: relative; z-index: 100; margin: 0 1rem; }
-    #header .header__inner { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+    /* Let drupal.org CSS handle header — just adjust hero for overlap */
+    .hero { padding-top: 6rem; }
     @media (max-width: 900px) {
-      #header { margin: 0 0.5rem; }
-      #header .header__inner { padding: 0 0.75rem; }
       #header .menu-main { display: none; }
       #header .header__secondary-menu { display: none; }
     }
-    .hero { padding-top: 3rem; }
+    /* Fix footer container width */
     /* Header hover effects */
     #header .menu-main__link--level-1 { transition: color 0.2s, opacity 0.2s; }
     #header .menu-main__link--level-1:hover { opacity: 0.7; }
@@ -39,9 +36,7 @@
     [class^="icon-"]::before, [class*=" icon-"]::before {
       font-family: 'fontello' !important;
     }
-    /* Fix footer container */
-    #footer .footer__primary-section,
-    #footer .footer__secondary-section { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+    /* Footer — let drupal.org CSS handle it */
     @font-face {
       font-family: 'ZT Gatha';
       src: url('assets/fonts/zt-gatha-web/ZTGatha-SemiBold.woff2') format('woff2');
