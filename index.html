@@ -148,14 +148,9 @@
     }
     #header .header-search-button:hover { background-color: transparent; }
     #header .header-search-button__icon {
-      position: absolute; inset: 0;
-      width: 28px; height: 28px;
-      display: block; margin: auto;
-      background-color: #12285F;
-      mask-image: url('assets/drupal-theme/magnifying-glass.svg');
-      mask-position: center; mask-repeat: no-repeat; mask-size: contain;
-      -webkit-mask-image: url('assets/drupal-theme/magnifying-glass.svg');
-      -webkit-mask-position: center; -webkit-mask-repeat: no-repeat; -webkit-mask-size: contain;
+      display: block; width: 28px; height: 28px;
+      background-image: url('assets/drupal-theme/magnifying-glass.svg');
+      background-size: contain; background-repeat: no-repeat; background-position: center;
       pointer-events: none;
     }
     /* Search button — positioned by source order, after nav */
