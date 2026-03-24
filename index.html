@@ -1401,7 +1401,19 @@
           </div>
         </div>
         <div class="canvas-visual">
-          <img src="assets/canvas-templates.png" alt="Drupal Canvas visual page builder with layers panel, live preview, and SEO settings" style="width:100%;border-radius:10px;box-shadow:var(--shadow-lg);">
+          <div class="canvas-images" data-active="1">
+            <div class="canvas-image-group" data-for="1">
+              <img src="assets/canvas-templates.png" alt="Canvas template browser" style="width:100%;border-radius:8px;box-shadow:var(--shadow);">
+              <img src="assets/canvas-ai.webp" alt="Canvas AI page generation" style="width:100%;border-radius:8px;box-shadow:var(--shadow);margin-top:0.75rem;">
+            </div>
+            <div class="canvas-image-group" data-for="2" style="display:none;">
+              <img src="assets/canvas-editor.png" alt="Canvas visual editor with layers and preview" style="width:100%;border-radius:8px;box-shadow:var(--shadow);">
+            </div>
+            <div class="canvas-image-group" data-for="3" style="display:none;">
+              <img src="assets/jsonapi-query-builder.png" alt="JSON:API Query Builder" style="width:100%;border-radius:8px;box-shadow:var(--shadow);">
+              <img src="assets/jsonapi-explorer.png" alt="JSON:API Explorer with live results" style="width:100%;border-radius:8px;box-shadow:var(--shadow);margin-top:0.75rem;">
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -2119,17 +2131,15 @@
     })();
 
     var canvasTabs = document.querySelectorAll('.canvas-option[data-tab]');
-    var canvasImg = document.querySelector('.canvas-visual img');
-    var canvasImages = {
-      '1': 'assets/canvas-templates.png',
-      '2': 'assets/canvas-editor.png',
-      '3': 'assets/jsonapi-query-builder.png'
-    };
+    var canvasGroups = document.querySelectorAll('.canvas-image-group');
     canvasTabs.forEach(function(tab) {
       tab.addEventListener('click', function() {
+        var tabId = tab.getAttribute('data-tab');
         canvasTabs.forEach(function(t) { t.classList.remove('active'); });
         tab.classList.add('active');
-        if (canvasImg) canvasImg.src = canvasImages[tab.getAttribute('data-tab')];
+        canvasGroups.forEach(function(g) {
+          g.style.display = g.getAttribute('data-for') === tabId ? 'block' : 'none';
+        });
       });
     });
   </script>
