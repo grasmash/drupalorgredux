@@ -35,7 +35,10 @@
       #header .header-logo { margin: 0 12px 0 0; }
     }
     #header .drupal-logo { display: inline-flex; align-items: center; text-decoration: none; }
-    #header .drupal-logo svg { height: 40px; width: auto; }
+    #header .drupal-logo svg { width: 115px; height: auto; }
+    @media (min-width: 1440px) {
+      #header .drupal-logo svg { width: 142px; }
+    }
     #header .drupal-logo.drupal-navy svg path { fill: #12285F; }
     /* Hamburger — hidden on desktop */
     #header .🍔-menu-toggle { display: none; }
