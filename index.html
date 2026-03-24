@@ -20,12 +20,22 @@
       font-family: 'Noto Sans', sans-serif;
     }
     #header * { box-sizing: border-box; }
-    #header .header__inner {
+    /* Main flex container: logo left, nav center, actions right */
+    #header .header__nav-section {
       display: flex; align-items: center; justify-content: space-between;
     }
+    /* Logo */
+    #header .header-logo { display: flex; align-items: center; flex-shrink: 0; }
+    #header .drupal-logo { display: inline-flex; align-items: center; }
     #header .drupal-logo svg { height: 40px; width: auto; }
-    #header .menu-main { display: flex; align-items: center; gap: 0; list-style: none; margin: 0; padding: 0; }
+    /* Hamburger — hidden on desktop */
+    #header .🍔-menu-toggle { display: none; }
+    /* Main nav (the <nav> block) */
+    #header .main-navigation { flex: 1; display: flex; justify-content: center; }
+    /* Top-level menu list */
+    #header .menu-main--level-1 { display: flex; align-items: center; gap: 0; list-style: none; margin: 0; padding: 0; }
     #header .menu-main__item { position: relative; }
+    /* Level 1 links & buttons */
     #header .menu-main__link--level-1 {
       display: inline-flex; align-items: center;
       padding: 8px 14px; font-size: 0.72rem; font-weight: 700;
@@ -36,21 +46,27 @@
     }
     #header .menu-main__link--level-1:hover { color: #006AA9; }
     /* Support Drupal pill */
-    #header .menu-main__link--pill {
+    #header .menu-main__link--level-1.support-drupal {
       border: 1.5px solid #0a1929; border-radius: 999px; padding: 6px 16px;
     }
-    /* Dropdown panels */
-    #header .menu-main__dropdown {
+    /* Hide "User Menu" and "Get Started" items from main nav (they repeat in secondary areas) */
+    #header .menu-main--level-1 > .menu-main__item--level-1:nth-last-child(1),
+    #header .menu-main--level-1 > .menu-main__item--level-1:nth-last-child(2) {
+      display: none;
+    }
+    /* Dropdown panels (submenu wrapper) */
+    #header .menu-main__submenu-wrapper {
       display: none; position: absolute; top: 100%; left: 0;
       min-width: 700px; padding: 24px;
       background: #fff; border-radius: 0 0 10px 10px;
       box-shadow: 0 8px 24px rgba(0,0,0,0.1);
       z-index: 50;
     }
-    #header .menu-main__link--level-1[aria-expanded="true"] + .menu-main__dropdown,
-    #header button[aria-expanded="true"] + * {
+    #header .menu-main__link--level-1[aria-expanded="true"] + .menu-main__submenu-wrapper {
       display: block;
     }
+    /* Sub-menu list */
+    #header .menu-main--level-2 { list-style: none; margin: 0; padding: 0; }
     /* Dropdown links */
     #header .menu-main__link--level-2 {
       display: block; padding: 8px 0; font-size: 0.85rem; font-weight: 600;
@@ -61,16 +77,57 @@
       display: block; font-size: 0.75rem; color: #666; font-weight: 400;
       margin-top: 2px; text-transform: none; letter-spacing: 0;
     }
-    /* Right side — user + get started */
-    #header .header__actions, #header .header__end {
-      display: flex; align-items: center; gap: 12px;
-    }
-    #header .header__user-menu-button {
+    /* Search drawer area */
+    #header .search-drawer { display: none; padding: 16px 25px; border-top: 1px solid #eee; }
+    /* Desktop search button (inside search drawer) */
+    #header .header-search-button {
       width: 36px; height: 36px; border: none; background: none; cursor: pointer;
-      background-image: url('assets/drupal-theme/user.svg');
-      background-size: 20px; background-repeat: no-repeat; background-position: center;
+      border-radius: 50%; transition: background-color 0.2s;
     }
-    #header .button--primary {
+    #header .header-search-button:hover { background-color: rgba(0,0,0,0.04); }
+    #header .header-search-button__icon {
+      display: block; width: 18px; height: 18px; margin: auto;
+      background-image: url('assets/drupal-theme/magnifying-glass.svg');
+      background-size: contain; background-repeat: no-repeat; background-position: center;
+    }
+    /* Mobile search button (at top of header) */
+    #header .header__mobile-search-button { display: none; }
+    /* Right side — user menu + get started (secondary menu) */
+    #header .header-user-menu {
+      display: flex; align-items: center; gap: 12px; flex-shrink: 0;
+    }
+    #header .header-user-menu__button {
+      width: 36px; height: 36px; border: none; background: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+    }
+    #header .header-user-menu__picture { width: 20px; height: 20px; }
+    /* User menu dropdown */
+    #header .header-user-menu .menu--level-1 {
+      display: none; position: absolute; top: 100%; right: 0;
+      min-width: 160px; padding: 12px;
+      background: #fff; border-radius: 8px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+      list-style: none; margin: 0; z-index: 50;
+    }
+    #header .header-user-menu__button[aria-expanded="true"] + .menu--level-1 {
+      display: block;
+    }
+    #header .header-user-menu .menu__link {
+      display: block; padding: 6px 8px; font-size: 0.85rem; font-weight: 600;
+      color: #0a1929; text-decoration: none;
+    }
+    #header .header-user-menu .menu__link:hover { color: #006AA9; }
+    /* Secondary menu (Get Started button area) */
+    #header .block-bluecheese-secondarymenu {
+      display: flex; align-items: center; flex-shrink: 0;
+    }
+    #header .block-bluecheese-secondarymenu .menu--level-1 {
+      display: flex; align-items: center; list-style: none; margin: 0; padding: 0;
+    }
+    #header .block-bluecheese-secondarymenu .menu__item--level-1 { position: relative; }
+    /* Get Started button — primary CTA */
+    #header .button--primary,
+    #header .button.button--primary {
       display: inline-flex; align-items: center; gap: 6px;
       padding: 10px 20px; background: #0a1929; color: #fff;
       border: none; border-radius: 8px; font-size: 0.82rem; font-weight: 600;
@@ -79,6 +136,22 @@
       transition: background 0.2s, transform 0.15s;
     }
     #header .button--primary:hover { background: #12285F; transform: translateY(-1px); }
+    /* Get Started dropdown */
+    #header .block-bluecheese-secondarymenu .menu--level-2 {
+      display: none; position: absolute; top: 100%; right: 0;
+      min-width: 180px; padding: 12px;
+      background: #fff; border-radius: 8px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+      list-style: none; margin: 0; z-index: 50;
+    }
+    #header .block-bluecheese-secondarymenu .menu__link--button[aria-expanded="true"] + .menu--level-2 {
+      display: block;
+    }
+    #header .block-bluecheese-secondarymenu .menu__link--level-2 {
+      display: block; padding: 6px 8px; font-size: 0.85rem; font-weight: 600;
+      color: #0a1929; text-decoration: none;
+    }
+    #header .block-bluecheese-secondarymenu .menu__link--level-2:hover { color: #006AA9; }
     /* Fontello arrow icon */
     @font-face {
       font-family: 'fontello';
@@ -89,21 +162,6 @@
       font-family: 'fontello' !important;
       content: '\e802'; float: right; padding-left: 6px;
     }
-    /* Search */
-    #header .header__search-button {
-      width: 36px; height: 36px; border: none; background: none; cursor: pointer;
-      background-image: url('assets/drupal-theme/magnifying-glass.svg');
-      background-size: 18px; background-repeat: no-repeat; background-position: center;
-      border-radius: 50%; transition: background-color 0.2s;
-    }
-    #header .header__search-button:hover { background-color: rgba(0,0,0,0.04); }
-    #header .search-drawer { display: none; padding: 16px 25px; border-top: 1px solid #eee; }
-    /* Hide things we don't need visible */
-    #header .header__search-button span,
-    #header .header__user-menu-button span,
-    #header .drupal-logo span.element-focusable {
-      position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0);
-    }
     /* Chevron on dropdown buttons */
     #header .menu-main__link--has-children::after {
       content: ''; display: inline-block; width: 10px; height: 10px; margin-left: 4px;
@@ -111,14 +169,30 @@
       background-size: contain; background-repeat: no-repeat;
       transition: transform 0.2s;
     }
+    #header .menu__link--has-children::after {
+      content: ''; display: inline-block; width: 10px; height: 10px; margin-left: 4px;
+      background-image: url('assets/drupal-theme/chevron-down.svg');
+      background-size: contain; background-repeat: no-repeat;
+      transition: transform 0.2s;
+    }
     #header button[aria-expanded="true"]::after { transform: rotate(180deg); }
+    /* Screen-reader only / visually hidden */
+    #header .visually-hidden,
+    #header .element-focusable {
+      position: absolute !important; width: 1px; height: 1px;
+      overflow: hidden; clip: rect(0,0,0,0); clip-path: inset(50%);
+      white-space: nowrap; border: 0; padding: 0; margin: -1px;
+    }
     /* Hero padding */
     .hero { padding-top: 6rem; }
     /* Responsive */
     @media (max-width: 900px) {
       #header { padding: 10px 16px; }
-      #header .menu-main { display: none; }
-      #header .header__secondary-menu { display: none; }
+      #header .main-navigation { display: none; }
+      #header .block-bluecheese-secondarymenu { display: none; }
+      #header .search-drawer { display: none; }
+      #header .🍔-menu-toggle { display: block; border: none; background: none; cursor: pointer; padding: 8px; }
+      #header .header__mobile-search-button { display: block; }
     }
 
     /* ============ FOOTER ============ */
