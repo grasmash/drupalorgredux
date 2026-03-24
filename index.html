@@ -44,7 +44,7 @@
     /* Level 1 links & buttons */
     #header .menu-main__link--level-1 {
       display: inline-flex; align-items: center;
-      padding: 8px 0; font-size: 12px; font-weight: 700;
+      padding: 16px 0; font-size: 12px; font-weight: 700;
       text-transform: uppercase; letter-spacing: 1.5px;
       color: #12285F; text-decoration: none; border: none; background: none;
       cursor: pointer; white-space: nowrap;
@@ -53,7 +53,8 @@
     #header .menu-main__link--level-1:hover { color: #009CDE; }
     /* Support Drupal pill */
     #header .menu-main__link--level-1.support-drupal {
-      border: 1.5px solid #12285F; border-radius: 999px; padding: 6px 16px;
+      border: 1px solid #12285F; border-radius: 999px; padding: 8px 16px;
+      line-height: 14px;
     }
     /* Hide "User Menu" and "Get Started" items from main nav (they repeat in secondary areas) */
     #header .menu-main--level-1 > .menu-main__item--level-1:nth-last-child(1),
@@ -63,9 +64,10 @@
     /* Dropdown panels (submenu wrapper) */
     #header .menu-main__submenu-wrapper {
       display: none; position: absolute; top: 100%; left: 0;
-      min-width: 700px; padding: 24px;
+      min-width: 700px; padding: 16px 25px 32px;
       background: #fff; border-radius: 0 0 10px 10px;
       box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+      border: solid 1px transparent; border-top: 0;
       z-index: 50;
     }
     #header:has([aria-expanded="true"]) {
@@ -80,15 +82,23 @@
     /* Sub-menu list */
     #header .menu-main--level-2 { list-style: none; margin: 0; padding: 0; }
     /* Dropdown links */
+    #header .menu-main--level-2 {
+      display: flex; flex-direction: column; gap: 16px;
+    }
     #header .menu-main__link--level-2 {
-      display: block; padding: 8px 0; font-size: 0.85rem; font-weight: 600;
-      color: #12285F; text-decoration: none; text-transform: none; letter-spacing: 0;
+      display: block; padding: 0; font-size: 18px; font-weight: 700;
+      font-family: 'ZT Gatha', 'Noto Sans', sans-serif;
+      color: #12285F; text-decoration: none; text-transform: none;
+      letter-spacing: -0.09px; line-height: 1.2;
     }
     #header .menu-main__link--level-2:hover { color: #006AA9; }
     #header .menu-main__description {
-      display: block; font-size: 0.75rem; color: #666; font-weight: 400;
-      margin-top: 2px; text-transform: none; letter-spacing: 0;
+      display: block; font-size: 14px; color: #6d7583; font-weight: 400;
+      margin-top: 2px; text-transform: none; letter-spacing: 0.25px;
+      line-height: 20px; transition: color 0.2s;
+      font-family: 'Noto Sans', sans-serif;
     }
+    #header .menu-main__item--level-2:hover .menu-main__description { color: #323946; }
     /* Search drawer area */
     #header .search-drawer { display: none; padding: 16px 25px; border-top: 1px solid #eee; }
     /* Search button */
@@ -99,9 +109,12 @@
     }
     #header .header-search-button:hover { background-color: transparent; }
     #header .header-search-button__icon {
-      display: block; width: 18px; height: 18px; margin: auto;
-      background-image: url('assets/drupal-theme/magnifying-glass.svg');
-      background-size: contain; background-repeat: no-repeat; background-position: center;
+      display: block; width: 28px; height: 28px;
+      background-color: #12285F;
+      mask-image: url('assets/drupal-theme/magnifying-glass.svg');
+      mask-position: center; mask-repeat: no-repeat; mask-size: contain;
+      -webkit-mask-image: url('assets/drupal-theme/magnifying-glass.svg');
+      -webkit-mask-position: center; -webkit-mask-repeat: no-repeat; -webkit-mask-size: contain;
     }
     /* Search button — positioned right, after nav */
     #header .header-search-button { order: 3; }
@@ -144,8 +157,8 @@
     #header .button--primary,
     #header .button.button--primary {
       display: inline-flex; align-items: center; gap: 6px;
-      padding: 16px 20px; background: #12285F; color: #fff;
-      border: none; border-radius: 6px; font-size: 12px; font-weight: 600;
+      padding: 1rem 1.25rem; background: #12285F; color: #fff;
+      border: solid 3px #12285F; border-radius: 6px; font-size: 12px; font-weight: 600;
       cursor: pointer; text-decoration: none; white-space: nowrap;
       font-family: 'Noto Sans', sans-serif;
       transition: background 0.2s, transform 0.15s;
@@ -179,15 +192,21 @@
     }
     /* Chevron on dropdown buttons */
     #header .menu-main__link--has-children::after {
-      content: ''; display: inline-block; width: 10px; height: 10px; margin-left: 4px;
-      background-image: url('assets/drupal-theme/chevron-down.svg');
-      background-size: contain; background-repeat: no-repeat;
+      content: ''; display: inline-block; width: 12px; height: 12px; margin-left: 6px;
+      background-color: #12285F;
+      mask-image: url('assets/drupal-theme/chevron-down.svg');
+      mask-repeat: no-repeat; mask-size: contain;
+      -webkit-mask-image: url('assets/drupal-theme/chevron-down.svg');
+      -webkit-mask-repeat: no-repeat; -webkit-mask-size: contain;
       transition: transform 0.2s;
     }
     #header .menu__link--has-children::after {
-      content: ''; display: inline-block; width: 10px; height: 10px; margin-left: 4px;
-      background-image: url('assets/drupal-theme/chevron-down.svg');
-      background-size: contain; background-repeat: no-repeat;
+      content: ''; display: inline-block; width: 12px; height: 12px; margin-left: 6px;
+      background-color: #12285F;
+      mask-image: url('assets/drupal-theme/chevron-down.svg');
+      mask-repeat: no-repeat; mask-size: contain;
+      -webkit-mask-image: url('assets/drupal-theme/chevron-down.svg');
+      -webkit-mask-repeat: no-repeat; -webkit-mask-size: contain;
       transition: transform 0.2s;
     }
     #header button[aria-expanded="true"]::after { transform: rotate(180deg); }
