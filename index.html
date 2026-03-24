@@ -2077,12 +2077,12 @@
     
         
           <div class="content">
-        <form action="/home" method="post" id="drupalorg-search-form" accept-charset="UTF-8">
+        <form action="https://www.drupal.org/search/site" method="get" id="drupalorg-search-form" accept-charset="UTF-8" target="_blank">
   <div class="js-form-item form-item js-form-type-textfield form-type--textfield js-form-item-query form-item--query">
       <label for="edit-query" class="form-item__label">Search</label>
-        <input placeholder="What are you searching for..." data-drupal-selector="edit-query" type="text" id="edit-query" name="query" value="" size="60" maxlength="128" class="form-text form-element form-element--type-text form-element--api-textfield"/>
+        <input placeholder="What are you searching for..." type="text" id="edit-query" name="keys" value="" size="60" maxlength="128" class="form-text form-element form-element--type-text form-element--api-textfield"/>
         </div>
-<input data-drupal-selector="edit-submit" type="submit" id="edit-submit" name="op" value="Search" class="button js-form-submit form-submit"/><input autocomplete="off" data-drupal-selector="form-o5wd0-7q-h-hn1kdxtd8lkg-c1u1lf01r-cumj83sp8" type="hidden" name="form_build_id" value="form-O5Wd0_7q-H_HN1KdxTD8lKg-c1u1Lf01R_CUMJ83SP8"/><input data-drupal-selector="edit-drupalorg-search-form" type="hidden" name="form_id" value="drupalorg_search_form"/>
+<input type="submit" id="edit-submit" value="Search" class="button js-form-submit form-submit"/>
 </form>
 
       </div>
@@ -2142,7 +2142,7 @@
         
         <li class="menu__item menu__item--level-1 menu__item--has-children">
                     
-          <button class="button button--primary icon-arrow-right menu__link menu__link--button menu__link--level-1 menu__link--has-children" type="button">Get Started</button>
+          <button class="button button--primary icon-arrow-right menu__link menu__link--button menu__link--level-1 menu__link--has-children" aria-expanded="false" type="button">Get Started</button>
 
                                 <ul  class="menu menu--level-2">
             
