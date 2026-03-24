@@ -71,6 +71,43 @@ Read this screenshot. Every labeled element must be visible at its labeled posit
 ```
 Check footer: purple gradient social section, light blue secondary, 60x60 social icons, two-column menu at 1330px+.
 
+**Step 0d: Click-target verification — elementFromPoint() check**
+
+Inject JS that checks whether each interactive element is actually reachable by the user's cursor (not blocked by an overlapping element):
+
+```bash
+cp /Users/matthewgrasmick/Sites/drupalorgredux/index.html /tmp/verify-clicktargets.html
+cat >> /tmp/verify-clicktargets.html << 'JSEOF'
+<script>
+setTimeout(function() {
+  var tests = [
+    ['.header-search__desktop-button', 'Search button'],
+    ['.support-drupal', 'Support Drupal'],
+    ['.block-bluecheese-secondarymenu .button--primary', 'Get Started'],
+    ['.menu-main__link--level-1', 'First nav item'],
+    ['.header-user-menu__button', 'User menu'],
+  ];
+  var results = [];
+  tests.forEach(function(t) {
+    var el = document.querySelector(t[0]);
+    if (!el) { results.push('MISSING: ' + t[1]); return; }
+    var rect = el.getBoundingClientRect();
+    var top = document.elementFromPoint(rect.left + rect.width/2, rect.top + rect.height/2);
+    var ok = (top === el || el.contains(top));
+    results.push((ok ? 'PASS' : 'FAIL') + ': ' + t[1] + (ok ? '' : ' — BLOCKED BY ' + top.tagName + '.' + top.className));
+  });
+  var pre = document.createElement('pre');
+  pre.style.cssText = 'position:fixed;top:80px;left:20px;background:#fff;padding:20px;z-index:99999;font-size:13px;border:3px solid red;';
+  pre.textContent = results.join('\n');
+  document.body.appendChild(pre);
+}, 500);
+</script>
+JSEOF
+"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless --disable-gpu --screenshot=/tmp/verify-clicktargets.png --window-size=1600,300 --virtual-time-budget=3000 --run-all-compositor-stages-before-draw "file:///tmp/verify-clicktargets.html"
+```
+
+Read the screenshot. Every line must say PASS. If ANY says FAIL or BLOCKED BY, there is a z-index or overlap issue that must be fixed.
+
 ### Phase 1: Fetch drupal.org ground truth (HTML + CSS)
 
 ```bash
