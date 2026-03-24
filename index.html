@@ -8,8 +8,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="brand-tokens.css">
-  <link rel="stylesheet" href="https://new.drupal.org/assets/css/css_ChRsPMNjgzCRgvIBqaH1-DjMQX-7nnoo82zVL-EM4rc.css">
-  <link rel="stylesheet" href="https://new.drupal.org/assets/css/css_V629T-vzSWFKYElkDUrqEcBuf3Oz5eE_kG0PgaRM26g.css">
+  <style>
+    /* Scope drupal.org CSS to header/footer only */
+    @import url('https://new.drupal.org/assets/css/css_ChRsPMNjgzCRgvIBqaH1-DjMQX-7nnoo82zVL-EM4rc.css') layer(drupalorg);
+    @import url('https://new.drupal.org/assets/css/css_V629T-vzSWFKYElkDUrqEcBuf3Oz5eE_kG0PgaRM26g.css') layer(drupalorg);
+  </style>
   <style>
     /* Header sits above hero content */
     #header { z-index: 100 !important; }
