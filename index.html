@@ -803,7 +803,8 @@
 
     /* Responsive */
     @media (max-width: 900px) {
-      .grid-3, .grid-4, .cta-paths, .initiative-stats, .agents-grid, .structured-section .grid { grid-template-columns: 1fr; }
+      .grid-3, .grid-4, .cta-paths, .agents-grid, .structured-section .grid { grid-template-columns: 1fr; }
+      .initiative-stats { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
       .proof-featured { flex-direction: column; }
       .proof-featured-item:first-child { flex: 1; }
       .proof-featured:hover .proof-featured-item { flex: 1; }
@@ -1436,7 +1437,7 @@
       <div class="initiative-inner reveal">
         <span class="section-label">Drupal AI Initiative</span>
         <h2>$1.5M+ invested in <span class="highlight">AI for Drupal</span></h2>
-        <div class="initiative-stats" id="initiativeStats" style="grid-template-columns: repeat(4, 1fr);">
+        <div class="initiative-stats" id="initiativeStats">
           <div>
             <div class="initiative-stat-number" data-counter="1.5" data-prefix="$" data-suffix="M+" data-decimals="1">$1.5M+</div>
             <div class="initiative-stat-label">Invested in the Drupal AI Initiative</div>
