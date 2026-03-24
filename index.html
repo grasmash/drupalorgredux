@@ -12,9 +12,9 @@
     /* ============ HEADER ============ */
     #header {
       position: absolute; z-index: 100;
-      top: 20px; left: 1rem; right: 1rem;
-      max-width: 1780px; margin: 0 auto;
-      padding: 13px 25px;
+      top: 0; left: 1rem; right: 1rem;
+      max-width: 1780px; margin: 20px auto 0;
+      padding: 13.5px 25px 0;
       background: #fff; border-radius: 10px;
       box-shadow: 0 2px 10px rgba(0,0,0,0.05);
       font-family: 'Noto Sans', sans-serif;
@@ -23,32 +23,37 @@
     /* Main flex container: logo left, nav center, actions right */
     #header .header__nav-section {
       display: flex; align-items: center; gap: 8px;
+      padding-bottom: 13.5px;
+      border-bottom: 1px solid transparent;
+    }
+    @media (min-width: 1330px) {
+      #header .header__nav-section { column-gap: 28px; }
     }
     /* Logo */
     #header .header-logo { display: flex; align-items: center; flex-shrink: 0; order: 1; }
     #header .drupal-logo { display: inline-flex; align-items: center; text-decoration: none; }
     #header .drupal-logo svg { height: 40px; width: auto; }
-    #header .drupal-logo.drupal-navy svg path { fill: #0a1929; }
+    #header .drupal-logo.drupal-navy svg path { fill: #12285F; }
     /* Hamburger — hidden on desktop */
     #header .🍔-menu-toggle { display: none; }
     /* Main nav */
     #header .main-navigation { flex: 1; display: flex; justify-content: center; order: 2; }
     /* Top-level menu list */
-    #header .menu-main--level-1 { display: flex; align-items: center; gap: 0; list-style: none; margin: 0; padding: 0; }
+    #header .menu-main--level-1 { display: flex; align-items: center; gap: 28px; list-style: none; margin: 0; padding: 0; }
     #header .menu-main__item { position: relative; }
     /* Level 1 links & buttons */
     #header .menu-main__link--level-1 {
       display: inline-flex; align-items: center;
-      padding: 8px 12px; font-size: 0.68rem; font-weight: 700;
-      text-transform: uppercase; letter-spacing: 0.06em;
-      color: #0a1929; text-decoration: none; border: none; background: none;
+      padding: 8px 0; font-size: 12px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 1.5px;
+      color: #12285F; text-decoration: none; border: none; background: none;
       cursor: pointer; white-space: nowrap;
       font-family: 'Noto Sans', sans-serif;
     }
-    #header .menu-main__link--level-1:hover { color: #006AA9; }
+    #header .menu-main__link--level-1:hover { color: #009CDE; }
     /* Support Drupal pill */
     #header .menu-main__link--level-1.support-drupal {
-      border: 1.5px solid #0a1929; border-radius: 999px; padding: 6px 16px;
+      border: 1.5px solid #12285F; border-radius: 999px; padding: 6px 16px;
     }
     /* Hide "User Menu" and "Get Started" items from main nav (they repeat in secondary areas) */
     #header .menu-main--level-1 > .menu-main__item--level-1:nth-last-child(1),
@@ -63,6 +68,12 @@
       box-shadow: 0 8px 24px rgba(0,0,0,0.1);
       z-index: 50;
     }
+    #header:has([aria-expanded="true"]) {
+      border-bottom-right-radius: 0; border-bottom-left-radius: 0;
+    }
+    #header:has([aria-expanded="true"]) .header__nav-section {
+      border-bottom: 1px solid #e7ebf3;
+    }
     #header .menu-main__link--level-1[aria-expanded="true"] + .menu-main__submenu-wrapper {
       display: block;
     }
@@ -71,7 +82,7 @@
     /* Dropdown links */
     #header .menu-main__link--level-2 {
       display: block; padding: 8px 0; font-size: 0.85rem; font-weight: 600;
-      color: #0a1929; text-decoration: none; text-transform: none; letter-spacing: 0;
+      color: #12285F; text-decoration: none; text-transform: none; letter-spacing: 0;
     }
     #header .menu-main__link--level-2:hover { color: #006AA9; }
     #header .menu-main__description {
@@ -80,12 +91,13 @@
     }
     /* Search drawer area */
     #header .search-drawer { display: none; padding: 16px 25px; border-top: 1px solid #eee; }
-    /* Desktop search button (inside search drawer) */
+    /* Search button */
     #header .header-search-button {
-      width: 36px; height: 36px; border: none; background: none; cursor: pointer;
+      width: 44px; height: 44px; border: none; background: none; cursor: pointer;
       border-radius: 50%; transition: background-color 0.2s;
+      padding: 8px; display: flex; align-items: center; justify-content: center;
     }
-    #header .header-search-button:hover { background-color: rgba(0,0,0,0.04); }
+    #header .header-search-button:hover { background-color: transparent; }
     #header .header-search-button__icon {
       display: block; width: 18px; height: 18px; margin: auto;
       background-image: url('assets/drupal-theme/magnifying-glass.svg');
@@ -98,10 +110,12 @@
       display: flex; align-items: center; gap: 12px; flex-shrink: 0; order: 4;
     }
     #header .header-user-menu__button {
-      width: 36px; height: 36px; border: none; background: none; cursor: pointer;
+      width: 44px; height: 44px; border: none; background: none; cursor: pointer;
       display: flex; align-items: center; justify-content: center;
+      margin: 0 -10px; padding: 0; border-radius: 50%;
     }
-    #header .header-user-menu__picture { width: 20px; height: 20px; }
+    #header .header-user-menu__button:hover { background: transparent; }
+    #header .header-user-menu__picture { width: 40px; height: 40px; object-fit: cover; border-radius: 50%; }
     /* User menu dropdown */
     #header .header-user-menu .menu--level-1 {
       display: none; position: absolute; top: 100%; right: 0;
@@ -115,7 +129,7 @@
     }
     #header .header-user-menu .menu__link {
       display: block; padding: 6px 8px; font-size: 0.85rem; font-weight: 600;
-      color: #0a1929; text-decoration: none;
+      color: #12285F; text-decoration: none;
     }
     #header .header-user-menu .menu__link:hover { color: #006AA9; }
     /* Secondary menu (Get Started button area) */
@@ -130,8 +144,8 @@
     #header .button--primary,
     #header .button.button--primary {
       display: inline-flex; align-items: center; gap: 6px;
-      padding: 10px 20px; background: #0a1929; color: #fff;
-      border: none; border-radius: 8px; font-size: 0.82rem; font-weight: 600;
+      padding: 16px 20px; background: #12285F; color: #fff;
+      border: none; border-radius: 6px; font-size: 12px; font-weight: 600;
       cursor: pointer; text-decoration: none; white-space: nowrap;
       font-family: 'Noto Sans', sans-serif;
       transition: background 0.2s, transform 0.15s;
@@ -150,7 +164,7 @@
     }
     #header .block-bluecheese-secondarymenu .menu__link--level-2 {
       display: block; padding: 6px 8px; font-size: 0.85rem; font-weight: 600;
-      color: #0a1929; text-decoration: none;
+      color: #12285F; text-decoration: none;
     }
     #header .block-bluecheese-secondarymenu .menu__link--level-2:hover { color: #006AA9; }
     /* Fontello arrow icon */
@@ -186,44 +200,116 @@
     }
     /* Hero padding */
     .hero { padding-top: 6rem; }
-    /* Responsive */
-    @media (max-width: 900px) {
+    /* Responsive — matches drupal.org 1330px breakpoint */
+    @media (max-width: 1329px) {
       #header { padding: 10px 16px; }
       #header .main-navigation { display: none; }
       #header .block-bluecheese-secondarymenu { display: none; }
       #header .search-drawer { display: none; }
+      #header .header-user-menu { display: none; }
       #header .🍔-menu-toggle { display: block; border: none; background: none; cursor: pointer; padding: 8px; }
-      /* search button already visible */
+      #header .header-search-button { display: flex; }
     }
 
     /* ============ FOOTER ============ */
     #footer {
-      background: #0a1929; color: rgba(255,255,255,0.6); padding: 0;
+      padding: 0;
       font-family: 'Noto Sans', sans-serif;
     }
     #footer * { box-sizing: border-box; }
-    #footer a { color: rgba(255,255,255,0.6); text-decoration: none; }
-    #footer a:hover { color: #fff; }
     #footer .footer__primary-section {
-      display: flex; align-items: flex-start; gap: 2rem; padding: 3rem 2rem;
-      max-width: 1200px; margin: 0 auto; flex-wrap: wrap;
+      display: flex; flex-direction: column;
     }
-    #footer .footer__drupal-logo svg { height: 30px; width: auto; }
+    @media (min-width: 1024px) {
+      #footer .footer__primary-section { flex-direction: row; }
+    }
+    /* Nav container — navy bg */
+    #footer .footer__nav-container {
+      display: flex; flex-direction: column; gap: 40px;
+      padding: 48px 1rem 28px;
+      background-color: #12285F;
+    }
+    @media (min-width: 768px) {
+      #footer .footer__nav-container { padding-left: 2rem; }
+    }
+    @media (min-width: 1024px) {
+      #footer .footer__nav-container { width: 55%; }
+    }
+    #footer .footer__drupal-logo svg { width: 185px; height: auto; }
     #footer .footer__drupal-logo svg path { fill: #fff; }
-    #footer .footer__menu { list-style: none; display: flex; flex-wrap: wrap; gap: 0.4rem 1.5rem; padding: 0; margin: 0; }
-    #footer .footer__menu-item a { font-size: 0.8rem; }
-    #footer .footer__social-menu { list-style: none; display: flex; gap: 1rem; padding: 0; margin: 0; }
-    #footer .footer__social-menu-item img { width: 20px; height: 20px; filter: brightness(0) invert(1); opacity: 0.5; }
-    #footer .footer__social-menu-item img:hover { opacity: 1; }
-    #footer .footer__secondary-section {
-      border-top: 1px solid rgba(255,255,255,0.08); padding: 1.5rem 2rem;
-      max-width: 1200px; margin: 0 auto;
-      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;
-      font-size: 0.75rem; color: rgba(255,255,255,0.35);
+    #footer .footer__menu {
+      list-style: none; display: grid; grid-template-columns: 1fr;
+      padding: 0; margin: 0;
     }
-    #footer .footer__secondary-section a { font-size: 0.75rem; color: rgba(255,255,255,0.45); }
-    #footer .footer__sponsorship { display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; }
-    #footer .footer__sponsorship-logo img { height: 18px; filter: brightness(0) invert(1); opacity: 0.5; }
+    @media (min-width: 1024px) {
+      #footer .footer__menu { padding-top: 25px; }
+    }
+    #footer .footer__menu-item a {
+      display: block; padding-bottom: 20px; text-decoration: none;
+      color: #fff; font-size: 18px; font-weight: 600; line-height: 1.6;
+    }
+    #footer .footer__menu-item a:hover { color: var(--drupal-light, #CCEDF9); }
+    /* Social container — purple gradient */
+    #footer .footer__social-container {
+      display: flex; align-items: center; justify-content: left;
+      padding: 32px 0;
+      background: linear-gradient(270deg, #CCBAF4 -0.5%, #22a5e5 100.62%);
+    }
+    @media (min-width: 1024px) {
+      #footer .footer__social-container { justify-content: center; width: 45%; }
+    }
+    #footer .footer__social-menu {
+      list-style: none; display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 32px 48px; width: fit-content;
+      margin: auto; padding: 0 1rem;
+    }
+    #footer .footer__social-menu-item a {
+      display: block; width: 60px; height: 60px; text-decoration: none;
+    }
+    #footer .footer__social-menu-item img {
+      width: 60px; height: 60px;
+      filter: brightness(0) invert(1); opacity: 0.8;
+      transition: opacity 0.2s;
+    }
+    #footer .footer__social-menu-item img:hover { opacity: 1; }
+    /* Secondary section — light blue bg */
+    #footer .footer__secondary-section {
+      display: flex; flex-direction: column;
+      padding: 2rem 1rem;
+      color: #12285F; background-color: #CCEDF9;
+    }
+    @media (min-width: 768px) {
+      #footer .footer__secondary-section { padding-left: 2rem; }
+    }
+    @media (min-width: 1024px) {
+      #footer .footer__secondary-section {
+        flex-direction: row; justify-content: space-between; align-items: flex-start;
+      }
+    }
+    #footer .footer__sponsorship {
+      display: flex; flex-direction: column; gap: 0.25rem;
+    }
+    @media (min-width: 1024px) {
+      #footer .footer__sponsorship { width: 55%; }
+    }
+    #footer .footer__sponsorship-logo img { height: 22px; }
+    #footer .footer__sponsorship-management,
+    #footer .footer__sponsorship-support {
+      font-size: 14px; line-height: 1.6; text-decoration: none; color: #12285F;
+    }
+    #footer .footer__sponsorship-management { font-weight: 600; }
+    #footer .footer__sponsorship-support { font-weight: 400; }
+    #footer .footer__sponsorship-support span { text-decoration: underline; }
+    #footer .footer__copyright {
+      padding-top: 48px; font-size: 14px; font-weight: 400;
+      line-height: 1.6; color: #12285F;
+    }
+    @media (min-width: 1024px) {
+      #footer .footer__copyright { width: 45%; padding-top: 0; }
+    }
+    #footer .footer__copyright a { color: #12285F; text-decoration: underline; }
+    #footer .footer__copyright-year { margin-top: 0.25rem; }
     @font-face {
       font-family: 'ZT Gatha';
       src: url('assets/fonts/zt-gatha-web/ZTGatha-SemiBold.woff2') format('woff2');
@@ -2515,7 +2601,7 @@
     </div>
     <div class="footer__secondary-section">
       <div class="footer__sponsorship">
-        <a class="footer__sponsorship-logo" href=https://www.tag1.com/?utm_source=DA&utm_medium=referral&utm_campaign=drupal-org-footer"><img alt="Tag1 logo" src="assets/drupal-theme/tag1logo-n.svg"></a>
+        <a class="footer__sponsorship-logo" href="https://www.tag1.com/?utm_source=DA&utm_medium=referral&utm_campaign=drupal-org-footer"><img alt="Tag1 logo" src="assets/drupal-theme/tag1logo-n.svg"></a>
         <a class="footer__sponsorship-management" href="https://www.tag1.com/?utm_source=DA&utm_medium=referral&utm_campaign=drupal-org-footer">Tag1 provides infrastructure management for Drupal.org</a>
         <a class="footer__sponsorship-support" href="https://d7es.tag1.com/plans?utm_source=DA&utm_medium=footer&utm_campaign=EOL&utm_id=d7es&utm_term=plans&utm_content=Dec">Need a Drupal 7 extended support partner? <span>Consider Tag1.</span></a>
       </div>
@@ -2679,11 +2765,7 @@
         var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
         var docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
 
-        if (scrollTop > 50) {
-          header.classList.add('header-shrink');
-        } else {
-          header.classList.remove('header-shrink');
-        }
+        // Header doesn't shrink on scroll (matches drupal.org behavior)
 
         if (docHeight > 0) {
           var progress = (scrollTop / docHeight) * 100;
