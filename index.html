@@ -30,7 +30,10 @@
       #header .header__nav-section { column-gap: 28px; }
     }
     /* Logo */
-    #header .header-logo { display: flex; align-items: center; flex-shrink: 0; order: 1; }
+    #header .header-logo { display: flex; align-items: center; flex-shrink: 0; order: 1; margin: auto; }
+    @media (min-width: 1330px) {
+      #header .header-logo { margin: 0 12px 0 0; }
+    }
     #header .drupal-logo { display: inline-flex; align-items: center; text-decoration: none; }
     #header .drupal-logo svg { height: 40px; width: auto; }
     #header .drupal-logo.drupal-navy svg path { fill: #12285F; }
@@ -118,9 +121,18 @@
     }
     /* Search button — positioned right, after nav */
     #header .header-search-button { order: 3; }
+    /* Desktop search button hidden below 1330px (mobile search button shown instead) */
+    #header .header-search__desktop-button { display: none; }
+    @media (min-width: 1330px) {
+      #header .header-search__desktop-button { display: flex; }
+      #header .header__mobile-search-button { display: none; }
+    }
     /* Right side — user menu + get started (secondary menu) */
     #header .header-user-menu {
-      display: flex; align-items: center; gap: 12px; flex-shrink: 0; order: 4;
+      position: relative; display: none; align-items: center; gap: 12px; flex-shrink: 0; order: 4;
+    }
+    @media (min-width: 1330px) {
+      #header .header-user-menu { display: flex; }
     }
     #header .header-user-menu__button {
       width: 44px; height: 44px; border: none; background: none; cursor: pointer;
@@ -131,10 +143,13 @@
     #header .header-user-menu__picture { width: 40px; height: 40px; object-fit: cover; border-radius: 50%; }
     /* User menu dropdown */
     #header .header-user-menu .menu--level-1 {
-      display: none; position: absolute; top: 100%; right: 0;
-      min-width: 160px; padding: 12px;
-      background: #fff; border-radius: 8px;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+      display: none; position: absolute; top: calc(100% + 13.5px); left: 50%;
+      transform: translateX(-50%);
+      width: max-content; min-width: 160px; padding: 12px;
+      background: #fff; border-radius: 10px;
+      border: solid 1px transparent;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      filter: drop-shadow(0 0 1px #ccc);
       list-style: none; margin: 0; z-index: 50;
     }
     #header .header-user-menu__button[aria-expanded="true"] + .menu--level-1 {
@@ -147,7 +162,10 @@
     #header .header-user-menu .menu__link:hover { color: #006AA9; }
     /* Secondary menu (Get Started button area) */
     #header .block-bluecheese-secondarymenu {
-      display: flex; align-items: center; flex-shrink: 0; order: 5;
+      position: relative; display: none; flex-shrink: 0; order: 5;
+    }
+    @media (min-width: 1330px) {
+      #header .block-bluecheese-secondarymenu { display: block; }
     }
     #header .block-bluecheese-secondarymenu .menu--level-1 {
       display: flex; align-items: center; list-style: none; margin: 0; padding: 0;
@@ -163,7 +181,7 @@
       font-family: 'Noto Sans', sans-serif;
       transition: background 0.2s, transform 0.15s;
     }
-    #header .button--primary:hover { background: #12285F; transform: translateY(-1px); }
+    #header .button--primary:hover { background: #fff; color: #12285F; text-decoration: none; }
     /* Get Started dropdown */
     #header .block-bluecheese-secondarymenu .menu--level-2 {
       display: none; position: absolute; top: 100%; right: 0;
