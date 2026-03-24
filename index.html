@@ -9,40 +9,146 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="brand-tokens.css">
   <style>
-    /* Scope drupal.org CSS to header/footer only */
-    @import url('https://new.drupal.org/assets/css/css_ChRsPMNjgzCRgvIBqaH1-DjMQX-7nnoo82zVL-EM4rc.css') layer(drupalorg);
-    @import url('https://new.drupal.org/assets/css/css_V629T-vzSWFKYElkDUrqEcBuf3Oz5eE_kG0PgaRM26g.css') layer(drupalorg);
-  </style>
-  <style>
-    /* Header sits above hero content */
-    #header { z-index: 100 !important; }
-    .hero { padding-top: 6rem; }
-    @media (max-width: 900px) {
-      #header .menu-main { display: none; }
-      #header .header__secondary-menu { display: none; }
+    /* ============ HEADER ============ */
+    #header {
+      position: absolute; z-index: 100;
+      top: 20px; left: 1rem; right: 1rem;
+      max-width: 1780px; margin: 0 auto;
+      padding: 13px 25px;
+      background: #fff; border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      font-family: 'Noto Sans', sans-serif;
     }
-    /* Fix footer container width */
-    /* Header hover effects */
-    #header .menu-main__link--level-1 { transition: color 0.2s, opacity 0.2s; }
-    #header .menu-main__link--level-1:hover { opacity: 0.7; }
-    #header .button--primary { transition: background-color 0.2s, transform 0.15s; }
-    #header .button--primary:hover { transform: translateY(-1px); }
-    /* Local fontello icon font (drupal.org blocks hotlinking) */
+    #header * { box-sizing: border-box; }
+    #header .header__inner {
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    #header .drupal-logo svg { height: 40px; width: auto; }
+    #header .menu-main { display: flex; align-items: center; gap: 0; list-style: none; margin: 0; padding: 0; }
+    #header .menu-main__item { position: relative; }
+    #header .menu-main__link--level-1 {
+      display: inline-flex; align-items: center;
+      padding: 8px 14px; font-size: 0.72rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.06em;
+      color: #0a1929; text-decoration: none; border: none; background: none;
+      cursor: pointer; white-space: nowrap;
+      font-family: 'Noto Sans', sans-serif;
+    }
+    #header .menu-main__link--level-1:hover { color: #006AA9; }
+    /* Support Drupal pill */
+    #header .menu-main__link--pill {
+      border: 1.5px solid #0a1929; border-radius: 999px; padding: 6px 16px;
+    }
+    /* Dropdown panels */
+    #header .menu-main__dropdown {
+      display: none; position: absolute; top: 100%; left: 0;
+      min-width: 700px; padding: 24px;
+      background: #fff; border-radius: 0 0 10px 10px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+      z-index: 50;
+    }
+    #header .menu-main__link--level-1[aria-expanded="true"] + .menu-main__dropdown,
+    #header button[aria-expanded="true"] + * {
+      display: block;
+    }
+    /* Dropdown links */
+    #header .menu-main__link--level-2 {
+      display: block; padding: 8px 0; font-size: 0.85rem; font-weight: 600;
+      color: #0a1929; text-decoration: none; text-transform: none; letter-spacing: 0;
+    }
+    #header .menu-main__link--level-2:hover { color: #006AA9; }
+    #header .menu-main__description {
+      display: block; font-size: 0.75rem; color: #666; font-weight: 400;
+      margin-top: 2px; text-transform: none; letter-spacing: 0;
+    }
+    /* Right side — user + get started */
+    #header .header__actions, #header .header__end {
+      display: flex; align-items: center; gap: 12px;
+    }
+    #header .header__user-menu-button {
+      width: 36px; height: 36px; border: none; background: none; cursor: pointer;
+      background-image: url('assets/drupal-theme/user.svg');
+      background-size: 20px; background-repeat: no-repeat; background-position: center;
+    }
+    #header .button--primary {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 10px 20px; background: #0a1929; color: #fff;
+      border: none; border-radius: 8px; font-size: 0.82rem; font-weight: 600;
+      cursor: pointer; text-decoration: none; white-space: nowrap;
+      font-family: 'Noto Sans', sans-serif;
+      transition: background 0.2s, transform 0.15s;
+    }
+    #header .button--primary:hover { background: #12285F; transform: translateY(-1px); }
+    /* Fontello arrow icon */
     @font-face {
       font-family: 'fontello';
       src: url('assets/drupal-theme/fontello.woff2') format('woff2');
-      font-weight: normal;
-      font-style: normal;
-      font-display: swap;
+      font-weight: normal; font-style: normal; font-display: swap;
     }
-    [class^="icon-"]::before, [class*=" icon-"]::before {
+    #header .icon-arrow-right::before {
       font-family: 'fontello' !important;
+      content: '\e802'; float: right; padding-left: 6px;
     }
-    /* Fix SVG icon paths — use local copies */
-    .header__search-button { background-image: url('assets/drupal-theme/magnifying-glass.svg') !important; }
-    .menu-main__link--has-children::after { background-image: url('assets/drupal-theme/chevron-down.svg') !important; }
-    .header__user-menu-button { background-image: url('assets/drupal-theme/user.svg') !important; }
-    /* Footer — let drupal.org CSS handle it */
+    /* Search */
+    #header .header__search-button {
+      width: 36px; height: 36px; border: none; background: none; cursor: pointer;
+      background-image: url('assets/drupal-theme/magnifying-glass.svg');
+      background-size: 18px; background-repeat: no-repeat; background-position: center;
+      border-radius: 50%; transition: background-color 0.2s;
+    }
+    #header .header__search-button:hover { background-color: rgba(0,0,0,0.04); }
+    #header .search-drawer { display: none; padding: 16px 25px; border-top: 1px solid #eee; }
+    /* Hide things we don't need visible */
+    #header .header__search-button span,
+    #header .header__user-menu-button span,
+    #header .drupal-logo span.element-focusable {
+      position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0);
+    }
+    /* Chevron on dropdown buttons */
+    #header .menu-main__link--has-children::after {
+      content: ''; display: inline-block; width: 10px; height: 10px; margin-left: 4px;
+      background-image: url('assets/drupal-theme/chevron-down.svg');
+      background-size: contain; background-repeat: no-repeat;
+      transition: transform 0.2s;
+    }
+    #header button[aria-expanded="true"]::after { transform: rotate(180deg); }
+    /* Hero padding */
+    .hero { padding-top: 6rem; }
+    /* Responsive */
+    @media (max-width: 900px) {
+      #header { padding: 10px 16px; }
+      #header .menu-main { display: none; }
+      #header .header__secondary-menu { display: none; }
+    }
+
+    /* ============ FOOTER ============ */
+    #footer {
+      background: #0a1929; color: rgba(255,255,255,0.6); padding: 0;
+      font-family: 'Noto Sans', sans-serif;
+    }
+    #footer * { box-sizing: border-box; }
+    #footer a { color: rgba(255,255,255,0.6); text-decoration: none; }
+    #footer a:hover { color: #fff; }
+    #footer .footer__primary-section {
+      display: flex; align-items: flex-start; gap: 2rem; padding: 3rem 2rem;
+      max-width: 1200px; margin: 0 auto; flex-wrap: wrap;
+    }
+    #footer .footer__drupal-logo svg { height: 30px; width: auto; }
+    #footer .footer__drupal-logo svg path { fill: #fff; }
+    #footer .footer__menu { list-style: none; display: flex; flex-wrap: wrap; gap: 0.4rem 1.5rem; padding: 0; margin: 0; }
+    #footer .footer__menu-item a { font-size: 0.8rem; }
+    #footer .footer__social-menu { list-style: none; display: flex; gap: 1rem; padding: 0; margin: 0; }
+    #footer .footer__social-menu-item img { width: 20px; height: 20px; filter: brightness(0) invert(1); opacity: 0.5; }
+    #footer .footer__social-menu-item img:hover { opacity: 1; }
+    #footer .footer__secondary-section {
+      border-top: 1px solid rgba(255,255,255,0.08); padding: 1.5rem 2rem;
+      max-width: 1200px; margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;
+      font-size: 0.75rem; color: rgba(255,255,255,0.35);
+    }
+    #footer .footer__secondary-section a { font-size: 0.75rem; color: rgba(255,255,255,0.45); }
+    #footer .footer__sponsorship { display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; }
+    #footer .footer__sponsorship-logo img { height: 18px; filter: brightness(0) invert(1); opacity: 0.5; }
     @font-face {
       font-family: 'ZT Gatha';
       src: url('assets/fonts/zt-gatha-web/ZTGatha-SemiBold.woff2') format('woff2');
