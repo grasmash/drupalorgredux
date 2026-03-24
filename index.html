@@ -591,27 +591,40 @@
 
     /* Proven at scale — case studies */
     .growth-section { padding: 5.5rem 0 4rem; background: var(--bg); }
-    /* Proof cases — varied layout, NOT a uniform grid */
-    .proof-cases {
+    /* Proof — editorial magazine layout */
+    .proof-headline-stats {
+      display: flex; justify-content: center; gap: 3rem; margin-bottom: 3rem;
+      flex-wrap: wrap;
+    }
+    .proof-headline-stats span {
+      font-size: 1rem; color: var(--text-secondary);
+    }
+    .proof-headline-stats strong {
+      font-family: var(--font-heading); font-size: 2rem; font-weight: 700;
+      color: var(--drupal-navy); display: block; line-height: 1.1;
+    }
+    .proof-featured {
+      display: grid; grid-template-columns: 1.4fr 1fr; gap: 1.5rem;
       max-width: 900px; margin: 0 auto;
-      display: flex; flex-direction: column; gap: 0;
     }
-    .proof-case {
-      display: grid; grid-template-columns: 160px 1fr; gap: 1.5rem; align-items: center;
-      padding: 1.25rem 0; border-bottom: 1px solid var(--border);
+    .proof-featured-main {
+      background: var(--bg-alt); padding: 2.5rem; border-radius: 8px;
     }
-    .proof-case:first-child { padding-top: 0; }
-    .proof-case:last-child { border-bottom: none; }
-    .proof-case-org {
-      font-family: var(--font-heading); font-size: 1rem; font-weight: 700;
-      color: var(--drupal-navy);
+    .proof-featured-stat {
+      font-family: var(--font-heading); font-size: 2.5rem; font-weight: 700;
+      color: var(--drupal-navy); margin: 1rem 0 0.5rem; line-height: 1;
     }
-    .proof-case-logo {
-      display: block; max-width: 120px; height: auto;
-      filter: grayscale(1); opacity: 0.5;
+    .proof-featured-desc {
+      font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6;
     }
-    .proof-case-detail {
-      font-size: 0.88rem; color: var(--text-secondary); line-height: 1.5;
+    .proof-featured-side {
+      display: flex; flex-direction: column; gap: 1.5rem;
+    }
+    .proof-featured-card {
+      background: var(--bg-alt); padding: 1.5rem; border-radius: 8px; flex: 1;
+    }
+    .proof-featured-card p {
+      font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5; margin-top: 0.75rem;
     }
 
     /* CTA Section — warm off-white background */
@@ -784,8 +797,8 @@
     /* Responsive */
     @media (max-width: 900px) {
       .grid-3, .grid-4, .cta-paths, .initiative-stats, .agents-grid, .structured-section .grid { grid-template-columns: 1fr; }
-      .proof-case { flex-direction: column; gap: 0.25rem; }
-      .proof-case-org { min-width: auto; }
+      .proof-featured { grid-template-columns: 1fr; }
+      .proof-headline-stats { gap: 1.5rem; }
       .structured-section .card-wide { grid-column: span 1; }
       .card-mcp-inner, .card-providers-inner { flex-direction: column; align-items: flex-start; }
       .card-providers-logos { flex-wrap: wrap; }
@@ -894,7 +907,11 @@
     .canvas-options { display: flex; flex-direction: column; gap: 1.5rem; }
     .canvas-option {
       display: flex; gap: 1rem; align-items: flex-start;
+      cursor: pointer; padding: 0.75rem; border-radius: 6px; transition: background 0.2s;
     }
+    .canvas-option:hover { background: rgba(0,156,222,0.04); }
+    .canvas-option.active { background: rgba(0,156,222,0.06); }
+    .canvas-option.active .canvas-option-num { opacity: 1; }
     .canvas-option-num {
       font-family: var(--font-heading); font-size: 1.5rem; font-weight: 700;
       color: var(--drupal-blue); line-height: 1; flex-shrink: 0;
@@ -1305,21 +1322,21 @@
           <h2>The modern visual page builder for <span class="highlight">humans and agents</span>.</h2>
           <p>Start with a site template. Edit visually with drag-and-drop or let an AI agent build pages from a prompt. Under the hood, it's React — no PHP required.</p>
           <div class="canvas-options">
-            <div class="canvas-option">
+            <div class="canvas-option active" data-tab="1">
               <span class="canvas-option-num">01</span>
               <div>
                 <h3>Site templates</h3>
                 <p>Launch in minutes with pre-built designs. Customize everything.</p>
               </div>
             </div>
-            <div class="canvas-option">
+            <div class="canvas-option" data-tab="2">
               <span class="canvas-option-num">02</span>
               <div>
                 <h3>Yes, React. In Drupal.</h3>
                 <p>Not the Drupal you knew. The frontend is React — modern tools, modern stack, the JavaScript ecosystem you already know. No PHP required.</p>
               </div>
             </div>
-            <div class="canvas-option">
+            <div class="canvas-option" data-tab="3">
               <span class="canvas-option-num">03</span>
               <div>
                 <h3>Go decoupled</h3>
@@ -1327,9 +1344,12 @@
               </div>
             </div>
           </div>
+          <div style="margin-top:2rem;">
+            <a href="https://new.drupal.org/drupal-cms/launcher" class="btn btn-primary">Try Canvas</a>
+          </div>
         </div>
         <div class="canvas-visual">
-          <img src="assets/canvas-editor.png" alt="Drupal Canvas visual page builder with layers panel, live preview, and SEO settings" style="width:100%;border-radius:10px;box-shadow:var(--shadow-lg);">
+          <img src="assets/canvas-templates.png" alt="Drupal Canvas visual page builder with layers panel, live preview, and SEO settings" style="width:100%;border-radius:10px;box-shadow:var(--shadow-lg);">
         </div>
       </div>
     </div>
@@ -1343,33 +1363,33 @@
         <h2>Start in minutes, <span class="highlight">never outgrow it</span></h2>
         <p class="mt-2">The same platform that launches in 60 seconds scales to the world's most demanding sites. These organizations have been building on Drupal for years — and they're still growing.</p>
       </div>
-      <div class="proof-cases">
-        <div class="proof-case reveal">
-          <div class="proof-case-org"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/JNJ_Logo_New.svg/250px-JNJ_Logo_New.svg.png" alt="Johnson & Johnson" height="20" class="proof-case-logo"></div>
-          <div class="proof-case-detail">750+ websites across 48 brands worldwide on their CANVAS Drupal multisite platform.</div>
-        </div>
-        <div class="proof-case reveal">
-          <div class="proof-case-org"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Pfizer_%282021%29.svg/250px-Pfizer_%282021%29.svg.png" alt="Pfizer" height="18" class="proof-case-logo"></div>
-          <div class="proof-case-detail">~500 Drupal sites. Mandates all agency partners contribute back to open source.</div>
-        </div>
-        <div class="proof-case reveal">
-          <div class="proof-case-org"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/The_Economist_Logo.svg/250px-The_Economist_Logo.svg.png" alt="The Economist" height="18" class="proof-case-logo"></div>
-          <div class="proof-case-detail">20M+ monthly readers since 2010. Funded the open-sourcing of Drupal's Migrate module.</div>
-        </div>
-        <div class="proof-case reveal">
-          <div class="proof-case-org">Higher Education</div>
-          <div class="proof-case-detail">71% of top 100 universities run Drupal — all Ivy League schools included.</div>
-        </div>
-        <div class="proof-case reveal">
-          <div class="proof-case-org">US Government</div>
-          <div class="proof-case-detail">150+ federal agency sites. 56% of government websites worldwide choose Drupal for security and compliance.</div>
-        </div>
-        <div class="proof-case reveal">
-          <div class="proof-case-org"><svg viewBox="0 0 24 24" width="80" height="24" fill="currentColor" class="proof-case-logo" role="img" aria-label="NASA"><path d="M4.344 13.598c.075.281.195.39.407.39.22 0 .335-.132.335-.39V8.804h1.379v4.794c0 .675-.088.968-.43 1.31-.247.248-.703.439-1.278.439-.464 0-.909-.154-1.192-.438-.249-.25-.386-.505-.599-1.311l-.846-3.196c-.074-.281-.194-.39-.406-.39-.22 0-.336.132-.336.39v4.794H0v-4.794c0-.675.088-.968.43-1.31.247-.248.703-.439 1.278-.439.464 0 .909.154 1.192.438.249.25.385.505.599 1.311zM22.575 15.196l-1.591-4.98a.415.415 0 00-.06-.132.226.226 0 00-.186-.082.226.226 0 00-.185.082.414.414 0 00-.06.132l-1.591 4.98h-1.425l1.739-5.44c.09-.283.22-.524.384-.684.282-.275.614-.419 1.138-.419.525 0 .857.144 1.139.42.164.16.294.4.384.683L24 15.196h-1.425zM15.531 15.196c.903 0 1.344-.192 1.692-.538.385-.383.569-.802.569-1.427 0-.553-.202-1.064-.51-1.37-.403-.4-.903-.527-1.719-.527h-1.142c-.436 0-.61-.053-.748-.188-.094-.093-.139-.23-.139-.393 0-.168.04-.334.156-.448.103-.1.243-.147.511-.147h3.301V8.804h-3.049c-.903 0-1.343.192-1.691.538-.385.383-.57.802-.57 1.427 0 .553.203 1.064.51 1.37.404.4.904.527 1.72.527h1.141c.437 0 .61.053.748.188.095.093.14.23.14.393 0 .169-.041.335-.157.448-.102.1-.242.147-.51.147h-3.405l-1.306-4.086c-.09-.283-.22-.524-.384-.684-.282-.275-.615-.419-1.139-.419s-.857.144-1.138.42c-.165.16-.294.4-.385.683l-1.738 5.44h1.424l1.592-4.98a.415.415 0 01.06-.132.226.226 0 01.185-.082c.082 0 .142.028.186.082a.413.413 0 01.06.132l1.591 4.98h4.144z"/></svg></div>
-          <div class="proof-case-detail">40M page views in a single day during the 2017 eclipse. 250K pages migrated in 13 weeks. Multiple Webby Awards.</div>
+      <div class="proof-headline reveal">
+        <div class="proof-headline-stats">
+          <span><strong>47</strong> Fortune 500 companies</span>
+          <span><strong>71%</strong> of top universities</span>
+          <span><strong>150+</strong> government agencies</span>
         </div>
       </div>
-      <p class="text-center reveal" style="font-size:0.88rem;color:var(--text-muted);margin-top:2.5rem;">47 Fortune 500 companies. 40,000+ modules. The same platform that launches in 60 seconds scales to the world's most demanding sites.</p>
+      <div class="proof-featured reveal">
+        <div class="proof-featured-main">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/JNJ_Logo_New.svg/250px-JNJ_Logo_New.svg.png" alt="Johnson & Johnson" height="24" style="filter:grayscale(1);opacity:0.6;">
+          <p class="proof-featured-stat">750+ websites</p>
+          <p class="proof-featured-desc">Across 48 brands worldwide on their CANVAS Drupal multisite platform.</p>
+        </div>
+        <div class="proof-featured-side">
+          <div class="proof-featured-card">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Pfizer_%282021%29.svg/250px-Pfizer_%282021%29.svg.png" alt="Pfizer" height="18" style="filter:grayscale(1);opacity:0.6;">
+            <p>~500 sites. Mandates open source contribution from all agency partners.</p>
+          </div>
+          <div class="proof-featured-card">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/The_Economist_Logo.svg/250px-The_Economist_Logo.svg.png" alt="The Economist" height="18" style="filter:grayscale(1);opacity:0.6;">
+            <p>20M+ monthly readers since 2010. Funded Drupal's Migrate module.</p>
+          </div>
+        </div>
+      </div>
+      <p class="proof-more reveal" style="font-size:0.88rem;color:var(--text-muted);margin-top:2rem;text-align:center;">
+        All Ivy League schools. NASA (40M page views in a day). 56% of government websites worldwide. 40,000+ modules.
+      </p>
     </div>
   </section>
 
@@ -2033,6 +2053,21 @@
     })();
 
     })();
+
+    var canvasTabs = document.querySelectorAll('.canvas-option[data-tab]');
+    var canvasImg = document.querySelector('.canvas-visual img');
+    var canvasImages = {
+      '1': 'assets/canvas-templates.png',
+      '2': 'assets/canvas-editor.png',
+      '3': 'assets/canvas-editor.png'
+    };
+    canvasTabs.forEach(function(tab) {
+      tab.addEventListener('click', function() {
+        canvasTabs.forEach(function(t) { t.classList.remove('active'); });
+        tab.classList.add('active');
+        if (canvasImg) canvasImg.src = canvasImages[tab.getAttribute('data-tab')];
+      });
+    });
   </script>
 
 </body>
