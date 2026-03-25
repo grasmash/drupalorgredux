@@ -3478,7 +3478,7 @@
         var expanded = btn.getAttribute('aria-expanded') === 'true';
         // Close all others first
         document.querySelectorAll('#header button[aria-expanded="true"]').forEach(function(other) {
-          if (other !== btn && other !== searchDesktopBtn) {
+          if (other !== btn && other !== searchDesktopBtn && other !== hamburgerBtn) {
             other.setAttribute('aria-expanded', 'false');
             var otherPanel = other.nextElementSibling;
             if (otherPanel) otherPanel.style.display = 'none';
