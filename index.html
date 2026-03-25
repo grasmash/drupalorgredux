@@ -27,14 +27,15 @@
       display: flex; align-items: center;
       padding-bottom: 13.5px;
       border-bottom: 1px solid transparent;
+      width: 100%;
     }
     @media (min-width: 1330px) {
       #header .header__nav-section { column-gap: 28px; }
     }
     /* Logo */
-    #header .header-logo { margin: auto; }
+    #header .header-logo { flex: 1; text-align: center; min-width: 0; }
     @media (min-width: 1330px) {
-      #header .header-logo { margin: 0 12px 0 0; }
+      #header .header-logo { flex: none; text-align: left; margin: 0 12px 0 0; }
     }
     #header .drupal-logo { display: inline-flex; align-items: center; text-decoration: none; }
     #header .drupal-logo svg { width: 115px; height: auto; }
@@ -42,8 +43,15 @@
       #header .drupal-logo svg { width: 142px; }
     }
     #header .drupal-logo.drupal-navy svg path { fill: #12285F; }
-    /* Hamburger — hidden on desktop */
-    #header .🍔-menu-toggle { display: none; }
+    /* Hamburger — visible only on mobile (<1330px), hidden at >=1330px */
+    #header .mobile-menu-toggle { display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; margin: 0; padding: 0; border: none; background: transparent; cursor: pointer; flex-shrink: 0; }
+    #header .mobile-menu-toggle__icon { display: flex; flex-direction: column; gap: 5px; width: 22px; }
+    #header .mobile-menu-toggle__line-1,
+    #header .mobile-menu-toggle__line-2,
+    #header .mobile-menu-toggle__line-3 { display: block; height: 2px; background: #fff; border-radius: 1px; transition: transform 0.2s, opacity 0.2s; }
+    #header .mobile-menu-toggle[aria-expanded="true"] .mobile-menu-toggle__line-1 { transform: translateY(7px) rotate(45deg); }
+    #header .mobile-menu-toggle[aria-expanded="true"] .mobile-menu-toggle__line-2 { opacity: 0; }
+    #header .mobile-menu-toggle[aria-expanded="true"] .mobile-menu-toggle__line-3 { transform: translateY(-7px) rotate(-45deg); }
     /* Main nav */
     #header .main-navigation { flex: 1; display: flex; }
     /* Top-level menu list */
@@ -201,6 +209,7 @@
     @media (min-width: 1330px) {
       #header .header-search__desktop-button { display: flex; }
       #header .header__mobile-search-button { display: none; }
+      #header .mobile-menu-toggle { display: none; }
     }
     /* Right side — user menu + get started (secondary menu) */
     #header .header-user-menu {
@@ -337,7 +346,7 @@
     }
     #header[data-mode="dark"] .icon-arrow-right::before { color: inherit; }
     #header[data-mode="dark"] .header__nav-section { border-bottom-color: rgba(255,255,255,0.15); }
-    #header[data-mode="dark"] .🍔-menu-toggle svg { color: #fff; }
+    #header[data-mode="dark"] .mobile-menu-toggle svg { color: #fff; }
     /* Dark mode — dropdown panels */
     #header[data-mode="dark"] .menu-main--level-2 {
       background: rgba(10,26,58,0.95); border-color: rgba(255,255,255,0.1);
@@ -378,8 +387,21 @@
     .hero { padding-top: 6rem; }
     /* Responsive — matches drupal.org 1330px breakpoint */
     @media (max-width: 1329px) {
+      #header { padding: 10px 8px 0; left: 0; right: 0; margin-top: 0; border-radius: 0; }
       #header .main-navigation { display: none; }
-      #header .🍔-menu-toggle { display: block; width: 35px; height: 35px; margin: 0; padding: 0; border: none; background: transparent; cursor: pointer; }
+      /* Mobile nav drawer */
+      #header .main-navigation.is-open { display: block; position: absolute; top: 100%; left: 0; width: 100%; background: rgba(10,26,58,0.97); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); padding: 16px 25px 24px; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px; z-index: 100; }
+      #header .main-navigation.is-open .menu-main--level-1 { flex-direction: column; gap: 0; }
+      #header .main-navigation.is-open .menu-main__item--level-1 { border-bottom: 1px solid rgba(255,255,255,0.1); }
+      #header .main-navigation.is-open .menu-main__link--level-1 { color: #fff; padding: 14px 0; display: block; }
+      #header .main-navigation.is-open .menu-main__submenu-wrapper { position: relative; top: auto; width: 100%; border-radius: 0; }
+      #header .main-navigation.is-open .menu-main--level-2 { grid-template-columns: 1fr; padding: 8px 0 16px 16px; background: transparent; border: none; }
+      #header .main-navigation.is-open .menu-main__link--level-2 { color: rgba(255,255,255,0.85); }
+      #header .main-navigation.is-open .menu-main__description { color: rgba(255,255,255,0.45); }
+      /* Hide desktop-only elements on mobile */
+      #header .header-search__desktop-button,
+      #header .block-bluecheese-secondarymenu,
+      #header .header-user-menu { display: none; }
     }
 
     /* ============ FOOTER ============ */
@@ -1504,12 +1526,12 @@
 
 </div>
 
-      <button class="🍔-menu-toggle">
+      <button class="mobile-menu-toggle" aria-expanded="false" aria-controls="block-bluecheese-mainmenu">
   <span class="visually-hidden">Menu</span>
-  <span class="🍔-menu-toggle__icon">
-    <span class="🍔-menu-toggle__line-1"></span>
-    <span class="🍔-menu-toggle__line-2"></span>
-    <span class="🍔-menu-toggle__line-3"></span>
+  <span class="mobile-menu-toggle__icon">
+    <span class="mobile-menu-toggle__line-1"></span>
+    <span class="mobile-menu-toggle__line-2"></span>
+    <span class="mobile-menu-toggle__line-3"></span>
   </span>
 </button>
 
@@ -3456,6 +3478,17 @@
         searchDesktopBtn.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
       });
     }
+    // Mobile hamburger menu toggle
+    var hamburger = document.querySelector('.mobile-menu-toggle');
+    var mainNav = document.querySelector('.main-navigation');
+    if (hamburger && mainNav) {
+      hamburger.addEventListener('click', function(e) {
+        e.stopPropagation();
+        var isOpen = hamburger.getAttribute('aria-expanded') === 'true';
+        hamburger.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
+        mainNav.classList.toggle('is-open', !isOpen);
+      });
+    }
     // Close dropdowns on outside click
     document.addEventListener('click', function(e) {
       if (!e.target.closest('#header')) {
@@ -3464,6 +3497,8 @@
           var panel = btn.nextElementSibling;
           if (panel) panel.style.display = 'none';
         });
+        if (mainNav) mainNav.classList.remove('is-open');
+        if (hamburger) hamburger.setAttribute('aria-expanded', 'false');
       }
     });
   </script>
